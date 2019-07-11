@@ -1,0 +1,118 @@
+@import './colors';
+@import '~antd/lib/style/mixins/clearfix.less';
+
+@header-height: 80px;
+
+.index-page-wrapper {
+  #header {
+    box-shadow: none;
+  }
+}
+
+#header {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
+  position: relative;
+  z-index: 10;
+  height: 64px;
+  .ant-menu-overflowed-submenu {
+    display: none;
+  }
+}
+
+#logo {
+  overflow: hidden;
+  padding-left: 40px;
+  float: left;
+  line-height: 64px;
+  text-decoration: none;
+  height: 64px;
+  img {
+    display: inline;
+    vertical-align: middle;
+    margin-right: 16px;
+    width: 32px;
+  }
+  img + img {
+    height: 16px;
+    margin-right: 0;
+    width: auto;
+    position: relative;
+    top: 1px;
+  }
+}
+
+.header-meta {
+  .clearfix();
+  padding-right: 40px;
+}
+.search-loading {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#search-box {
+  float: left;
+  height: 32px;
+  margin: 12px auto 0;
+  padding-left: 16px;
+  line-height: 32px;
+  border: 1px solid #cfd4db;
+  border-radius: 32px;
+}
+
+#search-box .anticon {
+  position: relative;
+  top: 0.5px;
+  color: #aaaaaa;
+}
+
+#search-box input {
+  width: 200px;
+  margin-top: -3px;
+  font-size: 14px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+
+  &::placeholder {
+    color: #a3b1bf;
+  }
+}
+
+#menu {
+  float: right;
+  overflow: hidden;
+  height: 64px;
+  .ant-menu {
+    line-height: 60px;
+  }
+  .ant-menu-horizontal {
+    border-bottom: none;
+    & > .ant-menu-item {
+      border-top: 2px solid transparent;
+      &:hover {
+        border-top: 2px solid @primary-color;
+        border-bottom: 2px solid transparent;
+      }
+    }
+    & > .ant-menu-item-selected {
+      border-top: 2px solid @primary-color;
+      border-bottom: 2px solid transparent;
+      a {
+        color: @primary-color;
+      }
+    }
+  }
+}
+
+.right-header {
+  float: right;
+  overflow: hidden;
+  padding: 20px;
+  > * {
+    display: inline-block;
+    margin-right: 16px;
+  }
+}
