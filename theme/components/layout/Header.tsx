@@ -3,13 +3,10 @@ import React from 'react';
 import { Link } from 'gatsby';
 import * as utils from '../utils';
 import { Row, Col, Icon, Select, Input, Menu, Button, Modal, Popover, Dropdown } from 'antd';
+import { PageContext } from './PageContext';
 
 interface HeaderProps {
   isMobile: boolean;
-  pageContext: {
-    webConfig: any;
-    slug: string;
-  };
 }
 interface HeaderState {
   inputValue?: string;
@@ -25,6 +22,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     menuVisible: false,
     menuMode: 'horizontal',
   };
+
+  static contextType = PageContext;
 
   searchInput: Input | null | undefined;
 
@@ -68,7 +67,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const { menuMode, menuVisible } = this.state;
     const {
       pageContext: { webConfig, slug },
-    } = this.props;
+    } = this.context;
 
     let currentLocate = utils.getCurrentLoacle(webConfig, slug);
     let {
@@ -166,5 +165,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     );
   }
 }
+
+console.log([Header]);
 
 export default Header;

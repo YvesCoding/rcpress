@@ -6,6 +6,7 @@ import Media from 'react-media';
 import '../../static/style';
 import Header from './Header';
 import Footer from './Footer';
+import { PageContext } from './PageContext';
 
 interface LayoutProps {
   pageContext: {
@@ -29,14 +30,9 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
   }
 
   render() {
-    const {
-      children,
-      pageContext: { webConfig, slug },
-      ...restProps
-    } = this.props;
-
+    const { children, pageContext, ...restProps } = this.props;
+    const { webConfig, slug } = pageContext;
     const { locales } = webConfig;
-
     return (
       <LocaleProvider locale={enUS}>
         <div
@@ -44,7 +40,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
             Object.keys(locales).includes(slug)) &&
             'index-page-wrapper'}`}
         >
-          <Header pageContext={{ webConfig, slug }} {...restProps} ref="header" />
+          <Header {...restProps} ref="header" />
           {React.cloneElement(children, {
             ...children.props,
             isMobile: restProps.isMobile,
@@ -88,12 +84,18 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
   };
 }
 
-const WrapperLayout = (props: LayoutProps) => (
-  <Media query="(max-width: 996px)">
-    {isMobile => {
-      const isNode = typeof window === `undefined`;
-      return <Layout {...props} isMobile={isMobile && !isNode} />;
-    }}
-  </Media>
-);
+const WrapperLayout = (props: LayoutProps) => {
+  const { pageContext } = props;
+
+  return (
+    <PageContext.Provider value={pageContext}>
+      <Media query="(max-width: 996px)">
+        {isMobile => {
+          const isNode = typeof window === `undefined`;
+          return <Layout {...props} isMobile={isMobile && !isNode} />;
+        }}
+      </Media>
+    </PageContext.Provider>
+  );
+};
 export default WrapperLayout;
