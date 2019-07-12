@@ -128,7 +128,7 @@ export function resolvePage(pages: Edges, rawPath: string, base: string): MenuDa
       );
     }
   }
-  console.error(`[AntDocs] No matching page found for sidebar item "${rawPath}"`);
+  console.error(`[AntSite] No matching page found for sidebar item "${rawPath}"`);
   return {
     children: [],
     title: '',
@@ -234,7 +234,7 @@ function resolveItem(item: any, pages: Edges, base: string, isNested: boolean): 
   } else {
     if (isNested) {
       console.error(
-        '[AntDocs] Nested sidebar groups are not supported. ' +
+        '[AntSite] Nested sidebar groups are not supported. ' +
           'Consider using navbar + categories instead.'
       );
     }

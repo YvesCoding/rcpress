@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-theme-antdocs",
+  "name": "gatsby-theme-ant-design-site",
   "version": "0.0.1",
-  "description": "Ant docs power by gatsby",
+  "description": "A docs generator based on gatsby and website of Ant Design",
   "homepage": "https://github.com/YvesCoding/gatsby-theme-ant-docs",
   "repository": {
     "type": "git",

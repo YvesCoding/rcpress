@@ -7,7 +7,6 @@ import { getCurrentWebConfigBySlug } from '../utils';
 function Banner(props) {
   const {
     isMobile,
-    pageContext: { webConfig, slug },
     data: {
       mdx: { frontmatter },
     },

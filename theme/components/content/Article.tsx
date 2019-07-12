@@ -7,6 +7,8 @@ import { IGraphqlFrontmatterData, IMarkDownFields } from '../../templates/docs';
 import moment from 'moment';
 import AvatarList from './AvatarList';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import * as utils from '../utils';
+import { PageContext } from '../layout/PageContext';
 
 interface ArticleProps {
   content: {
@@ -24,6 +26,8 @@ interface ArticleProps {
 }
 
 export default class Article extends React.PureComponent<ArticleProps> {
+  static contextType = PageContext;
+
   componentDidMount() {
     // Add ga event click
     this.delegation = delegate(
@@ -51,9 +55,13 @@ export default class Article extends React.PureComponent<ArticleProps> {
 
   render() {
     const props = this.props;
-    const content = props.content;
+    const { content } = props;
     const { meta } = content;
+
     const { title, subtitle, path, modifiedTime, avatarList } = meta;
+    //editLinkText
+    const { webConfig, slug } = this.context;
+    const { currentWebConfig: config } = utils.getCurrentWebConfigBySlug(webConfig, slug);
 
     return (
       <DocumentTitle title={`${title} - Magic Scroll`}>
@@ -67,7 +75,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
             <h1>
               {title}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
-              <EditButton title="编辑文件" filename={path} />
+              <EditButton title={config.editLinkText} filename={path} />
             </h1>
 
             {!content.toc.items.length ? null : (
@@ -97,7 +105,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
           </article>
           <div className="modifiedTime">
             {/* <AvatarList avatarList={avatarList} /> */}
-            上次修改时间
+            {config.lastUpdated}
             {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         </>

@@ -2,17 +2,17 @@ module.exports = {
   base: '/',
   locales: {
     '/': {
-      title: 'AntDocs',
-      description: 'AntDocs - A  docs generator powered by gatsby and antd',
+      title: 'AntSite',
+      description: 'AntSite -A docs generator based on gatsby and website of Ant Design',
     },
     '/zh/': {
-      title: 'AntDocs',
-      description: 'AntDocs - 一个基于gatsby和antd的文档生成工具',
+      title: 'AntSite',
+      description: 'AntSite - 基于Ant Design 网站 和 gatsby 的文档生成工具',
     },
   },
   themeConfig: {
-    repo: 'YvesCoding/magic-scroll',
-    docsRepo: 'yvesCoding/magicscrolljs',
+    repo: 'YvesCoding/gatsby-theme-antdsite',
+    docsRepo: 'YvesCoding/gatsby-theme-antdsite',
     docsDir: 'docs',
     docsBranch: 'temp',
     locales: {
