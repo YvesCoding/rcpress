@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { LocaleProvider } from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
 import Media from 'react-media';
 import '../../static/style';
 import Header from './Header';
 import Footer from './Footer';
 import { PageContext } from './PageContext';
+import { getcurrentLocaleConfigBySlug } from '../utils';
 
 interface LayoutProps {
   pageContext: {
@@ -34,21 +33,19 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
     const { webConfig, slug } = pageContext;
     const { locales } = webConfig;
     return (
-      <LocaleProvider locale={enUS}>
-        <div
-          className={`page-wrapper ${((!locales && slug == '/') ||
-            Object.keys(locales).includes(slug)) &&
-            'index-page-wrapper'}`}
-        >
-          <Header {...restProps} ref="header" />
-          {React.cloneElement(children, {
-            ...children.props,
-            isMobile: restProps.isMobile,
-            ref: 'content',
-          })}
-          <Footer {...restProps} ref="footer" />
-        </div>
-      </LocaleProvider>
+      <div
+        className={`page-wrapper ${((!locales && slug == '/') ||
+          Object.keys(locales).includes(slug)) &&
+          'index-page-wrapper'}`}
+      >
+        <Header {...restProps} ref="header" />
+        {React.cloneElement(children, {
+          ...children.props,
+          isMobile: restProps.isMobile,
+          ref: 'content',
+        })}
+        <Footer {...restProps} ref="footer" />
+      </div>
     );
   }
 
@@ -86,9 +83,13 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
 
 const WrapperLayout = (props: LayoutProps) => {
   const { pageContext } = props;
+  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(
+    pageContext.webConfig,
+    pageContext.slug
+  );
 
   return (
-    <PageContext.Provider value={pageContext}>
+    <PageContext.Provider value={{ ...pageContext, currentLocaleWebConfig }}>
       <Media query="(max-width: 996px)">
         {isMobile => {
           const isNode = typeof window === `undefined`;

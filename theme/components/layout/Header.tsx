@@ -65,14 +65,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   render() {
     const { menuMode, menuVisible } = this.state;
-    const {
-      pageContext: { webConfig, slug },
-    } = this.context;
+    const { webConfig, slug } = this.context;
 
     let currentLocate = utils.getCurrentLoacle(webConfig, slug);
     let {
-      currentWebConfig: { themeConfig, title, base },
-    } = utils.getCurrentWebConfigBySlug(webConfig, slug);
+      currentLocaleWebConfig: { themeConfig, title, base },
+    } = utils.getcurrentLocaleConfigBySlug(webConfig, slug);
     const { locales } = webConfig.themeConfig;
 
     const { nav = [] } = themeConfig;

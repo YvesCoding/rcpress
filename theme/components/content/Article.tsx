@@ -59,12 +59,11 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const { meta } = content;
 
     const { title, subtitle, path, modifiedTime, avatarList } = meta;
-    //editLinkText
-    const { webConfig, slug } = this.context;
-    const { currentWebConfig: config } = utils.getCurrentWebConfigBySlug(webConfig, slug);
+
+    const { currentLocaleWebConfig } = this.context;
 
     return (
-      <DocumentTitle title={`${title} - Magic Scroll`}>
+      <DocumentTitle title={`${title} - ${currentLocaleWebConfig.title}`}>
         <>
           <article
             className="markdown"
@@ -75,7 +74,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
             <h1>
               {title}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
-              <EditButton title={config.editLinkText} filename={path} />
+              <EditButton title={currentLocaleWebConfig.editLinkText} filename={path} />
             </h1>
 
             {!content.toc.items.length ? null : (
@@ -105,7 +104,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
           </article>
           <div className="modifiedTime">
             {/* <AvatarList avatarList={avatarList} /> */}
-            {config.lastUpdated}
+            {currentLocaleWebConfig.lastUpdated}
             {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         </>

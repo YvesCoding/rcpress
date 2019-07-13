@@ -53,13 +53,6 @@ module.exports = {
         path: path.resolve(finalConfig.themeConfig.docsDir),
       },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        name: '/default',
-        path: path.resolve(__dirname, '__default__'),
-      },
-    },
     `gatsby-plugin-netlify`,
     {
       resolve: 'gatsby-plugin-manifest',

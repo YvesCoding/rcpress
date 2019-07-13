@@ -3,24 +3,25 @@ import GitHubButton from 'react-github-button';
 import QueueAnim from 'rc-queue-anim';
 import { Button } from 'antd';
 import { Link } from 'gatsby';
-import { getCurrentWebConfigBySlug } from '../utils';
+
 function Banner(props) {
   const {
     isMobile,
     data: {
       mdx: { frontmatter },
     },
+    currentLocaleWebConfig,
   } = props;
-  const { currentWebConfig: config } = getCurrentWebConfigBySlug(webConfig, slug);
-  const [namespace, repo] = webConfig.themeConfig.repo.split('/');
+
+  const [namespace, repo] = currentLocaleWebConfig.themeConfig.repo.split('/');
   return (
     <div className="banner-wrapper">
       <QueueAnim className="banner-title-wrapper" type={isMobile ? 'bottom' : 'right'}>
         <div key="line" className="title-line-wrapper">
           <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
         </div>
-        <h1 key="h1">{config.title}</h1>
-        <p key="content">{config.description}</p>
+        <h1 key="h1">{currentLocaleWebConfig.title}</h1>
+        <p key="content">{currentLocaleWebConfig.description}</p>
         <div key="button" className="button-wrapper">
           <Link to={frontmatter.actionLink}>
             <Button style={{ margin: '0 16px' }} type="primary" ghost>

@@ -57,19 +57,19 @@ export function getCurrentLoacle(webConfig: any, slug: string) {
   return Object.keys(locales).length > 1 && targetLocale;
 }
 
-export function getCurrentWebConfigBySlug(
+export function getcurrentLocaleConfigBySlug(
   webConfig: any,
   slug: string
 ): {
   localte: string;
-  currentWebConfig: any;
+  currentLocaleWebConfig: any;
 } {
   const targetLocale = getCurrentLoacle(webConfig, slug);
   if (!targetLocale) return webConfig;
 
   return {
     localte: targetLocale,
-    currentWebConfig: {
+    currentLocaleWebConfig: {
       ...webConfig,
       ...webConfig.locales[targetLocale],
       themeConfig: {
@@ -191,9 +191,9 @@ export function resolveSidebarItems(
 ): MenuDataItem[] {
   const { edges } = allMdxData;
 
-  const { currentWebConfig } = getCurrentWebConfigBySlug(webConfig, currentSlug);
+  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(webConfig, currentSlug);
 
-  const pageSidebarConfig = currentWebConfig.themeConfig.sidebar;
+  const pageSidebarConfig = currentLocaleWebConfig.themeConfig.sidebar;
 
   if (!pageSidebarConfig) {
     return [];
@@ -202,7 +202,7 @@ export function resolveSidebarItems(
 
     return config
       ? config.map((item: any) =>
-          resolveItem(item, edges, resolvePathWithBase(path, currentWebConfig.base), false)
+          resolveItem(item, edges, resolvePathWithBase(path, currentLocaleWebConfig.base), false)
         )
       : [];
   }
