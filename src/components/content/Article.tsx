@@ -63,7 +63,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const { currentLocaleWebConfig } = this.context;
 
     return (
-      <DocumentTitle title={`${title} - ${currentLocaleWebConfig.title}`}>
+      <DocumentTitle title={`${title} | ${currentLocaleWebConfig.title}`}>
         <>
           <article
             className="markdown"
