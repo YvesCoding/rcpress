@@ -5,9 +5,7 @@ important: true
 
 ## 简介
 
-**One** 这个项目是一个开源的前后端分离项目，它的前身是著名的开源项目[Guns](https://gitee.com/stylefeng/guns)
-
-本文档专门针对**One**这个开源项目的前端。
+1 **One** 这个项目是一个开源的前后端分离项目，它的前身是著名的开源项目[Guns](https://gitee.com/stylefeng/guns) 1 本文档专门针对**One**这个开源项目的前端。
 
 ## 项目地址
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import WrapperLayout from '../components/layout';
-import MainContent from '../components/Content/MainContent';
+import MainContent from '../components/content/MainContent';
 import { resolveSidebarItems } from '../components/utils';
 
 export interface IGraphqlFrontmatterData {
@@ -115,6 +115,11 @@ export const pageQuery = graphql`
         modifiedTime
         path
         slug
+        avatarList {
+          href
+          text
+          src
+        }
       }
       code {
         body
@@ -122,8 +127,3 @@ export const pageQuery = graphql`
     }
   }
 `;
-// avatarList {
-//   href
-//   text
-//   src
-// }

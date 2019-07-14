@@ -3,10 +3,11 @@ module.exports = {
   themeConfig: {
     repo: null,
     docsRepo: null,
-    docsDir: null,
-    docsBranch: null,
+    docsDir: 'docs',
+    docsBranch: 'master',
     editLinkText: null,
-    lastUpdated: null, // string | boolean
+    lastUpdated: false, // string | boolean
     locales: null,
+    showAvatarList: true,
   },
 };

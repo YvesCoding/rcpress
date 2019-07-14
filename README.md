@@ -1,26 +1,19 @@
-# Ant Design Pro Site
+# Introduction
 
-The documentation source of [Ant Design Pro](https://github.com/ant-design/ant-design-pro).
+You can custom [antd-website](https://pro.ant.design/) in a config, just like [Vuepress](https://github.com/vuejs/vuepress)
 
-### Development
+# Usage
 
 ```bash
-$ git clone git@github.com:ant-design/ant-design-pro-site.git
-$ cd ant-design-pro-site
-$ npm install
-$ npm start
+npm install gatsby react react-dom antd gatsby-theme-antdsite
 ```
 
-Then visit http://localhost:8001 .
+Set theme in your `gatsby-config.js`
 
-### Deploy
-
-```
-$ npm run site
-```
-
-### Publish Components
-
-```
-$ npm run publish-components
+```js
+{
+  module.exports = {
+    __experimentalThemes: [`gatsby-theme-antdsite`],
+  };
+}
 ```

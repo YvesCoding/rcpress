@@ -57,13 +57,25 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const props = this.props;
     const { content } = props;
     const { meta } = content;
-
     const { title, subtitle, path, modifiedTime, avatarList } = meta;
-
-    const { currentLocaleWebConfig } = this.context;
+    const {
+      currentLocaleWebConfig: {
+        title: siteTitle,
+        themeConfig: {
+          lastUpdated,
+          editLinkText,
+          repo,
+          docsRepo,
+          docsDir,
+          docsBranch,
+          showAvatarList,
+        },
+      },
+    } = this.context;
+    console.log(this.context);
 
     return (
-      <DocumentTitle title={`${title} | ${currentLocaleWebConfig.title}`}>
+      <DocumentTitle title={`${title} | ${siteTitle}`}>
         <>
           <article
             className="markdown"
@@ -74,7 +86,11 @@ export default class Article extends React.PureComponent<ArticleProps> {
             <h1>
               {title}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
-              <EditButton title={currentLocaleWebConfig.editLinkText} filename={path} />
+              <EditButton
+                sourcePath={`https://github.com/${docsRepo || repo}/edit/${docsBranch}/`}
+                title={editLinkText}
+                filename={path}
+              />
             </h1>
 
             {!content.toc.items.length ? null : (
@@ -102,11 +118,12 @@ export default class Article extends React.PureComponent<ArticleProps> {
               <MDXRenderer>{content.code.body}</MDXRenderer>
             </section>
           </article>
-          <div className="modifiedTime">
-            {/* <AvatarList avatarList={avatarList} /> */}
-            {currentLocaleWebConfig.lastUpdated}
-            {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
-          </div>
+          {lastUpdated && (
+            <div className={`modifiedTime ${!showAvatarList ? 'no-avatar-list' : ''}`}>
+              {showAvatarList && <AvatarList avatarList={avatarList} />}
+              {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
+            </div>
+          )}
         </>
       </DocumentTitle>
     );

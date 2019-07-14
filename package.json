@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-theme-ant-design-site",
+  "name": "gatsby-theme-antdsite",
   "version": "0.0.1",
   "description": "A docs generator based on gatsby and website of Ant Design",
   "homepage": "https://github.com/YvesCoding/gatsby-theme-ant-docs",
@@ -89,9 +89,7 @@
   },
   "peerDependencies": {
     "react": "^16.8.2",
-    "react-dom": "^16.8.2",
-    "gatsby": "^2.2.7",
-    "antd": "latest"
+    "react-dom": "^16.8.2"
   },
   "devDependencies": {
     "eslint": "^5.3.0",

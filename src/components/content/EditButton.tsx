@@ -3,7 +3,7 @@ import { Tooltip, Icon } from 'antd';
 
 const EditButton: React.SFC<{
   title: React.ReactNode;
-  filename?: string;
+  filename: string;
   sourcePath: string;
 }> = ({ title, filename, sourcePath }) => {
   return (
