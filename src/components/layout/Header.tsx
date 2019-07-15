@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import * as utils from '../utils';
-import { Row, Col, Icon, Select, Input, Menu, Button, Modal, Popover, Dropdown } from 'antd';
+import { Row, Col, Icon, Select, Input, Menu, Button, Modal, Popover, Dropdown, Affix } from 'antd';
 import { PageContext } from './PageContext';
 
 interface HeaderProps {
@@ -45,6 +45,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     if (isMobile !== preProps.isMobile) {
       this.setMenuMode(isMobile);
     }
+
+    const affix = this.refs['header-affix'] as Affix;
+    affix && affix.updatePosition();
   }
 
   handleShowMenu = () => {
@@ -113,57 +116,58 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     ) : null;
 
     return (
-      <div id="header" className="header">
-        {menuMode === 'inline' ? (
-          <Popover
-            overlayClassName="popover-menu"
-            placement="bottomRight"
-            content={menu}
-            trigger="click"
-            visible={menuVisible}
-            arrowPointAtCenter
-            onVisibleChange={this.onMenuVisibleChange}
-          >
-            <Icon className="nav-phone-icon" type="menu" onClick={this.handleShowMenu} />
-          </Popover>
-        ) : null}
-        <Row>
-          <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-            <Link id="logo" to={utils.resolvePathWithBase(currentLocate || '/', base)}>
-              {/* <img src={LOGO_URL} alt="logo" />
-              <img
-                src="https://gw.alipayobjects.com/zos/rmsportal/tNoOLUAkyuGLXoZvaibF.svg"
-                alt="Ant Design Pro"
-              /> */}
-              {title}
-            </Link>
-          </Col>
-          <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
-            <div id="search-box">
-              <Icon type="search" className="search-icon" />
-              <Input
-                ref={ref => {
-                  this.searchInput = ref;
-                }}
-              />
-            </div>
-            <div className="header-meta">
-              <div className="right-header">
-                {currentLocate ? (
-                  <Dropdown overlay={chooseLanguage} placement="bottomLeft">
-                    <Button size="small">{themeConfig.selectText}</Button>
-                  </Dropdown>
-                ) : null}
+      <Affix style={{ width: '100%' }} ref="header-affix">
+        <div id="header" className="header">
+          {menuMode === 'inline' ? (
+            <Popover
+              overlayClassName="popover-menu"
+              placement="bottomRight"
+              content={menu}
+              trigger="click"
+              visible={menuVisible}
+              arrowPointAtCenter
+              onVisibleChange={this.onMenuVisibleChange}
+            >
+              <Icon className="nav-phone-icon" type="menu" onClick={this.handleShowMenu} />
+            </Popover>
+          ) : null}
+          <Row>
+            <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
+              <Link id="logo" to={utils.resolvePathWithBase(currentLocate || '/', base)}>
+                {
+                  <img
+                    src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+                    alt="Ant Design Pro"
+                  />
+                }
+                <span className="left-top-title">{title}</span>
+              </Link>
+            </Col>
+            <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
+              <div id="search-box">
+                <Icon type="search" className="search-icon" />
+                <Input
+                  ref={ref => {
+                    this.searchInput = ref;
+                  }}
+                />
               </div>
-              {menuMode === 'horizontal' ? <div id="menu">{menu}</div> : null}
-            </div>
-          </Col>
-        </Row>
-      </div>
+              <div className="header-meta">
+                <div className="right-header">
+                  {currentLocate ? (
+                    <Dropdown overlay={chooseLanguage} placement="bottomLeft">
+                      <Button size="small">{themeConfig.selectText}</Button>
+                    </Dropdown>
+                  ) : null}
+                </div>
+                {menuMode === 'horizontal' ? <div id="menu">{menu}</div> : null}
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </Affix>
     );
   }
 }
-
-console.log([Header]);
 
 export default Header;

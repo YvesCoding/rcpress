@@ -5,7 +5,11 @@ You can custom [antd-website](https://pro.ant.design/) in a config, just like [V
 # Usage
 
 ```bash
-npm install gatsby react react-dom antd gatsby-theme-antdsite
+yarn add gatsby gatsby-theme-antdsite antd -D
+
+# or
+
+npm install gatsby gatsby-theme-antdsite antd -S
 ```
 
 Set theme in your `gatsby-config.js`

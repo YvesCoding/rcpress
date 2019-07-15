@@ -6,12 +6,6 @@ function getPlugin(pluginName) {
 }
 
 module.exports = {
-  siteMetadata: {
-    title: 'Magic Scroll',
-    description: '极速开发框架 - 前端',
-    author: 'wangyi',
-    siteUrl: `https://gitee.com/stylefeng/one-front`,
-  },
   plugins: [
     {
       resolve: 'gatsby-mdx',
@@ -24,12 +18,7 @@ module.exports = {
           {
             resolve: getPlugin('gatsby-remark-img-warpper-p'),
           },
-          {
-            resolve: `gatsby-remark-prismjs`,
-            options: {
-              noInlineHighlight: true,
-            },
-          },
+          'gatsby-remark-prismjs',
         ],
       },
     },
@@ -66,6 +55,6 @@ module.exports = {
         icon: `${__dirname}/src/images/favicon.png`,
       },
     },
-    `gatsby-plugin-sitemap`,
+    `gatsby-plugin-react-helmet`,
   ],
 };

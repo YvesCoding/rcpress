@@ -17,9 +17,6 @@ function Banner(props) {
   return (
     <div className="banner-wrapper">
       <QueueAnim className="banner-title-wrapper" type={isMobile ? 'bottom' : 'right'}>
-        <div key="line" className="title-line-wrapper">
-          <div className="title-line" style={{ transform: 'translateX(-64px)' }} />
-        </div>
         <h1 key="h1">{currentLocaleWebConfig.title}</h1>
         <p key="content">{currentLocaleWebConfig.description}</p>
         <div key="button" className="button-wrapper">

@@ -3,12 +3,6 @@
 
 @header-height: 80px;
 
-.index-page-wrapper {
-  #header {
-    box-shadow: none;
-  }
-}
-
 #header {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(240, 241, 242, 65);
@@ -27,18 +21,18 @@
   line-height: 64px;
   text-decoration: none;
   height: 64px;
+
   img {
-    display: inline;
     vertical-align: middle;
     margin-right: 16px;
     width: 32px;
+    margin-top: -1px;
   }
-  img + img {
-    height: 16px;
-    margin-right: 0;
-    width: auto;
+  .left-top-title {
     position: relative;
-    top: 1px;
+    font-size: 17px;
+    font-weight: 500;
+    vertical-align: middle;
   }
 }
 
@@ -55,7 +49,7 @@
 #search-box {
   float: left;
   height: 32px;
-  margin: 12px auto 0;
+  margin: 16px auto 0;
   padding-left: 16px;
   line-height: 32px;
   border: 1px solid #cfd4db;

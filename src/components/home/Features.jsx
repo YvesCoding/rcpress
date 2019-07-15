@@ -1,8 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import OverPack from 'rc-scroll-anim/lib/ScrollOverPack';
-import QueueAnim from 'rc-queue-anim';
 
 class Page1 extends React.PureComponent {
   constructor(props) {
@@ -44,12 +42,6 @@ class Page1 extends React.PureComponent {
     return (
       <div className="home-page page1">
         <div className="home-page-wrapper" id="page1-wrapper">
-          <h2>
-            <span>{featureText}</span>
-          </h2>
-          <div className="title-line-wrapper page1-line">
-            <div className="title-line" />
-          </div>
           {children}
         </div>
       </div>

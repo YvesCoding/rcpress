@@ -50,5 +50,8 @@ module.exports = {
   },
 };
 function genSidebarConfig(title) {
-  return [{ title, collapsable: false, children: ['', 'getting-started'] }];
+  return [
+    { title, collapsable: false, children: ['', 'getting-started'] },
+    { title: 'title1', collapsable: false, children: ['README-copy', 'getting-started-copy'] },
+  ];
 }

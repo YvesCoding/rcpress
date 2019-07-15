@@ -27,12 +27,12 @@ npm install magic-scroll -S
 2.  Import `magic-scroll`
 
 ```js
-import Scrollbar from 'magic-scroll';
+import Scrollbar from 'magic-scroll'; // highlight-line
 ```
 
 3. Wrap the content.
 
-```js
+```jsx
 <div className="demo-container">
   <Scrollbar>
     <div className="demo-content">

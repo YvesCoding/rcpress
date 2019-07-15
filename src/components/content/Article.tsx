@@ -7,7 +7,6 @@ import { IGraphqlFrontmatterData, IMarkDownFields } from '../../templates/docs';
 import moment from 'moment';
 import AvatarList from './AvatarList';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
-import * as utils from '../utils';
 import { PageContext } from '../layout/PageContext';
 
 interface ArticleProps {
@@ -61,18 +60,9 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const {
       currentLocaleWebConfig: {
         title: siteTitle,
-        themeConfig: {
-          lastUpdated,
-          editLinkText,
-          repo,
-          docsRepo,
-          docsDir,
-          docsBranch,
-          showAvatarList,
-        },
+        themeConfig: { lastUpdated, editLinkText, repo, docsRepo, docsBranch, showAvatarList },
       },
     } = this.context;
-    console.log(this.context);
 
     return (
       <DocumentTitle title={`${title} | ${siteTitle}`}>
@@ -94,15 +84,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
             </h1>
 
             {!content.toc.items.length ? null : (
-              <Affix
-                className="toc-affix"
-                offsetTop={16}
-                target={() => {
-                  return typeof window === 'undefined'
-                    ? null
-                    : document.getElementById('layout-panel');
-                }}
-              >
+              <Affix className="toc-affix" offsetTop={16}>
                 <ul className="toc">
                   {content.toc.items.map(item => {
                     return (

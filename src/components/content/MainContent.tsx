@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { Badge, Row, Col, Menu, Icon } from 'antd';
+import { Badge, Row, Col, Menu, Icon, Affix } from 'antd';
 import classNames from 'classnames';
-import MobileMenu from 'rc-drawer-menu';
+import MobileMenu from 'rc-drawer';
 import Article from './Article';
 import { IGraphqlFrontmatterData, IMarkDownFields } from '../../templates/docs';
 
@@ -62,6 +62,8 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     };
   }
 
+  scroller: any;
+
   componentDidMount() {
     this.componentDidUpdate();
   }
@@ -74,23 +76,32 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
       });
     }
   }
-  timer: number;
-  componentDidUpdate() {
-    if (!window.location.hash) {
-      return;
+  componentDidUpdate(prevProps?: MainContentProps) {
+    let slug;
+    if (
+      !prevProps ||
+      !(slug = prevProps.localizedPageData.meta.slug) ||
+      slug != this.props.localizedPageData.meta.slug
+    ) {
+      this.bindScroller();
     }
-    const element = document.getElementById(
-      decodeURIComponent(window.location.hash.replace('#', ''))
-    );
-    setTimeout(() => {
-      if (element) {
-        element.scrollIntoView(true);
-      }
-    }, 100);
+
+    if (!window.location.hash && prevProps && slug !== location.pathname) {
+      window.scrollTo(0, 0);
+    } else if (window.location.hash) {
+      const element = document.getElementById(
+        decodeURIComponent(window.location.hash.replace('#', ''))
+      );
+      setTimeout(() => {
+        if (element) {
+          element.scrollIntoView(true);
+        }
+      }, 100);
+    }
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timer);
+    this.scroller && this.scroller.destroy();
   }
 
   handleMenuOpenChange = (openKeys: string[]) => {
@@ -194,6 +205,29 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     };
   };
 
+  bindScroller() {
+    if (this.scroller) {
+      this.scroller.destroy();
+    }
+    require('intersection-observer'); // eslint-disable-line
+    const scrollama = require('scrollama'); // eslint-disable-line
+    this.scroller = scrollama();
+    this.scroller
+      .setup({
+        step: '.markdown > h2, .code-box', // required
+        offset: 0,
+      })
+      .onStepEnter(({ element }: { element: HTMLDivElement }) => {
+        [].forEach.call(document.querySelectorAll('.toc-affix li a'), (node: HTMLDivElement) => {
+          node.className = ''; // eslint-disable-line
+        });
+        const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
+        if (currentNode) {
+          currentNode.className = 'current';
+        }
+      });
+  }
+
   render() {
     const { localizedPageData, isMobile } = this.props;
 
@@ -218,16 +252,14 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
       <div className="main-wrapper">
         <Row>
           {isMobile ? (
-            <MobileMenu
-              iconChild={[<Icon type="menu-unfold" />, <Icon type="menu-fold" />]}
-              key="mobile-menu"
-              wrapperClassName="drawer-wrapper"
-            >
+            <MobileMenu key="mobile-menu" wrapperClassName="drawer-wrapper">
               {menuChild}
             </MobileMenu>
           ) : (
             <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">
-              {menuChild}
+              <Affix>
+                <section className="main-menu-inner">{menuChild}</section>
+              </Affix>
             </Col>
           )}
           <Col xxl={20} xl={19} lg={18} md={24} sm={24} xs={24}>
