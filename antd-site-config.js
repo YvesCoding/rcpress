@@ -2,14 +2,20 @@ module.exports = {
   base: '/',
   locales: {
     '/': {
-      title: 'AntSite',
-      description: 'AntSite -A docs generator based on gatsby and website of Ant Design',
+      title: 'AntdSite',
+      description: 'AntdSite -A docs generator based on gatsby and website of Ant Design',
     },
     '/zh/': {
-      title: 'AntSite',
-      description: 'AntSite - 基于Ant Design 网站 和 gatsby 的文档生成工具',
+      title: 'AntdSite',
+      description: 'AntdSite - 基于Ant Design 网站 和 gatsby 的文档生成工具',
     },
   },
+  head: [
+    [
+      'link',
+      { rel: 'icon', href: `https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg` },
+    ],
+  ],
   themeConfig: {
     repo: 'YvesCoding/gatsby-theme-antdsite',
     docsRepo: 'YvesCoding/gatsby-theme-antdsite',
@@ -20,7 +26,7 @@ module.exports = {
         label: 'English',
         selectText: 'Languages',
         editLinkText: 'Edit this page on GitHub',
-        lastUpdated: 'Last updated on', // string | boolean
+        lastUpdated: 'Last updated on', // string | false
         nav: [
           {
             text: 'Guide',
@@ -35,7 +41,7 @@ module.exports = {
         label: '简体中文',
         selectText: '选择语言',
         editLinkText: '在 GitHub 上编辑此页',
-        lastUpdated: '上次更新于', // string | boolean
+        lastUpdated: '上次更新于', // string | false
         nav: [
           {
             text: '指南',

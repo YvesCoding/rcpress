@@ -1,8 +1,9 @@
 @import '~antd/lib/style/themes/default.less';
 
 .home-wrapper {
-  width: 100%;
   color: #697b8c;
+  max-width: 960px;
+  margin: auto;
   .ant-btn {
     min-width: 110px;
     height: 40px;
@@ -19,7 +20,7 @@ svg g {
 .banner-wrapper {
   width: 100%;
   max-width: 1500px;
-  margin: 75px auto;
+  margin: 60px auto;
   position: relative;
   .banner-title-wrapper {
     width: 40%;
@@ -42,7 +43,7 @@ svg g {
       text-align: center;
     }
     .button-wrapper {
-      margin-top: 64px;
+      margin-top: 50px;
       line-height: 40px;
       align-items: center;
       display: flex;
@@ -88,16 +89,11 @@ svg g {
     }
   }
 
-  .banner-image-wrapper {
-    width: 45%;
-    max-width: 598px;
-    height: 324px;
-    position: absolute;
-    right: 8%;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    opacity: 0;
+  .banner-logo {
+    text-align: center;
+    max-width: 100%;
+    max-height: 280px;
+    margin: 3rem auto 1.5rem;
   }
 }
 
@@ -119,16 +115,6 @@ svg g {
 
 .home-page {
   margin: 50px auto;
-  h2 {
-    text-align: center;
-    font-weight: 300;
-    font-size: 28px;
-    color: #314659;
-    letter-spacing: 0.6px;
-    span {
-      font-weight: 600;
-    }
-  }
 }
 
 .home-page-wrapper {
@@ -162,13 +148,15 @@ svg g {
 .page1-box-wrapper {
   margin-bottom: 62px;
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
+  align-content: stretch;
+  justify-content: space-between;
   li {
-    width: 33.33%;
+    width: 30%;
     display: inline-block;
     will-change: transform;
     .page1-box {
-      width: 194px;
       margin: auto;
       text-align: center;
       position: relative;
@@ -188,10 +176,13 @@ svg g {
       &:hover .page1-image {
         transform: translateY(-5px);
       }
-      h3 {
+      h2 {
         color: #0d1a26;
-        font-size: 18px;
-        margin: 8px auto;
+        margin: 18px auto;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.7;
       }
     }
   }
@@ -233,8 +224,6 @@ svg g {
 }
 /** page2 **/
 .home-markdown {
-  width: 90%;
-  max-width: 840px;
   border-radius: 4px;
   line-height: 28px;
   margin: 16px auto;

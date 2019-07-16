@@ -1,5 +1,4 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
 import { Affix } from 'antd';
 import delegate from 'delegate';
 import EditButton from './EditButton';
@@ -8,6 +7,7 @@ import moment from 'moment';
 import AvatarList from './AvatarList';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import { PageContext } from '../layout/PageContext';
+import SEO from '../SEO/SEO';
 
 interface ArticleProps {
   content: {
@@ -60,54 +60,55 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const {
       currentLocaleWebConfig: {
         title: siteTitle,
+        description,
         themeConfig: { lastUpdated, editLinkText, repo, docsRepo, docsBranch, showAvatarList },
       },
     } = this.context;
+    const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
 
     return (
-      <DocumentTitle title={`${title} | ${siteTitle}`}>
-        <>
-          <article
-            className="markdown"
-            ref={node => {
-              this.node = node;
-            }}
-          >
-            <h1>
-              {title}
-              {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
-              <EditButton
-                sourcePath={`https://github.com/${docsRepo || repo}/edit/${docsBranch}/`}
-                title={editLinkText}
-                filename={path}
-              />
-            </h1>
+      <>
+        <SEO title={`${title} | ${siteTitle}`} description={description} />
+        <article
+          className="markdown"
+          ref={node => {
+            this.node = node;
+          }}
+        >
+          <h1>
+            {title}
+            {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
+            <EditButton
+              sourcePath={`https://github.com/${docsRepo || repo}/edit/${docsBranch}/`}
+              title={editLinkText}
+              filename={path}
+            />
+          </h1>
 
-            {!content.toc.items.length ? null : (
-              <Affix className="toc-affix" offsetTop={16}>
-                <ul className="toc">
-                  {content.toc.items.map(item => {
-                    return (
-                      <li key={item.url}>
-                        <a href={item.url}>{item.title}</a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </Affix>
-            )}
-            <section className="markdown api-container">
-              <MDXRenderer>{content.code.body}</MDXRenderer>
-            </section>
-          </article>
-          {lastUpdated && (
-            <div className={`modifiedTime ${!showAvatarList ? 'no-avatar-list' : ''}`}>
-              {showAvatarList && <AvatarList avatarList={avatarList} />}
-              {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
-            </div>
+          {!content.toc.items.length ? null : (
+            <Affix className="toc-affix" offsetTop={16}>
+              <ul className="toc">
+                {content.toc.items.map(item => {
+                  return (
+                    <li key={item.url}>
+                      <a href={item.url}>{item.title}</a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Affix>
           )}
-        </>
-      </DocumentTitle>
+          <section className="markdown api-container">
+            <MDXRenderer>{content.code.body}</MDXRenderer>
+          </section>
+        </article>
+        {lastUpdated && (
+          <div className={`modifiedTime ${noAvatar ? 'no-avatar-list' : ''}`}>
+            {!noAvatar && <AvatarList avatarList={avatarList} />}
+            {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
+          </div>
+        )}
+      </>
     );
   }
 }

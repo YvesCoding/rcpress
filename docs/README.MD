@@ -1,5 +1,5 @@
 ---
-heroImage: /logo.png
+heroImage: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg
 actionText: Get Started →
 actionLink: /guide/
 featureText: Features
@@ -11,26 +11,34 @@ features:
     details: Each property is optional, and a custom scrollbar can appear just by wrapping the content
   - title: Good compatibility
     details: Compatible with TypeSciprt, SSR, PC, mobile phone, touch screen
+  - title: Rich Function
+    details: You can customize scrollbar, rail, scroll container, etc. Rich APIs and Events
+  - title: Easy To Use
+    details: Each property is optional, and a custom scrollbar can appear just by wrapping the content
+  - title: Good compatibility
+    details: Compatible with TypeSciprt, SSR, PC, mobile phone, touch screen
 
 footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
-## Get Started
+import Demo from './home-intro'
 
-1. Install `magic-scroll` via `yarn` or `npm`
+### Quick Start
+
+Install `magic-scroll` via `yarn` or `npm`
 
 ```bash
 npm install magic-scroll -S
 # yarn add magic-scroll
 ```
 
-2.  Import `magic-scroll`
+Import `magic-scroll`
 
 ```js
 import Scrollbar from 'magic-scroll'; // highlight-line
 ```
 
-3. Wrap the content.
+Wrap the content.
 
 ```jsx
 <div className="demo-container">
@@ -42,4 +50,6 @@ import Scrollbar from 'magic-scroll'; // highlight-line
 </div>
 ```
 
-4. You will get the custom scrollbar below.
+You will get the custom scrollbar below.
+
+<Demo />

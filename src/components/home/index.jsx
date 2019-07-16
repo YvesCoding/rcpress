@@ -1,5 +1,5 @@
 import React from 'react';
-import DocumentTitle from 'react-document-title';
+import SEO from '../SEO/SEO';
 
 import Banner from './Banner';
 import Features from './Features';
@@ -11,15 +11,17 @@ function Home(props) {
     <PageContext.Consumer>
       {value => {
         const { currentLocaleWebConfig } = value;
+        const { title, description } = currentLocaleWebConfig;
 
         return (
-          <DocumentTitle title={currentLocaleWebConfig.title}>
+          <>
+            <SEO title={`${title}`} description={description} />
             <div className="home-wrapper">
               <Banner {...props} {...value} />
               <Features {...props} {...value} />
               <HomeRest {...props} {...value} />
             </div>
-          </DocumentTitle>
+          </>
         );
       }}
     </PageContext.Consumer>

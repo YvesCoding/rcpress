@@ -1,11 +1,16 @@
 var path = require('path');
-var finalConfig = require('./lib/util').getFinalConfig();
+var { renderHeadTag, getFinalConfig } = require('./lib/util');
+
+var finalConfig = getFinalConfig();
 
 function getPlugin(pluginName) {
   return path.resolve(__dirname, `./lib/plugins/${pluginName}/index.js`);
 }
 
 module.exports = {
+  siteMetadata: {
+    extraHead: JSON.stringify(finalConfig.head || []),
+  },
   plugins: [
     {
       resolve: 'gatsby-mdx',
@@ -43,18 +48,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-netlify`,
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: 'Magic Scroll',
-        short_name: 'Magic Scroll Doc',
-        display: 'standalone',
-        start_url: './?utm_source=homescreen',
-        theme_color: '#002140',
-        background_color: '#001529',
-        icon: `${__dirname}/src/images/favicon.png`,
-      },
-    },
     `gatsby-plugin-react-helmet`,
   ],
 };

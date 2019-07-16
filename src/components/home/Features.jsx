@@ -18,19 +18,24 @@ class Page1 extends React.PureComponent {
         },
       },
     } = this.props;
-    let children = [[]];
+    let children = [];
 
     features &&
       features.forEach((item, i) => {
         const child = (
           <li key={i.toString()}>
             <div className="page1-box">
-              <h3>{item.title}</h3>
+              <h2>{item.title}</h2>
               <p>{item.details}</p>
             </div>
           </li>
         );
-        children[Math.floor(i / 3)].push(child);
+
+        const index = Math.floor(i / 3);
+        if (!children[index]) {
+          children[index] = [];
+        }
+        children[index].push(child);
       });
 
     children = children.map((item, i) => (

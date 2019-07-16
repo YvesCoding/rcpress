@@ -1,6 +1,5 @@
 import React from 'react';
 import GitHubButton from 'react-github-button';
-import QueueAnim from 'rc-queue-anim';
 import { Button } from 'antd';
 import { Link } from 'gatsby';
 
@@ -16,7 +15,12 @@ function Banner(props) {
   const [namespace, repo] = currentLocaleWebConfig.themeConfig.repo.split('/');
   return (
     <div className="banner-wrapper">
-      <QueueAnim className="banner-title-wrapper" type={isMobile ? 'bottom' : 'right'}>
+      {frontmatter.heroImage && (
+        <div className="banner-logo">
+          <img src={frontmatter.heroImage} alt="Hero" />
+        </div>
+      )}
+      <div className="banner-title-wrapper">
         <h1 key="h1">{currentLocaleWebConfig.title}</h1>
         <p key="content">{currentLocaleWebConfig.description}</p>
         <div key="button" className="button-wrapper">
@@ -29,7 +33,7 @@ function Banner(props) {
             <GitHubButton key="github-button" type="stargazers" namespace={namespace} repo={repo} />
           ) : null}
         </div>
-      </QueueAnim>
+      </div>
     </div>
   );
 }
