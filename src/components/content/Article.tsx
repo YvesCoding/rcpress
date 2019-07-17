@@ -86,7 +86,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
           </h1>
 
           {!content.toc.items.length ? null : (
-            <Affix className="toc-affix" offsetTop={16}>
+            <Affix className="toc-affix" offsetTop={64}>
               <ul className="toc">
                 {content.toc.items.map(item => {
                   return (

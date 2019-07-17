@@ -34,6 +34,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         searchInput && searchInput.focus();
       }
     });
+    const { isMobile } = this.props;
+    this.setMenuMode(isMobile);
   }
 
   setMenuMode = (isMobile: boolean) => {

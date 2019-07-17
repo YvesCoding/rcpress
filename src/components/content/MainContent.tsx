@@ -257,7 +257,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
             </MobileMenu>
           ) : (
             <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">
-              <Affix>
+              <Affix offset={64}>
                 <section className="main-menu-inner">{menuChild}</section>
               </Affix>
             </Col>

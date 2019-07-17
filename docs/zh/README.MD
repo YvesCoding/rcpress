@@ -1,5 +1,5 @@
 ---
-heroImage: /logo.png
+heroImage: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg
 actionText: 快速上手 →
 actionLink: /zh/guide/
 featureText: 特点
