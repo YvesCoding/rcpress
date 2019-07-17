@@ -50,24 +50,27 @@
   float: left;
   height: 32px;
   margin: 16px auto 0;
-  padding-left: 16px;
   line-height: 32px;
   border: 1px solid #cfd4db;
   border-radius: 32px;
+  position: relative;
 }
 
 #search-box .anticon {
-  position: relative;
-  top: 0.5px;
+  position: absolute;
+  margin: auto;
   color: #aaaaaa;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #search-box input {
+  border-radius: 32px;
   width: 200px;
-  margin-top: -3px;
   font-size: 14px;
   background: transparent;
-  border: 0;
+  padding-left: 34px;
   box-shadow: none;
 
   &::placeholder {
