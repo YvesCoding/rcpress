@@ -1,9 +1,10 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import { Link } from 'gatsby';
-import * as utils from '../utils';
+import * as utils from '../components/utils';
 import { Row, Col, Icon, Select, Input, Menu, Button, Modal, Popover, Dropdown, Affix } from 'antd';
 import { PageContext } from './PageContext';
+import SearchBox from '../components/search-box';
 
 interface HeaderProps {
   isMobile: boolean;
@@ -28,12 +29,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   searchInput: Input | null | undefined;
 
   componentDidMount() {
-    const { searchInput } = this;
-    document.addEventListener('keyup', event => {
-      if (event.keyCode === 83 && event.target === document.body) {
-        searchInput && searchInput.focus();
-      }
-    });
     const { isMobile } = this.props;
     this.setMenuMode(isMobile);
   }
@@ -146,14 +141,15 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               </Link>
             </Col>
             <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
-              <div id="search-box">
+              {/* <div id="search-box">
                 <Icon type="search" className="search-icon" />
                 <Input
                   ref={ref => {
                     this.searchInput = ref;
                   }}
                 />
-              </div>
+              </div> */}
+              <SearchBox />
               <div className="header-meta">
                 <div className="right-header">
                   {currentLocate ? (

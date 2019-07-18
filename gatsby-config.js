@@ -1,5 +1,5 @@
 var path = require('path');
-var { renderHeadTag, getFinalConfig } = require('./lib/util');
+var { getFinalConfig } = require('./lib/util');
 
 var finalConfig = getFinalConfig();
 
@@ -22,6 +22,9 @@ module.exports = {
           },
           {
             resolve: getPlugin('gatsby-remark-img-warpper-p'),
+          },
+          {
+            resolve: getPlugin('remark-default-class-name'),
           },
           'gatsby-remark-prismjs',
         ],

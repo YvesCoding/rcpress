@@ -1,0 +1,44 @@
+.search-box {
+  float: left;
+  margin: 16px auto 0;
+  position: relative;
+
+  input {
+    border-radius: 32px;
+    width: 200px;
+    font-size: 14px;
+    background: transparent;
+    padding-left: 34px;
+    box-shadow: none;
+
+    &::placeholder {
+      color: #a3b1bf;
+    }
+  }
+
+  .search-result-list {
+    display: none;
+    position: absolute;
+    margin-top: 5px;
+    width: 100%;
+    z-index: 999;
+    background: #fff;
+    :global(.ant-list) {
+      border-radius: 6px;
+    }
+  }
+
+  .searchInput-component {
+    position: relative;
+    height: 32px;
+
+    :global(.anticon) {
+      position: absolute;
+      margin: auto;
+      color: #aaaaaa;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}

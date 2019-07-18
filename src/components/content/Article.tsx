@@ -1,13 +1,15 @@
 import React from 'react';
-import { Affix } from 'antd';
+import { Affix, Anchor } from 'antd';
 import delegate from 'delegate';
 import EditButton from './EditButton';
 import { IGraphqlFrontmatterData, IMarkDownFields } from '../../templates/docs';
 import moment from 'moment';
 import AvatarList from './AvatarList';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
-import { PageContext } from '../layout/PageContext';
+import { PageContext } from '../../layout/PageContext';
 import SEO from '../SEO/SEO';
+
+const Link = Anchor.Link;
 
 interface ArticleProps {
   content: {
@@ -86,17 +88,25 @@ export default class Article extends React.PureComponent<ArticleProps> {
           </h1>
 
           {!content.toc.items.length ? null : (
-            <Affix className="toc-affix" offsetTop={64}>
-              <ul className="toc">
+            <div className="toc-affix">
+              <Anchor offsetTop={70}>
                 {content.toc.items.map(item => {
-                  return (
-                    <li key={item.url}>
-                      <a href={item.url}>{item.title}</a>
-                    </li>
-                  );
+                  return <Link key={item.url} href={item.url} title={item.title} />;
                 })}
-              </ul>
-            </Affix>
+              </Anchor>
+            </div>
+
+            // <Affix className="toc-affix" offsetTop={64}>
+            //   <ul className="toc">
+            //     {content.toc.items.map(item => {
+            //       return (
+            //         <li key={item.url}>
+            //           <a href={item.url}>{item.title}</a>
+            //         </li>
+            //       );
+            //     })}
+            //   </ul>
+            // </Affix>
           )}
           <section className="markdown api-container">
             <MDXRenderer>{content.code.body}</MDXRenderer>

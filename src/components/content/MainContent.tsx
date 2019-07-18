@@ -78,13 +78,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
   }
   componentDidUpdate(prevProps?: MainContentProps) {
     let slug;
-    if (
-      !prevProps ||
-      !(slug = prevProps.localizedPageData.meta.slug) ||
-      slug != this.props.localizedPageData.meta.slug
-    ) {
-      this.bindScroller();
-    }
 
     if (!window.location.hash && prevProps && slug !== location.pathname) {
       window.scrollTo(0, 0);
@@ -205,29 +198,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     };
   };
 
-  bindScroller() {
-    if (this.scroller) {
-      this.scroller.destroy();
-    }
-    require('intersection-observer'); // eslint-disable-line
-    const scrollama = require('scrollama'); // eslint-disable-line
-    this.scroller = scrollama();
-    this.scroller
-      .setup({
-        step: '.markdown > h2, .code-box', // required
-        offset: 0,
-      })
-      .onStepEnter(({ element }: { element: HTMLDivElement }) => {
-        [].forEach.call(document.querySelectorAll('.toc-affix li a'), (node: HTMLDivElement) => {
-          node.className = ''; // eslint-disable-line
-        });
-        const currentNode = document.querySelectorAll(`.toc-affix li a[href="#${element.id}"]`)[0];
-        if (currentNode) {
-          currentNode.className = 'current';
-        }
-      });
-  }
-
   render() {
     const { localizedPageData, isMobile } = this.props;
 
@@ -257,7 +227,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
             </MobileMenu>
           ) : (
             <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">
-              <Affix offset={64}>
+              <Affix offsetTop={70}>
                 <section className="main-menu-inner">{menuChild}</section>
               </Affix>
             </Col>

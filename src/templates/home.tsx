@@ -2,7 +2,7 @@ import React from 'react';
 import Media from 'react-media';
 
 import Home from '../components/home/index.jsx';
-import WrapperLayout from '../components/layout';
+import WrapperLayout from '../layout';
 import { graphql } from 'gatsby';
 
 const IndexPage = (props: any) => {

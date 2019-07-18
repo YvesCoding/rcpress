@@ -54,7 +54,8 @@
     "react-dom": "^16.8.6",
     "react-github-button": "^0.1.11",
     "react-media": "^1.9.2",
-    "style-loader": "^0.21.0"
+    "style-loader": "^0.21.0",
+    "unist-util-select": "^2.0.2"
   },
   "devDependencies": {
     "@types/react-helmet": "^5.0.8",

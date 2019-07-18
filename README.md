@@ -5,7 +5,7 @@ You can custom [antd-website](https://pro.ant.design/) in a config, just like [V
 # Usage
 
 ```bash
-yarn add gatsby gatsby-theme-antdsite antd -D
+yarn add gatsby gatsby-theme-antdsite antd
 
 # or
 

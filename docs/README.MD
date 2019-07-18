@@ -21,8 +21,6 @@ features:
 footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
-import Demo from './home-intro'
-
 ### Quick Start
 
 Install `magic-scroll` via `yarn` or `npm`
@@ -52,4 +50,8 @@ Wrap the content.
 
 You will get the custom scrollbar below.
 
-<Demo />
+- 1
+- 3
+
+* 4
+* 5

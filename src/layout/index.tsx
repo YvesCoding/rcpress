@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Media from 'react-media';
-import '../../static/style';
+import '../static/style';
 import Header from './Header';
 import Footer from './Footer';
 import { PageContext } from './PageContext';
-import { getcurrentLocaleConfigBySlug } from '../utils';
+import { getcurrentLocaleConfigBySlug } from '../components/utils';
 
 interface LayoutProps {
   pageContext: {

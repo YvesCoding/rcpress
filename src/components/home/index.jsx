@@ -4,7 +4,7 @@ import SEO from '../SEO/SEO';
 import Banner from './Banner';
 import Features from './Features';
 import HomeRest from './HomeRest';
-import { PageContext } from '../layout/PageContext';
+import { PageContext } from '../../layout/PageContext';
 
 function Home(props) {
   return (

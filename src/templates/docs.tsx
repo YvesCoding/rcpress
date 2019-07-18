@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import WrapperLayout from '../components/layout';
+import WrapperLayout from '../layout';
 import MainContent from '../components/content/MainContent';
 import { resolveSidebarItems } from '../components/utils';
 
