@@ -1,9 +1,34 @@
 import React from 'react';
-import { List, Input, Icon } from 'antd';
+import { List, Input, Icon, Breadcrumb } from 'antd';
 import styles from './index.module.less';
 
-export default class Search extends React.Component {
+interface SearchState {
+  isSearchListShow: boolean;
+}
+
+interface SearchProps {}
+
+export default class Search extends React.Component<SearchProps, SearchState> {
   searchInput: Input | null | undefined;
+
+  constructor(props: SearchProps) {
+    super(props);
+
+    this.state = {
+      isSearchListShow: false,
+    };
+  }
+
+  handleBlur = () => {
+    this.setState({
+      isSearchListShow: false,
+    });
+  };
+  handleInput = () => {
+    this.setState({
+      isSearchListShow: true,
+    });
+  };
 
   render() {
     const data = Array(10)
@@ -22,23 +47,37 @@ export default class Search extends React.Component {
             ref={ref => {
               this.searchInput = ref;
             }}
+            onBlur={this.handleBlur}
+            onInput={this.handleInput}
           />
         </div>
+
         <div className={styles.searchResultList}>
-          <List
-            dataSource={data}
-            renderItem={item => {
-              return (
-                <List.Item>
-                  <div>
-                    {item} > {item}
-                  </div>
-                </List.Item>
-              );
-            }}
-            size="small"
-            bordered
-          />
+          {this.state.isSearchListShow ? (
+            <List
+              key="search-list"
+              dataSource={data}
+              renderItem={(item, index) => {
+                return (
+                  <List.Item>
+                    <a href="www.baidu.com" className={styles.searchItem}>
+                      <List.Item.Meta
+                        description={
+                          <Breadcrumb separator=">" className={styles.ellipsis}>
+                            <Breadcrumb.Item>Guide</Breadcrumb.Item>
+                            <Breadcrumb.Item>Home</Breadcrumb.Item>
+                            <Breadcrumb.Item>Application Center</Breadcrumb.Item>
+                          </Breadcrumb>
+                        }
+                      />
+                    </a>
+                  </List.Item>
+                );
+              }}
+              size="small"
+              bordered
+            />
+          ) : null}
         </div>
       </div>
     );

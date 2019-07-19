@@ -6,6 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { PageContext } from './PageContext';
 import { getcurrentLocaleConfigBySlug } from '../components/utils';
+import { BackTop } from 'antd';
 
 interface LayoutProps {
   pageContext: {
@@ -45,6 +46,7 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
           ref: 'content',
         })}
         <Footer {...restProps} ref="footer" />
+        <BackTop />
       </div>
     );
   }

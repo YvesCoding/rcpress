@@ -17,14 +17,34 @@
   }
 
   .search-result-list {
-    display: none;
     position: absolute;
     margin-top: 5px;
-    width: 100%;
+    width: 320px;
     z-index: 999;
     background: #fff;
-    :global(.ant-list) {
-      border-radius: 6px;
+    :global {
+      .ant-list {
+        border-radius: 6px;
+      }
+      .ant-list-item {
+        padding: 0 !important;
+      }
+    }
+
+    .ellipsis {
+      max-width: 286px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .search-item {
+      width: 100%;
+      padding: 8px 16px;
+      &:hover,
+      &.active {
+        background-color: #e6f7ff;
+      }
     }
   }
 
