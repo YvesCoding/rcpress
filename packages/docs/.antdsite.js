@@ -15,7 +15,6 @@ module.exports = {
   themeConfig: {
     repo: 'YvesCoding/antdsite',
     docsRelativeDir: 'packages/docs',
-    docsBranch: 'monorepo',
     locales: {
       '/': {
         label: 'English',

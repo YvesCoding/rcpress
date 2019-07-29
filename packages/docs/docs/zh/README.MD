@@ -5,11 +5,11 @@ showStar: true
 home: true
 features:
   - title: 门槛底
-    details: 文档的配置参考了vuepress，只需要简单配置文档，然后会一些markdown语法就能上手
-  - title: 界面美观
-    details: 基于知名开源项目Ant Design，界面UI美观
+    details: 文档的配置设计参考了<a target="_blank" href="https://vuepress.vuejs.org/default-theme-config/">vuepress</a>，只需要简单配置，会一些markdown语法就能快速上手
+  - title: Ant Design 网站风格
+    details: 文档的设计风格基于<a target="_blank" href="https://ant.design/docs/react/introduce-cn">Ant Design</a>网站，界面美观。
   - title: 功能强大
-    details: 可以在markdown中使用react组件，可以使用ant-design的所有组件
+    details: 得益于<a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a>，我们可以在markdown里使用react组件。
 
 footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---

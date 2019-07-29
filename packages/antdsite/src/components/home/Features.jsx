@@ -25,8 +25,16 @@ class Page1 extends React.PureComponent {
         const child = (
           <li key={i.toString()}>
             <div className="page1-box">
-              <h2>{item.title}</h2>
-              <p>{item.details}</p>
+              <h2
+                dangerouslySetInnerHTML={{
+                  __html: item.title,
+                }}
+              ></h2>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: item.details,
+                }}
+              ></p>
             </div>
           </li>
         );
