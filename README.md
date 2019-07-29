@@ -1,6 +1,6 @@
 # Introduction
 
-You can custom [antd-website](https://pro.ant.design/) in a config, just like [Vuepress](https://github.com/vuejs/vuepress)
+A static docs generator based on Ant Design and GatsbyJs
 
 # Usage
 

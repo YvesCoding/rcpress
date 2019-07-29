@@ -1,5 +1,12 @@
-# AntSide official website
+# Introduction
 
-## Introduction
+A static docs generator based on Ant Design and GatsbyJs
 
-This is the official website of `AntdSite`.
+# Usage
+
+```bash
+  yarn gloabl add antdsite-cli
+  # or npm install antdsite-cli -g
+
+  antdsite my-docs
+```
