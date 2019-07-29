@@ -7,7 +7,7 @@
     "antdsite"
   ],
   "bin": {
-    "antdsite": "./index.js"
+    "antdsite": "index.js"
   },
   "author": "Yves Wang",
   "license": "MIT",
