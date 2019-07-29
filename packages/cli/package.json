@@ -25,5 +25,6 @@
     "tar-pack": "3.4.1",
     "tmp": "0.0.33",
     "validate-npm-package-name": "3.0.0"
-  }
+  },
+  "gitHead": "95cfad029a16bbab06503699c59dcd8b50302c7d"
 }

@@ -74,5 +74,6 @@
     "stylelint": "^9.4.0",
     "stylelint-config-prettier": "^3.3.0",
     "stylelint-config-standard": "^18.2.0"
-  }
+  },
+  "gitHead": "95cfad029a16bbab06503699c59dcd8b50302c7d"
 }
