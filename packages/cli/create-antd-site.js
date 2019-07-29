@@ -37,6 +37,14 @@ const program = new commander.Command(packageJson.name)
 
 createApp(projectName, program.useNpm);
 
+function printValidationResults(results) {
+  if (typeof results !== 'undefined') {
+    results.forEach(error => {
+      console.error(chalk.red(`  *  ${error}`));
+    });
+  }
+}
+
 function checkAppName(appName) {
   const validationResult = validateProjectName(appName);
   if (!validationResult.validForNewPackages) {
