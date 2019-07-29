@@ -37,12 +37,8 @@ module.exports = ({ actions }) => {
       fields: MdxFields
     }
 
-    type SitePage implements Node @infer {
-      context: SitePageContext
-    }
-
-    type SitePageContext @dontInfer  {
-      webConfig: Json
+    type SitePage implements Node @dontInfer {
+      path: String
     }
     `;
   createTypes(typeDefs);

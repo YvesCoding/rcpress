@@ -50,8 +50,14 @@ function writeTemplate(appPath) {
   }
 }
 
-function showSuccessTips(appPath, appName, useYarn) {
+function showSuccessTips(appPath, appName, useYarn, originalDirectory) {
   const displayedCommand = useYarn ? 'yarn' : 'npm';
+  let cdpath;
+  if (originalDirectory && path.join(originalDirectory, appName) === appPath) {
+    cdpath = appName;
+  } else {
+    cdpath = appPath;
+  }
 
   console.log();
 
@@ -77,14 +83,14 @@ function showSuccessTips(appPath, appName, useYarn) {
   console.log('We suggest that you begin by typing:');
   console.log();
 
-  console.log(chalk.hex('#29CDFF')('  cd'), appName);
+  console.log(chalk.hex('#29CDFF')('  cd'), cdpath);
   console.log(`  ${chalk.hex('#29CDFF')(`${displayedCommand} start`)}`);
 }
 
-module.exports = function(appPath, appName, useYarn) {
+module.exports = function(appPath, appName, useYarn, originalDirectory) {
   writeTemplate(appPath);
 
   tryGitInit(appPath);
 
-  showSuccessTips(appPath, appName, useYarn);
+  showSuccessTips(appPath, appName, useYarn, originalDirectory);
 };
