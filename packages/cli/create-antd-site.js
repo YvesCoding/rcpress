@@ -11,7 +11,7 @@ const spawn = require('cross-spawn');
 let projectName;
 
 const allDeps = {
-  antdsite: '^0.0.3',
+  antdsite: '^0.0.4',
   gatsby: '^2.13.39',
   react: '^16.8.0',
   'react-dom': '^16.8.0'
