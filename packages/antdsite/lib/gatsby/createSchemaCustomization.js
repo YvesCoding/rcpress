@@ -1,0 +1,49 @@
+module.exports = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type HomeFeature {
+      title: String
+      details: String
+    }
+
+    type MdxFrontmatter @infer {
+      type: String
+      title: String
+      subtitle: String
+      disabled: Boolean
+      link: String
+      important: Boolean
+      home: Boolean
+      heroImage: String
+      actionText: String
+      actionLink: String
+      showStar: Boolean
+      footer: String
+      features:[HomeFeature]
+    }
+
+    type Avatar {
+      href: String
+      text: String
+      src: String
+    }
+
+    type MdxFields @infer {
+      avatarList: [Avatar]
+    }
+  
+    type Mdx implements Node @infer {
+      frontmatter: MdxFrontmatter
+      fields: MdxFields
+    }
+
+    type SitePage implements Node @infer {
+      context: SitePageContext
+    }
+
+    type SitePageContext @dontInfer  {
+      webConfig: Json
+    }
+    `;
+  createTypes(typeDefs);
+};

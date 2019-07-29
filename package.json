@@ -1,82 +1,16 @@
 {
-  "name": "gatsby-theme-antdsite",
-  "version": "0.0.2",
-  "description": "A docs generator based on gatsby and website of Ant Design",
-  "homepage": "https://github.com/YvesCoding/gatsby-theme-ant-docs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/YvesCoding/gatsby-theme-ant-docs"
-  },
-  "author": {
-    "name": "Yves Wang"
-  },
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "build": "gatsby build",
-    "start": "gatsby develop"
+    "clean": "lerna clean && rm -rf node_modules",
+    "bs": "lerna bootstrap",
+    "publish": "lerna publish"
   },
-  "dependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/generator": "^7.0.0",
-    "@babel/plugin-proposal-decorators": "^7.1.6",
-    "@babel/traverse": "^7.0.0",
-    "@mdx-js/mdx": "^1.0.0-rc.4",
-    "@mdx-js/react": "^1.0.0-rc.5",
-    "@types/classnames": "^2.2.7",
-    "@types/react-dom": "^16.8.4",
-    "antd": "^3.20.1",
-    "antd-tools": "^7.3.5",
-    "axios": "^0.18.0",
-    "change-case": "^3.1.0",
-    "classnames": "^2.2.5",
-    "docsearch.js": "^2.6.3",
-    "gatsby": "^2.13.19",
-    "gatsby-mdx": "^0.6.3",
-    "gatsby-plugin-antd": "^2.0.2",
-    "gatsby-plugin-less": "^2.0.6",
-    "gatsby-plugin-manifest": "^2.0.9",
-    "gatsby-plugin-netlify": "^2.0.0",
-    "gatsby-plugin-offline": "^2.0.16",
-    "gatsby-plugin-react-helmet": "^3.0.2",
-    "gatsby-plugin-typescript": "^2.0.13",
-    "gatsby-remark-prismjs": "^3.0.2",
-    "gatsby-source-filesystem": "^2.0.0",
-    "github-slugger": "^1.2.1",
-    "himalaya": "^1.1.0",
-    "less": "^3.8.1",
-    "mdast-util-to-string": "^1.0.5",
-    "node-fetch": "^2.5.0",
-    "nprogress": "^0.2.0",
-    "prismjs": "^1.15.0",
-    "rc-drawer": "^2.0.1",
-    "react": "^16.8.2",
-    "react-dom": "^16.8.6",
-    "react-github-button": "^0.1.11",
-    "react-media": "^1.9.2",
-    "style-loader": "^0.21.0",
-    "unist-util-select": "^2.0.2"
-  },
+  "workspaces": [
+    "packages/antdsite",
+    "packages/cli",
+    "packages/docs"
+  ],
   "devDependencies": {
-    "@types/react-helmet": "^5.0.8",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-loader": "^2.1.0",
-    "eslint-plugin-babel": "^5.0.0",
-    "eslint-plugin-compat": "^2.1.0",
-    "eslint-plugin-import": "^2.10.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-markdown": "^1.0.0-beta.6",
-    "eslint-plugin-react": "^7.0.1",
-    "eslint-tinker": "^0.5.0",
-    "intersection-observer": "^0.7.0",
-    "js-beautify": "^1.7.5",
-    "prettier": "^1.14.0",
-    "react-helmet": "^5.2.1",
-    "scrollama": "^2.0.0",
-    "stylelint": "^9.4.0",
-    "stylelint-config-prettier": "^3.3.0",
-    "stylelint-config-standard": "^18.2.0"
+    "lerna": "^3.11.1"
   }
 }

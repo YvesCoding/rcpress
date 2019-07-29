@@ -1,0 +1,1 @@
+require('./create-antd-site');
