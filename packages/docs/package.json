@@ -7,7 +7,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "antdsite": "^0.0.6",
+    "antdsite": "^0.0.7",
     "gatsby": "^2.13.39",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
@@ -15,5 +15,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "version": "0.0.6"
+  "version": "0.0.7"
 }
