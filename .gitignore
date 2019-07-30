@@ -47,3 +47,4 @@ config/components/package.json
 .cache/
 public
 false  
+my-docs

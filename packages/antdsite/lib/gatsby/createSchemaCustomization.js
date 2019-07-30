@@ -19,7 +19,8 @@ module.exports = ({ actions }) => {
       actionLink: String
       showStar: Boolean
       footer: String
-      features:[HomeFeature]
+      features: [HomeFeature]
+      maxTocDeep: Int
     }
 
     type Avatar {

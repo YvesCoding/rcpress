@@ -1,19 +1,14 @@
-module.exports = ({ stage, actions, loaders }) => {
-  if (stage === 'build-html') {
+module.exports = ({ stage, actions, loaders, getConfig }) => {
+  if (stage === 'develop') {
     actions.setWebpackConfig({
       module: {
         rules: [
           {
-            test: /antv/,
-            use: loaders.null(),
-          },
-          {
-            test: /bizcharts/,
-            use: loaders.null(),
+            test: /react-hot-loader/,
+            use: [loaders.js()],
           },
         ],
       },
     });
-    return;
   }
 };

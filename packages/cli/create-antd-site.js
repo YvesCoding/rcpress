@@ -253,6 +253,7 @@ function run(root, dependencies, useYarn, appName, originalDirectory) {
 
 function install(root, useYarn, dependencies) {
   return new Promise((resolve, reject) => {
+    return resolve();
     let command;
     let args;
     if (useYarn) {

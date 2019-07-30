@@ -49,6 +49,7 @@ module.exports = async ({ graphql, actions }) => {
               }
               frontmatter {
                 home
+                maxTocDeep
               }
             }
           }
@@ -82,7 +83,7 @@ module.exports = async ({ graphql, actions }) => {
           context: {
             webConfig,
             slug,
-            maxTocDeep: webConfig.themeConfig.maxTocDeep,
+            maxTocDeep: frontmatter.maxTocDeep || webConfig.themeConfig.maxTocDeep,
           },
         });
       };

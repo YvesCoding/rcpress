@@ -7,7 +7,7 @@ module.exports = {
     },
     '/zh/': {
       title: 'AntdSite',
-      description: '一个基于Ant Design 和 GatsbyJs 的静态文档生成工具'
+      description: '一个基于Ant Design 和 GatsbyJs 的静态文档生成器'
     }
   },
   logo: '/favicon.png',
@@ -51,8 +51,8 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/guide/': genSidebarConfig('Guide'),
-          '/guide1/': genSidebarConfig('Guide1')
+          '/guide/': getGuideSidebar('Guide'),
+          '/guide1/': getGuideSidebar('Guide1')
         }
       },
       '/zh': {
@@ -67,20 +67,12 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/zh/guide/': genSidebarConfig('指南')
+          '/zh/guide/': getGuideSidebar()
         }
       }
     }
   }
 };
-function genSidebarConfig(title) {
-  return [
-    'aaa',
-    { title, collapsable: false, children: ['', 'getting-started'] },
-    {
-      title: 'title1',
-      collapsable: false,
-      children: ['README-copy', 'getting-started-copy']
-    }
-  ];
+function getGuideSidebar() {
+  return ['introduction', 'getting-started'];
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import GitHubButton from 'react-github-button';
+import GitHubButton from 'react-github-button-fix-iebug';
 import { Button } from 'antd';
 import { Link } from 'gatsby';
 

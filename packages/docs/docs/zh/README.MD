@@ -15,3 +15,35 @@ footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
 ## 开始上手
+
+### 通过 `antdsite-cli` 创建项目
+
+#### 使用 [yarn](https://yarnpkg.com) 进行安装
+
+```bash
+yarn global add antdsite-cli
+```
+
+#### 或者使用[npm](https://docs.npmjs.com/cli/install.html)进行安装
+
+```bash
+npm install antdsite-cli -g
+```
+
+### 使用`cli`来初始化一个网站
+
+```bash
+antdsite my-docs
+```
+
+### 切换到初始化的网站目录，运行网站
+
+```bash
+cd my-docs
+
+yarn start
+# OR
+npm start
+```
+
+### 访问默认的地址 `localhost:8000` 即可看到效果页面。
