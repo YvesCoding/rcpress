@@ -42,7 +42,9 @@ export default class Article extends React.PureComponent<ArticleProps> {
         themeConfig: { lastUpdated, editLinkText, repo, docsRepo, docsBranch, showAvatarList },
       },
     } = this.context;
-    const { subtitle, path, modifiedTime, avatarList } = currentPageInfo.frontmatter;
+
+    const { subtitle } = currentPageInfo.frontmatter;
+    const { path, modifiedTime, avatarList } = currentPageInfo.fields;
 
     const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
 
