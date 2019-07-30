@@ -16,6 +16,7 @@ module.exports = {
     showAvatarList: true,
     showBackToTop: true,
     maxTocDeep: 3,
-    showSearchBox: true,
+    search: true,
+    searchMaxSuggestions: 10,
   },
 };

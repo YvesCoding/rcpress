@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Input, Icon, Breadcrumb } from 'antd';
-import styles from './index.module.less';
 import { PageInfo } from '../utils';
 import { OneToc } from '../../templates/docs';
 import { Link } from 'gatsby';
@@ -19,6 +18,7 @@ interface SearchState {
 
 interface SearchProps {
   datas: Array<PageInfo>;
+  max: number;
 }
 
 function match(a: string, b: string) {
@@ -77,22 +77,27 @@ export default class Search extends React.Component<SearchProps, SearchState> {
   };
 
   search = () => {
-    const { datas } = this.props;
+    const { datas, max } = this.props;
     const query = this.state.query.trim();
     const results: filterDatas = [];
+
+    function hightlightRes(res: string) {
+      return res.replace(new RegExp(query, 'g'), `<span class='hight-light'>${query}</span>`);
+    }
 
     function resolveOnePageItem(currentItem: PageInfo) {
       if (match(currentItem.title, query)) {
         results.push([
           {
             url: currentItem.slug,
-            title: currentItem.title,
+            title: hightlightRes(currentItem.title),
             important: currentItem.important,
           },
         ]);
       } else if (currentItem.toc && currentItem.toc.items.length) {
         let tocs = flattenToc(currentItem.toc.items);
-        tocs.forEach(t => {
+        for (let i = 0; i < tocs.length && results.length < max; i++) {
+          let t = tocs[i];
           if (match(t.title, query)) {
             results.push([
               {
@@ -101,15 +106,15 @@ export default class Search extends React.Component<SearchProps, SearchState> {
               },
               {
                 url: currentItem.slug + t.url,
-                title: t.title,
+                title: hightlightRes(t.title),
               },
             ]);
           }
-        });
+        }
       }
     }
 
-    for (let i = 0; i < datas.length; i++) {
+    for (let i = 0; i < datas.length && results.length < max; i++) {
       const currentItem = datas[i];
       if (currentItem.slug) {
         resolveOnePageItem(currentItem);
@@ -129,8 +134,8 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     const { filterDatas } = this.state;
 
     return (
-      <div id="search-box" className={styles.searchBox}>
-        <div className={styles.searchInputComponent}>
+      <div id="search-box" className="search-box">
+        <div className="searchInput-component">
           <Icon type="search" />
           <Input
             ref={ref => {
@@ -143,7 +148,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
           />
         </div>
 
-        <div className={styles.searchResultList}>
+        <div className="search-result-list">
           {this.state.isSearchListShow && this.state.filterDatas.length ? (
             <List
               key="search-list"
@@ -153,7 +158,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
                   <List.Item>
                     <Link
                       to={dataItem[dataItem.length - 1].url as string}
-                      className={styles.searchItem}
+                      className="search-item "
                       onMouseDown={() => {
                         this.isClickLink = true;
                       }}
@@ -164,10 +169,16 @@ export default class Search extends React.Component<SearchProps, SearchState> {
                     >
                       <List.Item.Meta
                         description={
-                          <Breadcrumb separator=">" className={styles.ellipsis}>
+                          <Breadcrumb separator=">" className="ellipsis">
                             {dataItem.map((item, index) => (
                               // <Badge dot={i.important}>
-                              <Breadcrumb.Item key={index}>{item.title}</Breadcrumb.Item>
+                              <Breadcrumb.Item key={index}>
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: item.title,
+                                  }}
+                                ></span>
+                              </Breadcrumb.Item>
                               // </Badge>
                             ))}
                           </Breadcrumb>

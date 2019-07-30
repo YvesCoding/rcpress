@@ -98,7 +98,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     } = utils.getcurrentLocaleConfigBySlug(webConfig, slug);
     const { locales } = webConfig.themeConfig;
 
-    const { nav = [], showSearchBox } = themeConfig;
+    const { nav = [], search, searchMaxSuggestions } = themeConfig;
     const activeMenuItem = nav
       .filter((item: any) => {
         return item.link && slug.startsWith(item.link);
@@ -158,8 +158,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                   }}
                 />
               </div> */}
-              {showSearchBox && allPagesSidebarItems.length ? (
-                <SearchBox datas={allPagesSidebarItems} />
+              {search && allPagesSidebarItems.length ? (
+                <SearchBox datas={allPagesSidebarItems} max={searchMaxSuggestions} />
               ) : null}
               <div className="header-meta">
                 <div className="right-header">
