@@ -24,6 +24,7 @@
     "antd": "^3.20.1",
     "antd-tools": "^7.3.5",
     "axios": "^0.18.0",
+    "chalk": "2.4.2",
     "change-case": "^3.1.0",
     "classnames": "^2.2.5",
     "docsearch.js": "^2.6.3",

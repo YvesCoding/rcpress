@@ -1,17 +1,29 @@
-var path = require('path');
-var defaultConfig = require(path.resolve(__dirname, '../__default__/default-config'));
+const path = require('path');
+const defaultConfig = require(path.resolve(__dirname, '../__default__/default-config'));
+const chalk = require('chalk');
 
 const configName = '.antdsite.js';
+let userConfig;
 
 module.exports.getUserConfig = () => {
-  var config = {};
+  if (userConfig) return userConfig;
+
+  let configPath;
+
   try {
-    config = require(path.resolve(configName));
+    configPath = path.resolve(configName);
+    userConfig = require(configPath);
   } catch (error) {
-    config = defaultConfig;
+    console.error(
+      chalk.red(
+        `[AntdSite]: Error when parsing ${configName} at ${configPath}, fallback to default config, the detail error is bellow:`
+      )
+    );
+    console.error(error);
+    userConfig = defaultConfig;
   }
 
-  return config;
+  return userConfig;
 };
 
 function isObject(receive) {
@@ -35,7 +47,7 @@ function deepMerge(from, to) {
 }
 
 module.exports.getFinalConfig = function() {
-  var config = module.exports.getUserConfig();
+  const config = module.exports.getUserConfig();
 
   // merge with default config.
   const finalConfig = deepMerge(config, defaultConfig);
