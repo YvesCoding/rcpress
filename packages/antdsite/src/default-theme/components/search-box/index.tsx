@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, Input, Icon, Breadcrumb } from 'antd';
 import { PageInfo } from '../utils';
-import { OneToc } from '../../templates/docs';
+import { OneToc } from '../../../templates';
 import { Link } from 'gatsby';
 
 type filterDatas = {

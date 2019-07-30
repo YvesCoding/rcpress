@@ -1,4 +1,4 @@
-import { IAllMdxData, Edges, IGraphqlFrontmatterData, Toc, PageEdge } from '../templates/docs';
+import { IAllMdxData, Edges, IGraphqlFrontmatterData, Toc, PageEdge } from '../../templates';
 
 export function getCurrentLoacle(webConfig: any, slug: string) {
   const locales = webConfig.themeConfig.locales;

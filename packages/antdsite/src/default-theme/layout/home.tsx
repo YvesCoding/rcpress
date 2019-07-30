@@ -1,17 +1,17 @@
 import React from 'react';
-import SEO from '../SEO/SEO';
+import SEO from '../components/SEO/SEO';
 
-import Banner from './Banner';
-import Features from './Features';
-import HomeRest from './HomeRest';
-import { PageContext } from '../../layout/PageContext';
+import Banner from '../components/home/Banner.jsx';
+import Features from '../components/home/Features.jsx';
+import HomeRest from '../components/home/HomeRest.jsx';
+import { PageContext } from 'antdsite/src/templates/PageContext';
 
-function Home(props) {
+function Home(props: any) {
   return (
     <PageContext.Consumer>
       {value => {
         const { currentLocaleWebConfig } = value;
-        const { title, description } = currentLocaleWebConfig;
+        const { title, description } = currentLocaleWebConfig as any;
 
         return (
           <>

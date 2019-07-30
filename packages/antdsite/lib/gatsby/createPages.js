@@ -13,7 +13,8 @@ const path = require('path');
 function isHome(frontmatter, slug) {
   return (
     frontmatter.home === true &&
-    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(slug) !== -1) || slug === '/')
+    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(slug) !== -1) ||
+      slug === webConfig.base)
   );
 }
 
@@ -27,8 +28,7 @@ module.exports = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
   // Used to detect and prevent duplicate redirects
 
-  const docsTemplate = resolve(__dirname, '../../src/templates/docs.tsx');
-  const indexTemplate = resolve(__dirname, '../../src/templates/home.tsx');
+  const template = resolve(__dirname, '../../src/templates/index.tsx');
 
   // Redirect /index.html to root.
   createRedirect({
@@ -70,37 +70,32 @@ module.exports = async ({ graphql, actions }) => {
   edges.forEach(edge => {
     const { fields, frontmatter } = edge.node;
     const { slug } = fields;
-    if (!isHome(frontmatter, slug)) {
-      if (frontmatter.home === true) {
-        redirects[resolveDirPath(slug)] = slug;
-        redirects[resolveDirPath(slug, true)] = slug;
-      }
+    let isWebsiteHome = false;
 
-      const createArticlePage = path => {
-        return createPage({
-          path,
-          component: docsTemplate,
-          context: {
-            webConfig,
-            slug,
-            maxTocDeep: frontmatter.maxTocDeep || webConfig.themeConfig.maxTocDeep,
-          },
-        });
-      };
+    if (isHome(frontmatter, slug)) {
+      isWebsiteHome = true;
+    }
 
-      // Register primary URL.
-      createArticlePage(slug);
-    } else {
-      createPage({
-        path: slug,
-        component: indexTemplate,
+    if (frontmatter.home === true && !isWebsiteHome) {
+      redirects[resolveDirPath(slug)] = slug;
+      redirects[resolveDirPath(slug, true)] = slug;
+    }
+
+    const createArticlePage = path => {
+      return createPage({
+        path,
+        component: template,
         context: {
+          isWebsiteHome,
           webConfig,
           slug,
-          maxTocDeep: webConfig.themeConfig.maxTocDeep,
+          maxTocDeep: frontmatter.maxTocDeep || webConfig.themeConfig.maxTocDeep,
         },
       });
-    }
+    };
+
+    // Register primary URL.
+    createArticlePage(slug);
   });
 
   Object.keys(redirects).map(path => {

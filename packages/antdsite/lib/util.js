@@ -1,8 +1,11 @@
 const path = require('path');
 const defaultConfig = require(path.resolve(__dirname, '../__default__/default-config'));
 const chalk = require('chalk');
+const fs = require('fs');
 
-const configName = '.antdsite.js';
+const configName = '.antdsite/config.js';
+const themeName = '.antdsite/theme';
+
 let userConfig;
 
 module.exports.getUserConfig = () => {
@@ -92,3 +95,35 @@ function validateConfig(config) {
     }
   }
 }
+
+function componentExist(path) {
+  return (
+    fs.existsSync(path + '.js') ||
+    fs.existsSync(path + '.jsx') ||
+    fs.existsSync(path + '.ts') ||
+    fs.existsSync(path + '.tsx')
+  );
+}
+
+function getLayoutPath(layoutName) {
+  const userDefinedLayout = path.resolve(process.cwd(), `${themeName}/layout/${layoutName}`);
+  if (componentExist(userDefinedLayout)) {
+    return userDefinedLayout;
+  } else {
+    return path.resolve(__dirname, `../src/default-theme/layout/${layoutName}.tsx`);
+  }
+}
+
+module.exports.resolveLayouts = function(actions) {
+  const allLayouts = ['layout', 'header', 'home', 'footer', 'main-content'];
+  allLayouts.forEach(layout => {
+    const layoutPath = getLayoutPath(layout);
+    actions.setWebpackConfig({
+      resolve: {
+        alias: {
+          [`antdsite-${layout}`]: layoutPath,
+        },
+      },
+    });
+  });
+};

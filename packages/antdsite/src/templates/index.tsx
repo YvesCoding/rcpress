@@ -1,7 +1,13 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import WrapperLayout from '../layout';
-import MainContent from '../components/content/MainContent';
+import { PageContext } from './PageContext';
+import {
+  getcurrentLocaleConfigBySlug,
+  resolveSidebarItems,
+} from '../default-theme/components/utils';
+import Layout from 'antdsite-layout';
+
+import Media from 'react-media';
 
 export interface IGraphqlFrontmatterData {
   title: string;
@@ -67,12 +73,37 @@ export default function Template(props: {
   pageContext: {
     webConfig: any;
     slug: string;
+    isWebsiteHome: boolean;
   };
 }) {
+  const { pageContext } = props;
+  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(
+    pageContext.webConfig,
+    pageContext.slug
+  );
+
+  const sidebarItems = resolveSidebarItems(
+    props.data.allMdx,
+    pageContext.webConfig,
+    pageContext.slug
+  );
+
   return (
-    <WrapperLayout {...props}>
-      <MainContent {...props} />
-    </WrapperLayout>
+    <PageContext.Provider
+      value={{
+        ...pageContext,
+        currentLocaleWebConfig,
+        ...sidebarItems,
+        currentPageInfo: props.data.mdx,
+      }}
+    >
+      <Media query="(max-width: 996px)">
+        {isMobile => {
+          const isNode = typeof window === `undefined`;
+          return <Layout {...props} isMobile={isMobile && !isNode} />;
+        }}
+      </Media>
+    </PageContext.Provider>
   );
 }
 
@@ -111,6 +142,15 @@ export const pageQuery = graphql`
       }
       frontmatter {
         title
+        heroImage
+        actionText
+        actionLink
+        showStar
+        footer
+        features {
+          details
+          title
+        }
       }
       fields {
         modifiedTime

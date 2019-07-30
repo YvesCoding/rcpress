@@ -1,10 +1,10 @@
 import React from 'react';
 import { Anchor } from 'antd';
 import EditButton from './EditButton';
-import { OneToc } from '../../templates/docs';
+import { OneToc } from '../../../templates';
 import moment from 'moment';
 import AvatarList from './AvatarList';
-import { PageContext } from '../../layout/PageContext';
+import { PageContext } from 'antdsite/src/templates/PageContext';
 import SEO from '../SEO/SEO';
 import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
 

@@ -3,9 +3,9 @@ import { Link } from 'gatsby';
 import { Badge, Row, Col, Menu, Icon, Affix } from 'antd';
 import classNames from 'classnames';
 import MobileMenu from 'rc-drawer';
-import Article from './Article';
-import { PageInfo, getPageTitle } from '../utils';
-import { PageContext } from '../../layout/PageContext';
+import Article from '../components/content/Article';
+import { PageInfo, getPageTitle } from '../components/utils';
+import { PageContext } from 'antdsite/src/templates/PageContext';
 
 const { SubMenu } = Menu;
 

@@ -7,6 +7,7 @@ const packageJson = require('./package.json');
 const fs = require('fs-extra');
 const validateProjectName = require('validate-npm-package-name');
 const spawn = require('cross-spawn');
+const ejectTheme = require('./eject');
 
 let projectName;
 
@@ -29,17 +30,21 @@ const program = new commander.Command(packageJson.name)
   .version(packageJson.version)
   .arguments('[project-directory]')
   .usage(`${chalk.green('[project-directory]')}`)
-  .action((name) => {
+  .action(name => {
     projectName = name;
   })
-  .option('--use-npm')
+  .option(
+    '--use-npm',
+    'use npm to download packages instead of yarn, defaults to yarn'
+  )
+  .option('--eject', 'copy the default theme to current working directory.')
   .parse(process.argv);
 
-createApp(projectName, program.useNpm);
+createApp(projectName, program.useNpm, program.eject);
 
 function printValidationResults(results) {
   if (typeof results !== 'undefined') {
-    results.forEach((error) => {
+    results.forEach(error => {
       console.error(chalk.red(`  *  ${error}`));
     });
   }
@@ -69,7 +74,7 @@ function checkAppName(appName) {
           `Due to the way npm works, the following names are not allowed:\n\n`
       ) +
         chalk.hex('#29CDFF')(
-          dependencies.map((depName) => `  ${depName}`).join('\n')
+          dependencies.map(depName => `  ${depName}`).join('\n')
         ) +
         chalk.red('\n\nPlease choose a different project name.')
     );
@@ -87,14 +92,14 @@ function shouldUseYarn() {
 }
 
 function executeNodeScript({ cwd, initScriptPath }, data, source) {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     const child = spawn(
       process.execPath,
       ['-e', source, '--', JSON.stringify(data), initScriptPath],
       { cwd, stdio: 'inherit' }
     );
 
-    child.on('close', (code) => {
+    child.on('close', code => {
       if (code !== 0) {
         return;
       }
@@ -121,13 +126,12 @@ function isSafeToCreateProjectIn(root, name) {
 
   const conflicts = fs
     .readdirSync(root)
-    .filter((file) => !validFiles.includes(file))
+    .filter(file => !validFiles.includes(file))
     // IntelliJ IDEA creates module files before CRA is launched
-    .filter((file) => !/\.iml$/.test(file))
+    .filter(file => !/\.iml$/.test(file))
     // Don't treat log files from previous installation as conflicts
     .filter(
-      (file) =>
-        !errorLogFilePatterns.some((pattern) => file.indexOf(pattern) === 0)
+      file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0)
     );
 
   if (conflicts.length > 0) {
@@ -148,8 +152,8 @@ function isSafeToCreateProjectIn(root, name) {
 
   // Remove any remnant files from a previous installation
   const currentFiles = fs.readdirSync(path.join(root));
-  currentFiles.forEach((file) => {
-    errorLogFilePatterns.forEach((errorLogFilePattern) => {
+  currentFiles.forEach(file => {
+    errorLogFilePatterns.forEach(errorLogFilePattern => {
       // This will catch `(npm-debug|yarn-error|yarn-debug).log*` files
       if (file.indexOf(errorLogFilePattern) === 0) {
         fs.removeSync(path.join(root, file));
@@ -159,10 +163,14 @@ function isSafeToCreateProjectIn(root, name) {
   return true;
 }
 
-function createApp(name = './', useNpm) {
+function createApp(name = './', useNpm, eject) {
   const root = path.resolve(name);
   const appName = path.basename(root);
   const originalDirectory = process.cwd();
+
+  if (eject) {
+    return ejectTheme(root);
+  }
 
   checkAppName(appName);
   fs.ensureDirSync(name);
@@ -182,6 +190,9 @@ function createApp(name = './', useNpm) {
       build: `${useYarn ? 'yarn' : 'npm run'} clean && gatsby build`,
       start: `${useYarn ? 'yarn' : 'npm run'} clean && gatsby develop`,
       clean: 'gatsby clean'
+    },
+    dependencies: {
+      ...allDeps
     }
   };
   fs.writeFileSync(
@@ -222,7 +233,11 @@ function createApp(name = './', useNpm) {
     }
   }
 };`;
-  fs.writeFileSync(path.join(root, '.antdsite.js'), antsiteConfig + os.EOL);
+  fs.ensureDirSync(path.resolve(root, '.antdsite'));
+  fs.writeFileSync(
+    path.join(root, '.antdsite/config.js'),
+    antsiteConfig + os.EOL
+  );
 
   process.chdir(root);
 
@@ -281,7 +296,7 @@ function install(root, useYarn, dependencies) {
     }
 
     const child = spawn(command, args, { stdio: 'inherit' });
-    child.on('close', (code) => {
+    child.on('close', code => {
       if (code !== 0) {
         reject({
           command: `${command} ${args.join(' ')}`

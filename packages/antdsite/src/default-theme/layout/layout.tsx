@@ -1,37 +1,36 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Media from 'react-media';
 import '../assets/style';
-import Header from './Header';
-import Footer from './Footer';
-import { PageContext } from './PageContext';
-import { getcurrentLocaleConfigBySlug, resolveSidebarItems } from '../components/utils';
+import Header from 'antdsite-header';
+import Footer from 'antdsite-footer';
 import { BackTop } from 'antd';
-import { IAllMdxData, IMdxData } from '../templates/docs';
+import { IAllMdxData, IMdxData } from '../../templates';
+import MainContent from 'antdsite-main-content';
+import HomePage from 'antdsite-home';
 
-interface LayoutProps {
+export interface LayoutProps {
   pageContext: {
     webConfig: any;
     slug: string;
+    isWebsiteHome: boolean;
   };
   data: {
     mdx: IMdxData;
     allMdx: IAllMdxData;
   };
   isMobile: boolean;
-  children: React.ReactElement<LayoutProps>;
 }
 
 interface LayoutState {}
 
-export class Layout extends React.Component<LayoutProps, LayoutState> {
+export default class Layout extends React.Component<LayoutProps, LayoutState> {
   constructor(props: LayoutProps) {
     super(props);
   }
 
   render() {
     const { children, pageContext, ...restProps } = this.props;
-    const { webConfig, slug } = pageContext;
+    const { webConfig, slug, isWebsiteHome } = pageContext;
     const { locales } = webConfig;
     const { showBackToTop } = webConfig.themeConfig;
 
@@ -42,11 +41,10 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
           'index-page-wrapper'}`}
       >
         <Header {...restProps} ref="header" />
-        {React.cloneElement(children, {
-          ...children.props,
-          isMobile: restProps.isMobile,
-          ref: 'content',
-        })}
+        <div ref="content">
+          {isWebsiteHome ? <HomePage {...restProps} /> : <MainContent {...restProps} />}
+        </div>
+
         <Footer {...restProps} ref="footer" />
         {showBackToTop ? <BackTop /> : null}
       </div>
@@ -79,36 +77,3 @@ export class Layout extends React.Component<LayoutProps, LayoutState> {
       'px';
   };
 }
-
-const WrapperLayout = (props: LayoutProps) => {
-  const { pageContext } = props;
-  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(
-    pageContext.webConfig,
-    pageContext.slug
-  );
-
-  const sidebarItems = resolveSidebarItems(
-    props.data.allMdx,
-    pageContext.webConfig,
-    pageContext.slug
-  );
-
-  return (
-    <PageContext.Provider
-      value={{
-        ...pageContext,
-        currentLocaleWebConfig,
-        ...sidebarItems,
-        currentPageInfo: props.data.mdx,
-      }}
-    >
-      <Media query="(max-width: 996px)">
-        {isMobile => {
-          const isNode = typeof window === `undefined`;
-          return <Layout {...props} isMobile={isMobile && !isNode} />;
-        }}
-      </Media>
-    </PageContext.Provider>
-  );
-};
-export default WrapperLayout;

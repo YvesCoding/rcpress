@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import * as utils from '../components/utils';
 import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
-import { PageContext } from './PageContext';
+import { PageContext } from 'antdsite/src/templates/PageContext';
 import SearchBox from '../components/search-box';
 
 interface HeaderProps {
