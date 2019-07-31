@@ -4,7 +4,7 @@ import EditButton from './EditButton';
 import { OneToc } from '../../../templates';
 import moment from 'moment';
 import AvatarList from './AvatarList';
-import { PageContext } from 'antdsite/src/templates/PageContext';
+import { PageContext } from 'antdsite';
 import SEO from '../SEO/SEO';
 import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
 

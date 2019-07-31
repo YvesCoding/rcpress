@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import MobileMenu from 'rc-drawer';
 import Article from '../components/content/Article';
 import { PageInfo, getPageTitle } from '../components/utils';
-import { PageContext } from 'antdsite/src/templates/PageContext';
+import { PageContext } from 'antdsite';
 
 const { SubMenu } = Menu;
 

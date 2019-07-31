@@ -1,1 +1,1 @@
-export { PageContext } from './templates/PageContext';
+export { PageContext } from './src/templates/PageContext';
