@@ -74,5 +74,5 @@ module.exports = {
   }
 };
 function getGuideSidebar() {
-  return ['introduction', 'getting-started'];
+  return ['introduction', 'getting-started', 'configuration'];
 }
