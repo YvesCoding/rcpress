@@ -1,9 +1,105 @@
 # 自定义主题
 
-网站配置文件名为`config.js`，在网站根目录下`.antdsite`文件夹下的`config.js`
+## 自定义布局
+
+开发自定义的主题需要在`,antdsite`目录下新建一个`theme`目录。
 
 ```bash
-├── .antdsite           # 配置目录， 包括自定义出题，网站配置文件等
-    ├── config.js       # 网站配置文件，用于配置网站基本信息
+├── .antdsite
     ├── theme           # 主题文件夹，用于存放自定义主题
+```
+
+你可以通过建立不同的文件来自定义整个布局或者部分布局。
+
+```bash
+├── .antdsite
+    ├── theme                 # 主题文件夹，用于存放自定义主题
+        ├── layout.js         # 自定义整个布局
+        ├── header.js         # 自定义整个页面头部
+        ├── main-content.js   # 自定义除了首页外的内容页面
+        ├── heme.js           # 自定义首页
+        ├── footer.js         # 自定义首页尾部
+```
+
+其中：
+
+- 自定义 layout 的话会自定义所有布局。
+- 自定义其他文件为部分布局。
+
+## 获取网站数据和当前页面的数据
+
+页面的数据都存在`PageContext`中，获取`PageContext`即可得到网站的所有数据。
+
+```js
+import { PageContext } from 'antdsite';
+```
+
+用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#classcontexttype)。
+
+`PageContext`的值为一个`Object`，其中包含 6 个属性：
+
+```js
+{
+  webConfig: {},
+  slug: '',
+  currentLocaleWebConfig: {},
+  currentPageSidebarItems: {},
+  allPagesSidebarItems: {},
+  currentPageInfo: {},
+}
+```
+
+以下逐个进行讲解。
+
+### webConfig
+
+- 类型: `Object`
+
+网站配置文件，和你的`.antdsite/config.js`一致
+
+### slug
+
+- 类型: `String`
+
+网站当前页面路径
+
+### currentLocaleWebConfig
+
+- 类型: `Object`
+
+当前语言下的网站配置，如果没有多语言那么和`webConfig`一样
+
+### currentPageSidebarItems
+
+- 类型: `Object`
+
+当前页面(除了首页)左侧菜单栏。
+
+### allPagesSidebarItems
+
+- 类型: `Object`
+
+所有页面(除了首页)左侧菜单栏。
+
+### currentPageInfo
+
+- 类型: `Object`
+
+当前页面数据,值为：
+
+```js
+{
+  code: {
+    body: '' // 当前页面内容代码。只能用`MDXRenderer`进行渲染。
+  },
+  fields: {
+    avatarList: [{}]， // 为当前页面贡献过的用户信息列表
+    modifiedTime: '1564579847121', // 当前页面修改时间戳
+    path: 'packages/docs/docs/zh/guide/theme.md' // 文件和项目根目录的相对路径
+  }，
+  tableOfContents:{
+      items: [] // 当前页目录
+  },
+  headings: [{depth:1,value:'自定义主题'}] // 当前页标题
+}
 ```
