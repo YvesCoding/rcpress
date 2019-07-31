@@ -132,6 +132,20 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     }
   }
 
+  generaGroupItem = (footerNavIcons = {}, item: PageInfo) => {
+    const generateMenuItem = this.generateMenuItem.bind(this, footerNavIcons);
+
+    if (!item.children || !item.children.length) {
+      return generateMenuItem(item);
+    }
+
+    return (
+      <Menu.ItemGroup key={item.title} title={item.title}>
+        {item.children.map(generateMenuItem)}
+      </Menu.ItemGroup>
+    );
+  };
+
   generateSubMenuItems = (menus?: PageInfo[], footerNavIcons = {}) => {
     if (!menus) return [];
     const generateMenuItem = this.generateMenuItem.bind(this, footerNavIcons);
@@ -140,7 +154,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
         return generateMenuItem(menu);
       }
 
-      const groupItems = menu.children.map(this.generateMenuItem.bind(this, footerNavIcons));
+      const groupItems = menu.children.map(item => this.generaGroupItem(footerNavIcons, item));
       return (
         <SubMenu title={menu.title} key={menu.title}>
           {groupItems}
@@ -159,12 +173,16 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
   getPreAndNext = (menuItems: any) => {
     const { slug } = this.context;
 
-    const list = menuItems.length
-      ? Object.keys(menuItems).reduce((pre, key) => {
-          const ch = menuItems[key].props.children;
-          return pre.concat(ch.length ? ch : menuItems[key]);
-        }, [])
-      : menuItems;
+    function filterItem(items: any) {
+      return items.length
+        ? Object.keys(items).reduce((pre, key) => {
+            const ch = items[key].props.children;
+            return pre.concat(ch.length ? ch : items[key]);
+          }, [])
+        : items;
+    }
+
+    const list = filterItem(filterItem(menuItems));
 
     const index = list.findIndex((item: any) => {
       return item.key === slug;

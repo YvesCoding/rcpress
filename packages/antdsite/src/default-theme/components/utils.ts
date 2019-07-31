@@ -179,7 +179,7 @@ export interface PageInfo extends IGraphqlFrontmatterData {
 
 function resolvePageSidebar(config: any, path: string, base: string, edges: Edges): PageInfo[] {
   return config
-    ? config.map((item: any) => resolveItem(item, edges, resolvePathWithBase(path, base), false))
+    ? config.map((item: any) => resolveItem(item, edges, resolvePathWithBase(path, base), 1))
     : [];
 }
 
@@ -224,7 +224,7 @@ export function resolveSidebarItems(
   }
 }
 
-function resolveItem(item: any, pages: Edges, base: string, isNested: boolean): PageInfo | null {
+function resolveItem(item: any, pages: Edges, base: string, nestedLevel: number): PageInfo | null {
   if (typeof item === 'string') {
     return resolvePage(pages, item, base);
   } else if (Array.isArray(item)) {
@@ -232,11 +232,8 @@ function resolveItem(item: any, pages: Edges, base: string, isNested: boolean): 
       title: item[1],
     });
   } else {
-    if (isNested) {
-      console.error(
-        '[Gatsby-Theme-AntdSite] Nested sidebar groups are not supported. ' +
-          'Consider using navbar + categories instead.'
-      );
+    if (nestedLevel > 2) {
+      console.error('[AntdSite]: Currently antdsite sidebar only support max two levels nested. ');
 
       return null;
     }
@@ -244,7 +241,7 @@ function resolveItem(item: any, pages: Edges, base: string, isNested: boolean): 
     const children = item.children || [];
     return {
       title: item.title,
-      children: children.map((child: any) => resolveItem(child, pages, base, true)),
+      children: children.map((child: any) => resolveItem(child, pages, base, nestedLevel + 1)),
       collapsable: item.collapsable !== false,
     };
   }

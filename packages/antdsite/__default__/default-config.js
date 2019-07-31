@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   base: '/',
   title: path.relative('../', process.cwd()),
+  description: '',
   head: [],
   themeConfig: {
     repo: null,

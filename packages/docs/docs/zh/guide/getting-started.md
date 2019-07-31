@@ -93,9 +93,15 @@ npm
 mkdir docs
 ```
 
-### 新建`.antsite.js`
+### 新建一个 .antdsite 文件夹
 
-在项目的根目录建立`.antsite.js`
+```bash
+mkdir .antdsite
+```
+
+### 进入 .antdsite 建立 config.js
+
+在.antdsite 目录建立`config.js`
 
 ```js
 module.exports = {

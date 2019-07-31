@@ -64,15 +64,39 @@ module.exports = {
           {
             text: '指南',
             link: '/zh/guide/'
+          },
+          {
+            text: '配置',
+            link: '/zh/config/'
+          },
+          {
+            text: '默认主题配置',
+            link: '/zh/default-theme-config/'
+          },
+          {
+            text: 'GitHub',
+            link: 'https://github.com/YvesCoding/antdsite',
+            important: true
           }
         ],
         sidebar: {
-          '/zh/guide/': getGuideSidebar()
+          '/zh/guide/': getGuideSidebar('开始上手'),
+          '/zh/config/': [''],
+          '/zh/default-theme-config/': ['']
         }
       }
     }
   }
 };
-function getGuideSidebar() {
-  return ['introduction', 'getting-started', 'configuration'];
+
+function getGuideSidebar(start = 'Get Startted') {
+  return [
+    {
+      title: start,
+      collapsable: false,
+      children: ['introduction', 'getting-started']
+    },
+    'configuration',
+    'theme'
+  ];
 }

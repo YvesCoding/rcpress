@@ -80,6 +80,15 @@ function showSuccessTips(appPath, appName, useYarn, originalDirectory) {
 
   console.log();
 
+  console.log(
+    chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`)
+  );
+  console.log(
+    `    copy the default theme to .antdsite/theme of the created app directory.`
+  );
+
+  console.log();
+
   console.log('We suggest that you begin by typing:');
   console.log();
 

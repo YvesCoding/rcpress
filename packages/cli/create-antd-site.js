@@ -189,6 +189,7 @@ function createApp(name = './', useNpm, eject) {
     scripts: {
       build: `${useYarn ? 'yarn' : 'npm run'} clean && gatsby build`,
       start: `${useYarn ? 'yarn' : 'npm run'} clean && gatsby develop`,
+      eject: 'antdsite-cli --eject',
       clean: 'gatsby clean'
     },
     dependencies: {
@@ -202,6 +203,7 @@ function createApp(name = './', useNpm, eject) {
 
   const antsiteConfig = `module.exports = {
   title: '${appName}',
+  description: 'My first antdsite app',
   logo: '/favicon.png',
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
   themeConfig: {
