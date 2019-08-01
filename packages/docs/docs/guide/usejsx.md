@@ -1,17 +1,17 @@
-# 在 Markdown 中使用 react
+# Using JSX in Markdown
 
-> 得益于[mdx](https://github.com/mdx-js/mdx)，你可以把 markdown 当做`js`那样来使用
+> Thanks to [mdx](https://github.com/mdx-js/mdx), you can use `jsx` in markdown.
 
-## 例子
+## Example
 
-我们来做一个显示当前文件修改时间的组件。文件结构如下：
+Let's make a component that shows the current file modified time. The structure of the files is as follow:
 
 ```bash
 ├── showTime.md
 ├── showTime.js
 ```
 
-首先在 `showTime.js` 中引入`moment.js`, `PageContext` 和 `React`
+Firstly, import `moment.js`, `PageContext` and `React` in `showTime.js`
 
 ```js
 import React from 'react';
@@ -19,13 +19,13 @@ import moment from 'moment';
 import { PageContext } from 'antdsite';
 ```
 
-接着我们编写我们的`ShowTime`组件代码并导出
+Then we write code of our `ShowTime` component and export it.
 
 ```js
 export const ShowTime = () => {
   return (
     <PageContext.Consumer>
-      {context => {
+      {(context) => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
             {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
@@ -40,11 +40,11 @@ export const ShowTime = () => {
 };
 ```
 
-> 注意
+> Note
 >
-> 上面用到的`currentLocaleWebConfig`和`currentPageInfo`都是在[自定义主题](/zh/guide/theme)一节中提到过的，属于`PageContext`的一部分。
+> The `current Locale WebConfig` and `current PageInfo` used above are parts of `PageContext` and both mentioned in the section [Custom Themes](/guide/theme#get-site-data-and-current-page-data).
 
-最后，在我们的`showTime.md`文件里导入并使用
+Finally, import and use it in our `showTime.MD`
 
 ```jsx
 import { ShowTime } from './ShowTime';
@@ -52,15 +52,15 @@ import { ShowTime } from './ShowTime';
 <ShowTime />;
 ```
 
-效果如下：
+The result is as follow:
 
 import {ShowTime} from '@components/ShowModifiedTime'
 
 <ShowTime />
 
-## 使用`antd`
+## Use `antd`
 
-直接在 markdown 中使用并导入 Button 组件
+Import and use `Button` component from `antd` directly in markdown.
 
 ```jsx
 import { Button } from 'antd';
@@ -68,7 +68,7 @@ import { Button } from 'antd';
 <Button>Button</Button>;
 ```
 
-效果如下：
+The result is as follow:
 
 import {Button} from 'antd';
 

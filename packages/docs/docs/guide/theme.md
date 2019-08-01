@@ -1,42 +1,42 @@
-# 自定义主题
+# Custom Themes
 
-## 自定义布局
+## Custom layout
 
-开发自定义的主题需要在`,antdsite`目录下新建一个`theme`目录。
-
-```bash
-├── .antdsite
-    ├── theme           # 主题文件夹，用于存放自定义主题
-```
-
-你可以通过建立不同的文件来自定义整个布局或者部分布局。
+To develop custom themes, you need to create a new theme directory under the `antdsite` directory.
 
 ```bash
 ├── .antdsite
-    ├── theme                 # 主题文件夹，用于存放自定义主题
-        ├── layout.js         # 自定义整个布局
-        ├── header.js         # 自定义整个页面头部
-        ├── main-content.js   # 自定义除了首页外的内容页面
-        ├── heme.js           # 自定义首页
-        ├── footer.js         # 自定义首页尾部
+    ├── theme           # Theme folder for storing custom themes
 ```
 
-其中：
+You can customize the entire layout or partial layout by creating different files.
 
-- 自定义 layout 的话会自定义所有布局。
-- 自定义其他文件为部分布局。
+```bash
+├── .antdsite
+    ├── theme                 # Theme folder for storing custom themes
+        ├── layout.js         # Customize the entire layout
+        ├── header.js         # Customize the entire page header
+        ├── main-content.js   # Customize content pages except home pages
+        ├── heme.js           # Custom Home Page
+        ├── footer.js         # Custom Home Page Footer
+```
 
-## 获取网站数据和当前页面的数据
+Note:
 
-页面的数据都存在`PageContext`中，获取`PageContext`即可得到网站的所有数据。
+- Customizing layouts will customize all layouts.
+- Customize other files for partial layout.
+
+## Get site data and current page data
+
+Page data stores in `PageContext`. which is exported from `antdsite`.
 
 ```js
 import { PageContext } from 'antdsite';
 ```
 
-`PageContext`是由`React.createContext`创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#classcontexttype)。
+`PageContext` is created by `React.createContext` api, you can refer to react's [document](https://reactjs.org/docs/context.html#reactcreatecontext).
 
-`PageContext`的值为一个`Object`，其中包含 6 个属性：
+The value of `PageContext` is an `Object`, which contains six attributes:
 
 ```js
 {
@@ -49,67 +49,67 @@ import { PageContext } from 'antdsite';
 }
 ```
 
-以下逐项进行讲解：
+The following are explained item by item:
 
 ### webConfig
 
-- 类型: `Object`
+- Type: `Object`
 
-网站配置文件，和你的`.antdsite/config.js`一致
+That's all in your `antdsite/config.js` file.
 
 ### slug
 
-- 类型: `String`
+- Type: `String`
 
-网站当前页面路径
+Current Page Path of Website
 
 ### currentLocaleWebConfig
 
-- 类型: `Object`
+- Type: `Object`
 
-当前语言下的网站配置，如果没有多语言那么和`webConfig`一样
+Website configuration in the current language, it will be the same as `webConfig` if there are not locates set.
 
 ### currentPageSidebarItems
 
-- 类型: `Object`
+- Type: `Object`
 
-当前页面(除了首页)左侧菜单栏。
+The left menus of the current page (except the home page).
 
 ### allPagesSidebarItems
 
-- 类型: `Object`
+- Type: `Object`
 
-所有页面(除了首页)左侧菜单栏。
+The left menus of all pages (except the home page).
 
 ### currentPageInfo
 
-- 类型: `Object`
+- Type: `Object`
 
-当前页面数据,值为：
+Current page data, the value is:
 
 ```js
 {
   code: {
-    body: '' // 当前页面内容代码。只能用`MDXRenderer`进行渲染。
+    body: '' // Current page content code. Only can be used by `MDX Renderer' of mdx plugin for rendering.
   },
   fields: {
-    avatarList: [{}]， // 为当前页面贡献过的用户信息列表
-    modifiedTime: '1564579847121', // 当前页面修改时间戳
-    path: 'packages/docs/docs/zh/guide/theme.md' // 文件和项目根目录的相对路径
+    avatarList: [{}]， // List of User Information Contributed to the Current Page
+    modifiedTime: '1564579847121', // Current page modification timestamp
+    path: 'packages/docs/docs/zh/guide/theme.md' // Relative paths from current page file to project root directories
   }，
   tableOfContents:{
-      items: [] // 当前页目录
+      items: [] // Current page directory
   },
-  headings: [{depth:1,value:'自定义主题'}] // 当前页标题
+  headings: [{depth:1,value:'Custom Theme'}] // Current page title
 }
 ```
 
-## 修改默认主题
+## Modify the default theme
 
-在项目根目录下运行下列命令:
+Run the following commands in the project root directory:
 
 ```bash
 antdsite-cli --eject
 ```
 
-即可把所有默认主题拷贝到当前工作目录下的`.antdsite/theme`文件夹下。届时你可以对默认主题的所有样式进行修改。
+You can copy all default topics to the `antdsite/theme` folder in the current working directory, and then you can modify the entire default theme.

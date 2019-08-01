@@ -13,7 +13,7 @@ The website configuration file is named `config.js`, and `config.js`under the `a
 
 ## Basic configuration
 
-`The basic config.js` configuration is as follows:
+`The basic config.js` configuration is as follow:
 
 ```js
 module.exports = {

@@ -248,6 +248,7 @@ module.exports = {
     // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
     repo: 'YvesCoding/antdsite', // 自定义仓库链接，默认为Gihub仓库，支持Github,Bitbucket,Gitee。
     docsRepo: 'YvesCoding/antdsite', // 自定义文档仓库，默认和docsRepo的值一致
+    docsRelativeDir: 'packages/docs', // 项目根目录到文档的相对地址，默认为''
     docsDir: 'docs', // 假如文档放在一个特定的分支下：
     docsBranch: 'master',
     // 默认是 false, 设置为 true 来启用

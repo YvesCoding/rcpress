@@ -28,13 +28,13 @@
 
 ## 获取网站数据和当前页面的数据
 
-页面的数据都存在`PageContext`中，获取`PageContext`即可得到网站的所有数据。
+页面的数据都存在从`antdsite`导出的`PageContext`中
 
 ```js
 import { PageContext } from 'antdsite';
 ```
 
-`PageContext`是由`React.createContext`创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#classcontexttype)。
+`PageContext`是由`React.createContext` api 创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#reactcreatecontext)。
 
 `PageContext`的值为一个`Object`，其中包含 6 个属性：
 
@@ -55,7 +55,7 @@ import { PageContext } from 'antdsite';
 
 - 类型: `Object`
 
-网站配置文件，和你的`.antdsite/config.js`一致
+也就是你`.antdsite/config.js`文件里的所有内容。
 
 ### slug
 
@@ -67,19 +67,19 @@ import { PageContext } from 'antdsite';
 
 - 类型: `Object`
 
-当前语言下的网站配置，如果没有多语言那么和`webConfig`一样
+当前语言下的网站配置，如果没有设置多语言的话那么和`webConfig`一样
 
 ### currentPageSidebarItems
 
 - 类型: `Object`
 
-当前页面(除了首页)左侧菜单栏。
+当前页面(除了首页)的左侧菜单栏。
 
 ### allPagesSidebarItems
 
 - 类型: `Object`
 
-所有页面(除了首页)左侧菜单栏。
+所有页面(除了首页)的左侧菜单栏。
 
 ### currentPageInfo
 
@@ -90,12 +90,12 @@ import { PageContext } from 'antdsite';
 ```js
 {
   code: {
-    body: '' // 当前页面内容代码。只能用`MDXRenderer`进行渲染。
+    body: '' // 当前页面内容代码。只能用mdx插件的`MDXRenderer`函数进行渲染。
   },
   fields: {
     avatarList: [{}]， // 为当前页面贡献过的用户信息列表
     modifiedTime: '1564579847121', // 当前页面修改时间戳
-    path: 'packages/docs/docs/zh/guide/theme.md' // 文件和项目根目录的相对路径
+    path: 'packages/docs/docs/zh/guide/theme.md' // 从当前页面文件到项目根目录的相对路径
   }，
   tableOfContents:{
       items: [] // 当前页目录
@@ -112,4 +112,4 @@ import { PageContext } from 'antdsite';
 antdsite-cli --eject
 ```
 
-即可把所有默认主题拷贝到当前工作目录下的`.antdsite/theme`文件夹下。届时你可以对默认主题的所有样式进行修改。
+即可把所有默认主题拷贝到当前工作目录下的`.antdsite/theme`文件夹下， 然后你就=可以修改整个默认主题了。

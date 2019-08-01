@@ -1,6 +1,6 @@
-# 在 Markdown 中使用 react
+# 在 Markdown 中使用 JSX
 
-> 得益于[mdx](https://github.com/mdx-js/mdx)，你可以把 markdown 当做`js`那样来使用
+> 得益于[mdx](https://github.com/mdx-js/mdx)，你可以在 markdown 中使用 `jsx`
 
 ## 例子
 
@@ -25,7 +25,7 @@ import { PageContext } from 'antdsite';
 export const ShowTime = () => {
   return (
     <PageContext.Consumer>
-      {context => {
+      {(context) => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
             {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
@@ -44,7 +44,7 @@ export const ShowTime = () => {
 >
 > 上面用到的`currentLocaleWebConfig`和`currentPageInfo`都是在[自定义主题](/zh/guide/theme)一节中提到过的，属于`PageContext`的一部分。
 
-最后，在我们的`showTime.md`文件里导入并使用
+最后，在我们的`showTime.md`里导入并使用
 
 ```jsx
 import { ShowTime } from './ShowTime';
@@ -60,7 +60,7 @@ import {ShowTime} from '@components/ShowModifiedTime'
 
 ## 使用`antd`
 
-直接在 markdown 中使用并导入 Button 组件
+直接在 markdown 中从`antd`里导入并使用 `Button` 组件
 
 ```jsx
 import { Button } from 'antd';

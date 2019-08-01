@@ -56,7 +56,7 @@ Add dependencies and run scripts in `package.json`
 }
 ```
 
-If you use yarn, the script is as follows
+If you use yarn, the script is as follow
 
 ```json
 {
