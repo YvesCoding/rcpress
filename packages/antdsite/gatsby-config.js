@@ -8,9 +8,6 @@ function getPlugin(pluginName) {
 }
 
 module.exports = {
-  siteMetadata: {
-    extraHead: JSON.stringify(finalConfig.head || []),
-  },
   plugins: [
     {
       resolve: 'gatsby-mdx-fix',
@@ -52,5 +49,6 @@ module.exports = {
     },
     `gatsby-plugin-netlify`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-catch-links`,
   ],
 };

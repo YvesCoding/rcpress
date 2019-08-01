@@ -2,10 +2,12 @@ module.exports = {
   base: '/',
   locales: {
     '/': {
+      lang: 'en-US',
       title: 'AntdSite',
       description: 'A static docs generator based on Ant Design and GatsbyJs'
     },
     '/zh/': {
+      lang: 'zh-CN',
       title: 'AntdSite',
       description: '一个基于Ant Design 和 GatsbyJs 的静态文档生成器'
     }
@@ -24,25 +26,15 @@ module.exports = {
         nav: [
           {
             text: 'Guide',
-            link: '/guide/',
-            important: true
+            link: '/guide/'
           },
           {
-            text: '外部',
-            items: [
-              {
-                text: 'Group1',
-                important: true,
-                link: '/guide1/'
-              },
-              {
-                text: 'Group2'
-              }
-            ]
+            text: 'Config',
+            link: '/config/'
           },
           {
-            text: 'Guide1',
-            link: '/guide1/'
+            text: 'Default Theme Config',
+            link: '/default-theme-config/'
           },
           {
             text: 'GitHub',
@@ -51,8 +43,9 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/guide/': getGuideSidebar('Guide'),
-          '/guide1/': getGuideSidebar('Guide1')
+          '/guide/': getGuideSidebar(),
+          '/config/': [''],
+          '/default-theme-config/': ['']
         }
       },
       '/zh': {
@@ -89,7 +82,7 @@ module.exports = {
   }
 };
 
-function getGuideSidebar(start = 'Get Startted') {
+function getGuideSidebar(start = 'Get Started') {
   return [
     {
       title: start,
@@ -97,6 +90,8 @@ function getGuideSidebar(start = 'Get Startted') {
       children: ['introduction', 'getting-started']
     },
     'configuration',
-    'theme'
+    'theme',
+    'usejsx',
+    'i18n'
   ];
 }

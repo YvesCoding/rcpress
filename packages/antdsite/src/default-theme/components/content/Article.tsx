@@ -38,40 +38,52 @@ export default class Article extends React.PureComponent<ArticleProps> {
       currentPageInfo,
       currentLocaleWebConfig: {
         title,
+        lang,
         description,
-        themeConfig: { lastUpdated, editLinkText, repo, docsRepo, docsBranch, showAvatarList },
+        head,
+        themeConfig: {
+          lastUpdated,
+          editLinkText,
+          editLinks,
+          repo,
+          docsRepo,
+          docsBranch,
+          showAvatarList,
+          editLink,
+        },
       },
     } = this.context;
 
     const { subtitle } = currentPageInfo.frontmatter;
     const { path, modifiedTime, avatarList } = currentPageInfo.fields;
-
     const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
+    const editPath = this.getEditLink(editLink, docsRepo || repo, docsBranch, path);
 
     return (
       <>
-        <SEO title={this.getPageTitle(currentPageTitle, title)} description={description} />
+        <SEO
+          head={head as Array<any>}
+          lang={lang}
+          title={this.getPageTitle(currentPageTitle, title)}
+          description={description}
+        />
         <article
           className="markdown"
           ref={node => {
             this.node = node;
           }}
         >
-          {(docsRepo || repo) && editLinkText ? (
+          {(docsRepo || repo) && editLinkText && editLinks ? (
             <h1>
               {currentPageTitle}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
 
-              <EditButton
-                sourcePath={`https://github.com/${docsRepo || repo}/edit/${docsBranch}/`}
-                title={editLinkText}
-                filename={path}
-              />
+              <EditButton path={editPath} title={editLinkText} />
             </h1>
           ) : null}
 
           {lastUpdated && (
-            <div className={`modifiedTime ${noAvatar ? 'no-avatar-list' : ''}`}>
+            <div className={`modifiedTime ${noAvatar ? 'modifiedTimeLeft' : ''}`}>
               {!noAvatar && <AvatarList avatarList={avatarList} />}
               {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
             </div>
@@ -90,5 +102,26 @@ export default class Article extends React.PureComponent<ArticleProps> {
         </article>
       </>
     );
+  }
+  getEditLink(editLink: string, docsRepo: string, docsBranch: string, path: string) {
+    if (editLink) return editLink;
+
+    const bitbucket = /bitbucket.org/;
+    if (bitbucket.test(docsRepo)) {
+      return (
+        docsRepo +
+        `/src` +
+        `/${docsBranch}/` +
+        path +
+        `?mode=edit&spa=0&at=${docsBranch}&fileviewer=file-view-default`
+      );
+    }
+
+    const gitee = /gitee.com/;
+    if (gitee.test(docsRepo)) {
+      return `${docsRepo}/edit/${docsBranch}/${path}`;
+    }
+
+    return `https://github.com/${docsRepo}/edit/${docsBranch}/${path}`;
   }
 }

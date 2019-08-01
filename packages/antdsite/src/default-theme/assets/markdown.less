@@ -2,6 +2,12 @@
   color: @site-text-color;
   font-size: 14px;
   line-height: 2;
+
+  blockquote p:first-of-type,
+  blockquote p:first-of-type {
+    font-weight: 700;
+    margin-top: 0;
+  }
 }
 
 .highlight {
@@ -124,11 +130,6 @@
   font-size: @font-size-base;
   color: @site-text-color;
   overflow: auto;
-}
-
-.markdown strong,
-.markdown b {
-  font-weight: 500;
 }
 
 .markdown > table {

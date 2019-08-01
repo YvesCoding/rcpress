@@ -37,6 +37,8 @@ interface MainContentState {
 export default class MainContent extends React.PureComponent<MainContentProps, MainContentState> {
   static contextType = PageContext;
 
+  preSlug: String;
+
   constructor(props: MainContentProps) {
     super(props);
     this.state = {
@@ -45,7 +47,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
   }
 
   componentDidMount() {
-    this.chekScrollPosition();
     this.setState({
       openKeys: (this.getSideBarOpenKeys() || []) as Array<string>,
     });
@@ -59,10 +60,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
       });
     }
   }
-  componentDidUpdate() {
-    this.chekScrollPosition(this.context.slug);
-  }
-
   handleMenuOpenChange = (openKeys: string[]) => {
     this.setState({
       openKeys,
@@ -116,21 +113,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
       </Menu.Item>
     );
   };
-
-  chekScrollPosition(slug?: string) {
-    if (!window.location.hash && slug && slug !== location.pathname) {
-      window.scrollTo(0, 0);
-    } else if (window.location.hash) {
-      const element = document.getElementById(
-        decodeURIComponent(window.location.hash.replace('#', ''))
-      );
-      setTimeout(() => {
-        if (element) {
-          element.scrollIntoView(true);
-        }
-      }, 100);
-    }
-  }
 
   generaGroupItem = (footerNavIcons = {}, item: PageInfo) => {
     const generateMenuItem = this.generateMenuItem.bind(this, footerNavIcons);

@@ -1,57 +1,53 @@
 ---
-heroImage: /favicon.png
 actionText: Get Started →
 actionLink: /guide/
-home: true
 showStar: true
+home: true
 features:
-  - title: Rich Function
-    details: You can customize scrollbar, rail, scroll container, etc. Rich APIs and Events
-  - title: Easy To Use
-    details: Each property is optional, and a custom scrollbar can appear just by wrapping the content
-  - title: Good compatibility
-    details: Compatible with TypeSciprt, SSR, PC, mobile phone, touch screen
-  - title: Rich Function
-    details: You can customize scrollbar, rail, scroll container, etc. Rich APIs and Events
-  - title: Easy To Use
-    details: Each property is optional, and a custom scrollbar can appear just by wrapping the content
-  - title: Good compatibility
-    details: Compatible with TypeSciprt, SSR, PC, mobile phone, touch screen
+  - title: Easy to get started
+    details: It only requires simple configuration and some markdown syntax to get started quickly
+  - title: Rich UI components
+    details: Document design comes from <a target="_blank" href="https://ant.design/">Ant Design</a> website, which not only has a beautiful interface, but also can directly use all Ant Design components.
+  - title: Powerful
+    details: Thanks to <a target="_blank" href= "https://github.com/mdx-js/mdx">mdx</a>, we can use JSX in markdown.
 
 footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
-# Quick Start
+# Get Started
 
-Install `magic-scroll` via `yarn` or `npm`
+## Install via cli
+
+#### Install `antdsite-cli` via [yarn](https://yarnpkg.com)
 
 ```bash
-npm install magic-scroll -S
-# yarn add magic-scroll
+yarn global add antdsite-cli
 ```
 
-Import `magic-scroll`
+#### Or install via [npm](https://docs.npmjs.com/cli/install.html)
 
-```js
-import Scrollbar from 'magic-scroll'; // highlight-line
+```bash
+npm install antdsite-cli -g
 ```
 
-Wrap the content.
+#### Use `cli` to initialize a website
 
-```jsx
-<div className="demo-container">
-  <Scrollbar>
-    <div className="demo-content">
-      <span className="demo-content-text">Hello! Magic Scroll!</span>
-    </div>
-  </Scrollbar>
-</div>
+```bash
+antdsite my-docs
 ```
 
-You will get the custom scrollbar below.
+#### Switch to the initialized site directory and run the Site
 
-- 1
-- 3
+```bash
+cd my-docs
 
-* 4
-* 5
+yarn start
+# OR
+npm start
+```
+
+#### Visit the default address `localhost:8000` to see the effect page
+
+<p align="center">
+<img src="https://github.com/wangyi7099/pictureCdn/blob/master/allPic/antdsite/screenshot.png?raw=true" width="700" />
+</p>

@@ -58,10 +58,6 @@ module.exports.getFinalConfig = function() {
   // validate & fix config.
   validateConfig(finalConfig);
 
-  // We stringify head property here because type of head's value is dynamic and it is not easy to be
-  // inferred by gatsbyJs.
-  finalConfig.head = JSON.stringify(finalConfig.head);
-
   return finalConfig;
 };
 

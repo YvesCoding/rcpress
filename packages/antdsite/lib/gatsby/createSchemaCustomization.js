@@ -21,6 +21,7 @@ module.exports = ({ actions }) => {
       footer: String
       features: [HomeFeature]
       maxTocDeep: Int
+      editLink: String
     }
 
     type Avatar {

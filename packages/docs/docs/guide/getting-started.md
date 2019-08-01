@@ -1,18 +1,99 @@
----
-title: 开始使用
-important: true
----
+# Quick Start
 
-## 简介
+## Install via cli
 
-1 **One** 这个项目是一个开源的前后端分离项目，它的前身是著名的开源项目[Guns](https://gitee.com/stylefeng/guns) 1 本文档专门针对**One**这个开源项目的前端。
+#### Install `antdsite-cli` via [yarn](https://yarnpkg.com)
 
-## 项目地址
+```bash
+yarn global add antdsite-cli
+```
 
-**One**这个项目的前端部署在码云上面，地址为：[https://gitee.com/stylefeng/one-front](https://gitee.com/stylefeng/one-front)
+#### Or install via [npm](https://docs.npmjs.com/cli/install.html)
 
-## 项目架构
+```bash
+npm install antdsite-cli -g
+```
 
-项目架构采用的是 [ant-design-pro](https://pro.ant.design/docs/getting-started-cn) 这一开源的前端框架。 如果对这个框架不太了解可以去它的官网了解一下。
+#### Use `cli` to initialize a website
 
-> 1212
+```bash
+antdsite my-docs
+```
+
+#### Switch to the initialized site directory and run the Site
+
+```bash
+cd my-docs
+
+yarn start
+# OR
+npm start
+```
+
+#### Visit the default address `localhost:8000` to see the effect page
+
+<p align="center">
+<img src="https://github.com/wangyi7099/pictureCdn/blob/master/allPic/antdsite/screenshot.png?raw=true" width="700" />
+</p>
+
+## Install in an existing project
+
+Add dependencies and run scripts in `package.json`
+
+```json
+{
+  "dependencies": {
+    "antdsite": "^0.0.7",
+    "gatsby": "^2.13.39",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "scripts": {
+    "build": "npm run clean && gatsby build",
+    "start": "npm run clean && gatsby develop",
+    "clean": "gatsby clean"
+  }
+}
+```
+
+If you use yarn, the script is as follows
+
+```json
+{
+  "scripts": {
+    "build": "yarn clean && gatsby build",
+    "start": "yarn clean && gatsby develop",
+    "clean": "gatsby clean"
+  }
+}
+```
+
+Installation dependency
+
+```bash
+yarn # or npm
+```
+
+Create a new docs folder and add a README.MD file
+
+```bash
+mkdir docs
+
+echo '# Hello AntdSite' > docs/README.md
+```
+
+Run project
+
+```bash
+yarn start
+# OR
+npm start
+```
+
+Generate static files
+
+```bash
+yarn build
+# OR
+npm run build
+```

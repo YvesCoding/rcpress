@@ -4,6 +4,7 @@ module.exports = {
   base: '/',
   title: path.relative('../', process.cwd()),
   description: '',
+  lang: 'en-US',
   head: [],
   themeConfig: {
     repo: null,
@@ -11,8 +12,9 @@ module.exports = {
     docsDir: 'docs',
     docsRelativeDir: '',
     docsBranch: 'master',
-    editLinkText: null,
-    lastUpdated: false, // string | boolean
+    editLinks: true,
+    editLinkText: 'Edit this page',
+    lastUpdated: 'Last Updated', // string | boolean
     locales: null,
     showAvatarList: true,
     showBackToTop: true,

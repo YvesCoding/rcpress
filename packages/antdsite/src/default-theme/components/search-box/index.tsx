@@ -82,7 +82,10 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     const results: filterDatas = [];
 
     function hightlightRes(res: string) {
-      return res.replace(new RegExp(query, 'g'), `<span class='hight-light'>${query}</span>`);
+      return res.replace(
+        new RegExp('(' + query + ')', 'gi'),
+        `<span class='hight-light'>$1</span>`
+      );
     }
 
     function resolveOnePageItem(currentItem: PageInfo) {

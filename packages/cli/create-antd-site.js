@@ -13,7 +13,7 @@ let projectName;
 
 const allDeps = {
   antdsite: 'latest',
-  gatsby: '^2.13.39',
+  gatsby: '^2.13.45',
   react: '^16.8.0',
   'react-dom': '^16.8.0'
 };

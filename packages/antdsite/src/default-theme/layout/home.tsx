@@ -11,11 +11,16 @@ function Home(props: any) {
     <PageContext.Consumer>
       {(value: any) => {
         const { currentLocaleWebConfig } = value;
-        const { title, description } = currentLocaleWebConfig as any;
+        const { title, description, head, lang } = currentLocaleWebConfig as any;
 
         return (
           <>
-            <SEO title={`${title}`} description={description} />
+            <SEO
+              head={head as Array<any>}
+              lang={lang}
+              title={`${title}`}
+              description={description}
+            />
             <div className="home-wrapper">
               <Banner {...props} {...value} />
               <Features {...props} {...value} />

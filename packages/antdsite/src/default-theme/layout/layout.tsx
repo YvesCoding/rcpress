@@ -28,6 +28,8 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
     super(props);
   }
 
+  preSlug: String;
+
   render() {
     const { children, pageContext, ...restProps } = this.props;
     const { webConfig, slug, isWebsiteHome } = pageContext;
@@ -53,6 +55,7 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
 
   componentDidMount() {
     this.ajustContentHeight();
+    this.chekScrollPosition(this.props.pageContext.slug);
     window.addEventListener('resize', this.ajustContentHeight);
   }
 
@@ -61,6 +64,7 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
   }
 
   componentDidUpdate() {
+    this.chekScrollPosition(this.props.pageContext.slug);
     this.ajustContentHeight();
   }
 
@@ -76,4 +80,20 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
       (footer ? footer.offsetHeight : 0) +
       'px';
   };
+
+  chekScrollPosition(slug?: string) {
+    if (!window.location.hash && slug && slug !== this.preSlug) {
+      window.scrollTo(0, 0);
+      this.preSlug = slug;
+    } else if (window.location.hash) {
+      const element = document.getElementById(
+        decodeURIComponent(window.location.hash.replace('#', ''))
+      );
+      setTimeout(() => {
+        if (element) {
+          element.scrollIntoView(true);
+        }
+      }, 100);
+    }
+  }
 }
