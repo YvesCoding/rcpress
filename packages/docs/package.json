@@ -8,7 +8,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "antdsite": "^0.0.7",
+    "antdsite": "^0.0.11",
     "gatsby": "^2.13.39",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
