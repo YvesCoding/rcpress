@@ -1,2 +1,2 @@
 [build]
-  command = "npm i yarn && yarn && yarn bs"
+  command = "yarn bs"
