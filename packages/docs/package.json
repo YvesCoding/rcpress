@@ -1,14 +1,14 @@
 {
   "name": "docs",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "build": "yarn clean && gatsby build",
     "start": "yarn clean && gatsby develop",
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "antdsite": "^0.0.11",
+    "antdsite": "^0.0.12",
     "gatsby": "^2.13.39",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
