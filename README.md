@@ -22,7 +22,13 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
 ## Quick Start
 
 ```bash
-npm i antdsite -g
+
+yarn global add antdsite-cli
+
+# OR
+
+npm i antdsite-cli -g
+
 
 antdsite my-docs
 ```
