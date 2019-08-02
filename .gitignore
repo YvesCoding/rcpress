@@ -31,8 +31,7 @@ dist
 elasticsearch-*
 config/base.yaml
 .vscode 
-/coverage
-yarn.lock
+/coverage 
 components/**/*.js
 components/**/*.jsx
 !components/**/__tests__/*.js
