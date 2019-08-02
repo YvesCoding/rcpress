@@ -16,7 +16,7 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
   <img width="144" src="/gatsby-icon-144x144.png" />
 </div>
 
-## Basic characteristics
+## Basic features
 
 - It's easy to get started, you just need to know markdown and a little bit about JS.
 - Powerful, you can write react components in markdown, referring to [mdx](https://github.com/mdx-js/mdx).

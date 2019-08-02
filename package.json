@@ -3,7 +3,9 @@
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
     "bs": "lerna bootstrap",
-    "publish": "lerna publish"
+    "publish": "lerna publish",
+    "build": "yarn build:docs",
+    "build:docs": "yarn workspace docs build"
   },
   "workspaces": [
     "packages/antdsite",

@@ -1,0 +1,2 @@
+[build]
+  command = "npm i yarn@1.10.1 && yarn && yarn bs"
