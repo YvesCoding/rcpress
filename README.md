@@ -3,7 +3,7 @@
 <h1 align="center">AntdSite</h1>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/dev"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/dev.png?style=shield" alt="Build Status"></a> 
+  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/l/antdsite.svg" alt="License"></a>
 <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/dm/antdsite.svg" alt="Download"></a>
 <a href="https://github.com/YvesCoding/antdsite"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
@@ -17,7 +17,7 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
 
 - It's easy to get started, you just need to know markdown and a little bit about JS.
 - Powerful, you can write react components in markdown, referring to [mdx](https://github.com/mdx-js/mdx).
-- It can directly use many components of Ant Design (https://ant.design/components/button/) to meet daily development needs.
+- It can directly use many components of [Ant Design](https://ant.design/components/button/) to meet daily development needs.
 
 ## Quick Start
 

@@ -29,14 +29,9 @@ footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 
 任何 `YAML front matter` 之后额外的内容将会以普通的 markdown 被渲染，并插入到 `features` 的后面。
 
-<Alert
-message="警告"
-description={<p>showStar 只支持 <strong>GitHub</strong></p>}
-type="warning"
-showIcon
-/>
+<Alert message="警告" description={<p>showStar 只支持 <strong>GitHub</strong></p>} type="warning" showIcon />
 
-## Navbar
+## 导航栏
 
 The Navbar may contain your page title, [Search Box](#search-box), [Navbar Links](#navbar-links), [Languages](../guide/i18n) and [Repository Link](#git-repo-and-edit-links), all of them depends on your configuration.
 
@@ -51,9 +46,9 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', important: true }, // 标签右上会有红点显示
       { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' }
-    ]
-  }
+      { text: 'External', link: 'https://google.com' },
+    ],
+  },
 };
 ```
 
@@ -67,11 +62,11 @@ module.exports = {
         text: 'Languages',
         items: [
           { text: 'Chinese', link: '/language/chinese' },
-          { text: 'Japanese', link: '/language/japanese' }
-        ]
-      }
-    ]
-  }
+          { text: 'Japanese', link: '/language/japanese' },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -83,8 +78,8 @@ module.exports = {
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
-    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
-  }
+    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']],
+  },
 };
 ```
 
@@ -102,7 +97,7 @@ module.exports = {
       {
         title: 'Group 1',
         collapsable: false,
-        children: ['/']
+        children: ['/'],
       },
       {
         title: 'Group 2',
@@ -111,12 +106,12 @@ module.exports = {
             title: 'Group 3', // 最多两层分组
             children: [
               /* ... */
-            ]
-          }
-        ]
-      }
-    ]
-  }
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -148,19 +143,11 @@ module.exports = {
 module.exports = {
   themeConfig: {
     sidebar: {
-      '/foo/': [
-        '' /* /foo/ */,
-        'one' /* /foo/one.html */,
-        'two' /* /foo/two.html */
-      ],
+      '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
 
-      '/bar/': [
-        '' /* /bar/ */,
-        'three' /* /bar/three.html */,
-        'four' /* /bar/four.html */
-      ]
-    }
-  }
+      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */],
+    },
+  },
 };
 ```
 
@@ -190,10 +177,10 @@ module.exports = {
     sidebar: {
       '/foo/': [
         'one' /* /foo/one.html 或者 /foo 将会被重定向到 /foo/one */,
-        'two' /* /foo/two.html */
-      ]
-    }
-  }
+        'two' /* /foo/two.html */,
+      ],
+    },
+  },
 };
 ```
 
@@ -211,9 +198,7 @@ maxTocDeep: 4
 ---
 ```
 
-## 搜索框
-
-### 内置搜索
+## 内置搜索
 
 你可以通过设置 `themeConfig.search: false` 来禁用默认的搜索框，或是通过 `themeConfig.searchMaxSuggestions` 来调整默认搜索框显示的搜索结果数量：
 
@@ -221,8 +206,8 @@ maxTocDeep: 4
 module.exports = {
   themeConfig: {
     search: false,
-    searchMaxSuggestions: 10
-  }
+    searchMaxSuggestions: 10,
+  },
 };
 ```
 
@@ -233,8 +218,8 @@ module.exports = {
 ```js
 module.exports = {
   themeConfig: {
-    lastUpdated: 'Last Updated' // string | boolean
-  }
+    lastUpdated: 'Last Updated', // string | boolean
+  },
 };
 ```
 
@@ -255,8 +240,8 @@ module.exports = {
     docsBranch: 'master', // 文档所在git分支
     editLinks: true, // 默认是 false, 设置为 true 来启用
     editLinkText: '帮助我们改善此页面！', // 默认为 "Edit this page"
-    showAvatarList: true // 是否显示编辑过此页面的用户用户列表, 设置为false关闭
-  }
+    showAvatarList: true, // 是否显示编辑过此页面的用户用户列表, 设置为false关闭
+  },
 };
 ```
 
@@ -266,7 +251,7 @@ module.exports = {
 module.exports = {
   themeConfig: {
     // 是否启用回到顶部按钮
-    showBackToTop: true
-  }
+    showBackToTop: true,
+  },
 };
 ```

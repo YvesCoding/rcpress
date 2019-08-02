@@ -20,7 +20,7 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
 
 - It's easy to get started, you just need to know markdown and a little bit about JS.
 - Powerful, you can write react components in markdown, referring to [mdx](https://github.com/mdx-js/mdx).
-- It can directly use many components of Ant Design (https://ant.design/components/button/) to meet daily development needs.
+- It can directly use many components of [Ant Design](https://ant.design/components/button/) to meet daily development needs.
 
 ## Technology Stack
 

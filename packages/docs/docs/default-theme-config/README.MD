@@ -29,12 +29,7 @@ footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 
 Any additional content after the `YAML front matter` will be parsed as normal markdown and rendered after the features section.
 
-<Alert
-message="Warning"
-description={<p>showStar only supports <strong>GitHub</strong></p>}
-type="warning"
-showIcon
-/>
+<Alert message="Warning" description={<p>showStar only supports <strong>GitHub</strong></p>} type="warning" showIcon />
 
 ## Navbar
 
@@ -51,9 +46,9 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', important: true }, // There will be red dots on the right of the label.
       { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' }
-    ]
-  }
+      { text: 'External', link: 'https://google.com' },
+    ],
+  },
 };
 ```
 
@@ -67,11 +62,11 @@ module.exports = {
         text: 'Languages',
         items: [
           { text: 'Chinese', link: '/language/chinese' },
-          { text: 'Japanese', link: '/language/japanese' }
-        ]
-      }
-    ]
-  }
+          { text: 'Japanese', link: '/language/japanese' },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -83,8 +78,8 @@ To enable the sidebar, use `themeConfig.sidebar`. The basic configuration expect
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
-    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
-  }
+    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']],
+  },
 };
 ```
 
@@ -102,7 +97,7 @@ module.exports = {
       {
         title: 'Group 1',
         collapsable: false,
-        children: ['/']
+        children: ['/'],
       },
       {
         title: 'Group 2',
@@ -111,12 +106,12 @@ module.exports = {
             title: 'Group 3', // Max to level 2 group
             children: [
               /* ... */
-            ]
-          }
-        ]
-      }
-    ]
-  }
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -148,19 +143,11 @@ Then, update your configuration to define your sidebar for each section.
 module.exports = {
   themeConfig: {
     sidebar: {
-      '/foo/': [
-        '' /* /foo/ */,
-        'one' /* /foo/one.html */,
-        'two' /* /foo/two.html */
-      ],
+      '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
 
-      '/bar/': [
-        '' /* /bar/ */,
-        'three' /* /bar/three.html */,
-        'four' /* /bar/four.html */
-      ]
-    }
-  }
+      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */],
+    },
+  },
 };
 ```
 
@@ -190,10 +177,10 @@ module.exports = {
     sidebar: {
       '/foo/': [
         'one' /* /foo/one.html or /foo will be redirect to /foo/one */,
-        'two' /* /foo/two.html */
-      ]
-    }
-  }
+        'two' /* /foo/two.html */,
+      ],
+    },
+  },
 };
 ```
 
@@ -211,9 +198,7 @@ maxTocDeep: 4
 ---
 ```
 
-## Search Box
-
-### Built-in Search
+## Built-in Search Box
 
 You can disable the built-in search box with `themeConfig.search: false`, and customize how many suggestions will be shown with `themeConfig.searchMaxSuggestions`:
 
@@ -221,8 +206,8 @@ You can disable the built-in search box with `themeConfig.search: false`, and cu
 module.exports = {
   themeConfig: {
     search: false,
-    searchMaxSuggestions: 10
-  }
+    searchMaxSuggestions: 10,
+  },
 };
 ```
 
@@ -233,8 +218,8 @@ The `themeConfig.lastUpdated` option allows you to get the UNIX timestamp(ms) of
 ```js
 module.exports = {
   themeConfig: {
-    lastUpdated: 'Last Updated' // string | boolean
-  }
+    lastUpdated: 'Last Updated', // string | boolean
+  },
 };
 ```
 
@@ -255,8 +240,8 @@ module.exports = {
     docsBranch: 'master', // The git branch of document
     editLinks: true, // // defaults to false, set to true to enable
     editLinkText: 'Help us improve this page!', // custom text for edit link. Defaults to "Edit this page"
-    showAvatarList: true // Whether to display a list of users who edited this page, set it to false to disable
-  }
+    showAvatarList: true, // Whether to display a list of users who edited this page, set it to false to disable
+  },
 };
 ```
 
@@ -266,7 +251,7 @@ module.exports = {
 module.exports = {
   themeConfig: {
     // Whether to enable back to top
-    showBackToTop: true
-  }
+    showBackToTop: true,
+  },
 };
 ```
