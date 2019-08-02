@@ -1,6 +1,14 @@
- <p align="center"><a href="http://antdsite.yvescoding.org/"><img width="100" src="http://antdsite.yvescoding.org/favicon.png" /></a></p>
+ <p align="center"><a href="https://antdsite.yvescoding.org/"><img width="100" src="https://antdsite.yvescoding.org/favicon.png" /></a></p>
 
 <h1 align="center">AntdSite</h1>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/dev"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/dev.png?style=shield" alt="Build Status"></a>
+   <a href="https://codecov.io/github/YvesCoding/antdsite?branch=dev"><img src="https://img.shields.io/codecov/c/github/YvesCoding/antdsite/dev.svg" alt="Coverage"></a>
+  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/l/antdsite.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/dm/antdsite.svg" alt="Download"></a>
+<a href="https://github.com/YvesCoding/antdsite"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
+</p>
 
 ## Introduction
 
