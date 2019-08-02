@@ -6,8 +6,10 @@ import {
   resolveSidebarItems,
 } from '../default-theme/components/utils';
 import Layout from 'antdsite-layout';
-
+import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
 import Media from 'react-media';
+import { MDXProvider } from '@mdx-js/react';
+const antd = require('antd');
 
 export interface IGraphqlFrontmatterData {
   title: string;
@@ -89,22 +91,29 @@ export default function Template(props: {
     pageContext.slug
   );
 
+  const { body } = props.data.mdx.code;
+
   return (
-    <PageContext.Provider
-      value={{
-        ...pageContext,
-        currentLocaleWebConfig,
-        ...sidebarItems,
-        currentPageInfo: props.data.mdx,
-      }}
-    >
-      <Media query="(max-width: 996px)">
-        {isMobile => {
-          const isNode = typeof window === `undefined`;
-          return <Layout {...props} isMobile={isMobile && !isNode} />;
+    <MDXProvider components={{ ...antd }}>
+      <PageContext.Provider
+        value={{
+          ...pageContext,
+          currentLocaleWebConfig,
+          ...sidebarItems,
+          currentPageInfo: props.data.mdx,
+          currentPageContent: (compProps: any) => {
+            return <MDXRenderer {...compProps}>{body}</MDXRenderer>;
+          },
         }}
-      </Media>
-    </PageContext.Provider>
+      >
+        <Media query="(max-width: 996px)">
+          {isMobile => {
+            const isNode = typeof window === `undefined`;
+            return <Layout {...props} isMobile={isMobile && !isNode} />;
+          }}
+        </Media>
+      </PageContext.Provider>
+    </MDXProvider>
   );
 }
 

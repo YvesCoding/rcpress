@@ -6,7 +6,6 @@ import moment from 'moment';
 import AvatarList from './AvatarList';
 import { PageContext } from 'antdsite';
 import SEO from '../SEO/SEO';
-import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
 
 const Link = Anchor.Link;
 
@@ -36,6 +35,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const { currentPageTitle } = props;
     const {
       currentPageInfo,
+      currentPageContent,
       currentLocaleWebConfig: {
         title,
         lang,
@@ -97,7 +97,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
             </div>
           ) : null}
           <section className="markdown api-container">
-            <MDXRenderer>{currentPageInfo.code.body}</MDXRenderer>
+            {React.createElement(currentPageContent)}
           </section>
         </article>
       </>

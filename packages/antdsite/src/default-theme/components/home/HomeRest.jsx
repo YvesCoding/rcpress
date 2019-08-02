@@ -1,12 +1,14 @@
 import React from 'react';
-import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
+import { PageContext } from 'antdsite';
 
 export default class extends React.Component {
+  static contextType = PageContext;
+
   setConentVisible = () => {
     const container = this.refs['rest-content'];
     if (!container) return;
 
-    const innerContent = container.querySelector('.markdown.home-markdown');
+    const innerContent = container.querySelector('.home-markdown.markdown');
     if (!innerContent) return;
 
     if (innerContent.innerHTML === '') {
@@ -25,20 +27,11 @@ export default class extends React.Component {
   }
 
   render() {
-    const {
-      data: {
-        mdx: { code },
-      },
-    } = this.props;
-
-    const wrapper = _ => {
-      return <div className="markdown home-markdown">{_.children}</div>;
-    };
-
+    const { currentPageContent } = this.context;
     return (
       <div className="home-page page2" ref="rest-content">
-        <div className="home-page-wrapper">
-          <MDXRenderer components={{ wrapper }}>{code.body}</MDXRenderer>
+        <div className="home-page-wrapper home-markdown markdown">
+          {React.createElement(currentPageContent)}
         </div>
       </div>
     );

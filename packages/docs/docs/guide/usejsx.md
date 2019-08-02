@@ -25,7 +25,7 @@ Then we write code of our `ShowTime` component and export it.
 export const ShowTime = () => {
   return (
     <PageContext.Consumer>
-      {(context) => {
+      {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
             {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
@@ -60,16 +60,18 @@ import {ShowTime} from '@components/ShowModifiedTime'
 
 ## Use `antd`
 
-Import and use `Button` component from `antd` directly in markdown.
+Use components of `antd` directly in markdown without importing.
 
 ```jsx
-import { Button } from 'antd';
-
-<Button>Button</Button>;
+<Button>Button</Button>
+<br />
+<Switch defaultChecked style={{marginTop:'15px'}} />
 ```
 
 The result is as follow:
 
-import {Button} from 'antd';
-
 <Button>Button</Button>
+
+<br />
+
+<Switch defaultChecked style={{marginTop:'15px'}} />

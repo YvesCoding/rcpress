@@ -1,4 +1,5 @@
 import React from 'react';
+
 export const PageContext = React.createContext({
   webConfig: {},
   slug: '',
@@ -6,4 +7,5 @@ export const PageContext = React.createContext({
   currentPageSidebarItems: {},
   allPagesSidebarItems: {},
   currentPageInfo: {},
+  currentPageContent: {},
 });

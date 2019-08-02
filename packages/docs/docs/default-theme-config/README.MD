@@ -1,52 +1,55 @@
-# 默认主题
+# Default Theme Config
 
-> 注意
+> Most of the text is copied in [vuepress](https://vuepress.vuejs.org/zh/default-theme-config), with minor modifications
 >
-> 本节是从[vepress](https://vuepress.vuejs.org/zh/default-theme-config)复制的，有一些修改的地方
->
-> 本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同。
+> All options listed on this page apply to the default theme only. If you are using a custom theme, the options may be different.
 
-## 首页
+## Homepage
 
-默认的主题提供了一个首页（Homepage）的布局 (用于 [这个网站的主页](/zh))。想要使用它，需要在你的根级 `README.md` 的 [YAML front matter](https://jekyllrb.com/docs/front-matter/) 指定 `home: true`。以下是这个网站实际使用的数据：
+The default theme provides a homepage layout (which is used on [the homepage of this very website](/)). To use it, specify `home: true` plus some other metadata in your root `README.md`'s [YAML front matter](https://jekyllrb.com/docs/front-matter/). This is the actual data used on this site:
 
 ```yaml
 ---
-actionText: 快速上手 →
-actionLink: /zh/guide/
+actionText: Get Started →
+actionLink: /guide/
 showStar: true
 home: true
 features:
-  - title: 门槛底
-    details: 只需要简单配置，会一些markdown语法就能快速上手
-  - title: UI组件丰富
-    details: 文档的设计来源于<a target="_blank" href="https://ant.design/docs/react/introduce-cn">Ant Design</a>网站，不仅界面美观，还能直接使用所有的Ant Design 组件。
-  - title: 功能强大
-    details: 得益于<a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a>，我们可以在markdown里使用JSX。
+  - title: Easy to get started
+    details: It only requires simple configuration and some markdown syntax to get started quickly
+  - title: Rich UI components
+    details: Document design comes from <a target="_blank" href="https://ant.design/">Ant Design</a> website, which not only has a beautiful interface, but also can directly use all Ant Design components.
+  - title: Powerful
+    details: Thanks to <a target="_blank" href= "https://github.com/mdx-js/mdx">mdx</a>, we can use JSX in markdown.
 
 footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
 ```
 
-任何 `YAML front matter` 之后额外的内容将会以普通的 markdown 被渲染，并插入到 `features` 的后面。
+Any additional content after the `YAML front matter` will be parsed as normal markdown and rendered after the features section.
 
-`showStar`只支持 **GitHub**
+<Alert
+message="Warning"
+description={<p>showStar only supports <strong>GitHub</strong></p>}
+type="warning"
+showIcon
+/>
 
-## 导航栏
+## Navbar
 
-导航栏可能包含你的页面标题、[搜索框](#搜索框)、 [导航栏链接](#导航栏链接)、[多语言切换](../guide/i18n)、[仓库链接](#git-仓库和编辑链接)，它们均取决于你的配置。
+The Navbar may contain your page title, [Search Box](#search-box), [Navbar Links](#navbar-links), [Languages](../guide/i18n) and [Repository Link](#git-repo-and-edit-links), all of them depends on your configuration.
 
-### 导航栏链接
+### Navbar Links
 
-你可以通过 `themeConfig.nav` 增加一些导航栏链接:
+You can add links to the navbar via `themeConfig.nav`:
 
 ```js
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/', important: true },
+      { text: 'Home', link: '/', important: true }, // There will be red dots on the right of the label.
       { text: 'Guide', link: '/guide/' },
       { text: 'External', link: 'https://google.com' }
     ]
@@ -54,7 +57,7 @@ module.exports = {
 };
 ```
 
-当你提供了一个 `items` 数组而不是一个单一的 `link` 时，它将显示为一个 `下拉列表` ：
+These links can also be dropdown menus if you provide an array of `items` instead of a `link`:
 
 ```js
 module.exports = {
@@ -63,7 +66,7 @@ module.exports = {
       {
         text: 'Languages',
         items: [
-          { text: 'Chinese', link: '/language/chinese', important: true },
+          { text: 'Chinese', link: '/language/chinese' },
           { text: 'Japanese', link: '/language/japanese' }
         ]
       }
@@ -72,9 +75,9 @@ module.exports = {
 };
 ```
 
-## 侧边栏
+## Sidebar
 
-想要使 侧边栏（Sidebar）生效，需要配置 `themeConfig.sidebar`，基本的配置，需要一个包含了多个链接的数组：
+To enable the sidebar, use `themeConfig.sidebar`. The basic configuration expects an Array of links:
 
 ```js
 // .antdsite/config.js
@@ -85,11 +88,11 @@ module.exports = {
 };
 ```
 
-你可以省略 `.md` 拓展名，同时以 `/` 结尾的路径将会被视为 `*/README.md`，这个链接的文字将会被自动获取到（无论你是声明为页面的第一个 header，还是明确地在 `YAML front matter` 中指定页面的标题）。如果你想要显示地指定链接的文字，使用一个格式为 `[link, text]` 的数组。
+You can omit the `.md` extension, and paths ending with `/` are inferred as `*/README.md`. The text for the link is automatically inferred (either from the first header in the page or explicit title in `YAML front matter`). If you wish to explicitly specify the link text, use an Array in form of `[link, text]`.
 
-### 侧边栏分组
+### Sidebar Groups
 
-你可以通过使用**对象**来将侧边栏划分成多个组：
+You can divide sidebar links into multiple groups by using **objects**:
 
 ```js
 // .antdsite/config.js
@@ -105,7 +108,7 @@ module.exports = {
         title: 'Group 2',
         children: [
           {
-            title: 'Group 3', // 最多两层分组
+            title: 'Group 3', // Max to level 2 group
             children: [
               /* ... */
             ]
@@ -117,11 +120,11 @@ module.exports = {
 };
 ```
 
-侧边栏的每个子组默认是可折叠的，你可以设置 `collapsable: false` 来让一个组永远都是展开状态。
+Sidebar groups are collapsable by default. You can force a group to be always open with `collapsable: false`.
 
-### 多个侧边栏
+### Multiple Sidebars
 
-如果你想为不同的页面组来显示不同的侧边栏，首先，将你的页面文件组织成下述的目录结构：
+If you wish to display different sidebars for different sections of content, first organize your pages into directories for each desired section:
 
 ```
 .
@@ -138,7 +141,7 @@ module.exports = {
    └─ four.md
 ```
 
-接着，遵循以下的侧边栏配置：
+Then, update your configuration to define your sidebar for each section.
 
 ```js
 // .antdsite/config.js
@@ -161,9 +164,9 @@ module.exports = {
 };
 ```
 
-### 侧边栏首页
+### Sidebar HomePage
 
-如果你的目录结构是这样的：
+If your directory structure is like this:
 
 ```bash
 ├─ foo/
@@ -171,7 +174,7 @@ module.exports = {
 │ └─ two.md
 ```
 
-可以在`one.md`中通过 `YAML front matter` 将其设置为首页：
+In `one.md`, it can be set to the front page by `YAML front matter`:
 
 ```yaml
 ---
@@ -186,7 +189,7 @@ module.exports = {
   themeConfig: {
     sidebar: {
       '/foo/': [
-        'one' /* /foo/one.html 或者 /foo 都可以访问 */,
+        'one' /* /foo/one.html or /foo will be redirect to /foo/one */,
         'two' /* /foo/two.html */
       ]
     }
@@ -194,13 +197,13 @@ module.exports = {
 };
 ```
 
-## 右侧目录
+## Catalogue on the right
 
-### 嵌套的标题链接
+### Nested Header Links
 
-默认情况下，右侧目录会自动地显示由当前页面的标题（headers）组成的链接，并按照页面本身的结构进行嵌套，你可以通过 `themeConfig.maxTocDeep` 来修改它的行为。默认的深度是 `1`，它将提取到 `h1` 的标题，设置值为`2`，它将提取到`h2`的标题，以此类推。
+The sidebar automatically displays links for headers in the current active page, nested under the link for the page itself. You can customize this behavior using `themeConfig.maxTocDeep`. the default depth is `3`，which extracts the `h1` headers，if set to `2`，it will extracts the `h2` headers, and so on.
 
-也可以使用 `YAML front matter` 来为某个页面重写此值：
+You can also override this value for a page using `YAML front matter`:
 
 ```md
 ---
@@ -208,11 +211,11 @@ maxTocDeep: 4
 ---
 ```
 
-## 搜索框
+## Search Box
 
-### 内置搜索
+### Built-in Search
 
-你可以通过设置 `themeConfig.search: false` 来禁用默认的搜索框，或是通过 `themeConfig.searchMaxSuggestions` 来调整默认搜索框显示的搜索结果数量：
+You can disable the built-in search box with `themeConfig.search: false`, and customize how many suggestions will be shown with `themeConfig.searchMaxSuggestions`:
 
 ```js
 module.exports = {
@@ -223,9 +226,9 @@ module.exports = {
 };
 ```
 
-## 最后更新时间
+## Last Updated
 
-你可以通过 `themeConfig.lastUpdated` 选项来获取每个文件最后一次 `git` 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部：
+The `themeConfig.lastUpdated` option allows you to get the UNIX timestamp(ms) of each file's last modification, and it will also display at the top of each page in an appropriate format:
 
 ```js
 module.exports = {
@@ -235,38 +238,34 @@ module.exports = {
 };
 ```
 
-请注意，`themeConfig.lastUpdated` 默认是关闭的，如果给定一个字符串，它将会作为前缀显示（默认值是：`Last Updated`）。
+Note that it's `off` by default. If given a `string`, it will be displayed as a prefix (default value: `Last Updated`).
 
-## Git 仓库和编辑链接
+## Git Repo and Edit Links
 
-当你提供了 `themeConfig.repo` 选项，将会自动在每个页面的导航栏生成生成一个 GitHub 链接，以及在页面的底部生成一个 `"Edit this page"` 链接。
+Providing `themeConfig.repo` auto generates a GitHub link in the navbar and "Edit this page" links at the bottom of each page.
 
 ```js
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
-    // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-    repo: 'YvesCoding/antdsite', // 自定义仓库链接，默认为Gihub仓库，支持Github,Bitbucket,Gitee。
-    docsRepo: 'YvesCoding/antdsite', // 自定义文档仓库，默认和docsRepo的值一致
-    docsRelativeDir: 'packages/docs', // 项目根目录到文档的相对地址，默认为''
-    docsDir: 'docs', // 假如文档放在一个特定的分支下：
-    docsBranch: 'master',
-    // 默认是 false, 设置为 true 来启用
-    editLinks: true,
-    // 默认为 "Edit this page"
-    editLinkText: '帮助我们改善此页面！',
-    // 显示编辑过此页面的用户用户列表
-    showAvatarList: true
+    repo: 'YvesCoding/antdsite', // Assumes GitHub. Can also be a full Gitee url  Defaults to "GitHub"/"Gitee"/"Bitbucket" depending on `themeConfig.repo`
+    docsRepo: 'YvesCoding/antdsite', // Custom document repo, default to docsRepo
+    docsRelativeDir: 'packages/docs', // Relative path from project root to docs folder.
+    docsDir: 'docs', // The directory of document
+    docsBranch: 'master', // The git branch of document
+    editLinks: true, // // defaults to false, set to true to enable
+    editLinkText: 'Help us improve this page!', // custom text for edit link. Defaults to "Edit this page"
+    showAvatarList: true // Whether to display a list of users who edited this page, set it to false to disable
   }
 };
 ```
 
-## 回到顶部
+## Back To Top
 
 ```js
 module.exports = {
   themeConfig: {
-    // 显示回到顶部按钮
+    // Whether to enable back to top
     showBackToTop: true
   }
 };

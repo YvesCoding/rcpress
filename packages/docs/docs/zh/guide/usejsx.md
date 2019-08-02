@@ -25,7 +25,7 @@ import { PageContext } from 'antdsite';
 export const ShowTime = () => {
   return (
     <PageContext.Consumer>
-      {(context) => {
+      {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
             {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
@@ -60,16 +60,18 @@ import {ShowTime} from '@components/ShowModifiedTime'
 
 ## 使用`antd`
 
-直接在 markdown 中从`antd`里导入并使用 `Button` 组件
+不用`import`, 直接在 markdown 中使用 `antd` 里面的组件
 
 ```jsx
-import { Button } from 'antd';
-
-<Button>Button</Button>;
+<Button>Button</Button>
+<br />
+<Switch defaultChecked style={{marginTop:'15px'}} />
 ```
 
 效果如下：
 
-import {Button} from 'antd';
-
 <Button>Button</Button>
+
+<br />
+
+<Switch defaultChecked style={{marginTop:'15px'}} />

@@ -144,7 +144,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           ) : null}
           <Row>
             <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-              <Link id="logo" to={utils.resolvePathWithBase(currentLocate || '/', base)}>
+              <Link id="site-logo" to={utils.resolvePathWithBase(currentLocate || '/', base)}>
                 {logo && <img src={logo} alt={title} />}
                 <span className="left-top-title">{title}</span>
               </Link>

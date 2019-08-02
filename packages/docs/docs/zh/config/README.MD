@@ -1,7 +1,5 @@
-# 基本配置
+# 配置参考
 
-> 注意
->
 > 文本大部分复制于[vuepress](https://vuepress.vuejs.org/zh/config/)，略作修改
 
 ## 基本配置
@@ -49,6 +47,22 @@ module.exports = {
 
 提供多语言支持的语言配置。具体细节请查看 [多语言支持](../guide/i18n)。
 
+### logo
+
+- 类型: `string`
+- 默认值: ``
+
+你可以在导航栏加上一个 logo 通过`logo`属性. logo 可以放在[静态文件夹](https://www.gatsbyjs.org/docs/static-folder/).
+
+```js
+// .antdsite/config.js
+module.exports = {
+  themeConfig: {
+    logo: '/assets/img/logo.png'
+  }
+};
+```
+
 ## 主题
 
 ### themeConfig
@@ -60,13 +74,4 @@ module.exports = {
 
 **也可以参考:**
 
-- [默认主题](/zh/default-theme-config/)。
-
-## 浏览器兼容性
-
-### evergreen
-
-- 类型: `boolean`
-- 默认值: `false`
-
-如果你的对象只有那些 “常青树” 浏览器，你可以将其设置成 `true`，这将会禁止 ESNext 到 ES5 的转译以及对 IE 的 polyfills，同时会带来更快的构建速度和更小的文件体积。
+- [默认主题](../default-theme-config/)。

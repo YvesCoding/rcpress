@@ -1,10 +1,8 @@
 # 默认主题
 
-> 注意
+> 本节大部分复制于[vepress](https://vuepress.vuejs.org/zh/default-theme-config),略作修改
 >
-> 本节是从[vepress](https://vuepress.vuejs.org/zh/default-theme-config)复制的，有一些修改的地方
->
-> 本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同。
+> 本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同
 
 ## 首页
 
@@ -31,11 +29,16 @@ footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 
 任何 `YAML front matter` 之后额外的内容将会以普通的 markdown 被渲染，并插入到 `features` 的后面。
 
-`showStar`只支持 **GitHub**
+<Alert
+message="警告"
+description={<p>showStar 只支持 <strong>GitHub</strong></p>}
+type="warning"
+showIcon
+/>
 
-## 导航栏
+## Navbar
 
-导航栏可能包含你的页面标题、[搜索框](#搜索框)、 [导航栏链接](#导航栏链接)、[多语言切换](../guide/i18n)、[仓库链接](#git-仓库和编辑链接)，它们均取决于你的配置。
+The Navbar may contain your page title, [Search Box](#search-box), [Navbar Links](#navbar-links), [Languages](../guide/i18n) and [Repository Link](#git-repo-and-edit-links), all of them depends on your configuration.
 
 ### 导航栏链接
 
@@ -46,7 +49,7 @@ footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 module.exports = {
   themeConfig: {
     nav: [
-      { text: 'Home', link: '/', important: true },
+      { text: 'Home', link: '/', important: true }, // 标签右上会有红点显示
       { text: 'Guide', link: '/guide/' },
       { text: 'External', link: 'https://google.com' }
     ]
@@ -63,7 +66,7 @@ module.exports = {
       {
         text: 'Languages',
         items: [
-          { text: 'Chinese', link: '/language/chinese', important: true },
+          { text: 'Chinese', link: '/language/chinese' },
           { text: 'Japanese', link: '/language/japanese' }
         ]
       }
@@ -74,7 +77,7 @@ module.exports = {
 
 ## 侧边栏
 
-想要使 侧边栏（Sidebar）生效，需要配置 `themeConfig.sidebar`，基本的配置，需要一个包含了多个链接的数组：
+想要使 侧边栏 Sidebar 生效，需要配置 `themeConfig.sidebar`，基本的配置，需要一个包含了多个链接的数组：
 
 ```js
 // .antdsite/config.js
@@ -186,7 +189,7 @@ module.exports = {
   themeConfig: {
     sidebar: {
       '/foo/': [
-        'one' /* /foo/one.html 或者 /foo 都可以访问 */,
+        'one' /* /foo/one.html 或者 /foo 将会被重定向到 /foo/one */,
         'two' /* /foo/two.html */
       ]
     }
@@ -198,7 +201,7 @@ module.exports = {
 
 ### 嵌套的标题链接
 
-默认情况下，右侧目录会自动地显示由当前页面的标题（headers）组成的链接，并按照页面本身的结构进行嵌套，你可以通过 `themeConfig.maxTocDeep` 来修改它的行为。默认的深度是 `1`，它将提取到 `h1` 的标题，设置值为`2`，它将提取到`h2`的标题，以此类推。
+默认情况下，右侧目录会自动地显示由当前页面的标题（headers）组成的链接，并按照页面本身的结构进行嵌套，你可以通过 `themeConfig.maxTocDeep` 来修改它的行为。默认的深度是 `3`，如果设置成`1`, 它将提取到 `h1` 的标题，设置值为`2`，它将提取到`h2`的标题，以此类推。
 
 也可以使用 `YAML front matter` 来为某个页面重写此值：
 
@@ -225,7 +228,7 @@ module.exports = {
 
 ## 最后更新时间
 
-你可以通过 `themeConfig.lastUpdated` 选项来获取每个文件最后一次 `git` 提交的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的底部：
+你可以通过 `themeConfig.lastUpdated` 选项来获取文件最后一次修改的 UNIX 时间戳(ms)，同时它将以合适的日期格式显示在每一页的顶部：
 
 ```js
 module.exports = {
@@ -245,18 +248,14 @@ module.exports = {
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
-    // 假定是 GitHub. 同时也可以是一个完整的 GitLab URL
-    repo: 'YvesCoding/antdsite', // 自定义仓库链接，默认为Gihub仓库，支持Github,Bitbucket,Gitee。
+    repo: 'YvesCoding/antdsite', // 假定是 GitHub. 同时也可以是一个完整的 Gitee URL,默认为Gihub仓库，支持Github,Bitbucket,Gitee。
     docsRepo: 'YvesCoding/antdsite', // 自定义文档仓库，默认和docsRepo的值一致
     docsRelativeDir: 'packages/docs', // 项目根目录到文档的相对地址，默认为''
-    docsDir: 'docs', // 假如文档放在一个特定的分支下：
-    docsBranch: 'master',
-    // 默认是 false, 设置为 true 来启用
-    editLinks: true,
-    // 默认为 "Edit this page"
-    editLinkText: '帮助我们改善此页面！',
-    // 显示编辑过此页面的用户用户列表
-    showAvatarList: true
+    docsDir: 'docs', // 文档目录 默认为docs
+    docsBranch: 'master', // 文档所在git分支
+    editLinks: true, // 默认是 false, 设置为 true 来启用
+    editLinkText: '帮助我们改善此页面！', // 默认为 "Edit this page"
+    showAvatarList: true // 是否显示编辑过此页面的用户用户列表, 设置为false关闭
   }
 };
 ```
@@ -266,7 +265,7 @@ module.exports = {
 ```js
 module.exports = {
   themeConfig: {
-    // 显示回到顶部按钮
+    // 是否启用回到顶部按钮
     showBackToTop: true
   }
 };
