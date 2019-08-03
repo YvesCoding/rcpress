@@ -16,7 +16,7 @@ function tryGitInit(appPath) {
 
     execSync('git add -A', { stdio: 'ignore' });
     execSync('git commit -m "Initial commit from Create Antd Site"', {
-      stdio: 'ignore'
+      stdio: 'ignore',
     });
     return true;
   } catch (e) {
@@ -37,15 +37,13 @@ function tryGitInit(appPath) {
   }
 }
 
-function writeTemplate(appPath) {
+function copyTemplate(appPath) {
   const templatePath = path.resolve(__dirname, 'template');
 
   if (fs.existsSync(templatePath)) {
     fs.copySync(templatePath, appPath);
   } else {
-    console.error(
-      `Could not locate supplied template: ${chalk.green(templatePath)}`
-    );
+    console.error(`Could not locate supplied template: ${chalk.green(templatePath)}`);
     return;
   }
 }
@@ -66,26 +64,18 @@ function showSuccessTips(appPath, appName, useYarn, originalDirectory) {
 
   console.log();
 
-  console.log(
-    chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}start`)
-  );
+  console.log(chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}start`));
   console.log(`    start the development server.`);
 
   console.log();
 
-  console.log(
-    chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`)
-  );
+  console.log(chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`));
   console.log(`    Build a static website.`);
 
   console.log();
 
-  console.log(
-    chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`)
-  );
-  console.log(
-    `    copy the default theme to .antdsite/theme of the created app directory.`
-  );
+  console.log(chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`));
+  console.log(`    copy the default theme to .antdsite/theme of the created app directory.`);
 
   console.log();
 
@@ -97,7 +87,7 @@ function showSuccessTips(appPath, appName, useYarn, originalDirectory) {
 }
 
 module.exports = function(appPath, appName, useYarn, originalDirectory) {
-  writeTemplate(appPath);
+  copyTemplate(appPath);
 
   tryGitInit(appPath);
 

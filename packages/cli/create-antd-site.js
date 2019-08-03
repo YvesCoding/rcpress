@@ -20,11 +20,7 @@ const allDeps = {
 
 // These files should be allowed to remain on a failed install,
 // but then silently removed during the next create.
-const errorLogFilePatterns = [
-  'npm-debug.log',
-  'yarn-error.log',
-  'yarn-debug.log'
-];
+const errorLogFilePatterns = ['npm-debug.log', 'yarn-error.log', 'yarn-debug.log'];
 
 const program = new commander.Command(packageJson.name)
   .version(packageJson.version)
@@ -33,14 +29,18 @@ const program = new commander.Command(packageJson.name)
   .action(name => {
     projectName = name;
   })
+  .option('--use-npm', 'use npm to download packages instead of yarn, defaults to yarn')
   .option(
-    '--use-npm',
-    'use npm to download packages instead of yarn, defaults to yarn'
+    '--eject',
+    'copy the default theme to current working directory, and then you can modify the entire theme.'
   )
-  .option('--eject', 'copy the default theme to current working directory.')
+  .option(
+    '--force',
+    'force the creatation of a project and if there is a package.json, it will will be merged.'
+  )
   .parse(process.argv);
 
-createApp(projectName, program.useNpm, program.eject);
+createApp(projectName, program.useNpm, program.eject, program.force);
 
 function printValidationResults(results) {
   if (typeof results !== 'undefined') {
@@ -50,7 +50,7 @@ function printValidationResults(results) {
   }
 }
 
-function checkAppName(appName) {
+function checkAppName(appName, isForce) {
   const validationResult = validateProjectName(appName);
   if (!validationResult.validForNewPackages) {
     console.error(
@@ -73,9 +73,7 @@ function checkAppName(appName) {
         )} because a dependency with the same name exists.\n` +
           `Due to the way npm works, the following names are not allowed:\n\n`
       ) +
-        chalk.hex('#29CDFF')(
-          dependencies.map(depName => `  ${depName}`).join('\n')
-        ) +
+        chalk.hex('#29CDFF')(dependencies.map(depName => `  ${depName}`).join('\n')) +
         chalk.red('\n\nPlease choose a different project name.')
     );
     process.exit(1);
@@ -113,13 +111,23 @@ function executeNodeScript({ cwd, initScriptPath }, data, source) {
 // installation, lets remove them now.
 // We also special case IJ-based products .idea because it integrates with CRA:
 // https://github.com/facebook/create-react-app/pull/368#issuecomment-243446094
-function isSafeToCreateProjectIn(root, name) {
+function isSafeToCreateProjectIn(root, name, isForce) {
   const validFiles = [
+    '.DS_Store',
+    'Thumbs.db',
     '.git',
     '.gitignore',
+    '.idea',
     'README.md',
     'LICENSE',
+    '.hg',
+    '.hgignore',
+    '.hgcheck',
     '.npmignore',
+    'mkdocs.yml',
+    'docs',
+    '.travis.yml',
+    '.gitlab-ci.yml',
     '.gitattributes'
   ];
   console.log();
@@ -130,22 +138,16 @@ function isSafeToCreateProjectIn(root, name) {
     // IntelliJ IDEA creates module files before CRA is launched
     .filter(file => !/\.iml$/.test(file))
     // Don't treat log files from previous installation as conflicts
-    .filter(
-      file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0)
-    );
+    .filter(file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0));
 
-  if (conflicts.length > 0) {
-    console.log(
-      `The directory ${chalk.green(name)} contains files that could conflict:`
-    );
+  if (conflicts.length > 0 && !isForce) {
+    console.log(`The directory ${chalk.green(name)} contains files that could conflict:`);
     console.log();
     for (const file of conflicts) {
       console.log(`  ${file}`);
     }
     console.log();
-    console.log(
-      'Either try using a new directory name, or remove the files listed above.'
-    );
+    console.log('Either try using a new directory name, or remove the files listed above.');
 
     return false;
   }
@@ -163,7 +165,7 @@ function isSafeToCreateProjectIn(root, name) {
   return true;
 }
 
-function createApp(name = './', useNpm, eject) {
+function createApp(name = './', useNpm, eject, isForce) {
   const root = path.resolve(name);
   const appName = path.basename(root);
   const originalDirectory = process.cwd();
@@ -174,7 +176,7 @@ function createApp(name = './', useNpm, eject) {
 
   checkAppName(appName);
   fs.ensureDirSync(name);
-  if (!isSafeToCreateProjectIn(root, appName)) {
+  if (!isSafeToCreateProjectIn(root, appName, isForce)) {
     process.exit(1);
   }
 
@@ -182,7 +184,7 @@ function createApp(name = './', useNpm, eject) {
   console.log();
 
   const useYarn = useNpm ? false : shouldUseYarn();
-  const packageJson = {
+  let packageJson = {
     name: appName,
     version: '0.1.0',
     private: true,
@@ -196,10 +198,30 @@ function createApp(name = './', useNpm, eject) {
       ...allDeps
     }
   };
-  fs.writeFileSync(
-    path.join(root, 'package.json'),
-    JSON.stringify(packageJson, null, 2) + os.EOL
-  );
+  const pkgPath = path.join(root, 'package.json');
+  if (fs.existsSync(pkgPath)) {
+    const oldPakJson = require(pkgPath) || {};
+    oldPakJson.scripts = packageJson.scripts || {};
+    oldPakJson.dependencies = packageJson.dependencies || {};
+
+    packageJson = {
+      ...packageJson,
+      ...oldPakJson,
+      ...{
+        scripts: {
+          ...packageJson.scripts,
+          ...oldPakJson.scripts
+        }
+      },
+      ...{
+        dependencies: {
+          ...packageJson.dependencies,
+          ...oldPakJson.dependencies
+        }
+      }
+    };
+  }
+  fs.writeFileSync(pkgPath, JSON.stringify(packageJson, null, 2) + os.EOL);
 
   const antsiteConfig = `module.exports = {
   title: '${appName}',
@@ -236,10 +258,7 @@ function createApp(name = './', useNpm, eject) {
   }
 };`;
   fs.ensureDirSync(path.resolve(root, '.antdsite'));
-  fs.writeFileSync(
-    path.join(root, '.antdsite/config.js'),
-    antsiteConfig + os.EOL
-  );
+  fs.writeFileSync(path.join(root, '.antdsite/config.js'), antsiteConfig + os.EOL);
 
   process.chdir(root);
 
@@ -288,13 +307,7 @@ function install(root, useYarn, dependencies) {
       args.push(root);
     } else {
       command = 'npm';
-      args = [
-        'install',
-        '--save',
-        '--save-exact',
-        '--loglevel',
-        'error'
-      ].concat(dependencies);
+      args = ['install', '--save', '--save-exact', '--loglevel', 'error'].concat(dependencies);
     }
 
     const child = spawn(command, args, { stdio: 'inherit' });
