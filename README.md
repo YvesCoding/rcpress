@@ -11,7 +11,7 @@
 
 ## Introduction
 
-AntdSite is a website generator based on [Ant Design](https://ant.design), driven by [Gatsby Js](https://www.gatsbyjs.org/). (You can totally ignore these two technologies, just know the basic knowledge of markdown, and then simply configure it to build a website. Of course, it would be better if you could do both. The configuration of documents refers to the vue-based document generator - [vuepress](https://vuepress.vuejs.org/config/).
+AntdSite is a website generator based on [Ant Design](https://ant.design), driven by [Gatsby Js](https://www.gatsbyjs.org/)(You can totally ignore these two technologies, just know the basic knowledge of markdown, and then simply configure it to build a website. Of course, it would be better if you could do both). The configuration of documents refers to the vue-based document generator - [vuepress](https://vuepress.vuejs.org/config/).
 
 ## Features
 
