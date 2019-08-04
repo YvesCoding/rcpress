@@ -49,5 +49,5 @@ npm start
 #### Visit the default address `localhost:8000` to see the effect page
 
 <p align="center">
-<img src="https://github.com/wangyi7099/pictureCdn/blob/master/allPic/antdsite/screenshot.png?raw=true" width="700" />
+<img src="/screenshot.png" width="700" />
 </p>

@@ -4,13 +4,13 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'AntdSite',
-      description: 'A static docs generator based on Ant Design and GatsbyJs'
+      description: 'A static docs generator based on Ant Design and GatsbyJs',
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'AntdSite',
-      description: '一个基于Ant Design 和 GatsbyJs 的静态文档生成器'
-    }
+      description: '一个基于Ant Design 和 GatsbyJs 的静态文档生成器',
+    },
   },
   logo: '/favicon.png',
   head: [['link', { rel: 'icon', href: `/favicon.png` }]],
@@ -26,27 +26,27 @@ module.exports = {
         nav: [
           {
             text: 'Guide',
-            link: '/guide/'
+            link: '/guide/',
           },
           {
             text: 'Config',
-            link: '/config/'
+            link: '/config/',
           },
           {
             text: 'Default Theme Config',
-            link: '/default-theme-config/'
+            link: '/default-theme-config/',
           },
           {
             text: 'GitHub',
             link: 'https://github.com/YvesCoding/antdsite',
-            important: true
-          }
+            important: true,
+          },
         ],
         sidebar: {
           '/guide/': getGuideSidebar(),
           '/config/': [''],
-          '/default-theme-config/': ['']
-        }
+          '/default-theme-config/': [''],
+        },
       },
       '/zh': {
         label: '简体中文',
@@ -56,30 +56,30 @@ module.exports = {
         nav: [
           {
             text: '指南',
-            link: '/zh/guide/'
+            link: '/zh/guide/',
           },
           {
             text: '配置',
-            link: '/zh/config/'
+            link: '/zh/config/',
           },
           {
             text: '默认主题配置',
-            link: '/zh/default-theme-config/'
+            link: '/zh/default-theme-config/',
           },
           {
             text: 'GitHub',
             link: 'https://github.com/YvesCoding/antdsite',
-            important: true
-          }
+            important: true,
+          },
         ],
         sidebar: {
           '/zh/guide/': getGuideSidebar('开始上手'),
           '/zh/config/': [''],
-          '/zh/default-theme-config/': ['']
-        }
-      }
-    }
-  }
+          '/zh/default-theme-config/': [''],
+        },
+      },
+    },
+  },
 };
 
 function getGuideSidebar(start = 'Get Started') {
@@ -87,11 +87,12 @@ function getGuideSidebar(start = 'Get Started') {
     {
       title: start,
       collapsable: false,
-      children: ['introduction', 'getting-started']
+      children: ['introduction', 'getting-started'],
     },
     'configuration',
     'theme',
     'usejsx',
-    'i18n'
+    'i18n',
+    'cli',
   ];
 }
