@@ -10,8 +10,6 @@
   "dependencies": {
     "antdsite": "^0.0.12",
     "gatsby": "^2.13.39",
-    "gatsby-plugin-manifest": "^2.2.4",
-    "gatsby-plugin-offline": "^2.2.4",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },
