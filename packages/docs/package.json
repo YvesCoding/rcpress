@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "private": true,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "build": "yarn clean && gatsby build",
     "start": "yarn clean && gatsby develop",
@@ -10,9 +10,9 @@
   "dependencies": {
     "antdsite": "^0.0.14",
     "gatsby": "^2.13.39",
+    "gatsby-plugin-netlify": "^2.0.0",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "gatsby-plugin-netlify": "^2.0.0"
+    "react-dom": "^16.8.0"
   },
   "keywords": [],
   "author": "",
