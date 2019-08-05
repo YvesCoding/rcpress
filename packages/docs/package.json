@@ -8,7 +8,7 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "antdsite": "^0.0.14",
+    "antdsite": "^0.1.0",
     "gatsby": "^2.13.39",
     "gatsby-plugin-netlify": "^2.0.0",
     "react": "^16.8.0",
