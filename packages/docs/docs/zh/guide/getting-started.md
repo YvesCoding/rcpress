@@ -43,10 +43,6 @@ npm start
 ## 效果图
 
 <p align="center">
-<img src="https://github.com/wangyi7099/pictureCdn/blob/master/allPic/antdsite/screenshot.png?raw=true" width="700" />
-</p>
-
-<p align="center">
 <img src="/screenshot.png" width="700" />
 </p>
 

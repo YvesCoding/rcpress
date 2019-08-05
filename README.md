@@ -9,6 +9,8 @@
 <a href="https://github.com/YvesCoding/antdsite"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
 </p>
 
+English | [简体中文](./README-zh_CN.md)
+
 ## Introduction
 
 AntdSite is a website generator based on [Ant Design](https://ant.design), driven by [Gatsby Js](https://www.gatsbyjs.org/)(You can totally ignore these two technologies, just know the basic knowledge of markdown, and then simply configure it to build a website. Of course, it would be better if you could do both). The configuration of documents refers to the vue-based document generator - [vuepress](https://vuepress.vuejs.org/config/).
@@ -22,17 +24,35 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
 
 ## Quick Start
 
+Install command line tool `antdsite-cli`
+
 ```bash
 
 yarn global add antdsite-cli
 
-# OR
+# or if you use npm
 
 npm i antdsite-cli -g
 
+```
 
+Initialize project via `antdsite-cli`
+
+```bash
 antdsite my-docs
 ```
+
+Visit `8000` port and that's all.
+
+## Screenshots
+
+<p align="center">
+<img src="https://antdsite.yvescoding.org/screenshot.png" width="700" />
+</p>
+
+<p align="center">
+<img src="https://antdsite.yvescoding.org/screenshot.png" width="700" />
+</p>
 
 ## Documentation
 
