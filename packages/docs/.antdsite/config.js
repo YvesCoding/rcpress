@@ -69,6 +69,11 @@ module.exports = {
             link: '/zh/default-theme-config/'
           },
           {
+            text: 'Gitee',
+            link: 'https://gitee.com/wangyi_7099/AntdSite',
+            important: true
+          },
+          {
             text: 'GitHub',
             link: 'https://github.com/YvesCoding/antdsite',
             important: true
