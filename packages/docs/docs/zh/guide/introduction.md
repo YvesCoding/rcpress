@@ -20,7 +20,8 @@ AntdSite 是一个基于[Ant Design](https://ant.design)，由[GatsbyJs](https:/
 
 - 上手简单，只需要 markdown 和一点 js 知识就能上手。
 - 功能强大，可以在 markdown 里写 react 组件，具体可以参考[mdx](https://github.com/mdx-js/mdx)。
-- 可以直接使用 [Ant Design 众多组件](https://ant.design/components/button-cn/)，满足日常开发需求。
+- 可以直接在 markdown 中使用 [Ant Design 众多组件](https://ant.design/components/button-cn/)，满足日常开发需求。
+- 可以定制[主题颜色](../default-theme-config#定制主题颜色)。
 
 ## 技术栈
 

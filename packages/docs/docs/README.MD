@@ -10,8 +10,6 @@ features:
     details: Document design comes from <a target="_blank" href="https://ant.design/">Ant Design</a> website, which not only has a beautiful interface, but also can directly use all Ant Design components.
   - title: Powerful
     details: Thanks to <a target="_blank" href= "https://github.com/mdx-js/mdx">mdx</a>, we can use JSX in markdown.
-
-footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
 # Get Started

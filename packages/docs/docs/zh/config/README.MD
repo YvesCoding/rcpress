@@ -63,6 +63,23 @@ module.exports = {
 };
 ```
 
+### footer
+
+- 类型: `string`
+- 默认值: `null`
+
+设置网站的足部。如果不设置则不显示足部。
+
+```js
+// .antdsite/config.js
+module.exports = {
+  themeConfig: {
+    footer:
+      'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>'
+  }
+};
+```
+
 ## 主题
 
 ### themeConfig

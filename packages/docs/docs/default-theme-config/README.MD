@@ -21,8 +21,6 @@ features:
     details: Document design comes from <a target="_blank" href="https://ant.design/">Ant Design</a> website, which not only has a beautiful interface, but also can directly use all Ant Design components.
   - title: Powerful
     details: Thanks to <a target="_blank" href= "https://github.com/mdx-js/mdx">mdx</a>, we can use JSX in markdown.
-
-footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
 ```
@@ -46,9 +44,9 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', important: true }, // There will be red dots on the right of the label.
       { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' },
-    ],
-  },
+      { text: 'External', link: 'https://google.com' }
+    ]
+  }
 };
 ```
 
@@ -62,11 +60,11 @@ module.exports = {
         text: 'Languages',
         items: [
           { text: 'Chinese', link: '/language/chinese' },
-          { text: 'Japanese', link: '/language/japanese' },
-        ],
-      },
-    ],
-  },
+          { text: 'Japanese', link: '/language/japanese' }
+        ]
+      }
+    ]
+  }
 };
 ```
 
@@ -78,8 +76,8 @@ To enable the sidebar, use `themeConfig.sidebar`. The basic configuration expect
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
-    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']],
-  },
+    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
+  }
 };
 ```
 
@@ -97,7 +95,7 @@ module.exports = {
       {
         title: 'Group 1',
         collapsable: false,
-        children: ['/'],
+        children: ['/']
       },
       {
         title: 'Group 2',
@@ -106,12 +104,12 @@ module.exports = {
             title: 'Group 3', // Max to level 2 group
             children: [
               /* ... */
-            ],
-          },
-        ],
-      },
-    ],
-  },
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 ```
 
@@ -145,9 +143,9 @@ module.exports = {
     sidebar: {
       '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
 
-      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */],
-    },
-  },
+      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */]
+    }
+  }
 };
 ```
 
@@ -177,10 +175,10 @@ module.exports = {
     sidebar: {
       '/foo/': [
         'one' /* /foo/one.html or /foo will be redirect to /foo/one */,
-        'two' /* /foo/two.html */,
-      ],
-    },
-  },
+        'two' /* /foo/two.html */
+      ]
+    }
+  }
 };
 ```
 
@@ -206,8 +204,8 @@ You can disable the built-in search box with `themeConfig.search: false`, and cu
 module.exports = {
   themeConfig: {
     search: false,
-    searchMaxSuggestions: 10,
-  },
+    searchMaxSuggestions: 10
+  }
 };
 ```
 
@@ -218,8 +216,8 @@ The `themeConfig.lastUpdated` option allows you to get the UNIX timestamp(ms) of
 ```js
 module.exports = {
   themeConfig: {
-    lastUpdated: 'Last Updated', // string | boolean
-  },
+    lastUpdated: 'Last Updated' // string | boolean
+  }
 };
 ```
 
@@ -240,8 +238,8 @@ module.exports = {
     docsBranch: 'master', // The git branch of document
     editLinks: true, // // defaults to false, set to true to enable
     editLinkText: 'Help us improve this page!', // custom text for edit link. Defaults to "Edit this page"
-    showAvatarList: true, // Whether to display a list of users who edited this page, set it to false to disable
-  },
+    showAvatarList: true // Whether to display a list of users who edited this page, set it to false to disable
+  }
 };
 ```
 
@@ -251,7 +249,23 @@ module.exports = {
 module.exports = {
   themeConfig: {
     // Whether to enable back to top
-    showBackToTop: true,
-  },
+    showBackToTop: true
+  }
 };
 ```
+
+## Cutom Theme Color
+
+You can change theme color by setting `themeConfig.themeColors`
+
+```js
+module.exports = {
+  themeConfig: {
+    themeColors: {
+      'primary-color': 'red'
+    }
+  }
+};
+```
+
+The value of `themeConfig.themeColors` is assigned to `modifyVars` of `less-loader`. For details, please refer to: [Ant Design - Customize in webpack](https://ant.design/docs/react/customize-theme#Customize-in-webpack)

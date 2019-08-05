@@ -21,8 +21,6 @@ features:
     details: 文档的设计来源于<a target="_blank" href="https://ant.design/docs/react/introduce-cn">Ant Design</a>网站，不仅界面美观，还能直接使用所有的Ant Design 组件。
   - title: 功能强大
     details: 得益于<a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a>，我们可以在markdown里使用JSX。
-
-footer: MIT Licensed | Copyright © 2018-present Yi(Yves) Wang
 ---
 
 ```
@@ -46,9 +44,9 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/', important: true }, // 标签右上会有红点显示
       { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' },
-    ],
-  },
+      { text: 'External', link: 'https://google.com' }
+    ]
+  }
 };
 ```
 
@@ -62,11 +60,11 @@ module.exports = {
         text: 'Languages',
         items: [
           { text: 'Chinese', link: '/language/chinese' },
-          { text: 'Japanese', link: '/language/japanese' },
-        ],
-      },
-    ],
-  },
+          { text: 'Japanese', link: '/language/japanese' }
+        ]
+      }
+    ]
+  }
 };
 ```
 
@@ -78,8 +76,8 @@ module.exports = {
 // .antdsite/config.js
 module.exports = {
   themeConfig: {
-    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']],
-  },
+    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
+  }
 };
 ```
 
@@ -97,7 +95,7 @@ module.exports = {
       {
         title: 'Group 1',
         collapsable: false,
-        children: ['/'],
+        children: ['/']
       },
       {
         title: 'Group 2',
@@ -106,12 +104,12 @@ module.exports = {
             title: 'Group 3', // 最多两层分组
             children: [
               /* ... */
-            ],
-          },
-        ],
-      },
-    ],
-  },
+            ]
+          }
+        ]
+      }
+    ]
+  }
 };
 ```
 
@@ -145,9 +143,9 @@ module.exports = {
     sidebar: {
       '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
 
-      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */],
-    },
-  },
+      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */]
+    }
+  }
 };
 ```
 
@@ -177,10 +175,10 @@ module.exports = {
     sidebar: {
       '/foo/': [
         'one' /* /foo/one.html 或者 /foo 将会被重定向到 /foo/one */,
-        'two' /* /foo/two.html */,
-      ],
-    },
-  },
+        'two' /* /foo/two.html */
+      ]
+    }
+  }
 };
 ```
 
@@ -206,8 +204,8 @@ maxTocDeep: 4
 module.exports = {
   themeConfig: {
     search: false,
-    searchMaxSuggestions: 10,
-  },
+    searchMaxSuggestions: 10
+  }
 };
 ```
 
@@ -218,8 +216,8 @@ module.exports = {
 ```js
 module.exports = {
   themeConfig: {
-    lastUpdated: 'Last Updated', // string | boolean
-  },
+    lastUpdated: 'Last Updated' // string | boolean
+  }
 };
 ```
 
@@ -240,8 +238,8 @@ module.exports = {
     docsBranch: 'master', // 文档所在git分支
     editLinks: true, // 默认是 false, 设置为 true 来启用
     editLinkText: '帮助我们改善此页面！', // 默认为 "Edit this page"
-    showAvatarList: true, // 是否显示编辑过此页面的用户用户列表, 设置为false关闭
-  },
+    showAvatarList: true // 是否显示编辑过此页面的用户用户列表, 设置为false关闭
+  }
 };
 ```
 
@@ -251,7 +249,23 @@ module.exports = {
 module.exports = {
   themeConfig: {
     // 是否启用回到顶部按钮
-    showBackToTop: true,
-  },
+    showBackToTop: true
+  }
 };
 ```
+
+## 定制主题颜色
+
+你可以通过设置`themeConfig.themeColors`来变更主题的颜色。
+
+```js
+module.exports = {
+  themeConfig: {
+    themeColors: {
+      'primary-color': 'red'
+    }
+  }
+};
+```
+
+`themeConfig.themeColors`的值会赋给`less-loader`的`modifyVars`。 具体请参考[Ant Design - 在 webpack 中定制主题](https://ant.design/docs/react/customize-theme-cn#%E5%9C%A8-webpack-%E4%B8%AD%E5%AE%9A%E5%88%B6%E4%B8%BB%E9%A2%98)
