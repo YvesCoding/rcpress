@@ -9,6 +9,8 @@
 <a href="https://github.com/YvesCoding/antdsite"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
 </p>
 
+[English](./README.md) | 简体中文
+
 ## 简介
 
 AntdSite 是一个基于[Ant Design](https://ant.design)，由[GatsbyJs](https://www.gatsbyjs.org/)驱动的一个网站生成器 (你可以完全不会这两项技术，只需要会 markdown 的基础知识，然后简单配置，就能搭建一个网站。当然，如果你会这两项技术那更好)。文档的配置参考了基于 vue 的文档生成器 - [vuepress](https://vuepress.vuejs.org/config/)。
