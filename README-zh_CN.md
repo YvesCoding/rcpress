@@ -22,6 +22,10 @@ AntdSite 是一个基于[Ant Design](https://ant.design)，由[GatsbyJs](https:/
 - 可以直接在 markdown 中使用 [Ant Design 众多组件](https://ant.design/components/button-cn/)，满足日常开发需求。
 - 可以定制[主题颜色](https://antdsite.yvescoding.org/zh/default-theme-config/#%E5%AE%9A%E5%88%B6%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2)。
 
+## 文档
+
+获取详细文档，推荐访问官网的[开始上手](https://antdsite.yvescoding.org/guide/getting-started)一节。
+
 ## 快速开始
 
 下载命令行工具 `antdsite-cli`
@@ -42,10 +46,6 @@ antdsite my-docs
 ```
 
 访问 `8000` 端口即可
-
-## 文档
-
-获取详细文档，推荐访问官网的[开始上手](https://antdsite.yvescoding.org/guide/getting-started)一节。
 
 ## 截图
 

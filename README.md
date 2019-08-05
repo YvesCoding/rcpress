@@ -22,6 +22,10 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
 - You can directly [use all components](https://antdsite.yvescoding.org/guide/usejsx) of [Ant Design](https://ant.design/components/button/) in markdown to meet daily development needs.
 - [Custom theme color](https://antdsite.yvescoding.org/default-theme-config/#cutom-theme-color) supported
 
+## Documentation
+
+For detailed docs, recommend to view [Guide](https://antdsite.yvescoding.org/guide/getting-started) section on the website.
+
 ## Quick Start
 
 Install command line tool `antdsite-cli`
@@ -53,10 +57,6 @@ Visit `8000` port and that's all.
 <p align="center">
 <img src="https://antdsite.yvescoding.org/screenshot-1.png" width="700" />
 </p>
-
-## Documentation
-
-For detailed docs, recommend to view [Guide](https://antdsite.yvescoding.org/guide/getting-started) section on the website.
 
 ## Communication
 
