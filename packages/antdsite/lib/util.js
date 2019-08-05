@@ -117,9 +117,35 @@ module.exports.resolveLayouts = function(actions) {
     actions.setWebpackConfig({
       resolve: {
         alias: {
-          [`antdsite-${layout}`]: layoutPath,
-        },
-      },
+          [`antdsite-${layout}`]: layoutPath
+        }
+      }
     });
   });
+};
+
+module.exports.setThemeColors = function(actions) {
+  const config = module.exports.getFinalConfig();
+  const { themeColors } = config.themeConfig;
+
+  if (themeColors) {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /\.less$/,
+            use: [
+              {
+                loader: 'less-loader', // compiles Less to CSS
+                options: {
+                  modifyVars: themeColors,
+                  javascriptEnabled: true
+                }
+              }
+            ]
+          }
+        ]
+      }
+    });
+  }
 };

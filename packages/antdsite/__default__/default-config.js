@@ -7,6 +7,7 @@ module.exports = {
   lang: 'en-US',
   head: [],
   themeConfig: {
+    themeColors: null,
     repo: null,
     docsRepo: null,
     docsDir: 'docs',
@@ -20,6 +21,6 @@ module.exports = {
     showBackToTop: true,
     maxTocDeep: 3,
     search: true,
-    searchMaxSuggestions: 10,
-  },
+    searchMaxSuggestions: 10
+  }
 };
