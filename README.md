@@ -51,7 +51,7 @@ Visit `8000` port and that's all.
 </p>
 
 <p align="center">
-<img src="https://antdsite.yvescoding.org/screenshot.png" width="700" />
+<img src="https://antdsite.yvescoding.org/screenshot-1.png" width="700" />
 </p>
 
 ## Documentation
