@@ -8,7 +8,7 @@ Install via [yarn](https://yarnpkg.com) `antdsite-cli`
 yarn global add antdsite-cli
 ```
 
-or via [npm](https://docs.npmjs.com/cli/install.html) 安装
+or install via [npm](https://docs.npmjs.com/cli/install.html)
 
 ```bash
 npm install antdsite-cli -g
