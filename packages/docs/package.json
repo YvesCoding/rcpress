@@ -8,10 +8,11 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "antdsite": "latest",
+    "antdsite": "^0.0.14",
     "gatsby": "^2.13.39",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": "^16.8.0",
+    "gatsby-plugin-netlify": "^2.0.0"
   },
   "keywords": [],
   "author": "",
