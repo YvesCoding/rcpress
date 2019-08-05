@@ -3,9 +3,10 @@
   "scripts": {
     "clean": "lerna clean && rm -rf node_modules",
     "bs": "lerna bootstrap",
-    "publish": "lerna publish",
+    "publish": "lerna publish --conventional-commits",
     "build": "yarn build:docs",
-    "build:docs": "yarn workspace docs build"
+    "build:docs": "yarn workspace docs build",
+    "cl": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "workspaces": [
     "packages/antdsite",
@@ -13,6 +14,7 @@
     "packages/docs"
   ],
   "devDependencies": {
-    "lerna": "^3.11.1"
+    "lerna": "^3.11.1",
+    "conventional-changelog-cli": "2.0.23"
   }
 }

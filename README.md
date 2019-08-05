@@ -17,8 +17,8 @@ AntdSite is a website generator based on [Ant Design](https://ant.design), drive
 
 - It's easy to get started, you just need to know markdown and a little bit about JS.
 - Powerful, you can write react components in markdown, referring to [mdx](https://github.com/mdx-js/mdx).
-- You can directly use all components of [Ant Design](https://ant.design/components/button/) in markdown to meet daily development needs.
-- `Custom theme color` supported
+- You can directly [use all components](https://antdsite.yvescoding.org/guide/usejsx) of [Ant Design](https://ant.design/components/button/) in markdown to meet daily development needs.
+- [Custom theme color](https://antdsite.yvescoding.org/default-theme-config/#cutom-theme-color) supported
 
 ## Quick Start
 

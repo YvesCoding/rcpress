@@ -63,6 +63,23 @@ module.exports = {
 };
 ```
 
+### footer
+
+- Type: `string`
+- Default: `null`
+
+Set website footer. Footer will not display if it isn't set any value.
+
+```js
+// .antdsite/config.js
+module.exports = {
+  themeConfig: {
+    footer:
+      'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>'
+  }
+};
+```
+
 ## Theming
 
 ### themeConfig
