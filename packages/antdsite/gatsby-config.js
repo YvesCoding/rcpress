@@ -14,41 +14,41 @@ module.exports = {
       options: {
         extensions: ['.md', '.mdx', '.MD'],
         gatsbyRemarkPlugins: [
+          'gatsby-remark-external-links',
           {
-            resolve: getPlugin('gatsby-remark-header-custom-ids'),
+            resolve: getPlugin('gatsby-remark-header-custom-ids')
           },
           {
-            resolve: getPlugin('gatsby-remark-img-warpper-p'),
+            resolve: getPlugin('gatsby-remark-img-warpper-p')
           },
           {
-            resolve: getPlugin('remark-default-class-name'),
+            resolve: getPlugin('remark-default-class-name')
           },
-          'gatsby-remark-prismjs',
-        ],
-      },
+          'gatsby-remark-prismjs'
+        ]
+      }
     },
     {
       resolve: 'gatsby-plugin-less',
       options: {
-        javascriptEnabled: true,
-      },
+        javascriptEnabled: true
+      }
     },
     `gatsby-plugin-typescript`,
     {
       resolve: 'gatsby-plugin-antd',
       options: {
-        style: true,
-      },
+        style: true
+      }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: finalConfig.themeConfig.docsDir,
-        path: path.resolve(finalConfig.themeConfig.docsDir),
-      },
+        path: path.resolve(finalConfig.themeConfig.docsDir)
+      }
     },
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-catch-links`,
-  ],
+    `gatsby-plugin-catch-links`
+  ]
 };
