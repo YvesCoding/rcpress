@@ -1,24 +1,19 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 class Footer extends React.Component<{
-  data: {
-    mdx: {
-      frontmatter: any;
-    };
-  };
+  footeText: string;
 }> {
   render() {
-    const {
-      data: {
-        mdx: {
-          frontmatter: { footer },
-        },
-      },
-    } = this.props;
+    const { footeText } = this.props;
 
-    return footer ? (
+    return footeText ? (
       <footer id="footer">
-        <div className="bottom-bar">{footer}</div>
+        <div
+          className="bottom-bar"
+          dangerouslySetInnerHTML={{
+            __html: footeText
+          }}
+        ></div>
       </footer>
     ) : null;
   }

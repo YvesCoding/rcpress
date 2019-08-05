@@ -28,6 +28,7 @@ function getActiveMenuItem(slug: string, currentPageSidebarItems: PageInfo[]): P
 
 export interface MainContentProps {
   isMobile: boolean;
+  footer: any;
 }
 
 interface MainContentState {
@@ -42,13 +43,13 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
   constructor(props: MainContentProps) {
     super(props);
     this.state = {
-      openKeys: [],
+      openKeys: []
     };
   }
 
   componentDidMount() {
     this.setState({
-      openKeys: (this.getSideBarOpenKeys() || []) as Array<string>,
+      openKeys: (this.getSideBarOpenKeys() || []) as Array<string>
     });
   }
 
@@ -56,13 +57,13 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     const openKeys = this.getSideBarOpenKeys() as Array<string>;
     if (openKeys) {
       this.setState({
-        openKeys,
+        openKeys
       });
     }
   }
   handleMenuOpenChange = (openKeys: string[]) => {
     this.setState({
-      openKeys,
+      openKeys
     });
   };
   getSideBarOpenKeys() {
@@ -80,7 +81,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
       <span key="english">{item.title}</span>,
       <span className="chinese" key="chinese">
         {item.subtitle}
-      </span>,
+      </span>
     ];
 
     const disabled = item.disabled;
@@ -175,7 +176,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     }
     return {
       prev: list[index - 1],
-      next: list[index + 1],
+      next: list[index + 1]
     };
   };
 
@@ -184,7 +185,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
   };
 
   render() {
-    const { isMobile } = this.props;
+    const { isMobile, footer } = this.props;
 
     const activeMenuItem = getActiveMenuItem(
       this.context.slug,
@@ -228,6 +229,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
               </Col>
             )
           ) : null}
+
           <Col
             xxl={getContentWidth(20)}
             xl={getContentWidth(19)}
@@ -242,11 +244,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
                 currentPageTitle={getPageTitle(this.context.currentPageInfo)}
               />
             </div>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col lg={{ span: 20, offset: 4 }} md={24} sm={24} xs={24}>
             <section className="prev-next-nav">
               {prev ? (
                 <div className="prev-page">
@@ -261,6 +258,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
                 </div>
               ) : null}
             </section>
+            {footer}
           </Col>
         </Row>
       </div>

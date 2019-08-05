@@ -7,6 +7,7 @@ import { BackTop } from 'antd';
 import { IAllMdxData, IMdxData } from '../../templates';
 import MainContent from 'antdsite-main-content';
 import HomePage from 'antdsite-home';
+import { PageContext } from 'antdsite';
 
 export interface LayoutProps {
   pageContext: {
@@ -24,6 +25,8 @@ export interface LayoutProps {
 interface LayoutState {}
 
 export default class Layout extends React.Component<LayoutProps, LayoutState> {
+  static contextType = PageContext;
+
   constructor(props: LayoutProps) {
     super(props);
   }
@@ -31,10 +34,12 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
   preSlug: String;
 
   render() {
-    const { children, pageContext, ...restProps } = this.props;
-    const { webConfig, slug, isWebsiteHome } = pageContext;
-    const { locales } = webConfig;
+    const { currentLocaleWebConfig: webConfig, slug, isWebsiteHome } = this.context;
+
     const { showBackToTop } = webConfig.themeConfig;
+    const { locales, footer: footerText } = webConfig;
+
+    const footer = <Footer footeText={footerText} ref="footer" />;
 
     return (
       <div
@@ -42,12 +47,16 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
           (locales && Object.keys(locales).includes(slug))) &&
           'index-page-wrapper'}`}
       >
-        <Header {...restProps} ref="header" />
+        <Header {...this.props} ref="header" />
         <div ref="content">
-          {isWebsiteHome ? <HomePage {...restProps} /> : <MainContent {...restProps} />}
+          {isWebsiteHome ? (
+            <HomePage {...this.props} />
+          ) : (
+            <MainContent {...this.props} footer={footer} />
+          )}
         </div>
 
-        <Footer {...restProps} ref="footer" />
+        {isWebsiteHome ? footer : null}
         {showBackToTop ? <BackTop /> : null}
       </div>
     );
@@ -55,7 +64,7 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
 
   componentDidMount() {
     this.ajustContentHeight();
-    this.chekScrollPosition(this.props.pageContext.slug);
+    this.chekScrollPosition(this.context.slug);
     window.addEventListener('resize', this.ajustContentHeight);
   }
 
@@ -64,7 +73,7 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
   }
 
   componentDidUpdate() {
-    this.chekScrollPosition(this.props.pageContext.slug);
+    this.chekScrollPosition(this.context.slug);
     this.ajustContentHeight();
   }
 

@@ -1,23 +1,24 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
+import { PageContext } from 'antdsite';
 
-class Page1 extends React.PureComponent {
+class Features extends React.PureComponent {
+  static contextType = PageContext;
+
   constructor(props) {
     super(props);
     this.state = {
-      hoverNum: null,
+      hoverNum: null
     };
   }
 
   render() {
     const {
-      data: {
-        mdx: {
-          frontmatter: { features },
-        },
-      },
-    } = this.props;
+      currentPageInfo: {
+        frontmatter: { features }
+      }
+    } = this.context;
     let children = [];
 
     features &&
@@ -27,12 +28,12 @@ class Page1 extends React.PureComponent {
             <div className="page1-box">
               <h2
                 dangerouslySetInnerHTML={{
-                  __html: item.title,
+                  __html: item.title
                 }}
               ></h2>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: item.details,
+                  __html: item.details
                 }}
               ></p>
             </div>
@@ -62,4 +63,4 @@ class Page1 extends React.PureComponent {
   }
 }
 
-export default Page1;
+export default Features;

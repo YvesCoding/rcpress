@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import { PageContext } from './PageContext';
 import {
   getcurrentLocaleConfigBySlug,
-  resolveSidebarItems,
+  resolveSidebarItems
 } from '../default-theme/components/utils';
 import Layout from 'antdsite-layout';
 import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
@@ -103,13 +103,13 @@ export default function Template(props: {
           currentPageInfo: props.data.mdx,
           currentPageContent: (compProps: any) => {
             return <MDXRenderer {...compProps}>{body}</MDXRenderer>;
-          },
+          }
         }}
       >
         <Media query="(max-width: 996px)">
           {isMobile => {
             const isNode = typeof window === `undefined`;
-            return <Layout {...props} isMobile={isMobile && !isNode} />;
+            return <Layout isMobile={isMobile && !isNode} />;
           }}
         </Media>
       </PageContext.Provider>
@@ -156,7 +156,6 @@ export const pageQuery = graphql`
         actionText
         actionLink
         showStar
-        footer
         features {
           details
           title

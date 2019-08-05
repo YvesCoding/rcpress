@@ -18,7 +18,6 @@ module.exports = ({ actions }) => {
       actionText: String
       actionLink: String
       showStar: Boolean
-      footer: String
       features: [HomeFeature]
       maxTocDeep: Int
       editLink: String

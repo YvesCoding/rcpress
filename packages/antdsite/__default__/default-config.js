@@ -6,6 +6,7 @@ module.exports = {
   description: '',
   lang: 'en-US',
   head: [],
+  footer: null,
   themeConfig: {
     themeColors: null,
     repo: null,
