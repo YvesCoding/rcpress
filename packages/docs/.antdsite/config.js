@@ -4,12 +4,12 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'AntdSite',
-      description: 'A static docs generator based on Ant Design and GatsbyJs'
+      description: 'Build your documentation with Ant Design'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'AntdSite',
-      description: '一个基于Ant Design 和 GatsbyJs 的静态文档生成器'
+      description: '使用Ant Design来生成你的文档'
     }
   },
   logo: '/favicon.png',
