@@ -6,7 +6,7 @@ class Footer extends React.Component<{
   render() {
     const { footeText } = this.props;
 
-    return footeText ? (
+    return (
       <footer id="footer">
         <div
           className="bottom-bar"
@@ -15,7 +15,7 @@ class Footer extends React.Component<{
           }}
         ></div>
       </footer>
-    ) : null;
+    );
   }
 }
 

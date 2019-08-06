@@ -8,4 +8,5 @@ export const PageContext = React.createContext({
   allPagesSidebarItems: {},
   currentPageInfo: {},
   currentPageContent: {},
+  isWebsiteHome: false
 });

@@ -1,24 +1,12 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import '../assets/style';
 import Header from 'antdsite-header';
 import Footer from 'antdsite-footer';
 import { BackTop } from 'antd';
-import { IAllMdxData, IMdxData } from '../../templates';
 import MainContent from 'antdsite-main-content';
-import HomePage from 'antdsite-home';
 import { PageContext } from 'antdsite';
 
 export interface LayoutProps {
-  pageContext: {
-    webConfig: any;
-    slug: string;
-    isWebsiteHome: boolean;
-  };
-  data: {
-    mdx: IMdxData;
-    allMdx: IAllMdxData;
-  };
   isMobile: boolean;
 }
 
@@ -35,11 +23,10 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
 
   render() {
     const { currentLocaleWebConfig: webConfig, slug, isWebsiteHome } = this.context;
-
     const { showBackToTop } = webConfig.themeConfig;
     const { locales, footer: footerText } = webConfig;
 
-    const footer = <Footer footeText={footerText} ref="footer" />;
+    const footer = footerText ? <Footer footeText={footerText} ref="footer" /> : null;
 
     return (
       <div
@@ -47,48 +34,20 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
           (locales && Object.keys(locales).includes(slug))) &&
           'index-page-wrapper'}`}
       >
-        <Header {...this.props} ref="header" />
-        <div ref="content">
-          {isWebsiteHome ? (
-            <HomePage {...this.props} />
-          ) : (
-            <MainContent {...this.props} footer={footer} />
-          )}
-        </div>
-
-        {isWebsiteHome ? footer : null}
+        <Header {...this.props} />
+        <MainContent {...this.props} isWebsiteHome={isWebsiteHome} footer={footer} />
         {showBackToTop ? <BackTop /> : null}
       </div>
     );
   }
 
   componentDidMount() {
-    this.ajustContentHeight();
     this.chekScrollPosition(this.context.slug);
-    window.addEventListener('resize', this.ajustContentHeight);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.ajustContentHeight);
   }
 
   componentDidUpdate() {
     this.chekScrollPosition(this.context.slug);
-    this.ajustContentHeight();
   }
-
-  ajustContentHeight = () => {
-    const contentDom = ReactDom.findDOMNode(this.refs.content) as HTMLDivElement;
-    const header = ReactDom.findDOMNode(this.refs.header) as HTMLDivElement;
-    const footer = ReactDom.findDOMNode(this.refs.footer) as HTMLDivElement;
-    if (!contentDom) return;
-
-    contentDom.style.minHeight =
-      window.innerHeight -
-      (header ? header.offsetHeight : 0) -
-      (footer ? footer.offsetHeight : 0) +
-      'px';
-  };
 
   chekScrollPosition(slug?: string) {
     if (!window.location.hash && slug && slug !== this.preSlug) {

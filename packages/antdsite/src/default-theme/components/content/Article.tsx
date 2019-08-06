@@ -6,14 +6,11 @@ import moment from 'moment';
 import AvatarList from './AvatarList';
 import { PageContext } from 'antdsite';
 import SEO from '../SEO/SEO';
+import { getPageTitle } from '../utils';
 
 const Link = Anchor.Link;
 
-interface ArticleProps {
-  currentPageTitle: string;
-}
-
-export default class Article extends React.PureComponent<ArticleProps> {
+export default class Article extends React.PureComponent {
   static contextType = PageContext;
 
   node: HTMLElement | null | undefined;
@@ -31,8 +28,6 @@ export default class Article extends React.PureComponent<ArticleProps> {
   };
 
   render() {
-    const props = this.props;
-    const { currentPageTitle } = props;
     const {
       currentPageInfo,
       currentPageContent,
@@ -49,9 +44,9 @@ export default class Article extends React.PureComponent<ArticleProps> {
           docsRepo,
           docsBranch,
           showAvatarList,
-          editLink,
-        },
-      },
+          editLink
+        }
+      }
     } = this.context;
 
     const { subtitle } = currentPageInfo.frontmatter;
@@ -59,6 +54,7 @@ export default class Article extends React.PureComponent<ArticleProps> {
     const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
     const editPath = this.getEditLink(editLink, docsRepo || repo, docsBranch, path);
 
+    const currentPageTitle = getPageTitle(currentPageInfo);
     return (
       <>
         <SEO
