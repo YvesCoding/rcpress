@@ -227,6 +227,7 @@ function createApp(name = './', useNpm, eject, isForce) {
   title: '${appName}',
   description: 'My first antdsite app',
   logo: '/favicon.png',
+  footer:'MIT Licensed | Copyright © 2019-present Yi(Yves) Wang',
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
   themeConfig: {
     nav: [
