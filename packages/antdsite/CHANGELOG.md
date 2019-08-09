@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/YvesCoding/antdsite/compare/antdsite@0.1.2...antdsite@0.1.3) (2019-08-09)
+
+
+### Bug Fixes
+
+* **antdsite:** fix incorrect path when base is set. ([e85e09a](https://github.com/YvesCoding/antdsite/commit/e85e09a))
+
+
+
+
+
+
 ## [0.1.2](https://github.com/YvesCoding/antdsite/compare/antdsite@0.1.1...antdsite@0.1.2) (2019-08-07)
 
 
