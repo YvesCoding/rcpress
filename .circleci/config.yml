@@ -38,7 +38,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: yarn build
+      - run: yarn build-with-prefix
       - persist_to_workspace:
           root: ~/project
           paths:
