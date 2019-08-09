@@ -2,18 +2,12 @@ import { IAllMdxData, Edges, IGraphqlFrontmatterData, Toc, PageEdge } from '../.
 
 export function getCurrentLoacle(webConfig: any, slug: string) {
   const locales = webConfig.themeConfig.locales;
-  const base = webConfig.base;
-
-  function nomalizeSlug(_path: string) {
-    return (base + _path).replace(/\/\//g, '/');
-  }
-
   if (!locales) return false;
 
   let targetLocale = '/';
 
   for (let path in locales) {
-    if (path != targetLocale && slug.startsWith(nomalizeSlug(path))) {
+    if (path != targetLocale && slug.startsWith(path)) {
       targetLocale = path;
     }
   }
@@ -32,7 +26,7 @@ export function getcurrentLocaleConfigBySlug(
   if (!targetLocale) {
     return {
       localte: '/',
-      currentLocaleWebConfig: webConfig,
+      currentLocaleWebConfig: webConfig
     };
   }
 
@@ -43,9 +37,9 @@ export function getcurrentLocaleConfigBySlug(
       ...webConfig.locales[targetLocale],
       themeConfig: {
         ...webConfig.themeConfig,
-        ...webConfig.themeConfig.locales[targetLocale],
-      },
-    },
+        ...webConfig.themeConfig.locales[targetLocale]
+      }
+    }
   };
 }
 
@@ -98,11 +92,11 @@ export function resolvePage(pages: Edges, rawPath: string, base: string): PageIn
     if (normalize(node.fields.slug) === path) {
       return Object.assign(
         {
-          children: [],
+          children: []
         },
         node.frontmatter,
         {
-          title: getPageTitle(node),
+          title: getPageTitle(node)
         },
         node.fields,
         { toc: node.tableOfContents }
@@ -110,15 +104,27 @@ export function resolvePage(pages: Edges, rawPath: string, base: string): PageIn
     }
   }
 
-  console.error(`[Gatsby-Theme-AntdSite] No matching page found for sidebar item "${rawPath}"`);
+  console.error(`[AntdSite] No matching page found for sidebar item "${rawPath}"`);
   return {
     children: [],
     title: rawPath,
     slug: rawPath,
     toc: {
-      items: [],
-    },
+      items: []
+    }
   };
+}
+
+export function withBasePath(path: string, base: string) {
+  if (!base.endsWith('/')) {
+    base += '/';
+  }
+
+  if (path.startsWith('/')) {
+    path = path.slice(1);
+  }
+
+  return base + path;
 }
 
 function resolvePath(relative: string, base: string, append: string = '') {
@@ -163,6 +169,7 @@ export function resolvePathWithBase(path: string, base: string) {
   if (base.endsWith('/')) {
     base = base.slice(0, base.length - 1);
   }
+
   if (!path.startsWith('/')) {
     path = '/' + path;
   }
@@ -177,10 +184,8 @@ export interface PageInfo extends IGraphqlFrontmatterData {
   toc?: Toc;
 }
 
-function resolvePageSidebar(config: any, path: string, base: string, edges: Edges): PageInfo[] {
-  return config
-    ? config.map((item: any) => resolveItem(item, edges, resolvePathWithBase(path, base), 1))
-    : [];
+function resolvePageSidebar(config: any, path: string, edges: Edges): PageInfo[] {
+  return config ? config.map((item: any) => resolveItem(item, edges, path, 1)) : [];
 }
 
 export function resolveSidebarItems(
@@ -196,7 +201,6 @@ export function resolveSidebarItems(
   const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(webConfig, currentSlug);
 
   const pageSidebarConfig = currentLocaleWebConfig.themeConfig.sidebar;
-  const { base } = currentLocaleWebConfig;
 
   let currentPageSidebarItems: PageInfo[] = [];
   let allPagesSidebarItems: PageInfo[] = [];
@@ -204,11 +208,11 @@ export function resolveSidebarItems(
   if (!pageSidebarConfig) {
     return {
       currentPageSidebarItems,
-      allPagesSidebarItems,
+      allPagesSidebarItems
     };
   } else {
     allPagesSidebarItems = Object.keys(pageSidebarConfig).reduce((pre, cur) => {
-      const resolvedConfig = resolvePageSidebar(pageSidebarConfig[cur], cur, base, edges);
+      const resolvedConfig = resolvePageSidebar(pageSidebarConfig[cur], cur, edges);
 
       if (currentSlug.startsWith(cur)) {
         currentPageSidebarItems = resolvedConfig;
@@ -219,7 +223,7 @@ export function resolveSidebarItems(
 
     return {
       currentPageSidebarItems,
-      allPagesSidebarItems,
+      allPagesSidebarItems
     };
   }
 }
@@ -229,7 +233,7 @@ function resolveItem(item: any, pages: Edges, base: string, nestedLevel: number)
     return resolvePage(pages, item, base);
   } else if (Array.isArray(item)) {
     return Object.assign(resolvePage(pages, item[0], base), {
-      title: item[1],
+      title: item[1]
     });
   } else {
     if (nestedLevel > 2) {
@@ -242,7 +246,7 @@ function resolveItem(item: any, pages: Edges, base: string, nestedLevel: number)
     return {
       title: item.title,
       children: children.map((child: any) => resolveItem(child, pages, base, nestedLevel + 1)),
-      collapsable: item.collapsable !== false,
+      collapsable: item.collapsable !== false
     };
   }
 }

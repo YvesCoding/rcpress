@@ -8,12 +8,14 @@ import './introduction.less'
 
 AntdSite is a documentation generator based on [Ant Design](https://ant.design), driven by [Gatsby Js](https://www.gatsbyjs.org/)(You can totally ignore these two technologies, just know the basic knowledge of markdown, and then simply configure it to build a website. Of course, it would be better if you could do both). The configuration of documents refers to the vue-based document generator - [vuepress](https://vuepress.vuejs.org/config/).
 
+import ImgWidthBase from '@components/ImgWidthBase'
+
 <div class="pic-plus">
-  <img width="150" src="/antd-icon.svg" />
+  <ImgWidthBase url="antd-icon.svg" width={150} />
    <span>+</span>
-  <img width="160" src="/react-icon.svg" /> 
+  <ImgWidthBase url="react-icon.svg" width={150}/>
     <span>+</span> 
-  <img width="144" src="/gatsby-icon-144x144.png" />
+  <ImgWidthBase url="gatsby-icon-144x144.png" width={150}/>
 </div>
 
 ## Basic features

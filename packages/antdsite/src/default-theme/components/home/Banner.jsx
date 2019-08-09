@@ -3,6 +3,7 @@ import GitHubButton from 'react-github-button-fix-iebug';
 import { Button } from 'antd';
 import { Link } from 'gatsby';
 import { PageContext } from 'antdsite';
+import * as utils from '../utils';
 
 function Banner(props) {
   return (
@@ -19,7 +20,13 @@ function Banner(props) {
           <div className="banner-wrapper">
             {(frontmatter.heroImage || currentLocaleWebConfig.logo) && (
               <div className="banner-logo">
-                <img src={frontmatter.heroImage || currentLocaleWebConfig.logo} alt="Hero" />
+                <img
+                  src={utils.withBasePath(
+                    frontmatter.heroImage || currentLocaleWebConfig.logo,
+                    currentLocaleWebConfig.base
+                  )}
+                  alt="Hero"
+                />
               </div>
             )}
             <div className="banner-title-wrapper">

@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const himalaya = require('himalaya');
-var { themeConfig, base } = require('../util').getFinalConfig();
+var { themeConfig } = require('../util').getFinalConfig();
 
 // // 获取用户的头像列表
 const getAvatarList = async filename => {
@@ -15,7 +15,7 @@ const getAvatarList = async filename => {
   }/`;
   const url = `${sourcePath}${filename}/list`;
   const html = await fetch(url, {
-    timeout: 10000,
+    timeout: 10000
   }).then(res => res.text(), () => null);
   if (!html) return [];
 
@@ -31,7 +31,7 @@ const getAvatarList = async filename => {
         return {
           href,
           text,
-          src,
+          src
         };
       }
       return null;
@@ -39,10 +39,6 @@ const getAvatarList = async filename => {
     .filter(item => item && item.src);
   return data;
 };
-
-function withBase(_path) {
-  return (base + _path).replace(/\/\//g, '/');
-}
 
 function normalizeSlug(slug) {
   if (!slug.startsWith('/')) {
@@ -68,7 +64,7 @@ module.exports = exports.onCreateNode = async ({ node, actions, getNode }) => {
       createNodeField({
         node,
         name: `modifiedTime`,
-        value: mtime,
+        value: mtime
       });
 
       slug = normalizeSlug(`${relativePath.replace(/(readme)?\.mdx?/i, '')}`);
@@ -76,13 +72,13 @@ module.exports = exports.onCreateNode = async ({ node, actions, getNode }) => {
       createNodeField({
         node,
         name: 'slug',
-        value: withBase(slug),
+        value: slug
       });
 
       createNodeField({
         node,
         name: 'path',
-        value: mdFilePath,
+        value: mdFilePath
       });
 
       if (themeConfig.showAvatarList) {
@@ -90,7 +86,7 @@ module.exports = exports.onCreateNode = async ({ node, actions, getNode }) => {
         createNodeField({
           node,
           name: 'avatarList',
-          value: html,
+          value: html
         });
       }
   }

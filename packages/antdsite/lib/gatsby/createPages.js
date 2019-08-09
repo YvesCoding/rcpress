@@ -13,8 +13,7 @@ const path = require('path');
 function isHome(frontmatter, slug) {
   return (
     frontmatter.home === true &&
-    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(slug) !== -1) ||
-      slug === webConfig.base)
+    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(slug) !== -1) || slug === '/')
   );
 }
 
@@ -34,7 +33,7 @@ module.exports = async ({ graphql, actions }) => {
   createRedirect({
     fromPath: '/index.html',
     redirectInBrowser: true,
-    toPath: '/',
+    toPath: webConfig.base
   });
 
   const allMdx = await graphql(
@@ -89,8 +88,8 @@ module.exports = async ({ graphql, actions }) => {
           isWebsiteHome,
           webConfig,
           slug,
-          maxTocDeep: frontmatter.maxTocDeep || webConfig.themeConfig.maxTocDeep,
-        },
+          maxTocDeep: frontmatter.maxTocDeep || webConfig.themeConfig.maxTocDeep
+        }
       });
     };
 
@@ -102,7 +101,7 @@ module.exports = async ({ graphql, actions }) => {
     return createRedirect({
       fromPath: path,
       redirectInBrowser: true,
-      toPath: redirects[path],
+      toPath: redirects[path]
     });
   });
 };

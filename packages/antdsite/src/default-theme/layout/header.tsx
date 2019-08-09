@@ -21,7 +21,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   state: HeaderState = {
     inputValue: undefined,
     menuVisible: false,
-    menuMode: 'horizontal',
+    menuMode: 'horizontal'
   };
 
   static contextType = PageContext;
@@ -49,13 +49,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   handleShowMenu = () => {
     this.setState({
-      menuVisible: true,
+      menuVisible: true
     });
   };
 
   onMenuVisibleChange = (visible: boolean) => {
     this.setState({
-      menuVisible: visible,
+      menuVisible: visible
     });
   };
 
@@ -94,7 +94,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     const { webConfig, slug, allPagesSidebarItems } = this.context;
     let currentLocate = utils.getCurrentLoacle(webConfig, slug);
     let {
-      currentLocaleWebConfig: { themeConfig, title, base, logo },
+      currentLocaleWebConfig: { themeConfig, title, base, logo }
     } = utils.getcurrentLocaleConfigBySlug(webConfig, slug);
     const { locales } = webConfig.themeConfig;
 
@@ -109,7 +109,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         {nav.map((item: any, index: number) => {
           return this.renderNav(item, index);
         })}
-      </Menu>,
+      </Menu>
     ];
 
     const chooseLanguage = currentLocate ? (
@@ -144,8 +144,8 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           ) : null}
           <Row>
             <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-              <Link id="site-logo" to={utils.resolvePathWithBase(currentLocate || '/', base)}>
-                {logo && <img src={logo} alt={title} />}
+              <Link id="site-logo" to={currentLocate || base}>
+                {logo && <img src={utils.withBasePath(logo, base)} alt={title + '-logo'} />}
                 <span className="left-top-title">{title}</span>
               </Link>
             </Col>

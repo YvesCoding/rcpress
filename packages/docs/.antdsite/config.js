@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/',
+  base: process.env.base || '/',
   locales: {
     '/': {
       lang: 'en-US',
@@ -67,11 +67,6 @@ module.exports = {
           {
             text: '默认主题配置',
             link: '/zh/default-theme-config/'
-          },
-          {
-            text: 'Gitee',
-            link: 'https://gitee.com/wangyi_7099/AntdSite',
-            important: true
           },
           {
             text: 'GitHub',

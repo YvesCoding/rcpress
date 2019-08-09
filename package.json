@@ -6,6 +6,8 @@
     "publish": "lerna publish --conventional-commits",
     "build": "yarn build:docs",
     "build:docs": "yarn workspace docs build",
+    "start": "yarn workspace docs start",
+    "build-with-prefix": "cross-env base=/antdsite yarn build",
     "cl": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "workspaces": [
@@ -15,6 +17,7 @@
   ],
   "devDependencies": {
     "lerna": "^3.11.1",
-    "conventional-changelog-cli": "2.0.23"
+    "conventional-changelog-cli": "2.0.23",
+    "cross-env": "5.2.0"
   }
 }

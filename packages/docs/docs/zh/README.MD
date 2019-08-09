@@ -46,6 +46,8 @@ npm start
 
 #### 访问默认的地址 `localhost:8000` 即可看到效果页面
 
+import ImgWidthBase from '@components/ImgWidthBase'
+
 <p align="center">
-<img src="/screenshot.png" width="700" />
+<ImgWidthBase url="screenshot.png" width={700}/>
 </p>

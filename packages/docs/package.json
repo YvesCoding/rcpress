@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.8",
   "scripts": {
-    "build": "yarn clean && gatsby build",
+    "build": "yarn clean && gatsby build --prefix-paths",
     "start": "yarn clean && gatsby develop",
     "clean": "gatsby clean"
   },

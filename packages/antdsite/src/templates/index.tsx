@@ -94,7 +94,7 @@ export default function Template(props: {
   const { body } = props.data.mdx.code;
 
   return (
-    <MDXProvider components={{ ...antd }}>
+    <MDXProvider components={{ ...antd, ...{ PageCustomer: PageContext.Consumer } }}>
       <PageContext.Provider
         value={{
           ...pageContext,

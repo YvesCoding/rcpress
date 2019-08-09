@@ -188,7 +188,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     const menuChild = (
       <Menu
         ref="menu"
-        inlineIndent={16}
+        inlineIndent={40}
         className="aside-container"
         mode="inline"
         openKeys={openKeys}

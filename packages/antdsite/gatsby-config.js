@@ -8,6 +8,7 @@ function getPlugin(pluginName) {
 }
 
 module.exports = {
+  pathPrefix: finalConfig.base,
   plugins: [
     {
       resolve: 'gatsby-mdx-fix',

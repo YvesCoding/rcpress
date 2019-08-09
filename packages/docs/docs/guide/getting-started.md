@@ -40,12 +40,14 @@ npm start
 
 Visit the default address `localhost:8000` to see the effect page
 
-## Effect Page
+## Screenshots
+
+import ImgWidthBase from '@components/ImgWidthBase'
 
 <p align="center">
-<img src="/screenshot.png" width="700" />
+<ImgWidthBase url="screenshot.png" width={700}/>  
 </p>
 
 <p align="center">
-<img src="/screenshot-1.png" width="700" />
+<ImgWidthBase url="screenshot-1.png" width={700}/>
 </p>
