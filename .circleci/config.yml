@@ -3,18 +3,22 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  environment:
+    - APP_VERSION: $CIRCLE_SHA1
+  working_directory: ~/project/antdsite
+  docker:
+    # specify the version you desire here
+    - image: circleci/node:10.15.2
+
 jobs:
-  build:
+  build-docs:
+    <<: *defaults
+
     docker:
       # specify the version you desire here
       - image: circleci/node:10.15.2
-
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
-    # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
 
     steps:
       - checkout
@@ -35,3 +39,23 @@ jobs:
 
       # run tests!
       - run: yarn build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - antdsite
+  send-docs:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "rm -rf /etc/ngxin/website/antdsite"
+      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public root@$DOCKER_IP:/etc/nginx/website/antdsite
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-docs
+      - send-docs:
+          requires:
+            - build-docs
+          context: aliyun
