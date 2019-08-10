@@ -1,12 +1,23 @@
 const path = require('path');
-const defaultConfig = require(path.resolve(__dirname, '../__default__/default-config'));
+const defaultConfig = require('../__default__/default-config');
 const chalk = require('chalk');
-const fs = require('fs');
+const fs = require('fs-extra');
+const os = require('os');
 
 const configName = '.antdsite/config.js';
 const themeName = '.antdsite/theme';
 
 let userConfig;
+let finalConfig;
+
+const createFinalConfig = config => {
+  const filePath = path.resolve(__dirname, '../.cache/finalConfig.js');
+  fs.ensureFileSync(filePath);
+  const exportConfig = `module.exports = 
+  ${JSON.stringify(config)}
+  `;
+  fs.writeFileSync(filePath, exportConfig + os.EOL);
+};
 
 module.exports.getUserConfig = () => {
   if (userConfig) return userConfig;
@@ -50,13 +61,17 @@ function deepMerge(from, to) {
 }
 
 module.exports.getFinalConfig = function() {
+  if (finalConfig) return finalConfig;
+
   const config = module.exports.getUserConfig();
 
   // merge with default config.
-  const finalConfig = deepMerge(config, defaultConfig);
+  finalConfig = deepMerge(config, defaultConfig);
 
   // validate & fix config.
   validateConfig(finalConfig);
+  // create a  config as a file for ssr reading.
+  createFinalConfig(finalConfig);
 
   return finalConfig;
 };

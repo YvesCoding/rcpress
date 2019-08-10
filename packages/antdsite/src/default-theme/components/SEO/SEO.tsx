@@ -5,7 +5,7 @@ const SEO = ({
   title,
   description,
   head,
-  lang,
+  lang
 }: {
   title: string;
   description: string;
@@ -16,7 +16,7 @@ const SEO = ({
     <React.Fragment>
       <Helmet
         htmlAttributes={{
-          lang,
+          lang
         }}
       >
         {/* General tags */}
@@ -31,7 +31,7 @@ const SEO = ({
             tag[0],
             {
               key: index,
-              ...(tag[1] || {}),
+              ...(tag[1] || {})
             },
             tag[2]
           );

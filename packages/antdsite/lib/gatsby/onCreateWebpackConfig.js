@@ -1,4 +1,6 @@
-const { resolveLayouts, setThemeColors } = require('../util');
+const { resolveLayouts, setThemeColors, getFinalConfig } = require('../util');
+const largeFileList = require('../large-file-list');
+const config = getFinalConfig();
 
 module.exports = ({ stage, actions, loaders }) => {
   resolveLayouts(actions);
@@ -14,6 +16,17 @@ module.exports = ({ stage, actions, loaders }) => {
           }
         ]
       }
+    });
+  }
+
+  if (config.useCNDForLargeFiles && stage !== 'build-html') {
+    const externals = {};
+    largeFileList.forEach(file => {
+      externals[file.name] = file.umdName;
+    });
+
+    actions.setWebpackConfig({
+      externals
     });
   }
 };

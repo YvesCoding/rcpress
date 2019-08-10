@@ -24,23 +24,11 @@ jobs:
       - checkout
       - run: yarn && yarn bs
       - run: yarn build-with-prefix
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - antdsite
-  send-docs:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/project
       - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "rm -rf /etc/ngxin/website/antdsite"
-      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public root@$DOCKER_IP:/etc/nginx/website/antdsite
+      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public/. root@$DOCKER_IP:/etc/nginx/website/antdsite
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build-docs
-      - send-docs:
-          requires:
-            - build-docs
+      - build-docs:
           context: aliyun

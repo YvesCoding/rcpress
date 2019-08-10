@@ -7,7 +7,7 @@
     "build": "yarn build:docs",
     "build:docs": "yarn workspace docs build",
     "start": "yarn workspace docs start",
-    "build-with-prefix": "cross-env base=/antdsite yarn build",
+    "build-with-prefix": "cross-env base=/antdsite  yarn build",
     "cl": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "workspaces": [

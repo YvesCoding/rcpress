@@ -7,6 +7,7 @@ module.exports = {
   lang: 'en-US',
   head: [],
   footer: null,
+  useCNDForLargeFiles: true,
   themeConfig: {
     themeColors: null,
     repo: null,
