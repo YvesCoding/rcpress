@@ -1,5 +1,4 @@
 const { resolveLayouts, setThemeColors, getFinalConfig } = require('../util');
-const largeFileList = require('../large-file-list');
 const config = getFinalConfig();
 
 module.exports = ({ stage, actions, loaders }) => {
@@ -19,9 +18,13 @@ module.exports = ({ stage, actions, loaders }) => {
     });
   }
 
-  if (config.useCNDForLargeFiles && stage !== 'build-html') {
+  if (
+    config.useCNDForLargeFiles &&
+    stage !== 'build-html' &&
+    process.env.NODE_ENV !== 'development'
+  ) {
     const externals = {};
-    largeFileList.forEach(file => {
+    config.largeFileList.forEach(file => {
       externals[file.name] = file.umdName;
     });
 

@@ -29,9 +29,7 @@ export const ShowTime = () => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
             {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
-            {moment(context.currentPageInfo.fields.modifiedTime).format(
-              'YYYY-MM-DD HH:mm:SS'
-            )}
+            {moment(context.currentPageInfo.fields.modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         );
       }}
@@ -60,9 +58,9 @@ import {ShowTime} from '@components/ShowModifiedTime'
 
 ## 使用`antd`
 
-不用`import`, 直接在 markdown 中使用 `antd` 里面的组件
-
 ```jsx
+import {Button} from 'antd';
+
 <Button>Button</Button>
 <br />
 <Switch defaultChecked style={{marginTop:'15px'}} />
@@ -70,6 +68,7 @@ import {ShowTime} from '@components/ShowModifiedTime'
 
 效果如下：
 
+import {Button} from 'antd';
 <Button>Button</Button>
 
 <br />

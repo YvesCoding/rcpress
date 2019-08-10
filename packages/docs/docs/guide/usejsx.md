@@ -29,9 +29,7 @@ export const ShowTime = () => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
             {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
-            {moment(context.currentPageInfo.fields.modifiedTime).format(
-              'YYYY-MM-DD HH:mm:SS'
-            )}
+            {moment(context.currentPageInfo.fields.modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         );
       }}
@@ -60,9 +58,9 @@ import {ShowTime} from '@components/ShowModifiedTime'
 
 ## Use `antd`
 
-Use components of `antd` directly in markdown without importing.
-
 ```jsx
+import {Button} from 'antd'
+
 <Button>Button</Button>
 <br />
 <Switch defaultChecked style={{marginTop:'15px'}} />
@@ -70,6 +68,7 @@ Use components of `antd` directly in markdown without importing.
 
 The result is as follow:
 
+import {Button} from 'antd'
 <Button>Button</Button>
 
 <br />
