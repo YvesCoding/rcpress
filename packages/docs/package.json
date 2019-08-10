@@ -1,14 +1,14 @@
 {
   "name": "docs",
   "private": true,
-  "version": "0.0.10",
+  "version": "0.1.0",
   "scripts": {
     "build": "yarn clean && gatsby build --prefix-paths",
     "start": "yarn clean && gatsby develop",
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "antdsite": "^0.2.1",
+    "antdsite": "^0.3.0",
     "gatsby": "^2.13.39",
     "gatsby-plugin-netlify": "^2.0.0",
     "react": "^16.8.0",

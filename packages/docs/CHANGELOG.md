@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/YvesCoding/antdsite/compare/docs@0.0.9...docs@0.1.0) (2019-08-10)
+
+
+### Features
+
+* **antdsite:** add useCNDForLargeFiles that you can use cnd for those large files. ([0b9758a](https://github.com/YvesCoding/antdsite/commit/0b9758a))
+
+
+### Performance Improvements
+
+* **antdsite:** allow to set cdn link for production build. ([98a4b3b](https://github.com/YvesCoding/antdsite/commit/98a4b3b))
+
+
+
+
+
 ## [0.0.10](https://github.com/YvesCoding/antdsite/compare/docs@0.0.9...docs@0.0.10) (2019-08-10)
 
 **Note:** Version bump only for package docs
