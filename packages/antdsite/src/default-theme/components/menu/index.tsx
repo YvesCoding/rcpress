@@ -42,6 +42,8 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     };
   }
 
+  menuItems: Array<React.Component> = [];
+
   componentDidMount() {
     this.getPreAndNext();
 
@@ -61,8 +63,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
 
   getPreAndNext = () => {
     const { currentPath } = this.props || [];
-    const menu = this.refs.menu as React.Component;
-    const menuItems = menu.props.children || [];
+    const menuItems = this.menuItems || [];
 
     function filterItem(items: any) {
       return items.length
@@ -183,11 +184,10 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     const { currentPath, menuList, isMobile } = this.props;
     const { openKeys } = this.state;
     const activeMenuItem = getActiveMenuItem(currentPath, menuList);
-    const menuItems = this.getMenuItems();
+    this.menuItems = this.getMenuItems();
 
     const menuChild = (
       <Menu
-        ref="menu"
         inlineIndent={40}
         className="aside-container"
         mode="inline"
@@ -195,7 +195,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
         selectedKeys={[(activeMenuItem && activeMenuItem.slug) || '/']}
         onOpenChange={this.handleMenuOpenChange}
       >
-        {menuItems}
+        {this.menuItems}
       </Menu>
     );
 
