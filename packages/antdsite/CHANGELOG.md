@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/YvesCoding/antdsite/compare/antdsite@0.1.3...antdsite@0.2.0) (2019-08-10)
+
+
+### Features
+
+* **antdsite:** add useCNDForLargeFiles that you can use cnd for those large files. ([d8383c3](https://github.com/YvesCoding/antdsite/commit/d8383c3))
+
+
+
+
+
 ## [0.1.3](https://github.com/YvesCoding/antdsite/compare/antdsite@0.1.2...antdsite@0.1.3) (2019-08-09)
 
 
