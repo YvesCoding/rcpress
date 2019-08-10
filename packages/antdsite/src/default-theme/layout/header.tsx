@@ -5,6 +5,7 @@ import * as utils from '../components/utils';
 import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
 import { PageContext } from 'antdsite';
 import SearchBox from '../components/search-box';
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 interface HeaderProps {
   isMobile: boolean;
@@ -104,13 +105,30 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         return item.link && slug.startsWith(item.link);
       })
       .map((_: string) => _.link);
-    const menu = [
-      <Menu mode={menuMode} selectedKeys={activeMenuItem} id="nav" key="nav">
-        {nav.map((item: any, index: number) => {
-          return this.renderNav(item, index);
-        })}
-      </Menu>
-    ];
+    const menu = (
+      <>
+        <Menu mode={menuMode} selectedKeys={activeMenuItem} id="nav" key="nav">
+          {nav.map((item: any, index: number) => {
+            return this.renderNav(item, index);
+          })}
+        </Menu>
+        {menuMode === 'inline' && currentLocate ? (
+          <Menu key="choose-lang" selectedKeys={[currentLocate || '']} mode={menuMode}>
+            <SubMenu key="choose-lang" title={themeConfig.selectText}>
+              {Object.keys(locales).map(item => {
+                return (
+                  <Menu.Item key={item}>
+                    <Link to={this.setLocaleLinks(item, slug, currentLocate as string)}>
+                      {locales[item].label}
+                    </Link>
+                  </Menu.Item>
+                );
+              })}
+            </SubMenu>
+          </Menu>
+        ) : null}
+      </>
+    );
 
     const chooseLanguage = currentLocate ? (
       <Menu selectedKeys={[currentLocate]}>
