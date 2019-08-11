@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/YvesCoding/antdsite/compare/antdsite@0.4.2...antdsite@0.5.0) (2019-08-11)
+
+
+### Features
+
+* **antdsite:** start ngprocess after clicking link. ([60340d9](https://github.com/YvesCoding/antdsite/commit/60340d9))
+
+
+
+
+
 ## [0.4.2](https://github.com/YvesCoding/antdsite/compare/antdsite@0.4.1...antdsite@0.4.2) (2019-08-11)
 
 
