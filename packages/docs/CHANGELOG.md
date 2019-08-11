@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/YvesCoding/antdsite/compare/docs@0.2.1...docs@0.2.2) (2019-08-11)
+
+
+### Performance Improvements
+
+* **antdsite:** add a switch for prefetching. ([c5dd49f](https://github.com/YvesCoding/antdsite/commit/c5dd49f))
+
+
+
+
+
 ## [0.2.1](https://github.com/YvesCoding/antdsite/compare/docs@0.2.0...docs@0.2.1) (2019-08-10)
 
 **Note:** Version bump only for package docs

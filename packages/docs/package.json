@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "private": true,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "build": "yarn clean && gatsby build --prefix-paths",
     "start": "yarn clean && gatsby develop",
