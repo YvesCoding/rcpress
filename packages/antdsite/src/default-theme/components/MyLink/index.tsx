@@ -3,6 +3,12 @@ import { Link } from 'gatsby';
 import { Link as RouterLink } from '@reach/router';
 import { PageContext } from 'antdsite/src/templates/PageContext';
 import { resolvePathWithBase } from '../utils';
+import NProgress from 'nprogress';
+
+function handleLinkClick() {
+  NProgress.start();
+  NProgress.set(0.6);
+}
 
 const MyLink: React.SFC<any> = ({
   children,
@@ -19,13 +25,13 @@ const MyLink: React.SFC<any> = ({
       {({ webConfig: { base, prefetch: globalPrefetch } }) => {
         if (!prefetch || !globalPrefetch) {
           return (
-            <RouterLink to={resolvePathWithBase(to, base)} {...rest}>
+            <RouterLink onClick={handleLinkClick} to={resolvePathWithBase(to, base)} {...rest}>
               {children}
             </RouterLink>
           );
         }
         return (
-          <Link to={to} {...rest}>
+          <Link onClick={handleLinkClick} to={to} {...rest}>
             {children}
           </Link>
         );

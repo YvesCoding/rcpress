@@ -1,7 +1,3 @@
----
-home: true
----
-
 import './introduction.less'
 
 # 介绍

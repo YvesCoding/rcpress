@@ -1,6 +1,6 @@
 ---
 actionText: Get Started →
-actionLink: /guide/introduction
+actionLink: /guide/
 showStar: true
 home: true
 features:

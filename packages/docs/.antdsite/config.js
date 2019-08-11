@@ -29,7 +29,7 @@ module.exports = {
         nav: [
           {
             text: 'Guide',
-            link: '/guide/introduction'
+            link: '/guide/'
           },
           {
             text: 'Config',
@@ -59,7 +59,7 @@ module.exports = {
         nav: [
           {
             text: '指南',
-            link: '/zh/guide/introduction'
+            link: '/zh/guide/'
           },
           {
             text: '配置',
@@ -90,7 +90,7 @@ function getGuideSidebar(start = 'Get Started') {
     {
       title: start,
       collapsable: false,
-      children: ['introduction', 'getting-started']
+      children: ['', 'getting-started']
     },
     'configuration',
     'theme',

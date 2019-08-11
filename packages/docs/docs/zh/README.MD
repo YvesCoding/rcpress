@@ -1,6 +1,6 @@
 ---
 actionText: 快速上手 →
-actionLink: /zh/guide/introduction
+actionLink: /zh/guide/
 showStar: true
 home: true
 features:

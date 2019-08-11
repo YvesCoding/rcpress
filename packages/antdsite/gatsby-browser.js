@@ -82,11 +82,6 @@ export const onClientEntry = () => {
   NProgress.configure(options);
 };
 
-export const onPreRouteUpdate = () => {
-  NProgress.start();
-  NProgress.set(0.6);
-};
-
 export const onRouteUpdate = () => {
   NProgress.done(true);
 };
