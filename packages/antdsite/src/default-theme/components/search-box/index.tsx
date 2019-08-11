@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Input, Icon, Breadcrumb } from 'antd';
 import { PageInfo } from '../utils';
 import { OneToc } from '../../../templates';
-import { Link } from 'gatsby';
+import Link from '../MyLink';
 
 type filterDatas = {
   title: string;
@@ -48,7 +48,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     this.state = {
       isSearchListShow: false,
       query: '',
-      filterDatas: [],
+      filterDatas: []
     };
   }
 
@@ -59,7 +59,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
 
     this.setState(() => {
       return {
-        isSearchListShow: false,
+        isSearchListShow: false
       };
     });
   };
@@ -68,7 +68,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     this.setState(
       {
         isSearchListShow: true,
-        query: e.currentTarget.value,
+        query: e.currentTarget.value
       },
       () => {
         this.search();
@@ -94,8 +94,8 @@ export default class Search extends React.Component<SearchProps, SearchState> {
           {
             url: currentItem.slug,
             title: hightlightRes(currentItem.title),
-            important: currentItem.important,
-          },
+            important: currentItem.important
+          }
         ]);
       } else if (currentItem.toc && currentItem.toc.items.length) {
         let tocs = flattenToc(currentItem.toc.items);
@@ -105,12 +105,12 @@ export default class Search extends React.Component<SearchProps, SearchState> {
             results.push([
               {
                 title: currentItem.title,
-                important: currentItem.important,
+                important: currentItem.important
               },
               {
                 url: currentItem.slug + t.url,
-                title: hightlightRes(t.title),
-              },
+                title: hightlightRes(t.title)
+              }
             ]);
           }
         }
@@ -129,7 +129,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     }
 
     this.setState({
-      filterDatas: results,
+      filterDatas: results
     });
   };
 
@@ -178,7 +178,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
                               <Breadcrumb.Item key={index}>
                                 <span
                                   dangerouslySetInnerHTML={{
-                                    __html: item.title,
+                                    __html: item.title
                                   }}
                                 ></span>
                               </Breadcrumb.Item>

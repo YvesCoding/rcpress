@@ -8,6 +8,7 @@ module.exports = {
   head: [],
   footer: null,
   useCNDForLargeFiles: true,
+  prefetch: true,
   largeFileList: [
     {
       name: 'moment',

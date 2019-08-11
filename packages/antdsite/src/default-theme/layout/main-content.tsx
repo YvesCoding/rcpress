@@ -39,10 +39,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     this.setContentHeight();
   }
 
-  getContentWidth = (isEnableMenu: boolean, originWidth: number) => {
-    return isEnableMenu ? originWidth : 24;
-  };
-
   setContentHeight = () => {
     const { prev, next } = this.state;
     // header and footer height is 64px and
@@ -67,7 +63,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     const { prev, next, contentHeight } = this.state;
     const { currentPageSidebarItems: menuList, slug } = this.context;
     const enableMenu = !!(menuList && menuList.length);
-    const getContentWidth = this.getContentWidth.bind(null, enableMenu);
 
     return (
       <Row className="main-wrapper">
@@ -81,9 +76,9 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
         ) : null}
 
         <Col
-          xxl={getContentWidth(20)}
-          xl={getContentWidth(19)}
-          lg={getContentWidth(18)}
+          xxl={enableMenu ? 20 : 24}
+          xl={enableMenu ? 19 : 24}
+          lg={enableMenu ? 18 : 24}
           md={24}
           sm={24}
           xs={24}
@@ -93,7 +88,13 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
               minHeight: contentHeight
             }}
           >
-            {isWebsiteHome ? <HomePage /> : <Content />}
+            {isWebsiteHome ? (
+              <HomePage />
+            ) : (
+              <div>
+                <Content />
+              </div>
+            )}
           </div>
           <PrevAndNext prev={prev} next={next} />
           {footer}

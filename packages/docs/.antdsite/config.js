@@ -16,6 +16,7 @@ module.exports = {
   head: [['link', { rel: 'icon', href: `/favicon.png` }]],
   footer:
     'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>',
+  prefetch: false,
   themeConfig: {
     repo: 'YvesCoding/antdsite',
     docsRelativeDir: 'packages/docs',
@@ -28,7 +29,7 @@ module.exports = {
         nav: [
           {
             text: 'Guide',
-            link: '/guide/'
+            link: '/guide/introduction'
           },
           {
             text: 'Config',
@@ -58,7 +59,7 @@ module.exports = {
         nav: [
           {
             text: '指南',
-            link: '/zh/guide/'
+            link: '/zh/guide/introduction'
           },
           {
             text: '配置',

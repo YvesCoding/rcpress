@@ -115,7 +115,7 @@ export function resolvePage(pages: Edges, rawPath: string, base: string): PageIn
   };
 }
 
-export function withBasePath(path: string, base: string) {
+export function resolvePathWithBase(path: string, base: string) {
   if (!base.endsWith('/')) {
     base += '/';
   }
@@ -163,18 +163,6 @@ function resolvePath(relative: string, base: string, append: string = '') {
   }
 
   return stack.join('/');
-}
-
-export function resolvePathWithBase(path: string, base: string) {
-  if (base.endsWith('/')) {
-    base = base.slice(0, base.length - 1);
-  }
-
-  if (!path.startsWith('/')) {
-    path = '/' + path;
-  }
-
-  return base + path;
 }
 
 export interface PageInfo extends IGraphqlFrontmatterData {

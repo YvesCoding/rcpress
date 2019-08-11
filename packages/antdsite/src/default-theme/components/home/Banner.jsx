@@ -1,7 +1,7 @@
 import React from 'react';
 import GitHubButton from 'react-github-button-fix-iebug';
 import { Button } from 'antd';
-import { Link } from 'gatsby';
+import Link from '../MyLink';
 import { PageContext } from 'antdsite';
 import * as utils from '../utils';
 
@@ -21,7 +21,7 @@ function Banner(props) {
             {(frontmatter.heroImage || currentLocaleWebConfig.logo) && (
               <div className="banner-logo">
                 <img
-                  src={utils.withBasePath(
+                  src={utils.resolvePathWithBase(
                     frontmatter.heroImage || currentLocaleWebConfig.logo,
                     currentLocaleWebConfig.base
                   )}

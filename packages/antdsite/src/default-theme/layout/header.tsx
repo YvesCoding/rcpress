@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { Link } from 'gatsby';
+import Link from '../components/MyLink';
 import * as utils from '../components/utils';
 import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
 import { PageContext } from 'antdsite';
@@ -163,7 +163,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           <Row>
             <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
               <Link id="site-logo" to={currentLocate || base}>
-                {logo && <img src={utils.withBasePath(logo, base)} alt={title + '-logo'} />}
+                {logo && <img src={utils.resolvePathWithBase(logo, base)} alt={title + '-logo'} />}
                 <span className="left-top-title">{title}</span>
               </Link>
             </Col>

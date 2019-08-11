@@ -2,7 +2,7 @@ import React from 'react';
 import { PageInfo } from '../utils';
 import MobileMenu from 'rc-drawer';
 import { Badge, Col, Menu, Icon, Affix } from 'antd';
-import { Link } from 'gatsby';
+import Link from '../MyLink';
 
 const { SubMenu } = Menu;
 

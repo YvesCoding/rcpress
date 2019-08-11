@@ -27,6 +27,8 @@ features:
 
 Any additional content after the `YAML front matter` will be parsed as normal markdown and rendered after the features section.
 
+import {Alert} from 'antd';
+
 <Alert message="Warning" description={<p>showStar only supports <strong>GitHub</strong></p>} type="warning" showIcon />
 
 ## Navbar
