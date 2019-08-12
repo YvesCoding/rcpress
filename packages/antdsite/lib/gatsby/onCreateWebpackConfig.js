@@ -1,4 +1,4 @@
-const { themePath } = require('../constant');
+const { themePath, globalCompnentPath } = require('../constant');
 const { getFinalConfig } = require('../config');
 const path = require('path');
 const fs = require('fs');
@@ -8,6 +8,7 @@ const config = getFinalConfig();
 module.exports = ({ stage, actions, loaders }) => {
   resolveLayouts(actions);
   setThemeColors(actions);
+  setGlobalComponent(actions);
 
   if (stage === 'develop') {
     actions.setWebpackConfig({
@@ -93,4 +94,25 @@ function setThemeColors(actions) {
       }
     });
   }
+}
+
+function getGlobalComponentPath() {
+  const compPath = path.resolve(process.cwd(), globalCompnentPath);
+  if (componentExist(compPath)) {
+    return compPath;
+  } else {
+    return path.resolve(__dirname, `../../src/globalComponent`);
+  }
+}
+
+function setGlobalComponent(actions) {
+  const compPath = getGlobalComponentPath();
+
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        'antdsite-g-component': compPath
+      }
+    }
+  });
 }

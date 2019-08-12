@@ -2,7 +2,7 @@ const path = require('path');
 const chalk = require('chalk');
 const fs = require('fs-extra');
 const os = require('os');
-const { configName } = require('./constant');
+const { configPath, cacheDir } = require('./constant');
 const { deepMerge } = require('./util');
 
 let userConfig;
@@ -59,7 +59,7 @@ const defaultConfig = {
 module.exports.defaultConfig = defaultConfig;
 
 const createFinalConfig = config => {
-  const filePath = path.resolve(__dirname, '../.cache/finalConfig.js');
+  const filePath = path.resolve(cacheDir, 'finalConfig.js');
   fs.ensureFileSync(filePath);
   const exportConfig = `module.exports = 
   ${JSON.stringify(config)}
@@ -70,15 +70,15 @@ const createFinalConfig = config => {
 const getUserConfig = () => {
   if (userConfig) return userConfig;
 
-  let configPath;
+  let fullConfigPath;
 
   try {
-    configPath = path.resolve(configName);
-    userConfig = require(configPath);
+    fullConfigPath = path.resolve(configPath);
+    userConfig = require(fullConfigPath);
   } catch (error) {
     console.error(
       chalk.red(
-        `[AntdSite]: Error when parsing ${configName} at ${configPath}, fallback to default config, the detail error is bellow:`
+        `[AntdSite]: Error when parsing ${configPath} at ${fullConfigPath}, fallback to default config, the detail error is bellow:`
       )
     );
     console.error(error);

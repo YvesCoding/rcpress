@@ -9,6 +9,7 @@ import Layout from 'antdsite-layout';
 import MDXRenderer from 'gatsby-mdx-fix/mdx-renderer';
 import Media from 'react-media';
 import { MDXProvider } from '@mdx-js/react';
+import globalComponent from 'antdsite-g-component';
 
 export interface IGraphqlFrontmatterData {
   title: string;
@@ -91,9 +92,8 @@ export default function Template(props: {
   );
 
   const { body } = props.data.mdx.code;
-
   return (
-    <MDXProvider components={{ ...{ PageCustomer: PageContext.Consumer } }}>
+    <MDXProvider components={{ ...globalComponent, ...{ PageCustomer: PageContext.Consumer } }}>
       <PageContext.Provider
         value={{
           ...pageContext,
@@ -136,9 +136,6 @@ export const pageQuery = graphql`
             link
             important
             disabled
-          }
-          code {
-            body
           }
         }
       }
