@@ -13,7 +13,18 @@
 
 @media only screen and (max-width: 1300px) {
   #search-box {
-    display: none;
+    float: none;
+    position: absolute;
+    right: 54px;
+    z-index: 1;
+    background: #fff;
+    input {
+      width: 150px;
+    }
+    .search-result-list {
+      right: -30px;
+      width: calc(100vw - 70px);
+    }
   }
 }
 
@@ -208,7 +219,18 @@
 
 @media only screen and (max-width: @screen-md) {
   #search-box {
-    display: none;
+    float: none;
+    position: absolute;
+    right: 54px;
+    z-index: 1;
+    background: #fff;
+    input {
+      width: 150px;
+    }
+    .search-result-list {
+      right: -30px;
+      width: calc(100vw - 70px);
+    }
   }
   #logo {
     padding: 0;

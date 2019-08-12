@@ -14,11 +14,13 @@ interface SearchState {
   isSearchListShow: boolean;
   query: string;
   filterDatas: filterDatas;
+  isFocus: boolean;
 }
 
 interface SearchProps {
   datas: Array<PageInfo>;
   max: number;
+  mobile?: boolean;
 }
 
 function match(a: string, b: string) {
@@ -48,7 +50,8 @@ export default class Search extends React.Component<SearchProps, SearchState> {
     this.state = {
       isSearchListShow: false,
       query: '',
-      filterDatas: []
+      filterDatas: [],
+      isFocus: false
     };
   }
 
@@ -59,15 +62,23 @@ export default class Search extends React.Component<SearchProps, SearchState> {
 
     this.setState(() => {
       return {
-        isSearchListShow: false
+        isSearchListShow: false,
+        isFocus: false
       };
     });
+  };
+
+  handleClickIcon = () => {
+    return {
+      isFocus: true
+    };
   };
 
   handleInput = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState(
       {
         isSearchListShow: true,
+        isFocus: true,
         query: e.currentTarget.value
       },
       () => {
@@ -134,12 +145,15 @@ export default class Search extends React.Component<SearchProps, SearchState> {
   };
 
   render() {
-    const { filterDatas } = this.state;
+    const { filterDatas, isFocus } = this.state;
+    const { mobile } = this.props;
 
     return (
       <div id="search-box" className="search-box">
         <div className="searchInput-component">
-          <Icon type="search" />
+          <div className="icon-container">
+            <Icon type="search" onClick={this.handleClickIcon} />
+          </div>
           <Input
             ref={ref => {
               this.searchInput = ref;
@@ -148,6 +162,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
             onBlur={this.handleBlur}
             onChange={this.handleInput}
             onFocus={this.handleInput}
+            className={isFocus || !mobile ? '' : 'no-focus'}
           />
         </div>
 

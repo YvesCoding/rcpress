@@ -148,17 +148,22 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       <Affix style={{ width: '100%' }} ref="header-affix">
         <div id="header" className="header">
           {menuMode === 'inline' ? (
-            <Popover
-              overlayClassName="popover-menu"
-              placement="bottomRight"
-              content={menu}
-              trigger="click"
-              visible={menuVisible}
-              arrowPointAtCenter
-              onVisibleChange={this.onMenuVisibleChange}
-            >
-              <Icon className="nav-phone-icon" type="menu" onClick={this.handleShowMenu} />
-            </Popover>
+            <>
+              {search && allPagesSidebarItems.length ? (
+                <SearchBox mobile datas={allPagesSidebarItems} max={searchMaxSuggestions} />
+              ) : null}
+              <Popover
+                overlayClassName="popover-menu"
+                placement="bottomRight"
+                content={menu}
+                trigger="click"
+                visible={menuVisible}
+                arrowPointAtCenter
+                onVisibleChange={this.onMenuVisibleChange}
+              >
+                <Icon className="nav-phone-icon" type="menu" onClick={this.handleShowMenu} />
+              </Popover>
+            </>
           ) : null}
           <Row>
             <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
@@ -168,14 +173,6 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               </Link>
             </Col>
             <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
-              {/* <div id="search-box">
-                <Icon type="search" className="search-icon" />
-                <Input
-                  ref={ref => {
-                    this.searchInput = ref;
-                  }}
-                />
-              </div> */}
               {search && allPagesSidebarItems.length ? (
                 <SearchBox datas={allPagesSidebarItems} max={searchMaxSuggestions} />
               ) : null}

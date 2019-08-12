@@ -15,9 +15,16 @@
     color: #314659;
   }
 
+  .no-focus {
+    width: 0 !important;
+    border: none;
+    padding-left: 15px;
+  }
+
   input {
     border-radius: 32px;
     width: 200px;
+    transition: all 0.3s;
     font-size: 14px;
     background: transparent;
     padding-left: 34px;
@@ -34,21 +41,12 @@
     width: 250px;
     z-index: 999;
     background: #fff;
-    :global {
-      .ant-list {
-        border-radius: 6px;
-      }
-      .ant-list-item {
-        padding: 0 !important;
-      }
+    .ant-list {
+      border-radius: 6px;
     }
-
-    // .ellipsis {
-    //   max-width: 216px;
-    //   overflow: hidden;
-    //   white-space: nowrap;
-    //   text-overflow: ellipsis;
-    // }
+    .ant-list-item {
+      padding: 0 !important;
+    }
 
     .search-item {
       width: 100%;
@@ -64,13 +62,21 @@
     position: relative;
     height: 32px;
 
-    :global(.anticon) {
+    .icon-container {
       position: absolute;
-      margin: auto;
-      color: #aaaaaa;
-      left: 10px;
-      top: 50%;
-      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      left: 0;
+
+      .anticon {
+        position: absolute;
+        margin: auto;
+        color: #aaaaaa;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 17px;
+      }
     }
   }
 }
