@@ -14,24 +14,34 @@ const MyLink: React.SFC<any> = ({
   children,
   to,
   prefetch,
+  onClick,
   ...rest
 }: {
   children: React.ReactNode;
   to: string;
   prefetch: boolean;
+  onClick: (e: any) => void;
 }) => {
+  let clickMerged = handleLinkClick;
+
+  if (onClick) {
+    clickMerged = (...args) => {
+      onClick.apply(null, args);
+      handleLinkClick();
+    };
+  }
   return (
     <PageContext.Consumer>
       {({ webConfig: { base, prefetch: globalPrefetch } }) => {
         if (!prefetch || !globalPrefetch) {
           return (
-            <RouterLink onClick={handleLinkClick} to={resolvePathWithBase(to, base)} {...rest}>
+            <RouterLink onClick={clickMerged} to={resolvePathWithBase(to, base)} {...rest}>
               {children}
             </RouterLink>
           );
         }
         return (
-          <Link onClick={handleLinkClick} to={to} {...rest}>
+          <Link onClick={clickMerged} to={to} {...rest}>
             {children}
           </Link>
         );
