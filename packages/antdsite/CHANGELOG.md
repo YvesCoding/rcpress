@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/YvesCoding/antdsite/compare/antdsite@0.6.0...antdsite@0.6.1) (2019-08-12)
+
+
+### Bug Fixes
+
+* **MyLink:** apply origin click event when click triggers. ([f035f4b](https://github.com/YvesCoding/antdsite/commit/f035f4b))
+
+
+
+
+
 # [0.6.0](https://github.com/YvesCoding/antdsite/compare/antdsite@0.4.2...antdsite@0.6.0) (2019-08-12)
 
 
