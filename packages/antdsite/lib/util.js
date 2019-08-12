@@ -45,9 +45,9 @@ function isObject(receive) {
 }
 
 function deepMerge(from, to) {
-  for (var key in from) {
+  for (const key in from) {
     if (Array.isArray(from[key] || Array.isArray(to[key]))) {
-      from[key] = [].concat(from[key]).concat(to[key]);
+      to[key] = [].concat(from[key] || []).concat(to[key] || []);
     } else if (isObject(from[key]) && to && isObject(to[key])) {
       deepMerge(from[key], to[key]);
     } else {
