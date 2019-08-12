@@ -80,6 +80,54 @@ module.exports = {
 };
 ```
 
+### prefetch
+
+- Type: `boolean`
+- Default: `true`
+
+Whether to enable page preloading. It is recommended to disable this when the server bandwidth is slow.
+
+### useCNDForLargeFiles
+
+- Type: `boolean`
+- Default: `true`
+
+For larger files, whether to load from CDN. It is recommended to enable this when the server bandwidth is slow.
+
+### largeFileList
+
+- Type:
+
+```ts
+Array<{name:string,umdName:string,cdnLink:string,order?:number}>
+```
+
+- Default:
+
+```js
+[
+  {
+    name: 'moment',
+    umdName: 'moment',
+    cdnLink: 'https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js'
+  },
+  {
+    order: 2,
+    name: 'react-dom',
+    umdName: 'ReactDOM',
+    cdnLink: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.1/umd/react-dom.production.min.js'
+  },
+  {
+    order: 1,
+    name: 'react',
+    umdName: 'React',
+    cdnLink: 'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
+  }
+];
+```
+
+A list of files to be loaded from the CDN.
+
 ## Theming
 
 ### themeConfig

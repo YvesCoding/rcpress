@@ -27,7 +27,6 @@ features:
 
 任何 `YAML front matter` 之后额外的内容将会以普通的 markdown 被渲染，并插入到 `features` 的后面。
 
-import {Alert} from 'antd';
 <Alert message="警告" description={<p>showStar 只支持 <strong>GitHub</strong></p>} type="warning" showIcon />
 
 ## 导航栏

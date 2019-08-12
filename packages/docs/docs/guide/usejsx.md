@@ -59,7 +59,7 @@ import {ShowTime} from '@components/ShowModifiedTime'
 ## Use `antd`
 
 ```jsx
-import {Button} from 'antd'
+import {Button,Switch} from 'antd'
 
 <Button>Button</Button>
 <br />
@@ -68,7 +68,6 @@ import {Button} from 'antd'
 
 The result is as follow:
 
-import {Button} from 'antd'
 <Button>Button</Button>
 
 <br />

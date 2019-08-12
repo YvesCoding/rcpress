@@ -80,6 +80,54 @@ module.exports = {
 };
 ```
 
+### prefetch
+
+- 类型: `boolean`
+- 默认值: `true`
+
+是否开启页面预加载。建议服务器宽带较慢时禁用此项。
+
+### useCNDForLargeFiles
+
+- 类型: `boolean`
+- 默认值: `true`
+
+对于体积较大的文件，是否从 CDN 加载。建议服务器宽带较慢时启用此项。
+
+### largeFileList
+
+- 类型:
+
+```ts
+Array<{name:string,umdName:string,cdnLink:string,order?:number}>
+```
+
+- 默认值:
+
+```js
+[
+  {
+    name: 'moment',
+    umdName: 'moment',
+    cdnLink: 'https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js'
+  },
+  {
+    order: 2,
+    name: 'react-dom',
+    umdName: 'ReactDOM',
+    cdnLink: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.1/umd/react-dom.production.min.js'
+  },
+  {
+    order: 1,
+    name: 'react',
+    umdName: 'React',
+    cdnLink: 'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
+  }
+];
+```
+
+将从 CDN 加载的文件列表。
+
 ## 主题
 
 ### themeConfig

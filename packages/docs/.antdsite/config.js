@@ -95,6 +95,7 @@ function getGuideSidebar(start = 'Get Started') {
     'configuration',
     'theme',
     'usejsx',
+    'global-component',
     'i18n',
     'cli'
   ];
