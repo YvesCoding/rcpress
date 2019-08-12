@@ -246,13 +246,26 @@ function createApp(name = './', useNpm, eject, isForce) {
         'page1',
         {
           title: 'page2',
-          collapsable: true,
           children: ['page2']
         },
         {
           title: 'page3',
           collapsable: false,
           children: ['page3']
+        },
+        {
+          title: 'page4',
+          collapsable: false,
+          children: [
+            {
+              title: 'group-1',
+              children: ['page4-1']
+            },
+            {
+              title: 'group-2',
+              children: ['page4-2']
+            }
+          ]
         }
       ]
     }
