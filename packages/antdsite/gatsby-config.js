@@ -1,7 +1,6 @@
-var path = require('path');
-var { getFinalConfig } = require('./lib/util');
-
-var finalConfig = getFinalConfig();
+const path = require('path');
+const { getFinalConfig } = require('./lib/config');
+const finalConfig = getFinalConfig();
 
 function getPlugin(pluginName) {
   return path.resolve(__dirname, `./lib/plugins/${pluginName}/index.js`);

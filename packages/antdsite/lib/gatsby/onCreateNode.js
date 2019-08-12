@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const himalaya = require('himalaya');
-var { themeConfig } = require('../util').getFinalConfig();
+var { themeConfig } = require('../config').getFinalConfig();
 
 // // 获取用户的头像列表
 const getAvatarList = async filename => {

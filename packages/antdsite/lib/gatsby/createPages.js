@@ -6,7 +6,7 @@
  */
 
 const { resolve } = require('path');
-const webConfig = require('../util').getFinalConfig();
+const webConfig = require('../config').getFinalConfig();
 const { themeConfig } = webConfig;
 const path = require('path');
 
