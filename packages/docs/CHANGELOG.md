@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/YvesCoding/antdsite/compare/docs@0.4.1...docs@0.4.2) (2019-08-12)
+
+
+### Bug Fixes
+
+* **antdsite:** don't trigger ngprocess when links don't change. ([137ff27](https://github.com/YvesCoding/antdsite/commit/137ff27))
+
+
+
+
+
 ## [0.4.1](https://github.com/YvesCoding/antdsite/compare/docs@0.4.0...docs@0.4.1) (2019-08-12)
 
 **Note:** Version bump only for package docs
