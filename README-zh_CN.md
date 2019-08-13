@@ -2,7 +2,7 @@
 
 <h1 align="center">AntdSite</h1>
 <p align="center">
-一个修改自 [Ant Design Pro 网站](https://pro.ant.design/)的文档生成器. 🎨
+一个修改自 Ant Design Pro 官方网站的文档生成器. 🎨
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 

@@ -2,7 +2,7 @@
 
 <h1 align="center">AntdSite</h1>
 <p align="center">
-A documentation generator  modified from [Ant Design Pro Site](https://pro.ant.design/). 🎨
+A documentation generator  modified from Ant Design Pro Site. 🎨
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
