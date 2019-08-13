@@ -2,7 +2,7 @@
 
 <h1 align="center">AntdSite</h1>
 <p align="center">
-使用Ant Design 来构建你的文档 🎨
+一个修改自 [Ant Design Pro 网站](https://pro.ant.design/)的文档生成器. 🎨
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
@@ -17,7 +17,9 @@
 
 ## 简介
 
-AntdSite 是一个基于[Ant Design](https://ant.design)，由[GatsbyJs](https://www.gatsbyjs.org/)驱动的一个网站生成器 (你可以完全不会这两项技术，只需要会 markdown 的基础知识，然后简单配置，就能搭建一个网站。当然，如果你会这两项技术那更好)。文档的配置参考了基于 vue 的文档生成器 - [vuepress](https://vuepress.vuejs.org/config/)。
+- AntdSite 修改自[Ant Design Pro 官网](https://pro.ant.design)的一个文档生成器。
+- 它是由[GatsbyJs](https://www.gatsbyjs.org/)驱动的。
+- 文档的配置项参考了[vuepress](https://vuepress.vuejs.org/config/)。
 
 ## 特点
 

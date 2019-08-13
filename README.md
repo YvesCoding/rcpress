@@ -2,7 +2,7 @@
 
 <h1 align="center">AntdSite</h1>
 <p align="center">
-Build your documentation with Ant Design 🎨
+A documentation generator  modified from [Ant Design Pro Site](https://pro.ant.design/). 🎨
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
@@ -17,7 +17,9 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Introduction
 
-AntdSite is a documentation generator based on [Ant Design](https://ant.design), driven by [Gatsby Js](https://www.gatsbyjs.org/)(You can totally ignore these two technologies, just know the basic knowledge of markdown, and then simply configure it to build a website. Of course, it would be better if you could do both). The configuration of documents refers to the vue-based document generator - [vuepress](https://vuepress.vuejs.org/config/).
+- AntdSite is a documentation generator modified from [Ant Design Pro Site](https://pro.ant.design).
+- It is driven by [Gatsby Js](https://www.gatsbyjs.org/).
+- The configuration of documents is inspired by - [vuepress](https://vuepress.vuejs.org/config/).
 
 ## Features
 
