@@ -13,6 +13,8 @@ module.exports = ({ actions }) => {
       disabled: Boolean
       link: String
       important: Boolean
+      disableEditLink: Boolean
+      disableUpdateTime: Boolean
       home: Boolean
       heroImage: String
       actionText: String

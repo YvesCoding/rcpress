@@ -49,7 +49,7 @@ export default class Article extends React.PureComponent {
       }
     } = this.context;
 
-    const { subtitle } = currentPageInfo.frontmatter;
+    const { subtitle, disableEditLink, disableUpdateTime } = currentPageInfo.frontmatter;
     const { path, modifiedTime, avatarList } = currentPageInfo.fields;
     const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
     const editPath = this.getEditLink(editLink, docsRepo || repo, docsBranch, path);
@@ -69,7 +69,7 @@ export default class Article extends React.PureComponent {
             this.node = node;
           }}
         >
-          {(docsRepo || repo) && editLinkText && editLinks ? (
+          {(docsRepo || repo) && editLinkText && editLinks && !disableEditLink ? (
             <h1>
               {currentPageTitle}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
@@ -78,7 +78,7 @@ export default class Article extends React.PureComponent {
             </h1>
           ) : null}
 
-          {lastUpdated && (
+          {lastUpdated && !disableUpdateTime && (
             <div className={`modifiedTime ${noAvatar ? 'modifiedTimeLeft' : ''}`}>
               {!noAvatar && <AvatarList avatarList={avatarList} />}
               {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}

@@ -18,6 +18,8 @@ export interface IGraphqlFrontmatterData {
   link?: string;
   subtitle?: string;
   editLink?: string;
+  disableEditLink?: Boolean;
+  disableUpdateTime?: Boolean;
 }
 
 export interface IMarkDownFields {
@@ -157,6 +159,8 @@ export const pageQuery = graphql`
           title
         }
         editLink
+        disableUpdateTime
+        disableEditLink
       }
       fields {
         modifiedTime
