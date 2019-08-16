@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/YvesCoding/antdsite/compare/docs@0.4.2...docs@0.5.0) (2019-08-16)
+
+
+### Features
+
+* **antdsite:** support search in mobile phone. ([bb0361a](https://github.com/YvesCoding/antdsite/commit/bb0361a))
+
+
+
+
+
 ## [0.4.2](https://github.com/YvesCoding/antdsite/compare/docs@0.4.1...docs@0.4.2) (2019-08-12)
 
 
