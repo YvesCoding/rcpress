@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.0...antdsite@0.10.1) (2019-08-16)
+
+
+### Bug Fixes
+
+* **antdsite:** searchbox will throw error when there is no toc. ([1918855](https://github.com/YvesCoding/antdsite/commit/1918855))
+
+
+
+
+
 # [0.10.0](https://github.com/YvesCoding/antdsite/compare/antdsite@0.9.0...antdsite@0.10.0) (2019-08-16)
 
 
