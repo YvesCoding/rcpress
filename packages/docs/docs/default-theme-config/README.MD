@@ -221,7 +221,15 @@ module.exports = {
 };
 ```
 
-Note that it's `off` by default. If given a `string`, it will be displayed as a prefix (default value: `Last Updated`).
+Note that it's `on` by default. If given a `string`, it will be displayed as a prefix (default value: `Last Updated`).
+
+You can set the frontmatter `disableUpdateTime` to `true` to disable `lastUpdated` in certain page.
+
+```md
+---
+disableUpdateTime: true
+---
+```
 
 ## Git Repo and Edit Links
 
@@ -241,6 +249,14 @@ module.exports = {
     showAvatarList: true // Whether to display a list of users who edited this page, set it to false to disable
   }
 };
+```
+
+You can set the frontmatter `disableEditLink` to `true` to disable `editLinks` in certain page.
+
+```md
+---
+disableEditLink: true
+---
 ```
 
 ## Back To Top

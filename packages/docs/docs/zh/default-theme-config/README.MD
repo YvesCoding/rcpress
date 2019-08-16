@@ -221,7 +221,15 @@ module.exports = {
 };
 ```
 
-请注意，`themeConfig.lastUpdated` 默认是关闭的，如果给定一个字符串，它将会作为前缀显示（默认值是：`Last Updated`）。
+请注意，`themeConfig.lastUpdated` 默认是开启的，如果给定一个字符串，它将会作为前缀显示（默认值是：`Last Updated`）。
+
+你可以通过设置 frontmatter `disableUpdateTime`为`true`来关闭特定页面的`lastUpdated`
+
+```md
+---
+disableUpdateTime: true
+---
+```
 
 ## Git 仓库和编辑链接
 
@@ -241,6 +249,14 @@ module.exports = {
     showAvatarList: true // 是否显示编辑过此页面的用户用户列表, 设置为false关闭
   }
 };
+```
+
+你可以通过在特定的页面设置 frontmatter `disableEditLink`为`true`来关闭它的`editLinks`
+
+```md
+---
+disableEditLink: true
+---
 ```
 
 ## 回到顶部
