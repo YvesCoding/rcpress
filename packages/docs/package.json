@@ -7,12 +7,10 @@
     "start": "yarn clean && gatsby develop",
     "clean": "gatsby clean"
   },
-  "dependencies": {
+  "devDependencies": {
     "antdsite": "^0.8.0",
     "gatsby": "^2.13.39",
-    "gatsby-plugin-netlify": "^2.0.0",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "gatsby-plugin-netlify": "^2.0.0"
   },
   "keywords": [],
   "author": "",
