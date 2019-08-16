@@ -10,12 +10,14 @@ module.exports = root => {
   let themeDir;
 
   try {
-    themeDir = path.dirname(require.resolve('antdsite'));
+    themeDir = path.dirname(
+      require.resolve('antdsite', {
+        paths: [process.cwd()]
+      })
+    );
   } catch (e) {
     console.error(
-      chalk.red(
-        `[AntdSite]: Cannot find antdsite at ${root}, eject failed, process exit.`
-      )
+      chalk.red(`[AntdSite]: Cannot find antdsite at ${root}, eject failed, process exit.`)
     );
 
     process.exit(1);

@@ -13,9 +13,7 @@ let projectName;
 
 const allDeps = {
   antdsite: 'latest',
-  gatsby: '^2.13.45',
-  react: '^16.8.0',
-  'react-dom': '^16.8.0'
+  gatsby: '^2.13.45'
 };
 
 // These files should be allowed to remain on a failed install,
@@ -194,7 +192,7 @@ function createApp(name = './', useNpm, eject, isForce) {
       eject: 'antdsite-cli --eject',
       clean: 'gatsby clean'
     },
-    dependencies: {
+    devDependencies: {
       ...allDeps
     }
   };
@@ -202,7 +200,7 @@ function createApp(name = './', useNpm, eject, isForce) {
   if (fs.existsSync(pkgPath)) {
     const oldPakJson = require(pkgPath) || {};
     oldPakJson.scripts = packageJson.scripts || {};
-    oldPakJson.dependencies = packageJson.dependencies || {};
+    oldPakJson.devDependencies = packageJson.devDependencies || {};
 
     packageJson = {
       ...packageJson,
@@ -214,7 +212,7 @@ function createApp(name = './', useNpm, eject, isForce) {
         }
       },
       ...{
-        dependencies: {
+        devDependencies: {
           ...packageJson.dependencies,
           ...oldPakJson.dependencies
         }
@@ -308,7 +306,7 @@ function install(root, useYarn, dependencies) {
     let args;
     if (useYarn) {
       command = 'yarnpkg';
-      args = ['add', '--exact'];
+      args = ['add', '-D', '--exact'];
 
       [].push.apply(args, dependencies);
 
