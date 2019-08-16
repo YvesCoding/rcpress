@@ -108,7 +108,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
             important: currentItem.important
           }
         ]);
-      } else if (currentItem.toc && currentItem.toc.items.length) {
+      } else if (currentItem.toc && currentItem.toc.items && currentItem.toc.items.length) {
         let tocs = flattenToc(currentItem.toc.items);
         for (let i = 0; i < tocs.length && results.length < max; i++) {
           let t = tocs[i];
