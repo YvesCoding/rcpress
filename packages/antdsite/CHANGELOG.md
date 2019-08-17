@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.2](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.1...antdsite@0.10.2) (2019-08-17)
+
+
+### Bug Fixes
+
+* **antdsite:** add blockquote styles in markdown. ([fcebf39](https://github.com/YvesCoding/antdsite/commit/fcebf39))
+
+
+
+
+
 ## [0.10.1](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.0...antdsite@0.10.1) (2019-08-16)
 
 
