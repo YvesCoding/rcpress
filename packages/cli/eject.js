@@ -17,7 +17,7 @@ module.exports = root => {
     );
   } catch (e) {
     console.error(
-      chalk.red(`[AntdSite]: Cannot find antdsite at ${root}, eject failed, process exit.`)
+      chalk.red(`[AntdSite] Cannot find antdsite at ${root}, eject failed, process exit.`)
     );
 
     process.exit(1);

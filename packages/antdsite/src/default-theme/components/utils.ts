@@ -225,7 +225,7 @@ function resolveItem(item: any, pages: Edges, base: string, nestedLevel: number)
     });
   } else {
     if (nestedLevel > 2) {
-      console.error('[AntdSite]: Currently antdsite sidebar only support max two levels nested. ');
+      console.error('[AntdSite] Currently antdsite sidebar only support max two levels nested. ');
 
       return null;
     }

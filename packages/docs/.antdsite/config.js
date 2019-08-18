@@ -4,12 +4,12 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'AntdSite',
-      description: 'Build your documentation with Ant Design'
+      description: 'A static documentation generator  based on Ant Design and GatsbyJs. 🎨'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'AntdSite',
-      description: '使用Ant Design来生成你的文档'
+      description: '一个基于Ant Design 和 GtasbyJs的静态文档生成器'
     }
   },
   logo: '/favicon.png',
@@ -47,7 +47,7 @@ module.exports = {
         ],
         sidebar: {
           '/guide/': getGuideSidebar(),
-          '/config/': [''],
+          '/config/': 'auto',
           '/default-theme-config/': ['']
         }
       },

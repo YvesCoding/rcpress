@@ -2,7 +2,7 @@
 
 <h1 align="center">AntdSite</h1>
 <p align="center">
-一个修改自 Ant Design Pro 官方网站的文档生成器. 🎨
+一个基于Ant Design 和 GtasbyJs的静态文档生成器 
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
@@ -17,20 +17,20 @@
 
 ## 简介
 
-- AntdSite 修改自[Ant Design Pro 官网](https://pro.ant.design)的一个文档生成器。
+- AntdSite 是一个基于 Ant Design 和 GtasbyJs 的静态文档生成器，它修改自[Ant Design Pro 官网](https://pro.ant.design)的一个文档生成器。
 - 它是由[GatsbyJs](https://www.gatsbyjs.org/)驱动的。
 - 文档的配置项参考了[vuepress](https://vuepress.vuejs.org/config/)。
 
 ## 特点
 
 - 上手简单，只需要 markdown 和一点 js 知识就能上手。
-- 功能强大，可以在 markdown 里写 react 组件，具体可以参考[mdx](https://github.com/mdx-js/mdx)。
+- 功能强大，可以在 markdown 里写 react 组件，具体可以参考[mdx](https://github.com/zh/mdx-js/mdx)。
 - 可以直接在 markdown 中使用 [Ant Design 众多组件](https://ant.design/components/button-cn/)，满足日常开发需求。
 - 可以定制[主题颜色](https://antdsite.yvescoding.org/zh/default-theme-config/#%E5%AE%9A%E5%88%B6%E4%B8%BB%E9%A2%98%E9%A2%9C%E8%89%B2)。
 
 ## 文档
 
-获取详细文档，推荐访问官网的[开始上手](https://antdsite.yvescoding.org/guide/getting-started)一节。
+获取详细文档，推荐访问官网的[开始上手](https://antdsite.yvescoding.org/zh/guide/getting-started)一节。
 
 ## 快速开始
 

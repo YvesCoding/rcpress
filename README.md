@@ -2,7 +2,7 @@
 
 <h1 align="center">AntdSite</h1>
 <p align="center">
-A documentation generator  modified from Ant Design Pro Site. 🎨
+A static documentation generator  based on Ant Design and GatsbyJs 
 </p>
 <p align="center">
   <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
@@ -17,7 +17,7 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Introduction
 
-- AntdSite is a documentation generator modified from [Ant Design Pro Site](https://pro.ant.design).
+- AntdSite is a static documentation generator based on Ant Design and GatsbyJs, it is originly modified from [Ant Design Pro Site](https://pro.ant.design).
 - It is driven by [Gatsby Js](https://www.gatsbyjs.org/).
 - The configuration of documents is inspired by - [vuepress](https://vuepress.vuejs.org/config/).
 
