@@ -47,7 +47,7 @@ module.exports = {
         ],
         sidebar: {
           '/guide/': getGuideSidebar(),
-          '/config/': 'auto',
+          '/config/': [''],
           '/default-theme-config/': ['']
         }
       },
