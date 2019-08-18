@@ -4,7 +4,7 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'AntdSite',
-      description: 'A static documentation generator  based on Ant Design and GatsbyJs. 🎨'
+      description: 'A static documentation generator  based on Ant Design and GatsbyJs'
     },
     '/zh/': {
       lang: 'zh-CN',
