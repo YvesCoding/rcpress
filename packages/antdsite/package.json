@@ -1,6 +1,6 @@
 {
   "name": "antdsite",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "description": "A static docs generator based on Ant Design and GatsbyJs",
   "homepage": "https://github.com/YvesCoding/antdsite",
   "repository": {
