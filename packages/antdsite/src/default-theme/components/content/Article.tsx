@@ -87,7 +87,7 @@ export default class Article extends React.PureComponent {
 
           {currentPageInfo.tableOfContents.items && currentPageInfo.tableOfContents.items.length ? (
             <div className="toc-affix">
-              <Anchor offsetTop={70} className="toc">
+              <Anchor offsetTop={70} className="toc" targetOffset={0}>
                 {currentPageInfo.tableOfContents.items.map(this.getTocs)}
               </Anchor>
             </div>
