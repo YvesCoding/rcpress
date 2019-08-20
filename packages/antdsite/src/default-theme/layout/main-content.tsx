@@ -5,6 +5,8 @@ import HomePage from 'antdsite-home';
 import LeftMenu from '../components/menu';
 import Content from '../components/content';
 import PrevAndNext from '../components/prevAndNext';
+import Footer from 'antdsite-footer';
+import ReactDom from 'react-dom';
 
 export interface MainContentProps {
   isMobile: boolean;
@@ -39,12 +41,22 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     this.setContentHeight();
   }
 
+  getFooterHeight = () => {
+    const footer = this.refs.footer;
+    if (!footer) return 0;
+
+    const footerNode = ReactDom.findDOMNode(footer) as HTMLDivElement;
+    return footerNode.offsetHeight;
+  };
+
   setContentHeight = () => {
     const { prev, next } = this.state;
-    // header and footer height is 64px and
-    // prev and next section height is 73px,
+    // calc content's min-height
+    // header's height is 64px and
+    // prev and next button's height is 73px,
     // we should also add main-wrapper's paddingTop: 40opx
-    const resetHeight = (this.props.footer ? 128 : 64) + 40 + (prev || next ? 73 : 0);
+    const resetHeight =
+      (this.refs.footer ? this.getFooterHeight() + 64 : 64) + 40 + (prev || next ? 73 : 0);
 
     this.setState({
       contentHeight: `calc(100vh - ${resetHeight}px)`
@@ -59,9 +71,13 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
   };
 
   render() {
-    const { isMobile, footer, isWebsiteHome } = this.props;
+    const { isMobile, isWebsiteHome } = this.props;
     const { prev, next, contentHeight } = this.state;
-    const { currentPageSidebarItems: menuList, slug } = this.context;
+    const {
+      currentPageSidebarItems: menuList,
+      slug,
+      webConfig: { footer: footerText }
+    } = this.context;
     const enableMenu = !!(menuList && menuList.length);
 
     return (
@@ -97,7 +113,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
             )}
           </div>
           <PrevAndNext prev={prev} next={next} />
-          {footer}
+          {footerText ? <Footer footerText={footerText} ref="footer" /> : null}
         </Col>
       </Row>
     );

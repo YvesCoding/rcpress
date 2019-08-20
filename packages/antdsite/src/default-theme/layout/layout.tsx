@@ -1,7 +1,6 @@
 import React from 'react';
 import '../assets/style';
 import Header from 'antdsite-header';
-import Footer from 'antdsite-footer';
 import { BackTop } from 'antd';
 import MainContent from 'antdsite-main-content';
 import { PageContext } from 'antdsite';
@@ -24,9 +23,7 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
   render() {
     const { currentLocaleWebConfig: webConfig, slug, isWebsiteHome } = this.context;
     const { showBackToTop } = webConfig.themeConfig;
-    const { locales, footer: footerText } = webConfig;
-
-    const footer = footerText ? <Footer footeText={footerText} ref="footer" /> : null;
+    const { locales } = webConfig;
 
     return (
       <div
@@ -35,7 +32,7 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
           'index-page-wrapper'}`}
       >
         <Header {...this.props} />
-        <MainContent {...this.props} isWebsiteHome={isWebsiteHome} footer={footer} />
+        <MainContent {...this.props} isWebsiteHome={isWebsiteHome} />
         {showBackToTop ? <BackTop /> : null}
       </div>
     );
