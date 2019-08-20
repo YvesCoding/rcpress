@@ -1,6 +1,6 @@
 {
   "name": "antdsite-cli",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Create a website based on Ant Design and GatsbyJs",
   "keywords": [
     "antdsite"
