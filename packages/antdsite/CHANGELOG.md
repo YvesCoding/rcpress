@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.4](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.2...antdsite@0.10.4) (2019-08-20)
+
+
+### Bug Fixes
+
+* **antdsite:** calc footer's height dynamicly. ([4b64768](https://github.com/YvesCoding/antdsite/commit/4b64768))
+
+
+
+
+
 ## [0.10.3](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.2...antdsite@0.10.3) (2019-08-20)
 
 
