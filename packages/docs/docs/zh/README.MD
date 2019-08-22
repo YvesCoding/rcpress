@@ -14,27 +14,29 @@ features:
 
 # 开始上手
 
-## 通过 cli 安装
+## 安装
 
-#### 使用 [yarn](https://yarnpkg.com) 安装`antdsite-cli`
+使用 [yarn](https://yarnpkg.com) 安装`antdsite-cli`
 
 ```bash
 yarn global add antdsite-cli
 ```
 
-#### 或者使用[npm](https://docs.npmjs.com/cli/install.html) 安装
+或者使用[npm](https://docs.npmjs.com/cli/install.html) 安装
 
 ```bash
 npm install antdsite-cli -g
 ```
 
-#### 使用 `cli` 来初始化一个网站
+## 用法
+
+使用 `cli` 来初始化一个网站
 
 ```bash
 antdsite my-docs
 ```
 
-#### 切换到初始化的网站目录，运行网站
+切换到初始化的网站目录，运行网站
 
 ```bash
 cd my-docs
@@ -44,7 +46,7 @@ yarn start
 npm start
 ```
 
-#### 访问默认的地址 `localhost:8000` 即可看到效果页面
+访问默认的地址 `localhost:8000` 即可看到效果页面
 
 import ImgWidthBase from '@components/ImgWidthBase'
 

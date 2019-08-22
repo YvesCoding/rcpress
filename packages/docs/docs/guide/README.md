@@ -2,7 +2,9 @@ import './introduction.less'
 
 # Introduction
 
-AntdSite is a static documentation generator based on [Ant Design](https://ant.design), driven by [Gatsby Js](https://www.gatsbyjs.org/)(You can totally ignore these two technologies, just know the basic knowledge of markdown, and then simply configure it to build a website. Of course, it would be better if you could do both). The configuration of documents refers to the vue-based document generator - [vuepress](https://vuepress.vuejs.org/config/).
+- AntdSite is a static website generator based on React.js.
+- It's driven by [Gatsby Js](https://www.gatsbyjs.org/)
+- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://vuepress.vuejs.org/).
 
 import ImgWidthBase from '@components/ImgWidthBase'
 
@@ -16,10 +18,10 @@ import ImgWidthBase from '@components/ImgWidthBase'
 
 ## Basic features
 
-- It's easy to get started, you just need to know markdown and a little bit about JS.
-- You can write JSX in markdown, referring to [mdx](https://github.com/mdx-js/mdx).
-- You can directly use many components of [Ant Design](https://ant.design/components/button/) in markdown to meet daily development needs.
-- Has ability to [custom theme color](../default-theme-config#cutom-theme-color).
+- [Vuepree](https://vuepress.vuejs.org/) configuration style, powerfulit's easy to use.
+- [mdx](https://github.com/mdx-js/mdx) supported.
+- Built-in [Ant Design](https://ant.design).
+- Support [custom layout](https://www.yvescoding.com/antdsite/guide/theme#custom-layout)(such as header, footer, home page and so on).
 
 ## Technology Stack
 

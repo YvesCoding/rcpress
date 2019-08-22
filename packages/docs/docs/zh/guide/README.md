@@ -2,7 +2,9 @@ import './introduction.less'
 
 # 介绍
 
-AntdSite 是一个基于[Ant Design](https://ant.design)，由[GatsbyJs](https://www.gatsbyjs.org/)驱动的一个静态文档生成器 (你可以完全不会这两项技术，只需要会 markdown 的基础知识，然后简单配置，就能搭建一个网站。当然，如果你会这两项技术那更好)。文档的配置参考了基于 vue 的文档生成器 - [vuepress](https://vuepress.vuejs.org/config/)。
+- Antdsite 是一个基于 React.js 的静态文档生成器。
+- 它是由[Gatsby Js](https://www.gatsbyjs.org/)驱动的
+- 使用 [Ant Design](https://ant.design/)设计构建， 并且它的配置项借鉴了[Vuepress](https://vuepress.vuejs.org/)
 
 import ImgWidthBase from '@components/ImgWidthBase'
 
@@ -16,10 +18,10 @@ import ImgWidthBase from '@components/ImgWidthBase'
 
 ## 基本特点
 
-- 上手简单，只需要 markdown 和一点 js 知识就能上手。
-- 你可以可以在 markdown 里写 JSX，具体可以参考[mdx](https://github.com/mdx-js/mdx)。
-- 可以直接在 markdown 中使用 [Ant Design 所有组件](https://ant.design/components/button-cn/)，满足日常开发需求。
-- 可以定制[主题颜色](../default-theme-config#定制主题颜色)。
+- [Vuepree](https://vuepress.vuejs.org/) 配置风格，使用起来功能强大，简单方便。
+- 支持[mdx](https://github.com/mdx-js/mdx).
+- 内置了 [Ant Design](https://ant.design).
+- 支持[custom layout](https://www.yvescoding.com/antdsite/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等等).
 
 ## 技术栈
 

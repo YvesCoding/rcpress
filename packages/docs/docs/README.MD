@@ -14,28 +14,30 @@ features:
 
 # Get Started
 
-## Install via cli
+## Install
 
-#### Install `antdsite-cli` via [yarn](https://yarnpkg.com)
+Install `antdsite-cli` via [yarn](https://yarnpkg.com)
 
 ```bash
 yarn global add antdsite-cli
 ```
 
-#### Or install via [npm](https://docs.npmjs.com/cli/install.html)
+Or install via [npm](https://docs.npmjs.com/cli/install.html)
 
 ```bash
 npm install antdsite-cli -g
 
 ```
 
-#### Use `cli` to initialize a website
+## Usage
+
+Use `cli` to initialize a website
 
 ```bash
 antdsite my-docs
 ```
 
-#### Switch to the initialized site directory and run the Site
+Switch to the initialized site directory and run the Site
 
 ```bash
 cd my-docs
@@ -45,7 +47,7 @@ yarn start
 npm start
 ```
 
-#### Visit the default address `localhost:8000` to see the effect page
+Visit the default address `localhost:8000` to see the effect page
 
 import ImgWidthBase from '@components/ImgWidthBase'
 
