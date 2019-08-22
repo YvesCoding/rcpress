@@ -17,7 +17,9 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Introduction
 
-AntdSite is a static website generator based on React.js. It's driven by [Gatsby Js](https://www.gatsbyjs.org/), and it is built with [Ant Design](https://ant.design/). Its configuration style borrows from [Vuepress](https://vuepress.vuejs.org/).
+- AntdSite is a static website generator based on React.js.
+- It's driven by [Gatsby Js](https://www.gatsbyjs.org/)
+- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://vuepress.vuejs.org/).
 
 ## Features
 

@@ -17,7 +17,9 @@
 
 ## 简介
 
-Antdsite 是一个基于 React.js 的静态文档生成器。它是由[Gatsby Js](https://www.gatsbyjs.org/)驱动的， 使用 [Ant Design](https://ant.design/)设计构建。它的配置项借鉴了[Vuepress](https://vuepress.vuejs.org/)
+- Antdsite 是一个基于 React.js 的静态文档生成器。
+- 它是由[Gatsby Js](https://www.gatsbyjs.org/)驱动的
+- 使用 [Ant Design](https://ant.design/)设计构建， 并且它的配置项借鉴了[Vuepress](https://vuepress.vuejs.org/)
 
 ## 特点
 
