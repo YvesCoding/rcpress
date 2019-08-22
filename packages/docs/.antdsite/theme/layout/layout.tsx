@@ -4,7 +4,7 @@ import Header from 'antdsite-header';
 import { BackTop } from 'antd';
 import MainContent from 'antdsite-main-content';
 import { PageContext } from 'antdsite';
-import './hide-statistical-script';
+import './hide-statistical-script.less';
 
 export interface LayoutProps {
   isMobile: boolean;
