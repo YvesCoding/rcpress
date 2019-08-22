@@ -241,27 +241,22 @@ function createApp(name = './', useNpm, eject, isForce) {
     ],
     sidebar: {
       '/guide/': [
-        'page1',
+        'introduction',
         {
-          title: 'page2',
-          children: ['page2']
+          title: 'page-collapsed',
+          children: ['page-collapsed']
         },
         {
-          title: 'page3',
-          collapsable: false,
-          children: ['page3']
-        },
-        {
-          title: 'page4',
+          title: 'page-group-exapmle',
           collapsable: false,
           children: [
             {
               title: 'group-1',
-              children: ['page4-1']
+              children: ['group-1-item']
             },
             {
               title: 'group-2',
-              children: ['page4-2']
+              children: ['group-2-item']
             }
           ]
         }
@@ -302,6 +297,7 @@ function run(root, dependencies, useYarn, appName, originalDirectory) {
 
 function install(root, useYarn, dependencies) {
   return new Promise((resolve, reject) => {
+    return resolve();
     let command;
     let args;
     if (useYarn) {
