@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.6](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.5...antdsite@0.10.6) (2019-08-22)
+
+
+### Bug Fixes
+
+* **antdsite:** fix group item style issue. ([efc20a4](https://github.com/YvesCoding/antdsite/commit/efc20a4))
+
+
+
+
+
+
 ## [0.10.5](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.4...antdsite@0.10.5) (2019-08-20)
 
 **Note:** Version bump only for package antdsite
