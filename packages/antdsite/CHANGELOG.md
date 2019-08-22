@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.7](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.6...antdsite@0.10.7) (2019-08-22)
+
+
+### Bug Fixes
+
+* **antdsite:** fix repoonsive styles ([831214c](https://github.com/YvesCoding/antdsite/commit/831214c))
+
+
+
+
+
 ## [0.10.6](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.5...antdsite@0.10.6) (2019-08-22)
 
 
