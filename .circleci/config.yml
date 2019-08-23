@@ -31,4 +31,8 @@ workflows:
   build-and-deploy:
     jobs:
       - build-docs:
+         filters:
+            branches:
+              only:
+                - "master"
           context: aliyun
