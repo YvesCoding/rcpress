@@ -132,6 +132,7 @@ function getGuideSidebar(start = 'Get Started') {
     'configuration',
     'theme',
     'usejsx',
+    'markdown',
     'global-component',
     'i18n',
     'cli'

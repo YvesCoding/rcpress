@@ -1,8 +1,10 @@
 # Default Theme Config
 
 > Most of the text is copied in [vuepress](https://vuepress.vuejs.org/zh/default-theme-config), with minor modifications
->
-> All options listed on this page apply to the default theme only. If you are using a custom theme, the options may be different.
+
+::: tip
+All options listed on this page apply to the default theme only. If you are using a custom theme, the options may be different.
+:::
 
 ## Homepage
 
@@ -27,7 +29,9 @@ features:
 
 Any additional content after the `YAML front matter` will be parsed as normal markdown and rendered after the features section.
 
-<Alert message="Warning" description={<p>showStar only supports <strong>GitHub</strong></p>} type="warning" showIcon />
+::: warning
+`showStar` only supports **GitHub**
+:::
 
 ## Navbar
 

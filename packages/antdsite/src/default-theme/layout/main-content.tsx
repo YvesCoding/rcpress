@@ -113,7 +113,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
             )}
           </div>
           <PrevAndNext prev={prev} next={next} />
-          {footerText ? <Footer footerText={footerText} ref="footer" /> : null}
+          {footerText && isWebsiteHome ? <Footer footerText={footerText} ref="footer" /> : null}
         </Col>
       </Row>
     );

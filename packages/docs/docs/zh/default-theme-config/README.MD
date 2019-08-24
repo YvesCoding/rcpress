@@ -1,8 +1,10 @@
 # 默认主题
 
 > 本节大部分复制于[vepress](https://vuepress.vuejs.org/zh/default-theme-config),略作修改
->
-> 本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同
+
+::: tip-zh
+本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同
+:::
 
 ## 首页
 
@@ -27,7 +29,9 @@ features:
 
 任何 `YAML front matter` 之后额外的内容将会以普通的 markdown 被渲染，并插入到 `features` 的后面。
 
-<Alert message="警告" description={<p>showStar 只支持 <strong>GitHub</strong></p>} type="warning" showIcon />
+::: warning-zh
+`showStar` 只支持 **GitHub**
+:::
 
 ## 导航栏
 

@@ -2,6 +2,10 @@
 
 > Most of the text is copied in [vuepress](https://vuepress.vuejs.org/config/), with minor modifications
 
+::: tip
+Don't worry about the default settings being overwritten, antdsite will use the [deepMerge function](https://github.com/YvesCoding/antdsite/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/antdsite/lib/util.js#L5) to **deep merge** the new settings and default configuration.
+:::
+
 ## Basic Config
 
 ### base
@@ -140,3 +144,73 @@ Provide config options to the used theme. The options will vary depending on the
 **Also see:**
 
 - [Default Theme Configuration](../default-theme-config).
+
+## markdown
+
+### alert
+
+The Alert will eventually be rendered into the [Alert](https://ant.design/components/alert-cn/) component of **Ant Design**. You can set different aliases and default titles by configuring `alert`. The default configuration items are as follows:
+
+```js
+const config = {
+  markdown: {
+    alert: {
+      info: [
+        {
+          alias: 'tip',
+          defaultTitle: 'Tip'
+        },
+        {
+          alias: 'tip-zh',
+          defaultTitle: '提示'
+        }
+      ],
+      warning: [
+        {
+          alias: 'warning',
+          defaultTitle: 'Warning'
+        },
+        {
+          alias: 'warning-zh',
+          defaultTitle: '警告'
+        }
+      ],
+      error: [
+        {
+          alias: 'error',
+          defaultTitle: 'Caveat'
+        },
+        {
+          alias: 'error-zh',
+          defaultTitle: '严重警告'
+        }
+      ]
+    }
+  }
+};
+```
+
+among them:
+
+- info: corresponding to `type="info"` alert component
+- warning: corresponds to `type="warning"` alert component
+- error: corresponding to `type="error"` alert component
+
+You can set multiple aliases and default titles for each type, such as:
+
+```js
+const config = {
+  markdown: {
+    alert: {
+      info: [
+        alias: 'tip-alias',
+        defaultTitle: 'Tip Alias'
+      ]
+    }
+  }
+};
+```
+
+**See also:**
+
+- [Markdown Extensions](../guide/markdown/)

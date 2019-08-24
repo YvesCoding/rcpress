@@ -24,7 +24,11 @@ module.exports = {
           {
             resolve: getPlugin('remark-default-class-name')
           },
-          'gatsby-remark-prismjs'
+          'gatsby-remark-prismjs',
+          {
+            resolve: getPlugin('gatsby-remark-custom-blocks'),
+            pluginOptions: finalConfig.markdown.alert
+          }
         ]
       }
     },

@@ -2,6 +2,10 @@
 
 > 文本大部分复制于[vuepress](https://vuepress.vuejs.org/zh/config/)，略作修改
 
+::: tip-zh
+不必担心默认的设置会被覆盖掉，antdsite 会使用[deepMerge 函数](https://github.com/YvesCoding/antdsite/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/antdsite/lib/util.js#L5)将新设置的配置和默认配置进行**深度合并**
+:::
+
 ## 基本配置
 
 ### base
@@ -140,3 +144,73 @@ Array<{name:string,umdName:string,cdnLink:string,order?:number}>
 **也可以参考:**
 
 - [默认主题](../default-theme-config/)。
+
+## markdown
+
+### alert
+
+Alert 最终会渲染成 **Ant Design** 的 [Alert](https://ant.design/components/alert-cn/)组件。可以通过配置`alert`来设置不同的别名和默认标题，默认的配置项如下：
+
+```js
+const config = {
+  markdown: {
+    alert: {
+      info: [
+        {
+          alias: 'tip',
+          defaultTitle: 'Tip'
+        },
+        {
+          alias: 'tip-zh',
+          defaultTitle: '提示'
+        }
+      ],
+      warning: [
+        {
+          alias: 'warning',
+          defaultTitle: 'Warning'
+        },
+        {
+          alias: 'warning-zh',
+          defaultTitle: '警告'
+        }
+      ],
+      error: [
+        {
+          alias: 'error',
+          defaultTitle: 'Caveat'
+        },
+        {
+          alias: 'error-zh',
+          defaultTitle: '严重警告'
+        }
+      ]
+    }
+  }
+};
+```
+
+其中:
+
+- info：对应 `type="info"` 时 alert 组件
+- warning： 对应 `type="warning"` 时 alert 组件
+- error：对应 `type="error"` 时 alert 组件
+
+你可以为每种类型设置多个别名和默认标题，如：
+
+```js
+const config = {
+  markdown: {
+    alert: {
+      info: [
+        alias: 'tip-alias',
+        defaultTitle: 'Tip Alias'
+      ]
+    }
+  }
+};
+```
+
+**也可以参考:**
+
+- [markdown 扩展](../guide/markdown/)
