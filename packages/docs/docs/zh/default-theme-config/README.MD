@@ -1,6 +1,6 @@
 # 默认主题
 
-> 本节大部分复制于[vepress](https://vuepress.vuejs.org/zh/default-theme-config),略作修改
+> 本节大部分复制于[Vuepress](https://vuepress.vuejs.org/zh/default-theme-config),略作修改
 
 ::: tip-zh
 本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同
