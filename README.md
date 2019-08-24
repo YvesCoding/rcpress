@@ -66,6 +66,17 @@ Visit `8000` port and that's all.
 <img src="https://www.yvescoding.com/antdsite/screenshot-1.png" width="700" />
 </p>
 
+## Todo List
+
+- [ ] Support highlighting the specified line of code
+- [ ] A global component that can display the demo
+
+## Thanks
+
+- [Ant Design](https://ant.design/)
+- [VuePress](https://vuepress.vuejs.org/)
+- [GatsbyJs](https://www.gatsbyjs.org/)
+
 ## Communication
 
 Add my wechat to invite you to communication group.
