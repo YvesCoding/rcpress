@@ -62,10 +62,6 @@ antdsite my-docs
 <img src="https://www.yvescoding.com/antdsite/screenshot.png" width="700" />
 </p>
 
-<p align="center">
-<img src="https://www.yvescoding.com/antdsite/screenshot-1.png" width="700" />
-</p>
-
 ## 待办列表
 
 - [ ] 支持高亮指定的代码行
