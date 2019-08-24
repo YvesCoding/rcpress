@@ -18,7 +18,7 @@ import ImgWidthBase from '@components/ImgWidthBase'
 
 ## 基本特点
 
-- [Vuepree](https://vuepress.vuejs.org/) 配置风格，使用起来功能强大，简单方便。
+- [Vuepress](https://vuepress.vuejs.org/) 配置风格，使用起来功能强大，简单方便。
 - 支持[mdx](https://github.com/mdx-js/mdx).
 - 内置了 [Ant Design](https://ant.design).
 - 支持[custom layout](https://www.yvescoding.com/antdsite/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等等).
