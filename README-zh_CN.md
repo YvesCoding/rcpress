@@ -56,7 +56,7 @@ antdsite my-docs
 
 访问`8000`端口即可。
 
-## 截图
+## 首页截图
 
 <p align="center">
 <img src="https://www.yvescoding.com/antdsite/screenshot.png" width="700" />
@@ -73,9 +73,9 @@ antdsite my-docs
 - [VuePress](https://vuepress.vuejs.org/)
 - [GatsbyJs](https://www.gatsbyjs.org/)
 
-## 交流
+## 微信交流
 
-添加我的微信我将邀请你到交流群讨论。
+群里成员已经超过 100 人了，添加我的微信我将邀请你到交流群讨论。
 
  <img src="https://github.com/wangyi7099/pictureCdn/blob/master/allPic/vuescroll/wx.png?raw=true" width="400" alt="Demo" style="max-width:100%;">
 

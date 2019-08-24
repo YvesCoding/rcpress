@@ -49,20 +49,6 @@ module.exports = {
             link: '/default-theme-config/'
           },
           {
-            text: 'My opensources',
-            important: true,
-            items: [
-              {
-                text: 'vuescroll',
-                link: 'https://github.com/YvesCoding/vuescroll'
-              },
-              {
-                text: 'magic-scroll',
-                link: 'https://github.com/YvesCoding/magic-scroll'
-              }
-            ]
-          },
-          {
             text: 'GitHub',
             link: 'https://github.com/YvesCoding/antdsite',
             important: true
@@ -91,20 +77,6 @@ module.exports = {
           {
             text: '默认主题配置',
             link: '/zh/default-theme-config/'
-          },
-          {
-            text: '我的开源项目',
-            important: true,
-            items: [
-              {
-                text: 'vuescroll',
-                link: 'https://github.com/YvesCoding/vuescroll'
-              },
-              {
-                text: 'magic-scroll',
-                link: 'https://github.com/YvesCoding/magic-scroll'
-              }
-            ]
           },
           {
             text: 'GitHub',

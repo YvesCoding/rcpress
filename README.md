@@ -56,7 +56,7 @@ antdsite my-docs
 
 Visit `8000` port and that's all.
 
-## Screenshot
+## HomPpage Screenshot
 
 <p align="center">
 <img src="https://www.yvescoding.com/antdsite/screenshot.png" width="700" />
@@ -73,9 +73,9 @@ Visit `8000` port and that's all.
 - [VuePress](https://vuepress.vuejs.org/)
 - [GatsbyJs](https://www.gatsbyjs.org/)
 
-## Communication
+## WeChat Communication
 
-Add my wechat to invite you to communication group.
+There are more than 100 members in the group, add my WeChat, I will invite you to the communication group.
 
  <img src="https://github.com/wangyi7099/pictureCdn/blob/master/allPic/vuescroll/wx.png?raw=true" width="400" alt="Demo" style="max-width:100%;">
 
