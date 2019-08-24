@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.7...antdsite@0.11.0) (2019-08-24)
+
+
+### Features
+
+* **antdsite:** add markdown syntax of alert component ([8b30183](https://github.com/YvesCoding/antdsite/commit/8b30183))
+
+
+
+
+
 ## [0.10.7](https://github.com/YvesCoding/antdsite/compare/antdsite@0.10.6...antdsite@0.10.7) (2019-08-22)
 
 
