@@ -56,12 +56,11 @@ antdsite my-docs
 
 Visit `8000` port and that's all.
 
-## Screenshots
+## Screenshot
 
 <p align="center">
 <img src="https://www.yvescoding.com/antdsite/screenshot.png" width="700" />
 </p>
-
 
 ## Todo List
 
