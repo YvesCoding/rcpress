@@ -1,0 +1,60 @@
+/** 
+ * --------------------------------
+ * Custom markdown block
+ * --------------------------------
+ */
+
+.md-alert.ant-alert {
+  .ant-alert-description {
+    p {
+      margin: 0.3rem 0;
+    }
+  }
+
+  margin-bottom: 16px;
+}
+
+/** 
+ * --------------------------------
+ *  Highlight code line
+ * --------------------------------
+ */
+
+.gatsby-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.66);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+}
+
+/** 
+ * --------------------------------
+ *  Line  Numbers 
+ * --------------------------------
+ */
+
+// Adjust the position of the line numbers
+.gatsby-highlight pre[class*='language-'].line-numbers {
+  padding-left: 2.8em;
+}
+
+// If you only want to use line numbering
+.gatsby-highlight {
+  border-radius: 0.3em;
+}
+.gatsby-highlight pre[class*='language-'].line-numbers {
+  padding-left: 1.8em;
+  overflow: auto;
+}
+.line-numbers .line-numbers-rows {
+  border: none;
+}
+.line-numbers-rows > span:before {
+  padding-right: 0.4rem;
+  padding-left: 0.4rem;
+}
+.line-numbers .line-numbers-rows {
+  padding-top: 1em;
+}

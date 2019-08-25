@@ -1,4 +1,5 @@
 import NProgress from 'nprogress';
+require('prismjs/plugins/line-numbers/prism-line-numbers.css');
 
 export const onClientEntry = () => {
   // Merge default options with user defined options in `gatsby-config.js`

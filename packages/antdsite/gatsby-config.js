@@ -24,7 +24,12 @@ module.exports = {
           {
             resolve: getPlugin('remark-default-class-name')
           },
-          'gatsby-remark-prismjs',
+          {
+            resolve: 'gatsby-remark-prismjs',
+            options: {
+              inlineCodeMarker: '>>>'
+            }
+          },
           {
             resolve: getPlugin('gatsby-remark-custom-blocks'),
             pluginOptions: finalConfig.markdown.alert

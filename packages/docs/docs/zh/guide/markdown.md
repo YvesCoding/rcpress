@@ -48,6 +48,94 @@
 这是一个自定义标题的提示
 :::
 
-**具体配置参考:**
+**也可以查看:**
 
 - [Markdown alert 配置项](../config/#alert)
+
+## 代码块中的行高亮
+
+输入：
+
+````markdown
+```js{4}
+export default {
+  data() {
+    return {
+      msg: 'Highlighted!'
+    };
+  }
+};
+```
+````
+
+输出：
+
+```js{4}
+export default {
+  data() {
+    return {
+      msg: 'Highlighted!'
+    };
+  }
+};
+```
+
+**参考：**
+
+- [gatsby-remark-prismjs](https://www.npmjs.com/package/gatsby-remark-prismjs#line-highlighting)
+
+## 显示行号
+
+输入：
+
+````markdown
+```javascript{numberLines:true}{4}
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-transformer-remark`,
+    options: {
+      plugins: [`gatsby-remark-prismjs`]
+    }
+  }
+];
+```
+````
+
+输出：
+
+```javascript{numberLines:true}{4}
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-transformer-remark`,
+    options: {
+      plugins: [`gatsby-remark-prismjs`]
+    }
+  }
+];
+```
+
+**参考：**
+
+- [gatsby-remark-prismjs](https://www.npmjs.com/package/gatsby-remark-prismjs#optional-add-line-numbering)
+
+## 高亮行内的代码
+
+输入：
+
+```markdown
+我可以用 css 语法高亮这段代码：`css>>>.some-class { background-color: red }`
+
+我可以用 js 语法高亮这段代码：`js>>>const foo = 'bar';`
+```
+
+输出：
+
+我可以用 css 语法高亮这段代码：`css>>>.some-class { background-color: red }`
+
+我可以用 js 语法高亮这段代码：`js>>>const foo = 'bar';`
+
+**参考：**
+
+- [gatsby-remark-prismjs](https://www.npmjs.com/package/gatsby-remark-prismjs#inline-code-blocks)
