@@ -74,13 +74,15 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
           sm={24}
           xs={24}
         >
-          {isWebsiteHome ? (
-            <HomePage />
-          ) : (
-            <div>
-              <Content prev={prev} next={next} />
-            </div>
-          )}
+          <div>
+            {isWebsiteHome ? (
+              <HomePage />
+            ) : (
+              <div>
+                <Content prev={prev} next={next} />
+              </div>
+            )}
+          </div>
           {footerText && isWebsiteHome ? <Footer footerText={footerText} ref="footer" /> : null}
         </Col>
       </Row>
