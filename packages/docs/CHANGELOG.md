@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/YvesCoding/antdsite/compare/docs@0.6.0...docs@0.7.0) (2019-08-25)
+
+
+### Features
+
+* **antdsite:** add highlight line number and show line number of markdown extensions. ([dd8029b](https://github.com/YvesCoding/antdsite/commit/dd8029b))
+
+
+
+
+
 # [0.6.0](https://github.com/YvesCoding/antdsite/compare/docs@0.5.9...docs@0.6.0) (2019-08-24)
 
 
