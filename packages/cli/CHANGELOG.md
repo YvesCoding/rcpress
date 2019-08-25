@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/YvesCoding/antdsite/compare/antdsite-cli@0.1.6...antdsite-cli@0.1.7) (2019-08-25)
+
+**Note:** Version bump only for package antdsite-cli
+
+
+
+
+
 ## [0.1.6](https://github.com/YvesCoding/antdsite/compare/antdsite-cli@0.1.5...antdsite-cli@0.1.6) (2019-08-22)
 
 **Note:** Version bump only for package antdsite-cli
