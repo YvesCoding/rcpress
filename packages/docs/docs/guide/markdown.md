@@ -1,6 +1,10 @@
 # Markdown Extensions
 
-## Tip box
+## Ant Design Components
+
+### Prompt box
+
+> The corresponding component of the prompt box is [Alert](https://ant.design/components/alert/)
 
 Input:
 

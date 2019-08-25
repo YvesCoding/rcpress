@@ -1,6 +1,10 @@
 # Markdown 扩展
 
-## 提示框
+## Ant Design 组件
+
+### 提示框
+
+> 提示框所对应的组件是[Alert](https://ant.design/components/alert-cn/)
 
 输入：
 

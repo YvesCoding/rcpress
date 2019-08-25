@@ -5,11 +5,11 @@ showStar: true
 home: true
 features:
   - title: 门槛底
-    details: 只需要简单配置和会一些markdown语法就能快速上手
-  - title: UI组件丰富
-    details: 文档的设计来源于<a target="_blank" href="https://ant.design/docs/react/introduce-cn">Ant Design</a>网站，不仅界面美观，还能直接使用所有的Ant Design 组件。
+    details: 只需要简单配置和会一些markdown语法就能快速上手，熟悉<a href="https://vuepress.vuejs.org/">Vuepress</a>的用户使用起来更是得心应手
+  - title: 从 markdown 到 antd
+    details: 支持用markdown语法渲染成常用的Ant Design组件，如 <a href="/zh/guide/markdown#%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88alert%EF%BC%89">Alert</a>
   - title: 功能强大
-    details: 得益于<a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a>，我们可以在markdown里使用JSX。
+    details: 支持<a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a>，支持<a href="https://www.yvescoding.com/antdsite/zh/guide/theme#custom-layout">自定义布局</a>(例如自定义网站头部，底部， 首页等)
 ---
 
 # 开始上手

@@ -5,11 +5,11 @@ showStar: true
 home: true
 features:
   - title: Easy to get started
-    details: It only requires simple configuration and some markdown syntax to get started quickly
-  - title: Rich UI components
-    details: Document design comes from <a target="_blank" href="https://ant.design/">Ant Design</a> website, which not only has a beautiful interface, but also can directly use all Ant Design components.
+    details: It only requires simple configuration and some markdown syntax to get started quickly, users who are familiar with <a href="https://vuepress.vuejs.org/">Vuepress </a> are more comfortable to use
+  - title: From markdown to antd
+    details: Supports rendering to common Ant design components using the markdown syntax, such as <a href="/guide/markdown#prompt-box">Alert</a>
   - title: Powerful
-    details: Thanks to <a target="_blank" href= "https://github.com/mdx-js/mdx">mdx</a>, we can use JSX in markdown.
+    details: Support <a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a> to support <a href="/guide/theme#custom-layout">custom layout</a> (eg custom site header, bottom, homepage, etc.)
 ---
 
 # Get Started
