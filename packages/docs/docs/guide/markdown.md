@@ -58,12 +58,12 @@ Enter:
 
 ````markdown
 ```js{4}
-Export default {
-  Data() {
-    Return {
-      Msg: 'Highlighted!'
-    };
-  }
+export default {
+  data() {
+    return {
+      msg: 'Highlighted!'
+    };
+  }
 };
 ```
 ````
@@ -71,12 +71,12 @@ Export default {
 Output:
 
 ```js{4}
-Export default {
-  Data() {
-    Return {
-      Msg: 'Highlighted!'
-    };
-  }
+export default {
+  data() {
+    return {
+      msg: 'Highlighted!'
+    };
+  }
 };
 ```
 
