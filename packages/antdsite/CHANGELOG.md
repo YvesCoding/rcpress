@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/YvesCoding/antdsite/compare/antdsite@0.12.0...antdsite@0.12.1) (2019-08-25)
+
+
+### Bug Fixes
+
+* **antdsite:** fix markdown with at homepage. ([6851fbd](https://github.com/YvesCoding/antdsite/commit/6851fbd))
+
+
+
+
+
 # [0.12.0](https://github.com/YvesCoding/antdsite/compare/antdsite@0.11.0...antdsite@0.12.0) (2019-08-25)
 
 
