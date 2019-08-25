@@ -1,6 +1,6 @@
 {
   "name": "antdsite",
-  "version": "0.12.5",
+  "version": "0.12.6",
   "description": "A static website generator based on React.js",
   "homepage": "https://github.com/YvesCoding/antdsite",
   "repository": {
