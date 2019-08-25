@@ -64,7 +64,7 @@ Visit `8000` port and that's all.
 
 ## Todo List
 
-- [ ] Support highlighting the specified line of code
+- [x] Support highlighting the specified line of code
 - [ ] A global component that can display the demo
 
 ## Thanks
