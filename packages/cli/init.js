@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 const execSync = require('child_process').execSync;
-const chalk = require('chalk');
+var msg = require('./message');
 
 function tryGitInit(appPath) {
   let didInit = false;
@@ -16,7 +16,7 @@ function tryGitInit(appPath) {
 
     execSync('git add -A', { stdio: 'ignore' });
     execSync('git commit -m "Initial commit from Create Antd Site"', {
-      stdio: 'ignore',
+      stdio: 'ignore'
     });
     return true;
   } catch (e) {
@@ -43,7 +43,7 @@ function copyTemplate(appPath) {
   if (fs.existsSync(templatePath)) {
     fs.copySync(templatePath, appPath);
   } else {
-    console.error(`Could not locate supplied template: ${chalk.green(templatePath)}`);
+    console.error(`Could not locate supplied template: ${msg.tip(templatePath)}`);
     return;
   }
 }
@@ -64,17 +64,17 @@ function showSuccessTips(appPath, appName, useYarn, originalDirectory) {
 
   console.log();
 
-  console.log(chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}start`));
+  console.log(msg.keyword(`  ${displayedCommand} ${useYarn ? '' : 'run '}start`));
   console.log(`    start the development server.`);
 
   console.log();
 
-  console.log(chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`));
+  console.log(msg.keyword(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`));
   console.log(`    Build a static website.`);
 
   console.log();
 
-  console.log(chalk.hex('#29CDFF')(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`));
+  console.log(msg.keyword(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`));
   console.log(`    copy the default theme to .antdsite/theme of the created app directory.`);
 
   console.log();
@@ -82,8 +82,8 @@ function showSuccessTips(appPath, appName, useYarn, originalDirectory) {
   console.log('We suggest that you begin by typing:');
   console.log();
 
-  console.log(chalk.hex('#29CDFF')('  cd'), cdpath);
-  console.log(`  ${chalk.hex('#29CDFF')(`${displayedCommand} start`)}`);
+  console.log(msg.keyword('  cd'), cdpath);
+  console.log(`  ${msg.keyword(`${displayedCommand} start`)}`);
 }
 
 module.exports = function(appPath, appName, useYarn, originalDirectory) {

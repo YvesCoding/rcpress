@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const commander = require('commander');
 const os = require('os');
 const path = require('path');
@@ -8,6 +7,7 @@ const fs = require('fs-extra');
 const validateProjectName = require('validate-npm-package-name');
 const spawn = require('cross-spawn');
 const ejectTheme = require('./eject');
+var msg = require('./message');
 
 let projectName;
 
@@ -23,7 +23,7 @@ const errorLogFilePatterns = ['npm-debug.log', 'yarn-error.log', 'yarn-debug.log
 const program = new commander.Command(packageJson.name)
   .version(packageJson.version)
   .arguments('[project-directory]')
-  .usage(`${chalk.green('[project-directory]')}`)
+  .usage(`${msg.tip('[project-directory]')}`)
   .action(name => {
     projectName = name;
   })
@@ -43,7 +43,7 @@ createApp(projectName, program.useNpm, program.eject, program.force);
 function printValidationResults(results) {
   if (typeof results !== 'undefined') {
     results.forEach(error => {
-      console.error(chalk.red(`  *  ${error}`));
+      console.error(msg.error(`  *  ${error}`));
     });
   }
 }
@@ -52,7 +52,7 @@ function checkAppName(appName, isForce) {
   const validationResult = validateProjectName(appName);
   if (!validationResult.validForNewPackages) {
     console.error(
-      `Could not create a project called ${chalk.red(
+      `Could not create a project called ${msg.error(
         `"${appName}"`
       )} because of npm naming restrictions:`
     );
@@ -65,14 +65,14 @@ function checkAppName(appName, isForce) {
   const dependencies = Object.keys(allDeps).sort();
   if (dependencies.indexOf(appName) >= 0) {
     console.error(
-      chalk.red(
-        `We cannot create a project called ${chalk.green(
+      msg.error(
+        `We cannot create a project called ${msg.tip(
           appName
         )} because a dependency with the same name exists.\n` +
           `Due to the way npm works, the following names are not allowed:\n\n`
       ) +
-        chalk.hex('#29CDFF')(dependencies.map(depName => `  ${depName}`).join('\n')) +
-        chalk.red('\n\nPlease choose a different project name.')
+        msg.keyword(dependencies.map(depName => `  ${depName}`).join('\n')) +
+        msg.error('\n\nPlease choose a different project name.')
     );
     process.exit(1);
   }
@@ -139,7 +139,7 @@ function isSafeToCreateProjectIn(root, name, isForce) {
     .filter(file => !errorLogFilePatterns.some(pattern => file.indexOf(pattern) === 0));
 
   if (conflicts.length > 0 && !isForce) {
-    console.log(`The directory ${chalk.green(name)} contains files that could conflict:`);
+    console.log(`The directory ${msg.tip(name)} contains files that could conflict:`);
     console.log();
     for (const file of conflicts) {
       console.log(`  ${file}`);
@@ -178,7 +178,7 @@ function createApp(name = './', useNpm, eject, isForce) {
     process.exit(1);
   }
 
-  console.log(`Creating a new antd site in ${chalk.green(root)}.`);
+  console.log(`Creating a new antd site in ${msg.tip(root)}.`);
   console.log();
 
   const useYarn = useNpm ? false : shouldUseYarn();
@@ -198,9 +198,33 @@ function createApp(name = './', useNpm, eject, isForce) {
   };
   const pkgPath = path.join(root, 'package.json');
   if (fs.existsSync(pkgPath)) {
+    console.log(msg.warn(`Note: We detected the package.json at ${root}`));
+    console.log();
+    console.log(msg.warn('The following keys will be overwritten:'));
+    console.log();
+
+    const keys = [
+      'scripts.build',
+      'scripts.start',
+      'scripts.eject',
+      'scripts.clean',
+      'devDependencies.antdsite',
+      'devDependencies.gatsby'
+    ];
+
+    for (const key of keys) {
+      console.log(`  ${key}`);
+    }
+
+    console.log();
+    console.log(
+      msg.warn('You can rename the key in package.json if it is conflict with the above keys.')
+    );
+    console.log();
+
     const oldPakJson = require(pkgPath) || {};
-    oldPakJson.scripts = packageJson.scripts || {};
-    oldPakJson.devDependencies = packageJson.devDependencies || {};
+    oldPakJson.scripts = oldPakJson.scripts || {};
+    oldPakJson.devDependencies = oldPakJson.devDependencies || {};
 
     packageJson = {
       ...packageJson,
@@ -277,7 +301,7 @@ function createApp(name = './', useNpm, eject, isForce) {
 }
 
 function run(root, dependencies, useYarn, appName, originalDirectory) {
-  console.log(`Installing ${chalk.hex('#29CDFF')(dependencies.join(' '))} ...`);
+  console.log(`Installing ${msg.keyword(dependencies.join(' '))} ...`);
   install(root, useYarn, dependencies).then(() => {
     const initScriptPath = path.resolve(__dirname, 'init.js');
 

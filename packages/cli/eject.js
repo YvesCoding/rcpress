@@ -1,10 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const chalk = require('chalk');
-
-function copyDir(from, to, dirName) {
-  fs.copySync(path.resolve(from, dirName), path.resolve(to, dirName));
-}
+var msg = require('./message');
 
 module.exports = root => {
   let themeDir;
@@ -16,9 +12,7 @@ module.exports = root => {
       })
     );
   } catch (e) {
-    console.error(
-      chalk.red(`[AntdSite] Cannot find antdsite at ${root}, eject failed, process exit.`)
-    );
+    console.error(msg.error(`Cannot find antdsite at ${root}, eject failed, process exit.`));
 
     process.exit(1);
   }
