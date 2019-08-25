@@ -4,7 +4,6 @@ import { PageContext } from 'antdsite';
 import HomePage from 'antdsite-home';
 import LeftMenu from '../components/menu';
 import Content from '../components/content';
-import PrevAndNext from '../components/prevAndNext';
 import Footer from 'antdsite-footer';
 import ReactDom from 'react-dom';
 
@@ -17,7 +16,6 @@ export interface MainContentProps {
 export interface MainContentState {
   prev: React.Component | null;
   next: React.Component | null;
-  contentHeight: string;
 }
 
 export default class MainContent extends React.PureComponent<MainContentProps, MainContentState> {
@@ -28,17 +26,8 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
 
     this.state = {
       prev: null,
-      next: null,
-      contentHeight: ''
+      next: null
     };
-  }
-
-  componentDidMount() {
-    this.setContentHeight();
-  }
-
-  componentDidUpdate() {
-    this.setContentHeight();
   }
 
   getFooterHeight = () => {
@@ -47,20 +36,6 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
 
     const footerNode = ReactDom.findDOMNode(footer) as HTMLDivElement;
     return footerNode.offsetHeight;
-  };
-
-  setContentHeight = () => {
-    const { prev, next } = this.state;
-    // calc content's min-height
-    // header's height is 64px and
-    // prev and next button's height is 73px,
-    // we should also add main-wrapper's paddingTop: 40opx
-    const resetHeight =
-      (this.refs.footer ? this.getFooterHeight() + 64 : 64) + 40 + (prev || next ? 73 : 0);
-
-    this.setState({
-      contentHeight: `calc(100vh - ${resetHeight}px)`
-    });
   };
 
   getPreAndNextMenu = (prev: React.Component, next: React.Component) => {
@@ -72,7 +47,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
 
   render() {
     const { isMobile, isWebsiteHome } = this.props;
-    const { prev, next, contentHeight } = this.state;
+    const { prev, next } = this.state;
     const {
       currentPageSidebarItems: menuList,
       slug,
@@ -99,20 +74,13 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
           sm={24}
           xs={24}
         >
-          <div
-            style={{
-              minHeight: contentHeight
-            }}
-          >
-            {isWebsiteHome ? (
-              <HomePage />
-            ) : (
-              <div>
-                <Content />
-              </div>
-            )}
-          </div>
-          <PrevAndNext prev={prev} next={next} />
+          {isWebsiteHome ? (
+            <HomePage />
+          ) : (
+            <div>
+              <Content prev={prev} next={next} />
+            </div>
+          )}
           {footerText && isWebsiteHome ? <Footer footerText={footerText} ref="footer" /> : null}
         </Col>
       </Row>

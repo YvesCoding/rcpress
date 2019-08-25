@@ -1,6 +1,5 @@
 .prev-next-nav {
-  margin-right: 64px;
-  margin-left: 64px;
+  margin-top: 15px;
   overflow: hidden;
   font-size: 14px;
   border-top: 1px solid @site-border-color-split;
@@ -12,6 +11,9 @@
     line-height: 72px;
     height: 72px;
     text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     .ant-badge-count,
     .ant-badge-dot {
       right: 20px;

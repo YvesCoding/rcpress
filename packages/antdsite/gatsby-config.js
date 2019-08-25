@@ -31,7 +31,7 @@ module.exports = {
             }
           },
           {
-            resolve: getPlugin('gatsby-remark-custom-blocks'),
+            resolve: getPlugin('gatsby-remark-ant-alert'),
             pluginOptions: finalConfig.markdown.alert
           }
         ]

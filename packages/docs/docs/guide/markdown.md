@@ -2,9 +2,11 @@
 
 ## Ant Design Components
 
+> Antdsite can render some markdown syntax tags into common Ant Design components
+
 ### Prompt box
 
-> The corresponding component of the prompt box is [Alert](https://ant.design/components/alert/)
+> Corresponding component: [Alert](https://ant.design/components/alert/)
 
 Input:
 
@@ -36,7 +38,7 @@ This is a warning
 This is a dangerous waring
 :::
 
-You can also override the default title and use a custom title.
+You can also use a custom title:
 
 Input:
 

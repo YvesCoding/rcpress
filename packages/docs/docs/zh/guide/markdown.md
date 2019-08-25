@@ -2,9 +2,11 @@
 
 ## Ant Design 组件
 
+> Antdsite 可以将一些 markdown 语法标记渲染成常用的 Ant Design 组件
+
 ### 提示框
 
-> 提示框所对应的组件是[Alert](https://ant.design/components/alert-cn/)
+> 对应组件： [Alert](https://ant.design/components/alert-cn/)
 
 输入：
 
@@ -36,7 +38,7 @@
 这是一个严重警告
 :::
 
-你也可以覆盖默认的标题,使用自定义标题。
+你也可以自定义标题：
 
 输入：
 
