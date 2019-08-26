@@ -47,7 +47,7 @@ npm i antdsite-cli -g
 
 ## 用法
 
-使用命令行工具`antdsite-cli`初始化项目
+使用命令行工具`antdsite-cli`初始化一个默认的入门项目
 
 ```bash
 antdsite my-docs

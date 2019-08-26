@@ -30,7 +30,7 @@ npm install antdsite-cli -g
 
 ## 用法
 
-使用 `cli` 来初始化一个网站
+使用 `cli` 来初始化一个默认的入门项目
 
 ```bash
 antdsite my-docs

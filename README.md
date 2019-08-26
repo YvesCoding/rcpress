@@ -47,7 +47,7 @@ npm i antdsite-cli -g
 
 ## Usage
 
-Initialize project via `antdsite-cli`
+Initialize a default starter project via `antdsite-cli`
 
 ```bash
 antdsite my-docs

@@ -16,7 +16,7 @@ npm install antdsite-cli -g
 
 ## Create project via cli
 
-Initialize a wesite via `cli`
+Initialize a default starter wesite via `cli`
 
 ```bash
 antdsite my-docs

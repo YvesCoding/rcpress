@@ -31,7 +31,7 @@ npm install antdsite-cli -g
 
 ## Usage
 
-Use `cli` to initialize a website
+Use `cli` to initialize a default starter project
 
 ```bash
 antdsite my-docs
