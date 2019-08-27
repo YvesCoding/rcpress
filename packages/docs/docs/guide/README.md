@@ -9,19 +9,20 @@ import './introduction.less'
 import ImgWidthBase from '@components/ImgWidthBase'
 
 <div class="pic-plus">
-  <ImgWidthBase url="antd-icon.svg" width={150} />
+  <ImgWidthBase url="antd-icon.svg" width={120} />
    <span>+</span>
-  <ImgWidthBase url="react-icon.svg" width={150}/>
+  <ImgWidthBase url="react-icon.svg" width={120}/>
     <span>+</span> 
-  <ImgWidthBase url="gatsby-icon-144x144.png" width={150}/>
+  <ImgWidthBase url="gatsby-icon-144x144.png" width={120}/>
+   <span>=</span> 
+  <ImgWidthBase url="favicon.png" width={120}/>
 </div>
 
-## Basic features
+## Features
 
-- [Vuepree](https://vuepress.vuejs.org/) configuration style, powerfulit's easy to use.
-- [mdx](https://github.com/mdx-js/mdx) supported.
-- Built-in [Ant Design](https://ant.design).
-- Support [custom layout](https://www.yvescoding.com/antdsite/guide/theme#custom-layout)(such as header, footer, home page and so on).
+- It only needs a simple configuration and some markdown knowledge to get started quickly. Users who are familiar with [Vuepress](https://vuepress.vuejs.org/) are more comfortable to use.
+- Supports rendering to common Ant Design components using markdown syntax, such as [Alert](https://www.yvescoding.com/antdsite/guide/markdown#prompt-box)
+- Support [mdx](https://github.com/mdx-js/mdx), support [custom layout](https://www.yvescoding.com/antdsite/guide/theme#custom-layout) (eg custom website header, bottom, home page, etc.)
 
 ## Technology Stack
 

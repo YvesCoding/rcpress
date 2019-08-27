@@ -5,7 +5,7 @@ showStar: true
 home: true
 features:
   - title: 门槛底
-    details: 只需要简单配置和会一些markdown语法就能快速上手，熟悉<a href="https://vuepress.vuejs.org/">Vuepress</a>的用户使用起来更是得心应手
+    details: 只需要简单配置和会一些markdown知识就能快速上手，熟悉<a href="https://vuepress.vuejs.org/">Vuepress</a>的用户使用起来更是得心应手
   - title: 从 markdown 到 antd
     details: 支持用markdown语法渲染成常用的Ant Design组件，如 <a href="guide/markdown#%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88alert%EF%BC%89">Alert</a>
   - title: 功能强大

@@ -9,19 +9,20 @@ import './introduction.less'
 import ImgWidthBase from '@components/ImgWidthBase'
 
 <div class="pic-plus">
-  <ImgWidthBase url="antd-icon.svg" width={150} />
+  <ImgWidthBase url="antd-icon.svg" width={120} />
    <span>+</span>
-  <ImgWidthBase url="react-icon.svg" width={150}/>
+  <ImgWidthBase url="react-icon.svg" width={120}/>
     <span>+</span> 
-  <ImgWidthBase url="gatsby-icon-144x144.png" width={150}/>
+  <ImgWidthBase url="gatsby-icon-144x144.png" width={120}/>
+   <span>=</span> 
+  <ImgWidthBase url="favicon.png" width={120}/>
 </div>
 
-## 基本特点
+## 特点
 
-- [Vuepress](https://vuepress.vuejs.org/) 配置风格，使用起来功能强大，简单方便。
-- 支持[mdx](https://github.com/mdx-js/mdx).
-- 内置了 [Ant Design](https://ant.design).
-- 支持[custom layout](https://www.yvescoding.com/antdsite/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等等).
+- 只需要简单配置和会一些 markdown 知识就能快速上手，熟悉[Vuepress](https://vuepress.vuejs.org/)的用户使用起来更是得心应手
+- 支持用 markdown 语法渲染成常用的 Ant Design 组件，如[Alert](https://www.yvescoding.com/antdsite/zh/guide/markdown#%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88alert%EF%BC%89)
+- 支支持[mdx](https://github.com/mdx-js/mdx) ,支持[自定义布局](https://www.yvescoding.com/antdsite/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等)
 
 ## 技术栈
 
