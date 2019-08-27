@@ -13,6 +13,7 @@
   "workspaces": [
     "packages/antdsite",
     "packages/cli",
+    "packages/cli/my-docs",
     "packages/docs"
   ],
   "devDependencies": {

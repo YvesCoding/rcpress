@@ -1,8 +1,21 @@
+@import '~antd/lib/style/themes/default.less';
+
 .pic-plus {
   margin-bottom: 20px;
   span {
     font-size: 30px;
     color: #aaa;
     margin: 0 20px;
+    vertical-align: sub;
+  }
+}
+@media only screen and (max-width: @screen-xs) {
+  .pic-plus {
+    span {
+      margin: 0 5px !important;
+    }
+    img {
+      width: calc(25% - 25px);
+    }
   }
 }
