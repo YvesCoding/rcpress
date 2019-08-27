@@ -70,9 +70,9 @@ module.exports = {
   title: 'my-docs',
   // Site description, used to generate a description of the seo search and home page.
   description: 'My first antdsite app',
-  // 一般展示在首页和左上角
-  logo: '/favicon.png',
   // Generally shown on the front page and top left corner
+  logo: '/favicon.png',
+  // The text at the bottom of the home page supports html format
   footer: 'MIT Licensed | Copyright © 2019-present Yi(Yves) Wang',
   // Each element in the format is [tagName, {/* element attribute, which will be attached to the generated element as it is. */}, /* child node */]
   // some elements that will be inserted into the head of the site when the site is generated,
