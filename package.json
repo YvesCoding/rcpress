@@ -13,7 +13,8 @@
   "workspaces": [
     "packages/antdsite",
     "packages/cli",
-    "packages/docs"
+    "packages/docs",
+    "packages/theme-blog"
   ],
   "devDependencies": {
     "lerna": "^3.11.1",

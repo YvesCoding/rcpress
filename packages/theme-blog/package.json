@@ -1,0 +1,16 @@
+{
+  "name": "antdsite-blog-theme",
+  "version": "0.0.1",
+  "description": "A blog theme based on Antdsite",
+  "private": true,
+  "scripts": {
+    "build": "yarn clean && gatsby build",
+    "start": "yarn clean && gatsby develop",
+    "eject": "antdsite-cli --eject",
+    "clean": "gatsby clean"
+  },
+  "devDependencies": {
+    "antdsite": "latest",
+    "gatsby": "^2.13.45"
+  }
+}
