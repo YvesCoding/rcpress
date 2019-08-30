@@ -2,12 +2,14 @@ const fs = require('fs-extra');
 const path = require('path');
 var msg = require('./message');
 
+const EXCLUDED_FILES = ['__tests__', '.npmignore', 'package.json', 'node_modules', 'README.md'];
+
 module.exports = root => {
   let themeDir;
 
   try {
     themeDir = path.dirname(
-      require.resolve('antdsite', {
+      require.resolve('antdsite-default-theme', {
         paths: [process.cwd()]
       })
     );
@@ -20,7 +22,16 @@ module.exports = root => {
   const themePath = path.resolve(root, '.antdsite/theme');
 
   fs.ensureDirSync(themePath);
-  fs.copySync(path.resolve(themeDir, 'src/default-theme'), themePath);
+  fs.copySync(themeDir, themePath, {
+    filter: function(src) {
+      const relative = path.relative(sourceDir, src);
+      if (EXCLUDED_FILES.includes(relative)) {
+        return false;
+      }
+
+      return true;
+    }
+  });
 
   console.log();
 

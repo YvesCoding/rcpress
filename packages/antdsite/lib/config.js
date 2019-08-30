@@ -7,6 +7,8 @@ const { deepMerge } = require('./util');
 
 let userConfig;
 let finalConfig;
+let themeConfig;
+let themeFullPath;
 
 const defaultConfig = {
   base: '/',
@@ -37,56 +39,14 @@ const defaultConfig = {
       cdnLink: 'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
     }
   ],
+  theme: 'antdsite-default-theme',
   themeConfig: {
     themeColors: null,
     repo: null,
     docsRepo: null,
     docsDir: 'docs',
     docsRelativeDir: '',
-    docsBranch: 'master',
-    editLinks: true,
-    editLinkText: 'Edit this page',
-    lastUpdated: 'Last Updated', // string | boolean
-    locales: null,
-    showAvatarList: true,
-    showBackToTop: true,
-    maxTocDeep: 3,
-    search: true,
-    searchMaxSuggestions: 10
-  },
-  markdown: {
-    alert: {
-      info: [
-        {
-          alias: 'tip',
-          defaultTitle: 'Tip'
-        },
-        {
-          alias: 'tip-zh',
-          defaultTitle: '提示'
-        }
-      ],
-      warning: [
-        {
-          alias: 'warning',
-          defaultTitle: 'Warning'
-        },
-        {
-          alias: 'warning-zh',
-          defaultTitle: '警告'
-        }
-      ],
-      error: [
-        {
-          alias: 'error',
-          defaultTitle: 'Caveat'
-        },
-        {
-          alias: 'error-zh',
-          defaultTitle: '严重警告'
-        }
-      ]
-    }
+    docsBranch: 'master'
   }
 };
 
@@ -122,12 +82,53 @@ const getUserConfig = () => {
   return userConfig;
 };
 
+const getThemeConfig = themeName => {
+  if (themeConfig) return themeConfig;
+
+  let fullConfigPath;
+  let currentThemeConfig;
+  let isThrow;
+  let currentThemePath;
+
+  try {
+    currentThemePath = require.resolve(themeName);
+    fullConfigPath = path.resolve(currentThemePath, configPath);
+    currentThemeConfig = require(fullConfigPath);
+  } catch (error) {
+    console.error(
+      chalk.red(
+        `[AntdSite]: Error when parsing  theme config at ${fullConfigPath}, fallback to default config, the detail error is bellow:`
+      )
+    );
+    console.error(error);
+    isThrow = true;
+  }
+
+  if (!isThrow && currentThemeConfig) {
+    themeName = currentThemeConfig.theme;
+    themeFullPath = currentThemePath;
+    themeConfig = currentThemeConfig;
+  }
+
+  return themeConfig;
+};
+
+module.exports.getTheme = function() {
+  return {
+    themeConfig,
+    themeFullPath
+  };
+};
+
 module.exports.getFinalConfig = function() {
   if (finalConfig) return finalConfig;
 
-  const config = getUserConfig();
+  // get user config
+  const userConfig = getUserConfig();
+  // get theme config
+  const themeConfig = getThemeConfig(userConfig.theme);
   // merge with default config.
-  finalConfig = deepMerge(config, defaultConfig);
+  finalConfig = deepMerge.apply(null, [defaultConfig, ...themeConfig, userConfig]);
   // validate & fix config.
   validateConfig(finalConfig);
   // create a config file for enabling read for other runtime files.

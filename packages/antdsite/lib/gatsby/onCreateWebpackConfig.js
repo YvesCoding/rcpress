@@ -1,5 +1,5 @@
 const { themePath, globalCompnentPath } = require('../constant');
-const { getFinalConfig } = require('../config');
+const { getFinalConfig, getTheme } = require('../config');
 const path = require('path');
 const fs = require('fs');
 
@@ -49,16 +49,17 @@ function componentExist(path) {
 }
 
 function getLayoutPath(layoutName) {
-  const userDefinedLayout = path.resolve(process.cwd(), `${themePath}/layout/${layoutName}`);
+  const userDefinedLayout = path.resolve(process.cwd(), `${themePath}/${layoutName}`);
   if (componentExist(userDefinedLayout)) {
     return userDefinedLayout;
   } else {
-    return path.resolve(__dirname, `../../src/default-theme/layout/${layoutName}.tsx`);
+    const { themeFullPath } = getTheme();
+    return path.resolve(themeFullPath, 'layout');
   }
 }
 
 function resolveLayouts(actions) {
-  const allLayouts = ['layout', 'header', 'home', 'footer', 'main-content'];
+  const allLayouts = ['layout'];
   allLayouts.forEach(layout => {
     const layoutPath = getLayoutPath(layout);
     actions.setWebpackConfig({

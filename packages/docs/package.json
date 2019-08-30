@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "antdsite": "^0.12.8",
+    "antdsite-default-theme": "^0.0.0",
     "gatsby": "^2.13.39",
     "gatsby-plugin-netlify": "^2.0.0"
   },

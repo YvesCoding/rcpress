@@ -1,7 +1,7 @@
 {
-  "name": "antdsite-blog-theme",
+  "name": "antdsite-default-theme",
   "version": "0.0.0",
-  "description": "The blog theme of Antdsite",
+  "description": "The default theme of Antdsite",
   "private": true,
   "scripts": {
     "build": "yarn clean && gatsby build",
