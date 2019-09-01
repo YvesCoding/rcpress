@@ -1,0 +1,7 @@
+{
+  "name": "@antdsite/markdown",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@antdsite/rollup": "^0.0.0"
+  }
+}

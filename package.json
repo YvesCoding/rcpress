@@ -1,25 +1,40 @@
 {
   "private": true,
-  "scripts": {
-    "clean": "lerna clean && rm -rf node_modules",
-    "bs": "lerna bootstrap",
-    "publish": "lerna publish --conventional-commits",
-    "build": "yarn build:docs",
-    "build:docs": "yarn workspace docs build",
-    "start": "yarn workspace docs start",
-    "build-with-prefix": "cross-env base=/antdsite  yarn build",
-    "cl": "conventional-changelog -p angular -i CHANGELOG.md -s"
-  },
   "workspaces": [
-    "packages/antdsite",
-    "packages/cli",
-    "packages/docs",
-    "packages/theme-default",
-    "packages/theme-blog"
+    "packages/@antdsite/cli",
+    "packages/@antdsite/core",
+    "packages/@antdsite/markdown",
+    "packages/@antdsite/rollup",
+    "packages/@antdsite/util",
+    "packages/@antdsite/theme-default",
+    "packages/@antdsite/theme-blog",
+    "packages/docs"
   ],
+  "scripts": {
+    "bs": "lerna bootstrap",
+    "build": "yarn build:docs",
+    "build-with-prefix": "cross-env base=/antdsite  yarn build",
+    "build:docs": "yarn workspace docs build",
+    "cl": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "clean": "lerna clean && rm -rf node_modules",
+    "publish": "lerna publish --conventional-commits",
+    "start": "yarn workspace docs start"
+  },
   "devDependencies": {
-    "lerna": "^3.11.1",
+    "@types/fs-extra": "^8.0.0",
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.136",
+    "@types/node": "^12.6.8",
+    "@types/prettier": "^1.16.4",
     "conventional-changelog-cli": "2.0.23",
-    "cross-env": "5.2.0"
+    "cross-env": "5.2.0",
+    "husky": "^3.0.0",
+    "jest": "^24.8.0",
+    "lerna": "^3.11.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "rollup": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "3.5.3"
   }
 }

@@ -1,0 +1,34 @@
+{
+  "name": "@antdsite/rollup",
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "src/",
+    "package.json"
+  ],
+  "main": "src/index.js",
+  "scripts": {
+    "fix": "yarn lint --fix",
+    "lint": "eslint . --ext .js",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "figures": "3.0.0",
+    "filesize": "^4.1.2",
+    "fs-extra": "^8.1.0",
+    "gzip-size": "^5.1.1",
+    "lodash": "^4.17.14",
+    "log-update": "^3.2.0",
+    "rollup": "^1.17.0",
+    "rollup-plugin-alias": "^1.5.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-progress": "^1.1.1",
+    "rollup-plugin-typescript2": "^0.22.0"
+  }
+}

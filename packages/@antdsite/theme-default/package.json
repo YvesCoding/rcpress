@@ -1,12 +1,10 @@
 {
-  "name": "docs",
-  "version": "0.7.8",
+  "name": "@antdsite/default-theme",
+  "version": "0.0.0",
   "private": true,
-  "keywords": [],
-  "license": "MIT",
-  "author": "",
+  "description": "The default theme of Antdsite",
   "scripts": {
-    "build": "yarn clean && gatsby build --prefix-paths",
+    "build": "yarn clean && gatsby build",
     "clean": "gatsby clean",
     "start": "yarn clean && gatsby develop"
   },
