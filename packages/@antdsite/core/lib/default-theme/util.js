@@ -66,7 +66,7 @@ export function resolvePage (pages, rawPath, base) {
       })
     }
   }
-  console.error(`[vuepress] No matching page found for sidebar item "${rawPath}"`)
+  console.error(`[antdsite] No matching page found for sidebar item "${rawPath}"`)
   return {}
 }
 
@@ -201,7 +201,7 @@ function resolveItem (item, pages, base, isNested) {
   } else {
     if (isNested) {
       console.error(
-        '[vuepress] Nested sidebar groups are not supported. ' +
+        '[antdsite] Nested sidebar groups are not supported. ' +
         'Consider using navbar + categories instead.'
       )
     }

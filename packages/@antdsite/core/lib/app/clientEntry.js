@@ -44,23 +44,23 @@ router.onReady(() => {
     window.location.protocol === 'https:') {
     register(`${BASE_URL}service-worker.js`, {
       ready () {
-        console.log('[vuepress:sw] Service worker is active.')
+        console.log('[antdsite:sw] Service worker is active.')
         app.$refs.layout.$emit('sw-ready')
       },
       cached (registration) {
-        console.log('[vuepress:sw] Content has been cached for offline use.')
+        console.log('[antdsite:sw] Content has been cached for offline use.')
         app.$refs.layout.$emit('sw-cached', new SWUpdateEvent(registration))
       },
       updated (registration) {
-        console.log('[vuepress:sw] Content updated.')
+        console.log('[antdsite:sw] Content updated.')
         app.$refs.layout.$emit('sw-updated', new SWUpdateEvent(registration))
       },
       offline () {
-        console.log('[vuepress:sw] No internet connection found. App is running in offline mode.')
+        console.log('[antdsite:sw] No internet connection found. App is running in offline mode.')
         app.$refs.layout.$emit('sw-offline')
       },
       error (err) {
-        console.error('[vuepress:sw] Error during service worker registration:', err)
+        console.error('[antdsite:sw] Error during service worker registration:', err)
         app.$refs.layout.$emit('sw-error', err)
         if (GA_ID) {
           ga('send', 'exception', {

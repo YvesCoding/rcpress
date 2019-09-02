@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "@antdsite/core": "^0.0.0",
-    "@antdsite/default-theme": "^0.0.0",
+    "@antdsite/theme-default": "^0.0.0",
+    "@antdsite/util": "^0.0.0",
     "chalk": "2.4.2",
     "commander": "2.19.0",
     "cross-spawn": "6.0.5",

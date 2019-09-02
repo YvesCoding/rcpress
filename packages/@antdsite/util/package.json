@@ -1,7 +1,5 @@
 {
   "name": "@antdsite/util",
-  "version": "0.0.0",
-  "devDependencies": {
-    "@antdsite/rollup": "^0.0.0"
-  }
+  "main": "src/index.js",
+  "version": "0.0.0"
 }

@@ -1,6 +1,6 @@
 # Config Reference
 
-> Most of the text is copied in [vuepress](https://vuepress.vuejs.org/config/), with minor modifications
+> Most of the text is copied in [antdsite](https://antdsite.vuejs.org/config/), with minor modifications
 
 ::: tip
 Don't worry about the default settings being overwritten, antdsite will use the [deepMerge function](https://github.com/YvesCoding/antdsite/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/antdsite/lib/util.js#L5) to **deep merge** the new settings and default configuration.

@@ -1,6 +1,6 @@
 const { deeplyParseHeaders } = require('./parseHeaders');
 
-exports.normalizeHeadTag = function(tag: string | string[]) {
+exports.normalizeHeadTag = function(tag) {
   if (typeof tag === 'string') {
     tag = [tag];
   }
@@ -10,10 +10,10 @@ exports.normalizeHeadTag = function(tag: string | string[]) {
     attributes: tag[1] || {},
     innerHTML: tag[2] || '',
     closeTag: !(tagName === 'meta' || tagName === 'link')
-  }; 
+  };
 };
 
-exports.applyUserWebpackConfig = function(userConfig: any, config: any, isServer: boolean) {
+exports.applyUserWebpackConfig = function(userConfig, config, isServer) {
   const merge = require('webpack-merge');
   if (typeof userConfig === 'object') {
     return merge(config, userConfig);
@@ -27,7 +27,7 @@ exports.applyUserWebpackConfig = function(userConfig: any, config: any, isServer
   return config;
 };
 
-exports.inferTitle = function(frontmatter: any) {
+exports.inferTitle = function(frontmatter) {
   if (frontmatter.data.home) {
     return 'Home';
   }
@@ -40,7 +40,7 @@ exports.inferTitle = function(frontmatter: any) {
   }
 };
 
-exports.parseFrontmatter = function(content: string) {
+exports.parseFrontmatter = function(content) {
   const matter = require('gray-matter');
   const toml = require('toml');
 
@@ -56,7 +56,7 @@ exports.parseFrontmatter = function(content: string) {
 const LRU = require('lru-cache');
 const cache = LRU({ max: 1000 });
 
-exports.extractHeaders = function(content: string, include = [], md: any) {
+exports.extractHeaders = function(content, include = [], md) {
   const key = content + include.join(',');
   const hit = cache.get(key);
   if (hit) {
@@ -65,11 +65,11 @@ exports.extractHeaders = function(content: string, include = [], md: any) {
 
   const tokens = md.parse(content, {});
 
-  const res: any = [];
-  tokens.forEach((t: any, i: number) => {
-    if (t.type === 'heading_open' && include.includes(t.tag as never)) {
+  const res = [];
+  tokens.forEach((t, i) => {
+    if (t.type === 'heading_open' && include.includes(t.tag)) {
       const title = tokens[i + 1].content;
-      const slug = t.attrs.find(([name]: [string]) => name === 'id')[1];
+      const slug = t.attrs.find(([name]) => name === 'id')[1];
       res.push({
         level: parseInt(t.tag.slice(1), 10),
         title: deeplyParseHeaders(title),
@@ -81,3 +81,7 @@ exports.extractHeaders = function(content: string, include = [], md: any) {
   cache.set(key, res);
   return res;
 };
+
+const logger = require('./logger');
+
+module.exports.logger = logger;

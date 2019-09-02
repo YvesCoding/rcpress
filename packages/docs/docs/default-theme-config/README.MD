@@ -1,6 +1,6 @@
 # Default Theme Config
 
-> Most of the text is copied in [vuepress](https://vuepress.vuejs.org/zh/default-theme-config), with minor modifications
+> Most of the text is copied in [antdsite](https://antdsite.vuejs.org/zh/default-theme-config), with minor modifications
 
 ::: tip
 All options listed on this page apply to the default theme only. If you are using a custom theme, the options may be different.

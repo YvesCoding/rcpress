@@ -31,7 +31,7 @@ module.exports = function createServerConfig (options, cliOptions) {
       filename: 'manifest/server.json'
     }])
 
-  const publicDir = path.resolve(sourceDir, '.vuepress/public')
+  const publicDir = path.resolve(sourceDir, '.antdsite/public')
   if (fs.existsSync(publicDir)) {
     config
       .plugin('copy')

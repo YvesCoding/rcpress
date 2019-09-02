@@ -43,8 +43,8 @@ export function getcurrentLocaleConfigBySlug(
   };
 }
 
-// copy from vuepress
-// https://github.com/vuejs/vuepress/blob/master/packages/%40vuepress/theme-default/util/index.js
+// copy from antdsite
+// https://github.com/vuejs/antdsite/blob/master/packages/%40antdsite/theme-default/util/index.js
 
 export const hashRE = /#.*$/;
 export const extRE = /\.(md|html)$/;

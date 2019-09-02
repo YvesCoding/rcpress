@@ -1,1 +1,1 @@
-export { default } from "/Users/yiwang/Desktop/node/vuescrolljs/node_modules/vuepress-theme-vuescroll/enhanceApp.js"
+export { default } from "/Users/yiwang/Desktop/node/vuescrolljs/node_modules/antdsite-theme-vuescroll/enhanceApp.js"

@@ -62,7 +62,7 @@ exports.genRoutesFile = async function ({
 exports.genComponentRegistrationFile = async function ({ sourceDir }) {
   function genImport (file) {
     const name = fileToComponentName(file)
-    const baseDir = path.resolve(sourceDir, '.vuepress/components')
+    const baseDir = path.resolve(sourceDir, '.antdsite/components')
     const absolutePath = path.resolve(baseDir, file)
     const code = `Vue.component(${JSON.stringify(name)}, () => import(${JSON.stringify(absolutePath)}))`
     return code

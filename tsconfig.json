@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strictNullChecks": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "preserve",
@@ -11,5 +12,6 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es2017"]
   },
-  "exclude": ["node_modules"]
+  "include": ["packages/@antdsite/theme-blog", "packages/@antdsite/theme-default"],
+  "exclude": ["node_modules", "lib", "es"]
 }

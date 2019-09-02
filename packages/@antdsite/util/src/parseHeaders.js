@@ -30,7 +30,7 @@ exports.parseHeaders = compose(
 
 // Also clean the tail html in headers.
 // Since we want to support tailed badge in headers.
-// See: https://vuepress.vuejs.org/guide/using-vue.html#badge
+// See: https://antdsite.vuejs.org/guide/using-vue.html#badge
 exports.deeplyParseHeaders = compose(
   exports.removeTailHtml,
   exports.parseHeaders,

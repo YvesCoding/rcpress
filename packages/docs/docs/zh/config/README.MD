@@ -1,6 +1,6 @@
 # 配置参考
 
-> 文本大部分复制于[vuepress](https://vuepress.vuejs.org/zh/config/)，略作修改
+> 文本大部分复制于[antdsite](https://antdsite.vuejs.org/zh/config/)，略作修改
 
 ::: tip-zh
 不必担心默认的设置会被覆盖掉，antdsite 会使用[deepMerge 函数](https://github.com/YvesCoding/antdsite/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/antdsite/lib/util.js#L5)将新设置的配置和默认配置进行**深度合并**

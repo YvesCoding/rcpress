@@ -8,7 +8,7 @@ module.exports = class DevLogPlugin {
 
   apply (compiler) {
     let isFirst = true
-    compiler.hooks.done.tap('vuepress-log', stats => {
+    compiler.hooks.done.tap('antdsite-log', stats => {
       clearScreen()
 
       const { displayHost, port, publicPath } = this.options
@@ -20,7 +20,7 @@ module.exports = class DevLogPlugin {
         console.log(`\n${chalk.gray('>')} VuePress dev server listening at ${chalk.cyan(`http://${displayHost}:${port}${publicPath}`)}`)
       }
     })
-    compiler.hooks.invalid.tap('vuepress-log', clearScreen)
+    compiler.hooks.invalid.tap('antdsite-log', clearScreen)
   }
 }
 

@@ -31,11 +31,11 @@ English | [简体中文](./README-zh_CN.md)
 
 - AntdSite is a static website generator based on React.js.
 - It's driven by [Gatsby Js](https://www.gatsbyjs.org/)
-- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://vuepress.vuejs.org/).
+- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://antdsite.vuejs.org/).
 
 ## Features
 
-- [Vuepree](https://vuepress.vuejs.org/) configuration style, powerfulit's easy to use.
+- [Vuepree](https://antdsite.vuejs.org/) configuration style, powerfulit's easy to use.
 - [mdx](https://github.com/mdx-js/mdx) supported.
 - Built-in [Ant Design](https://ant.design).
 - Support [custom layout](https://www.yvescoding.com/antdsite/guide/theme#custom-layout)(such as header, footer, home page and so on).

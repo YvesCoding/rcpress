@@ -36,7 +36,7 @@ module.exports = (str, lang) => {
     try {
       loadLanguages([lang])
     } catch (e) {
-      logger.warn(chalk.yellow(`[vuepress] Syntax highlight for language "${lang}" is not supported.`))
+      logger.warn(chalk.yellow(`[antdsite] Syntax highlight for language "${lang}" is not supported.`))
     }
   }
   if (prism.languages[lang]) {

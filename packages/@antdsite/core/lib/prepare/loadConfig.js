@@ -3,10 +3,10 @@ const path = require('path')
 const yamlParser = require('js-yaml')
 const tomlParser = require('toml')
 
-module.exports = function loadConfig (vuepressDir, bustCache = true) {
-  const configPath = path.resolve(vuepressDir, 'config.js')
-  const configYmlPath = path.resolve(vuepressDir, 'config.yml')
-  const configTomlPath = path.resolve(vuepressDir, 'config.toml')
+module.exports = function loadConfig (antdsiteDir, bustCache = true) {
+  const configPath = path.resolve(antdsiteDir, 'config.js')
+  const configYmlPath = path.resolve(antdsiteDir, 'config.yml')
+  const configTomlPath = path.resolve(antdsiteDir, 'config.toml')
 
   if (bustCache) {
     delete require.cache[configPath]

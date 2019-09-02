@@ -5,7 +5,7 @@ const logger = require('./util/logger')
 
 module.exports = async (dir) => {
   const source = path.resolve(__dirname, 'default-theme')
-  const target = path.resolve(dir, '.vuepress/theme')
+  const target = path.resolve(dir, '.antdsite/theme')
   await fs.copy(source, target)
   // remove the import to default theme override
   const styleConfig = path.resolve(target, 'styles/config.styl')

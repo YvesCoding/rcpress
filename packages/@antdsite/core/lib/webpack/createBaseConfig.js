@@ -80,9 +80,9 @@ module.exports = function createBaseConfig ({
   config.module
     .noParse(/^(vue|vue-router|vuex|vuex-router-sync)$/)
 
-  const cacheDirectory = path.resolve(__dirname, '../../node_modules/.cache/vuepress')
+  const cacheDirectory = path.resolve(__dirname, '../../node_modules/.cache/antdsite')
   const cacheIdentifier = JSON.stringify({
-    vuepress: require('../../package.json').version,
+    antdsite: require('../../package.json').version,
     'cache-loader': require('cache-loader').version,
     'vue-loader': require('vue-loader').version,
     isProd,

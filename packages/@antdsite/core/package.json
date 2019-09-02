@@ -11,9 +11,7 @@
   "author": {
     "name": "Yves Wang"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "typings": "dist/index.d.ts",
+  "main": "lib/index.js",
   "dependencies": {
     "@antdsite/util": "^0.0.0",
     "@babel/cli": "^7.0.0",
@@ -33,6 +31,7 @@
     "globby": "^6.1.0",
     "gray-matter": "^4.0.1",
     "himalaya": "^1.1.0",
+    "js-yaml": "^3.13.1",
     "less": "^3.8.1",
     "mdast-util-to-string": "^1.0.5",
     "node-fetch": "^2.5.0",
@@ -46,11 +45,11 @@
     "react-media": "^1.9.2",
     "space-separated-tokens": "^1.1.1",
     "style-loader": "^0.21.0",
+    "toml": "^3.0.0",
     "unist-util-find": "^1.0.1",
     "unist-util-select": "^2.0.2"
   },
   "devDependencies": {
-    "@antdsite/rollup": "^0.0.0",
     "@antdsite/util": "^0.0.0",
     "@types/react-helmet": "^5.0.8",
     "dedent": "^0.7.0",

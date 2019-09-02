@@ -56,7 +56,7 @@ exports.isIndexFile = function (file) {
 }
 
 exports.resolveComponents = async function (sourceDir) {
-  const componentDir = path.resolve(sourceDir, '.vuepress/components')
+  const componentDir = path.resolve(sourceDir, '.antdsite/components')
   if (!fs.existsSync(componentDir)) {
     return
   }

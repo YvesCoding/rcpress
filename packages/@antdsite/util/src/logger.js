@@ -1,27 +1,8 @@
 const chalk = require('chalk');
 
-interface LoggerFunction {
-  (msg: string, log: boolean): string | void;
-}
+const logger = {};
 
-interface Logger {
-  success: LoggerFunction;
-  error: LoggerFunction;
-  warn: LoggerFunction;
-  tip: LoggerFunction;
-  wait: LoggerFunction;
-}
-
-const logger: Logger = {} as Logger;
-
-type LogTypes = {
-  [key in keyof Logger]: {
-    color: string;
-    label: string;
-  }
-};
-
-const logTypes: LogTypes = {
+const logTypes = {
   success: {
     color: 'green',
     label: 'DONE'
@@ -44,10 +25,7 @@ const logTypes: LogTypes = {
   }
 };
 
-const getLoggerFn: (color: string, label: string) => LoggerFunction = (
-  color: string,
-  label: string
-) => (msg: string, log = true) => {
+const getLoggerFn = (color, label) => (msg, log = true) => {
   let newLine = false;
   if (msg.startsWith('\n')) {
     if (log) msg = msg.slice(1);
@@ -61,8 +39,7 @@ const getLoggerFn: (color: string, label: string) => LoggerFunction = (
   }
 };
 
-let type: keyof Logger;
-for (type in logTypes) {
+for (const type in logTypes) {
   const { color, label } = logTypes[type];
   logger[type] = getLoggerFn(color, label);
 }

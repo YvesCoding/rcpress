@@ -19,11 +19,11 @@ English | [简体中文](./README-zh_CN.md)
 
 - AntdSite is a static website generator based on React.js.
 - It's driven by [Gatsby Js](https://www.gatsbyjs.org/)
-- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://vuepress.vuejs.org/).
+- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://antdsite.vuejs.org/).
 
 ## Features
 
-- It only needs a simple configuration and some markdown knowledge to get started quickly. Users who are familiar with [Vuepress](https://vuepress.vuejs.org/) are more comfortable to use.
+- It only needs a simple configuration and some markdown knowledge to get started quickly. Users who are familiar with [Vuepress](https://antdsite.vuejs.org/) are more comfortable to use.
 - Supports rendering to common Ant Design components using markdown syntax, such as [Alert](https://www.yvescoding.com/antdsite/guide/markdown#prompt-box)
 - Support [mdx](https://github.com/mdx-js/mdx), support [custom layout](https://www.yvescoding.com/antdsite/guide/theme#custom-layout) (eg custom website header, bottom, home page, etc.)
 
@@ -69,7 +69,7 @@ Visit `8000` port and that's all.
 ## Thanks
 
 - [Ant Design](https://ant.design/)
-- [VuePress](https://vuepress.vuejs.org/)
+- [VuePress](https://antdsite.vuejs.org/)
 - [GatsbyJs](https://www.gatsbyjs.org/)
 
 ## WeChat Communication

@@ -23,12 +23,12 @@ export default class SWUpdateEvent {
       return Promise.resolve()
     }
 
-    console.log('[vuepress:sw] Doing worker.skipWaiting().')
+    console.log('[antdsite:sw] Doing worker.skipWaiting().')
     return new Promise((resolve, reject) => {
       const channel = new MessageChannel()
 
       channel.port1.onmessage = (event) => {
-        console.log('[vuepress:sw] Done worker.skipWaiting().')
+        console.log('[antdsite:sw] Done worker.skipWaiting().')
         if (event.data.error) {
           reject(event.data.error)
         } else {

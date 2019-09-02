@@ -1,4 +1,4 @@
-export default async function dev(sourceDir, cliOptions = {}) {
+module.exports = async function dev(sourceDir, cliOptions = {}) {
   const fs = require('fs');
   const path = require('path');
   const chalk = require('chalk');
@@ -30,9 +30,9 @@ export default async function dev(sourceDir, cliOptions = {}) {
   };
 
   // watch add/remove of files
-  const pagesWatcher = chokidar.watch(['**/*.md', '.vuepress/components/**/*.vue'], {
+  const pagesWatcher = chokidar.watch(['**/*.md', '.antdsite/components/**/*.vue'], {
     cwd: sourceDir,
-    ignored: '.vuepress/**/*.md',
+    ignored: '.antdsite/**/*.md',
     ignoreInitial: true
   });
   pagesWatcher.on('add', update);
@@ -42,7 +42,7 @@ export default async function dev(sourceDir, cliOptions = {}) {
 
   // watch config file
   const configWatcher = chokidar.watch(
-    ['.vuepress/config.js', '.vuepress/config.yml', '.vuepress/config.toml'],
+    ['.antdsite/config.js', '.antdsite/config.yml', '.antdsite/config.toml'],
     {
       cwd: sourceDir,
       ignoreInitial: true
@@ -60,7 +60,7 @@ export default async function dev(sourceDir, cliOptions = {}) {
     .plugin('html')
     // using a fork of html-webpack-plugin to avoid it requiring webpack
     // internals from an incompatible version.
-    .use(require('vuepress-html-webpack-plugin'), [
+    .use(require('antdsite-html-webpack-plugin'), [
       {
         template: path.resolve(__dirname, 'app/index.dev.html')
       }
@@ -75,7 +75,7 @@ export default async function dev(sourceDir, cliOptions = {}) {
   const port = await resolvePort(cliOptions.port || options.siteConfig.port);
   const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
 
-  config.plugin('vuepress-log').use(DevLogPlugin, [
+  config.plugin('antdsite-log').use(DevLogPlugin, [
     {
       port,
       displayHost,
@@ -106,7 +106,7 @@ export default async function dev(sourceDir, cliOptions = {}) {
     logLevel: 'error',
     port,
     add: app => {
-      const userPublic = path.resolve(sourceDir, '.vuepress/public');
+      const userPublic = path.resolve(sourceDir, '.antdsite/public');
 
       // enable range request
       app.use(range);
@@ -125,7 +125,7 @@ export default async function dev(sourceDir, cliOptions = {}) {
       );
     }
   });
-}
+};
 
 function resolveHost(host) {
   // webpack-serve hot updates doesn't work properly over 0.0.0.0 on Windows,
