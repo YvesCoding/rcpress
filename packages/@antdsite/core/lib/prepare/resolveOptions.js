@@ -5,6 +5,7 @@ const createMarkdown = require('../markdown');
 const loadConfig = require('./loadConfig');
 const { encodePath, fileToPath, sort, getGitLastUpdatedTimeStamp } = require('./util');
 const { inferTitle, extractHeaders, parseFrontmatter, logger } = require('@antdsite/util');
+const { createResolveThmepath, resolvePathWidthExts } = require('./theme')
 
 module.exports = async function resolveOptions(sourceDir) {
   const antdsiteDir = path.resolve(sourceDir, '.antdsite');
@@ -34,8 +35,9 @@ module.exports = async function resolveOptions(sourceDir) {
     : path.resolve(sourceDir, '.antdsite/dist');
 
   // resolve theme
+  const resolveThemePath = createResolveThmepath(sourceDir);
   const useDefaultTheme = !siteConfig.theme && !fs.existsSync(path.resolve(antdsiteDir, 'theme'));
-  const defaultThemePath = require.resolve();
+  const defaultThemePath = resolveThemePath("@antdsite/theme-default");
   let themePath = null;
   let themeLayoutPath = null;
   let themeNotFoundPath = null;
@@ -43,54 +45,54 @@ module.exports = async function resolveOptions(sourceDir) {
 
   if (useDefaultTheme) {
     // use default theme
-    themePath = defaultThemePath;
-    themeLayoutPath = path.resolve(defaultThemePath, 'Layout.vue');
-    themeNotFoundPath = path.resolve(defaultThemePath, 'NotFound.vue');
+    themePath = path.dirname(defaultThemePath);
+    themeLayoutPath = defaultThemePath;
+    themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`, sourceDir);
   } else {
     // resolve theme Layout
     if (siteConfig.theme) {
-      // use external theme
+      // use external theme 
       try {
-        themeLayoutPath = require.resolve(`antdsite-theme-${siteConfig.theme}/Layout.vue`, {
-          paths: [path.resolve(__dirname, '../../node_modules'), path.resolve(sourceDir)]
-        });
+        themeLayoutPath = resolveThemePath(siteConfig.theme);
         themePath = path.dirname(themeLayoutPath);
       } catch (e) {
         throw new Error(
-          `[antdsite] Failed to load custom theme "${siteConfig.theme}". File antdsite-theme-${siteConfig.theme}/Layout.vue does not exist.`
+          logger.Error(`Failed to load custom theme layout at theme "${siteConfig.theme}".`, false)
         );
       }
     } else {
-      // use custom theme
+      // use custom theme 
       themePath = path.resolve(antdsiteDir, 'theme');
-      themeLayoutPath = path.resolve(themePath, 'Layout.vue');
-      if (!fs.existsSync(themeLayoutPath)) {
-        throw new Error(`[antdsite] Cannot resolve Layout.vue file in .antdsite/theme.`);
+      themeLayoutPath = resolvePathWidthExts(`${themePath}/Layout`, sourceDir);
+      if (!themeLayoutPath) {
+        throw new Error(logger.error(`Cannot resolve Layout file in .antdsite/theme`));
       }
     }
 
     // resolve theme NotFound
-    themeNotFoundPath = path.resolve(themePath, 'NotFound.vue');
-    if (!fs.existsSync(themeNotFoundPath)) {
-      themeNotFoundPath = path.resolve(defaultThemePath, 'NotFound.vue');
+    themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`, sourceDir);
+    if (!themeNotFoundPath) {
+      themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`, sourceDir);
     }
 
     // resolve theme enhanceApp
-    themeEnhanceAppPath = path.resolve(themePath, 'enhanceApp.js');
-    if (!fs.existsSync(themeEnhanceAppPath)) {
-      themeEnhanceAppPath = null;
-    }
+    // TODO antdsite should also have a similar stuff to enhance app.
+    // themeEnhanceAppPath = path.resolve(themePath, 'enhanceApp.js');
+    // if (!fs.existsSync(themeEnhanceAppPath)) {
+    //   themeEnhanceAppPath = null;
+    // }
   }
 
   // resolve theme config
   const themeConfig = siteConfig.themeConfig || {};
 
   // resolve algolia
-  const isAlgoliaSearch =
-    themeConfig.algolia ||
-    Object.keys((siteConfig.locales && themeConfig.locales) || {}).some(
-      base => themeConfig.locales[base].algolia
-    );
+  // TODO Algolia supported
+  // const isAlgoliaSearch =
+  //   themeConfig.algolia ||
+  //   Object.keys((siteConfig.locales && themeConfig.locales) || {}).some(
+  //     base => themeConfig.locales[base].algolia
+  //   );
 
   // resolve markdown
   const markdown = createMarkdown(siteConfig);

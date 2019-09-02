@@ -12,11 +12,10 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   const history = require('connect-history-api-fallback');
 
   const prepare = require('./prepare');
-  const logger = require('./util/logger');
   const HeadPlugin = require('./webpack/HeadPlugin');
   const DevLogPlugin = require('./webpack/DevLogPlugin');
   const createClientConfig = require('./webpack/createClientConfig');
-  const { applyUserWebpackConfig } = require('./util');
+  const { applyUserWebpackConfig, logger } = require('@antdsite/util');
   const { frontmatterEmitter } = require('./webpack/markdownLoader');
 
   logger.wait('\nExtracting site metadata...');
