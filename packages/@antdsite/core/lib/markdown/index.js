@@ -1,78 +1,58 @@
-const highlight = require('./highlight')
-const highlightLines = require('./highlightLines')
-const preWrapper = require('./preWrapper')
-const lineNumbers = require('./lineNumbers')
-const component = require('./component')
-const hoistScriptStyle = require('./hoist')
-const convertRouterLink = require('./link')
-const containers = require('./containers')
-const snippet = require('./snippet')
-const emoji = require('markdown-it-emoji')
-const anchor = require('markdown-it-anchor')
-const toc = require('markdown-it-table-of-contents')
-const _slugify = require('./slugify')
-const { parseHeaders } = require('../util/parseHeaders')
+const grayMatter = require(`gray-matter`);
+const mdx = require(`@mdx-js/mdx`);
+const generateTOC = require(`mdast-util-toc`);
+const { deepMerge } = require('@antdsite/util');
+const path = require('path');
+const toString = require(`mdast-util-to-string`);
 
-module.exports = ({ markdown = {}} = {}) => {
-  // allow user config slugify
-  const slugify = markdown.slugify || _slugify
+const resolvePlugin = plugins =>
+  plugins.map(plugin => path.resolve(__dirname, `./reamarkPlugins/${plugin}`));
 
-  const md = require('markdown-it')({
-    html: true,
-    highlight
-  })
-    // custom plugins
-    .use(component)
-    .use(highlightLines)
-    .use(preWrapper)
-    .use(snippet)
-    .use(convertRouterLink, Object.assign({
-      target: '_blank',
-      rel: 'noopener noreferrer'
-    }, markdown.externalLinks))
-    .use(hoistScriptStyle)
-    .use(containers)
+/**
+ * @returns html, toc, frontMatter, headings
+ * @param {*} mdContent mdx content
+ */
+const genMarkdownInfo = options => {
+  const defaultOptions = {
+    maxTocDepth: 3,
+    remarkPlugins: [
+      resolvePlugin([
+        'gatsby-remark-ant-alert',
+        'remark-default-class-name',
+        'remark-header-custom-ids',
+        'remark-img-warpper-p'
+      ])
+    ]
+  };
+  options = deepMerge(options, defaultOptions);
 
-    // 3rd party plugins
-    .use(emoji)
-    .use(anchor, Object.assign({
-      slugify,
-      permalink: true,
-      permalinkBefore: true,
-      permalinkSymbol: '#'
-    }, markdown.anchor))
-    .use(toc, Object.assign({
-      slugify,
-      includeLevel: [2, 3],
-      format: parseHeaders
-    }, markdown.toc))
+  return async rawMDX => {
+    let results = {
+      html: '',
+      toc: [],
+      headings: [],
+      frontMatter: {}
+    };
 
-  // apply user config
-  if (markdown.config) {
-    markdown.config(md)
-  }
+    const { data, content: frontMatterCodeResult } = grayMatter(rawMDX);
+    const content = `${frontMatterCodeResult}`;
+    const compiler = mdx.createMdxAstCompiler(options);
+    const mdast = compiler.parse(content);
 
-  if (markdown.lineNumbers) {
-    md.use(lineNumbers)
-  }
+    // frontmatter
+    results.frontMatter = data;
 
-  module.exports.dataReturnable(md)
+    // toc
+    results.toc = generateTOC(mdast, { maxDepth: options.maxTocDepth });
 
-  // expose slugify
-  md.slugify = slugify
+    // headings
+    visit(mdast, `heading`, heading => {
+      results.headings.push({
+        value: toString(heading),
+        depth: heading.depth
+      });
+    });
 
-  return md
-}
-
-module.exports.dataReturnable = function dataReturnable (md) {
-  // override render to allow custom plugins return data
-  const render = md.render
-  md.render = (...args) => {
-    md.__data = {}
-    const html = render.call(md, ...args)
-    return {
-      html,
-      data: md.__data
-    }
-  }
-}
+    return results;
+  };
+};

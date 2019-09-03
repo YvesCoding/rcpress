@@ -1,4 +1,5 @@
 const { deeplyParseHeaders } = require('./parseHeaders');
+const deepMerge = require('./deepMerge');
 
 exports.normalizeHeadTag = function(tag) {
   if (typeof tag === 'string') {
@@ -28,11 +29,11 @@ exports.applyUserWebpackConfig = function(userConfig, config, isServer) {
 };
 
 exports.inferTitle = function(frontmatter) {
-  if (frontmatter.data.home) {
+  if (frontmatter.home) {
     return 'Home';
   }
-  if (frontmatter.data.title) {
-    return deeplyParseHeaders(frontmatter.data.title);
+  if (frontmatter.title) {
+    return deeplyParseHeaders(frontmatter.title);
   }
   const match = frontmatter.content.trim().match(/^#+\s+(.*)/);
   if (match) {
@@ -85,3 +86,5 @@ exports.extractHeaders = function(content, include = [], md) {
 const logger = require('./logger');
 
 module.exports.logger = logger;
+
+module.exports.deepMerge = deepMerge;

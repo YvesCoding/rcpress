@@ -14,6 +14,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@antdsite/util": "^0.0.0",
+    "@antdsite/markdown": "^0.0.0",
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/generator": "^7.0.0",

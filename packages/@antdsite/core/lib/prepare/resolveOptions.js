@@ -1,11 +1,11 @@
 const fs = require('fs-extra');
 const path = require('path');
 const globby = require('globby');
-const createMarkdown = require('../markdown');
+const createMarkdown = require('@antdsite/markdown');
 const loadConfig = require('./loadConfig');
 const { encodePath, fileToPath, sort, getGitLastUpdatedTimeStamp } = require('./util');
 const { inferTitle, extractHeaders, parseFrontmatter, logger } = require('@antdsite/util');
-const { createResolveThmepath, resolvePathWidthExts } = require('./theme')
+const { createResolveThmepath, createResolvePathWidthExts } = require('./theme');
 
 module.exports = async function resolveOptions(sourceDir) {
   const antdsiteDir = path.resolve(sourceDir, '.antdsite');
@@ -36,8 +36,9 @@ module.exports = async function resolveOptions(sourceDir) {
 
   // resolve theme
   const resolveThemePath = createResolveThmepath(sourceDir);
+  const resolvePathWidthExts = createResolvePathWidthExts(sourceDir);
   const useDefaultTheme = !siteConfig.theme && !fs.existsSync(path.resolve(antdsiteDir, 'theme'));
-  const defaultThemePath = resolveThemePath("@antdsite/theme-default");
+  const defaultThemePath = resolveThemePath('@antdsite/theme-default');
   let themePath = null;
   let themeLayoutPath = null;
   let themeNotFoundPath = null;
@@ -47,11 +48,11 @@ module.exports = async function resolveOptions(sourceDir) {
     // use default theme
     themePath = path.dirname(defaultThemePath);
     themeLayoutPath = defaultThemePath;
-    themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`, sourceDir);
+    themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`);
   } else {
     // resolve theme Layout
     if (siteConfig.theme) {
-      // use external theme 
+      // use external theme
       try {
         themeLayoutPath = resolveThemePath(siteConfig.theme);
         themePath = path.dirname(themeLayoutPath);
@@ -61,22 +62,22 @@ module.exports = async function resolveOptions(sourceDir) {
         );
       }
     } else {
-      // use custom theme 
+      // use custom theme
       themePath = path.resolve(antdsiteDir, 'theme');
-      themeLayoutPath = resolvePathWidthExts(`${themePath}/Layout`, sourceDir);
+      themeLayoutPath = resolvePathWidthExts(`${themePath}/Layout`);
       if (!themeLayoutPath) {
         throw new Error(logger.error(`Cannot resolve Layout file in .antdsite/theme`));
       }
     }
 
     // resolve theme NotFound
-    themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`, sourceDir);
+    themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`);
     if (!themeNotFoundPath) {
-      themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`, sourceDir);
+      themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`);
     }
 
-    // resolve theme enhanceApp
     // TODO antdsite should also have a similar stuff to enhance app.
+    // resolve theme enhanceApp
     // themeEnhanceAppPath = path.resolve(themePath, 'enhanceApp.js');
     // if (!fs.existsSync(themeEnhanceAppPath)) {
     //   themeEnhanceAppPath = null;
@@ -86,8 +87,8 @@ module.exports = async function resolveOptions(sourceDir) {
   // resolve theme config
   const themeConfig = siteConfig.themeConfig || {};
 
-  // resolve algolia
   // TODO Algolia supported
+  // resolve algolia
   // const isAlgoliaSearch =
   //   themeConfig.algolia ||
   //   Object.keys((siteConfig.locales && themeConfig.locales) || {}).some(
@@ -100,8 +101,6 @@ module.exports = async function resolveOptions(sourceDir) {
   // resolve pageFiles
   const patterns = ['**/*.md', '!.antdsite', '!node_modules'];
   if (siteConfig.dest) {
-    // #654 exclude dest folder when dest dir was set in
-    // sourceDir but not in '.antdsite'
     const outDirRelative = path.relative(sourceDir, outDir);
     if (!outDirRelative.includes('..')) {
       patterns.push('!' + outDirRelative);
@@ -136,7 +135,8 @@ module.exports = async function resolveOptions(sourceDir) {
 
       // extract yaml frontmatter
       const content = await fs.readFile(filepath, 'utf-8');
-      const frontmatter = parseFrontmatter(content);
+      const results = markdown(content);
+      const frontmatter = results.frontmatter;
       // infer title
       const title = inferTitle(frontmatter);
       if (title) {
