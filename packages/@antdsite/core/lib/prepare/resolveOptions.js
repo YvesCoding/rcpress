@@ -4,7 +4,7 @@ const globby = require('globby');
 const createMarkdown = require('@antdsite/markdown');
 const loadConfig = require('./loadConfig');
 const { encodePath, fileToPath, sort, getGitLastUpdatedTimeStamp } = require('./util');
-const { inferTitle, extractHeaders, parseFrontmatter, logger } = require('@antdsite/util');
+const { inferTitle, logger } = require('@antdsite/util');
 const { createResolveThmepath, createResolvePathWidthExts } = require('./theme');
 
 module.exports = async function resolveOptions(sourceDir) {
@@ -89,7 +89,7 @@ module.exports = async function resolveOptions(sourceDir) {
 
   // TODO Algolia supported
   // resolve algolia
-  // const isAlgoliaSearch =
+  const isAlgoliaSearch = false;
   //   themeConfig.algolia ||
   //   Object.keys((siteConfig.locales && themeConfig.locales) || {}).some(
   //     base => themeConfig.locales[base].algolia
@@ -142,7 +142,7 @@ module.exports = async function resolveOptions(sourceDir) {
       if (title) {
         data.title = title;
       }
-      const headers = extractHeaders(frontmatter.content, ['h2', 'h3'], markdown);
+      const headers = results.headings;
       if (headers.length) {
         data.headers = headers;
       }
@@ -150,7 +150,7 @@ module.exports = async function resolveOptions(sourceDir) {
         data.frontmatter = frontmatter.data;
       }
       if (frontmatter.excerpt) {
-        const { html } = markdown.render(frontmatter.excerpt);
+        const html = await markdown.render(frontmatter.excerpt);
         data.excerpt = html;
       }
       return data;

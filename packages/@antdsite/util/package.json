@@ -1,5 +1,9 @@
 {
   "name": "@antdsite/util",
   "main": "src/index.js",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "dependencies": {
+    "node-emoji": "^1.8.1",
+    "toml": "^3.0.0"
+  }
 }

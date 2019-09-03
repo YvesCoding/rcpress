@@ -1,5 +1,4 @@
 const { deeplyParseHeaders } = require('./parseHeaders');
-const deepMerge = require('./deepMerge');
 
 exports.normalizeHeadTag = function(tag) {
   if (typeof tag === 'string') {
@@ -29,11 +28,11 @@ exports.applyUserWebpackConfig = function(userConfig, config, isServer) {
 };
 
 exports.inferTitle = function(frontmatter) {
-  if (frontmatter.home) {
+  if (frontmatter.data.home) {
     return 'Home';
   }
-  if (frontmatter.title) {
-    return deeplyParseHeaders(frontmatter.title);
+  if (frontmatter.data.title) {
+    return deeplyParseHeaders(frontmatter.data.title);
   }
   const match = frontmatter.content.trim().match(/^#+\s+(.*)/);
   if (match) {
@@ -41,50 +40,6 @@ exports.inferTitle = function(frontmatter) {
   }
 };
 
-exports.parseFrontmatter = function(content) {
-  const matter = require('gray-matter');
-  const toml = require('toml');
-
-  return matter(content, {
-    excerpt_separator: '<!-- more -->',
-    engines: {
-      toml: toml.parse.bind(toml),
-      excerpt: false
-    }
-  });
-};
-
-const LRU = require('lru-cache');
-const cache = LRU({ max: 1000 });
-
-exports.extractHeaders = function(content, include = [], md) {
-  const key = content + include.join(',');
-  const hit = cache.get(key);
-  if (hit) {
-    return hit;
-  }
-
-  const tokens = md.parse(content, {});
-
-  const res = [];
-  tokens.forEach((t, i) => {
-    if (t.type === 'heading_open' && include.includes(t.tag)) {
-      const title = tokens[i + 1].content;
-      const slug = t.attrs.find(([name]) => name === 'id')[1];
-      res.push({
-        level: parseInt(t.tag.slice(1), 10),
-        title: deeplyParseHeaders(title),
-        slug: slug || md.slugify(title)
-      });
-    }
-  });
-
-  cache.set(key, res);
-  return res;
-};
-
-const logger = require('./logger');
-
-module.exports.logger = logger;
-
-module.exports.deepMerge = deepMerge;
+module.exports.logger = require('./logger');
+module.exports.deepMerge = require('./deepMerge');
+module.exports.emoji = require('./emoji');

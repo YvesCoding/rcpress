@@ -20,7 +20,8 @@ const createMarkdown = ({ markdown: options = {} }) => {
         'gatsby-remark-ant-alert',
         'remark-default-class-name',
         'remark-header-custom-ids',
-        'remark-img-warpper-p'
+        'remark-img-warpper-p',
+        'remark-emoji'
       ])
     ]
   };
@@ -34,18 +35,13 @@ const createMarkdown = ({ markdown: options = {} }) => {
       frontMatter: {}
     };
 
-    const { data, content: frontMatterCodeResult } = grayMatter(rawMDX);
+    const { content: frontMatterCodeResult } = (results.frontMatter = grayMatter(rawMDX));
     const content = `${frontMatterCodeResult}`;
     const compiler = mdx.createMdxAstCompiler(options);
     const mdast = compiler.parse(content);
 
-    // frontmatter
-    results.frontMatter = data;
-
     // toc
-    results.toc = await getTableOfContents(
-      generateTOC(mdast, { maxDepth: options.maxTocDepth }).map
-    );
+    results.toc = getItems(generateTOC(mdast, { maxDepth: options.maxTocDepth }).map, {});
 
     // headings
     visit(mdast, `heading`, heading => {
@@ -56,7 +52,10 @@ const createMarkdown = ({ markdown: options = {} }) => {
     });
 
     // html
-    results.html = await mdx(content, options);
+    createMarkdown.render = input => {
+      mdx(input, options);
+    };
+    results.html = await createMarkdown.render(content);
 
     return results;
   };
@@ -64,4 +63,30 @@ const createMarkdown = ({ markdown: options = {} }) => {
 
 module.exports.createMarkdown = createMarkdown;
 
-async function getTableOfContents() {}
+function getItems(node, current) {
+  if (!node) {
+    return {};
+  } else if (node.type === 'paragraph') {
+    visit(node, item => {
+      if (item.type === 'link') {
+        current.url = item.url;
+      }
+      if (item.type === 'text') {
+        current.title = item.value;
+      }
+    });
+    return current;
+  } else {
+    if (node.type === 'list') {
+      current.items = node.children.map(i => getItems(i, {}));
+      return current;
+    } else if (node.type === 'listItem') {
+      const heading = getItems(node.children[0], {});
+      if (node.children.length > 1) {
+        getItems(node.children[1], heading);
+      }
+      return heading;
+    }
+  }
+  return {};
+}
