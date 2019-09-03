@@ -1,7 +1,7 @@
 const path = require('path');
 const { fileToComponentName, resolveComponents } = require('./util');
 
-exports.genRoutesFile = async function({ siteData: { pages }, sourceDir, pageFiles }) {
+exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFiles }) {
   function genRoute({ path: pagePath, key: componentName }, index) {
     const file = pageFiles[index];
     const filePath = path.resolve(sourceDir, file);
@@ -9,13 +9,8 @@ exports.genRoutesFile = async function({ siteData: { pages }, sourceDir, pageFil
   {
     name: ${JSON.stringify(componentName)},
     path: ${JSON.stringify(pagePath)},
-    component: ThemeLayout,
-    beforeEnter: (to, from, next) => {
-      import(${JSON.stringify(filePath)}).then(comp => {
-        Vue.component(${JSON.stringify(componentName)}, comp.default)
-        next()
-      })
-    }
+    filePath: ${JSON.stringify(filePath)},
+    component: ThemeLayout
   }`;
 
     const dncodedPath = decodeURIComponent(pagePath);
@@ -47,12 +42,11 @@ exports.genRoutesFile = async function({ siteData: { pages }, sourceDir, pageFil
   return (
     `import ThemeLayout from '@themeLayout'\n` +
     `import ThemeNotFound from '@themeNotFound'\n` +
-    `import rootMixins from '@app/root-mixins'\n\n` +
     `export const routes = [${pages.map(genRoute).join(',')}${notFoundRoute}\n]`
   );
 };
 
-exports.genComponentRegistrationFile = async function({ sourceDir }) {
+exports.genComponentRegistrationFile = async function ({ sourceDir }) {
   function genImport(file) {
     const name = fileToComponentName(file);
     const baseDir = path.resolve(sourceDir, '.antdsite/components');

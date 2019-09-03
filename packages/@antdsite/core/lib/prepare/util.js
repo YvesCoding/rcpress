@@ -7,7 +7,7 @@ const tempPath = path.resolve(__dirname, '../app/.temp');
 fs.ensureDirSync(tempPath);
 
 const tempCache = new Map();
-exports.writeTemp = async function(file, content) {
+exports.writeTemp = async function (file, content) {
   // cache write to avoid hitting the dist if it didn't change
   const cached = tempCache.get(file);
   if (cached !== content) {
@@ -16,7 +16,7 @@ exports.writeTemp = async function(file, content) {
   }
 };
 
-exports.writeEnhanceTemp = async function(destName, srcPath) {
+exports.writeEnhanceTemp = async function (destName, srcPath) {
   await exports.writeTemp(
     destName,
     fs.existsSync(srcPath)
@@ -28,7 +28,7 @@ exports.writeEnhanceTemp = async function(destName, srcPath) {
 const indexRE = /(^|.*\/)(index|readme)\.md$/i;
 const extRE = /\.(jsx|tsx|ts|js|md)$/;
 
-exports.fileToPath = function(file) {
+exports.fileToPath = function (file) {
   if (exports.isIndexFile(file)) {
     // README.md -> /
     // foo/README.md -> /foo/
@@ -36,11 +36,11 @@ exports.fileToPath = function(file) {
   } else {
     // foo.md -> /foo.html
     // foo/bar.md -> /foo/bar.html
-    return `/${file.replace(extRE, '').replace(/\\/g, '/')}.html`;
+    return `/${file.replace(extRE, '').replace(/\\/g, '/')}`;
   }
 };
 
-exports.fileToComponentName = function(file) {
+exports.fileToComponentName = function (file) {
   let normalizedName = file.replace(/\/|\\/g, '-').replace(extRE, '');
   if (exports.isIndexFile(file)) {
     normalizedName = normalizedName.replace(/readme$/i, 'index');
@@ -49,11 +49,11 @@ exports.fileToComponentName = function(file) {
   return `${pagePrefix}${normalizedName}`;
 };
 
-exports.isIndexFile = function(file) {
+exports.isIndexFile = function (file) {
   return indexRE.test(file);
 };
 
-exports.resolveComponents = async function(sourceDir) {
+exports.resolveComponents = async function (sourceDir) {
   const componentDir = path.resolve(sourceDir, '.antdsite/components');
   if (!fs.existsSync(componentDir)) {
     return;
@@ -61,7 +61,7 @@ exports.resolveComponents = async function(sourceDir) {
   return exports.sort(await globby(['**/*.vue'], { cwd: componentDir }));
 };
 
-exports.sort = function(arr) {
+exports.sort = function (arr) {
   return arr.sort((a, b) => {
     if (a < b) return -1;
     if (a > b) return 1;
@@ -69,14 +69,14 @@ exports.sort = function(arr) {
   });
 };
 
-exports.encodePath = function(userpath) {
+exports.encodePath = function (userpath) {
   return userpath
     .split('/')
     .map(item => encodeURIComponent(item))
     .join('/');
 };
 
-exports.getGitLastUpdatedTimeStamp = function(filepath) {
+exports.getGitLastUpdatedTimeStamp = function (filepath) {
   return (
     parseInt(spawn.sync('git', ['log', '-1', '--format=%ct', filepath]).stdout.toString('utf-8')) *
     1000
