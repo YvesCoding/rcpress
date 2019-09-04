@@ -29,7 +29,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   };
 
   // watch add/remove of files
-  const pagesWatcher = chokidar.watch(['**/*.md', '.antdsite/components/**/*.vue'], {
+  const pagesWatcher = chokidar.watch(['**/*.mdx?', '.antdsite/components/**/*.jsx?', '.antdsite/components/**/*.tsx?'], {
     cwd: sourceDir,
     ignored: '.antdsite/**/*.md',
     ignoreInitial: true

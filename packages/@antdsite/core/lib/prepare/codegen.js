@@ -40,23 +40,26 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
   }`;
 
   return (
-    `import ThemeLayout from '@themeLayout'\n` +
-    `import ThemeNotFound from '@themeNotFound'\n` +
+    `import loadable from '@loadable/component'` +
+    `import React from 'react'` +
+    `const ThemeLayout = loadable((() => import('@themeLayout'))\n` +
+    `const ThemeNotFound = loadable((() => import('@themeNotFound'))\n` +
     `export const routes = [${pages.map(genRoute).join(',')}${notFoundRoute}\n]`
   );
 };
 
-exports.genComponentRegistrationFile = async function ({ sourceDir }) {
-  function genImport(file) {
-    const name = fileToComponentName(file);
-    const baseDir = path.resolve(sourceDir, '.antdsite/components');
-    const absolutePath = path.resolve(baseDir, file);
-    const code = `Vue.component(${JSON.stringify(name)}, () => import(${JSON.stringify(
-      absolutePath
-    )}))`;
-    return code;
-  }
+// TODO add global component.
+// exports.genComponentRegistrationFile = async function ({ sourceDir }) {
+//   function genImport(file) {
+//     const name = fileToComponentName(file);
+//     const baseDir = path.resolve(sourceDir, '.antdsite/components');
+//     const absolutePath = path.resolve(baseDir, file);
+//     const code = `Vue.component(${JSON.stringify(name)}, () => import(${JSON.stringify(
+//       absolutePath
+//     )}))`;
+//     return code;
+//   }
 
-  const components = (await resolveComponents(sourceDir)) || [];
-  return `import Vue from 'vue'\n` + components.map(genImport).join('\n');
-};
+//   const components = (await resolveComponents(sourceDir)) || [];
+//   return `import React from 'react'\n` + `import loadable from '@loadable/component'\n` + components.map(genImport).join('\n');
+// };

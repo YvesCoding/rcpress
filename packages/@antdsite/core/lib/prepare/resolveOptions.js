@@ -150,7 +150,7 @@ module.exports = async function resolveOptions(sourceDir) {
         data.frontmatter = frontmatter.data;
       }
       if (frontmatter.excerpt) {
-        const html = await markdown.render(frontmatter.excerpt);
+        const html = markdown.render(frontmatter.excerpt);
         data.excerpt = html;
       }
       return data;

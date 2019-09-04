@@ -27,9 +27,9 @@ const createMarkdown = ({ markdown: options = {} }) => {
   };
   options = deepMerge(options, defaultOptions);
 
-  return async rawMDX => {
+  md.render = (input) => mdx.sync(input)
+  const md = rawMDX => {
     let results = {
-      html: '',
       toc: [],
       headings: [],
       frontMatter: {}
@@ -50,15 +50,10 @@ const createMarkdown = ({ markdown: options = {} }) => {
         depth: heading.depth
       });
     });
-
-    // html
-    createMarkdown.render = input => {
-      mdx(input, options);
-    };
-    results.html = await createMarkdown.render(content);
-
     return results;
   };
+
+  return md;
 };
 
 module.exports.createMarkdown = createMarkdown;
