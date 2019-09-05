@@ -1,4 +1,5 @@
 module.exports = {
+  title: "antdsite",
   base: process.env.base || '/',
   locales: {
     '/': {

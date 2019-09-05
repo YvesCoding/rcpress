@@ -4,11 +4,13 @@
   "main": "src/index.js",
   "dependencies": {
     "@antdsite/util": "^0.0.0",
+    "cache-loader": "^4.1.0",
     "webpack": "^4.8.1",
     "webpack-chain": "^4.6.0",
     "webpack-dev-server": "^3.5.1",
     "webpack-merge": "^4.1.2",
-    "webpackbar": "3.2.0"
+    "webpackbar": "3.2.0",
+    "mini-css-extract-plugin": "^0.8.0"
   },
   "devDependencies": {}
 }

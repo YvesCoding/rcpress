@@ -1,4 +1,6 @@
 const path = require('path')
+const fs = require('fs-extra');
+const { logger } = require('@antdsite/util')
 
 module.exports = function createBaseConfig({
   siteConfig,
@@ -9,14 +11,15 @@ module.exports = function createBaseConfig({
   themeLayoutPath,
   themeNotFoundPath,
   isAlgoliaSearch,
-  markdown
+  markdown,
+  cache,
 }, { debug } = {}, isServer) {
   const Config = require('webpack-chain')
   const CSSExtractPlugin = require('mini-css-extract-plugin')
-
+  const cacheDirectory = '@antdsite/core/lib/app/.temp'
   const isProd = process.env.NODE_ENV === 'production'
   const inlineLimit = 10000
-
+  const modulePaths = getModulePaths()
   const config = new Config()
 
   config
@@ -33,14 +36,13 @@ module.exports = function createBaseConfig({
   }
 
   config.resolve
-    .set('symlinks', true)
     .alias
     .set('@theme', themePath)
     .set('@themeLayout', themeLayoutPath)
     .set('@themeNotFound', themeNotFoundPath)
     .set('@source', sourceDir)
     .set('@app', path.resolve(__dirname, '../app'))
-    .set('@temp', path.resolve(__dirname, '../app/.temp'))
+    .set('@temp', cacheDirectory)
     .set('@default-theme', '@antdiste/theme-default')
     .set('@AlgoliaSearchBox', isAlgoliaSearch
       ? path.resolve(__dirname, '../default-theme/AlgoliaSearchBox.vue')
@@ -50,21 +52,21 @@ module.exports = function createBaseConfig({
     .merge(['.js', '.jsx', '.ts', '.tsx', '.less'])
     .end()
     .modules
-    // prioritize our own
-    .add(path.resolve(__dirname, '../../node_modules'))
-    .add('node_modules')
+    .merge(modulePaths)
 
   config.resolveLoader
     .set('symlinks', true)
     .modules
-    // prioritize our own
-    .add(path.resolve(__dirname, '../../node_modules'))
-    .add('node_modules')
+    .merge(modulePaths)
+
+  if (cache === false) {
+    logger.tip('Clean cache...\n')
+    fs.emptyDirSync(cacheDirectory)
+  }
 
 
-  const cacheDirectory = path.resolve(__dirname, '../../node_modules/.cache/antdsite')
   const cacheIdentifier = JSON.stringify({
-    antdsite: require('../../package.json').version,
+    antdsite: require('@antdsite/core/package.json').version,
     'cache-loader': require('cache-loader').version,
     isProd,
     isServer,
@@ -82,7 +84,10 @@ module.exports = function createBaseConfig({
 
   mdRule
     .use('babel-loader')
-    .loader('@mdx-js/loader')
+    .end()
+    .use('@mdx-js/loader')
+    .end()
+    .use()
     .loader(require.resolve('./markdownLoader'))
     .options({ sourceDir, markdown })
 
@@ -94,15 +99,10 @@ module.exports = function createBaseConfig({
     .end()
 
   if (!siteConfig.evergreen) {
-    const libDir = path.join(__dirname, '..')
     config.module
       .rule('js')
       .test(/\.(jsx?)|(tsx?)$/)
       .exclude.add(filepath => {
-        // Always transpile lib directory
-        if (filepath.startsWith(libDir)) {
-          return false
-        }
 
         // transpile antdsite
         if (/@antdsite/.test(filepath)) {
@@ -259,4 +259,8 @@ function getLastCommitHash() {
     hash = spawn.sync('git', ['log', '-1', '--format=%h']).stdout.toString('utf-8').trim()
   } catch (error) { }
   return hash
+}
+
+function getModulePaths() {
+  return module.paths.concat([path.resolve(process.cwd(), 'node_modules')])
 }

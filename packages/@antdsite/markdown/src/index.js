@@ -1,29 +1,40 @@
 const grayMatter = require(`gray-matter`);
 const mdx = require(`@mdx-js/mdx`);
 const generateTOC = require(`mdast-util-toc`);
-const { deepMerge } = require('@antdsite/util');
-const path = require('path');
+const { deepMerge, emoji } = require('@antdsite/util');
 const toString = require(`mdast-util-to-string`);
-
-const resolvePlugin = plugins =>
-  plugins.map(plugin => require(path.resolve(__dirname, `./reamarkPlugins/${plugin}`)));
+const { unifiedPlugins, reamrk2mdast } = require('../util')
+const path = require("path")
+const visit = require("unist-util-visit");
 
 /**
  * @returns html, toc, frontMatter, headings
  * @param {*} mdContent mdx content
  */
-const createMarkdown = ({ markdown: options = {} }) => {
+const createMarkdown = async ({ markdown: options = {}, base = "/" }) => {
+  const resolvePlugin = (plugins, dirName) =>
+    plugins.map(plugin => require(path.resolve(__dirname, `./${dirName}/${plugin}`)));
+
   const defaultOptions = {
     maxTocDepth: 3,
-    remarkPlugins: resolvePlugin([
-      'gatsby-remark-ant-alert',
+    mdastPlugins: resolvePlugin([
       'remark-default-class-name',
       'remark-header-custom-ids',
       'remark-img-warpper-p',
       'remark-emoji'
-    ])
+    ], "mdastPlugins"),
+    remarkPlugins: resolvePlugin([
+      'gatsby-remark-ant-alert'
+    ], "remarkPlugins")
   };
+
   options = deepMerge(defaultOptions, options);
+
+  options.remarkPlugins = [...unifiedPlugins(options.remarkPlugins), ...await reamrk2mdast({
+    remarkPlugins: unifiedPlugins(options.mdastPlugins),
+    pathPrefix: base
+  })]
+
   const compiler = mdx.createMdxAstCompiler(options);
 
   const md = rawMDX => {
@@ -65,7 +76,7 @@ function getItems(node, current) {
         current.url = item.url;
       }
       if (item.type === 'text') {
-        current.title = item.value;
+        current.title = emoji(item.value);
       }
     });
     return current;

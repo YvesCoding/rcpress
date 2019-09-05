@@ -96,7 +96,7 @@ module.exports = async function resolveOptions(sourceDir) {
   //   );
 
   // resolve markdown
-  const markdown = createMarkdown(siteConfig);
+  const markdown = await createMarkdown(siteConfig);
 
   // resolve pageFiles
   const patterns = ['**/*.md', '!.antdsite', '!node_modules'];
@@ -133,33 +133,35 @@ module.exports = async function resolveOptions(sourceDir) {
         data.lastUpdated = getGitLastUpdatedTimeStamp(filepath);
       }
 
-      // extract yaml frontmatter
+      // extract yaml frontMatter
       const content = await fs.readFile(filepath, 'utf-8');
-      const results = markdown(content);
-      const frontmatter = results.frontmatter;
+      const { headings, frontMatter, toc } = markdown(content);
+
       // infer title
-      const title = inferTitle(frontmatter);
+      const title = inferTitle(frontMatter, headings);
       if (title) {
         data.title = title;
       }
-      const headers = results.headings;
-      if (headers.length) {
-        data.headers = headers;
+      if (headings.length) {
+        data.headings = headings;
       }
-      if (Object.keys(frontmatter.data).length) {
-        data.frontmatter = frontmatter.data;
+      if (Object.keys(frontMatter.data).length) {
+        data.frontMatter = frontMatter.data;
       }
-      if (frontmatter.excerpt) {
-        const html = markdown.render(frontmatter.excerpt);
+      if (frontMatter.excerpt) {
+        const html = markdown.render(frontMatter.excerpt);
         data.excerpt = html;
       }
+
+      data.toc = toc;
+
       return data;
     })
   );
 
   // resolve site data
   const siteData = {
-    title: siteConfig.title || '',
+    title: siteConfig.title || path.dirname(sourceDir),
     description: siteConfig.description || '',
     base,
     pages: pagesData,
