@@ -12,11 +12,13 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   const history = require('connect-history-api-fallback');
 
   const prepare = require('./prepare');
-  const HeadPlugin = require('./webpack/HeadPlugin');
-  const DevLogPlugin = require('./webpack/DevLogPlugin');
-  const createClientConfig = require('./webpack/createClientConfig');
+  const {
+    HeadPlugin,
+    DevLogPlugin,
+    createClientConfig,
+    markdownLoader: { frontmatterEmitter }
+  } = require('@antdsite/webpack');
   const { applyUserWebpackConfig, logger } = require('@antdsite/util');
-  const { frontmatterEmitter } = require('./webpack/markdownLoader');
 
   logger.wait('\nExtracting site metadata...');
   const options = await prepare(sourceDir);
@@ -29,11 +31,14 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   };
 
   // watch add/remove of files
-  const pagesWatcher = chokidar.watch(['**/*.mdx?', '.antdsite/components/**/*.jsx?', '.antdsite/components/**/*.tsx?'], {
-    cwd: sourceDir,
-    ignored: '.antdsite/**/*.md',
-    ignoreInitial: true
-  });
+  const pagesWatcher = chokidar.watch(
+    ['**/*.mdx?', '.antdsite/components/**/*.jsx?', '.antdsite/components/**/*.tsx?'],
+    {
+      cwd: sourceDir,
+      ignored: '.antdsite/**/*.md',
+      ignoreInitial: true
+    }
+  );
   pagesWatcher.on('add', update);
   pagesWatcher.on('unlink', update);
   pagesWatcher.on('addDir', update);
