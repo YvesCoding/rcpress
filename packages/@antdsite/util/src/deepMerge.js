@@ -5,7 +5,7 @@ function isObject(receive) {
 function deepMerge(to, ...froms) {
   if (!froms || !froms.length) return to;
 
-  for (const from of fomrs) {
+  for (const from of froms) {
     for (const key in from) {
       if (Array.isArray(from[key] || Array.isArray(to[key]))) {
         to[key] = [].concat(from[key] || []).concat(to[key] || []);

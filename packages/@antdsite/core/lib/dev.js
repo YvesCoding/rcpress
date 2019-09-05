@@ -4,7 +4,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   const chalk = require('chalk');
   const webpack = require('webpack');
   const chokidar = require('chokidar');
-  const serve = require('webpack-serve');
+  const serve = require('webpack-dev-server');
   const convert = require('koa-connect');
   const mount = require('koa-mount');
   const range = require('koa-range');

@@ -15,6 +15,7 @@
   "dependencies": {
     "@antdsite/util": "^0.0.0",
     "@antdsite/markdown": "^0.0.0",
+    "@antdsite/webpack": "^0.0.0",
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/generator": "^7.0.0",
@@ -33,7 +34,7 @@
     "gray-matter": "^4.0.1",
     "himalaya": "^1.1.0",
     "js-yaml": "^3.13.1",
-    "koa": "^5.0.0",
+    "koa": "^2.8.1",
     "koa-connect": "^2.0.1",
     "koa-mount": "^4.0.0",
     "koa-range": "^0.3.0",

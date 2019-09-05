@@ -6,7 +6,7 @@ const path = require('path');
 const toString = require(`mdast-util-to-string`);
 
 const resolvePlugin = plugins =>
-  plugins.map(plugin => path.resolve(__dirname, `./reamarkPlugins/${plugin}`));
+  plugins.map(plugin => require(path.resolve(__dirname, `./reamarkPlugins/${plugin}`)));
 
 /**
  * @returns html, toc, frontMatter, headings
@@ -15,19 +15,17 @@ const resolvePlugin = plugins =>
 const createMarkdown = ({ markdown: options = {} }) => {
   const defaultOptions = {
     maxTocDepth: 3,
-    remarkPlugins: [
-      resolvePlugin([
-        'gatsby-remark-ant-alert',
-        'remark-default-class-name',
-        'remark-header-custom-ids',
-        'remark-img-warpper-p',
-        'remark-emoji'
-      ])
-    ]
+    remarkPlugins: resolvePlugin([
+      'gatsby-remark-ant-alert',
+      'remark-default-class-name',
+      'remark-header-custom-ids',
+      'remark-img-warpper-p',
+      'remark-emoji'
+    ])
   };
-  options = deepMerge(options, defaultOptions);
+  options = deepMerge(defaultOptions, options);
+  const compiler = mdx.createMdxAstCompiler(options);
 
-  md.render = (input) => mdx.sync(input)
   const md = rawMDX => {
     let results = {
       toc: [],
@@ -37,7 +35,6 @@ const createMarkdown = ({ markdown: options = {} }) => {
 
     const { content: frontMatterCodeResult } = (results.frontMatter = grayMatter(rawMDX));
     const content = `${frontMatterCodeResult}`;
-    const compiler = mdx.createMdxAstCompiler(options);
     const mdast = compiler.parse(content);
 
     // toc
@@ -52,11 +49,12 @@ const createMarkdown = ({ markdown: options = {} }) => {
     });
     return results;
   };
+  md.render = input => mdx.sync(input);
 
   return md;
 };
 
-module.exports.createMarkdown = createMarkdown;
+module.exports = createMarkdown;
 
 function getItems(node, current) {
   if (!node) {
