@@ -1,9 +1,11 @@
 
-import loadable from '@loadable/component'import React from 'react'const ThemeLayout = loadable((() => import('@themeLayout'))
-const ThemeNotFound = loadable((() => import('@themeNotFound'))
+import loadable from '@loadable/component';
+import React from 'react';
+const ThemeLayout = loadable(() => import('@themeLayout'))
+const ThemeNotFound = loadable(() => import('@themeNotFound'))
 export const routes = [
   {
-    name: "v-731889cab319a",
+    name: "v-ca8da828a181e",
     path: "/guide/",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/README.md",
     component: ThemeLayout
@@ -13,55 +15,55 @@ export const routes = [
     redirect: "/guide/"
   },
   {
-    name: "v-482a871aad675",
+    name: "v-e896bb2f5d3e1",
     path: "/guide/cli",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/cli.md",
     component: ThemeLayout
   },
   {
-    name: "v-a0f33d5f0c526",
+    name: "v-925ae7a68e8e4",
     path: "/guide/configuration",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/configuration.md",
     component: ThemeLayout
   },
   {
-    name: "v-6332f3e0570b",
+    name: "v-2961e904ed6c7",
     path: "/guide/getting-started",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/getting-started.md",
     component: ThemeLayout
   },
   {
-    name: "v-04e1e582f9d98",
+    name: "v-b4c5b547c76ab",
     path: "/guide/global-component",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/global-component.md",
     component: ThemeLayout
   },
   {
-    name: "v-b9f729b74713a",
+    name: "v-9a473de2f9cb3",
     path: "/guide/i18n",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/i18n.md",
     component: ThemeLayout
   },
   {
-    name: "v-5b96d99a00e59",
+    name: "v-0a94ea29ecfa7",
     path: "/guide/markdown",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/markdown.md",
     component: ThemeLayout
   },
   {
-    name: "v-1015879fea9c9",
+    name: "v-116844bc31e56",
     path: "/guide/theme",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/theme.md",
     component: ThemeLayout
   },
   {
-    name: "v-6fcd1c887be56",
+    name: "v-0ab7ddf0c3254",
     path: "/guide/usejsx",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/guide/usejsx.md",
     component: ThemeLayout
   },
   {
-    name: "v-e1d8b6f3cc8a1",
+    name: "v-43600156fed5",
     path: "/zh/guide/",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/README.md",
     component: ThemeLayout
@@ -71,49 +73,49 @@ export const routes = [
     redirect: "/zh/guide/"
   },
   {
-    name: "v-551aedb0d61fc",
+    name: "v-a3e4553cafbea",
     path: "/zh/guide/cli",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/cli.md",
     component: ThemeLayout
   },
   {
-    name: "v-415909ae1f651",
+    name: "v-12be87a9475e8",
     path: "/zh/guide/configuration",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/configuration.md",
     component: ThemeLayout
   },
   {
-    name: "v-1c1718ad8a073",
+    name: "v-074de94e90c2b",
     path: "/zh/guide/getting-started",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/getting-started.md",
     component: ThemeLayout
   },
   {
-    name: "v-55e31f0f00708",
+    name: "v-79bf970a2ccd4",
     path: "/zh/guide/global-component",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/global-component.md",
     component: ThemeLayout
   },
   {
-    name: "v-ae96bab878c63",
+    name: "v-d9815935e2363",
     path: "/zh/guide/i18n",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/i18n.md",
     component: ThemeLayout
   },
   {
-    name: "v-a28888b634456",
+    name: "v-4a642621e802b",
     path: "/zh/guide/markdown",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/markdown.md",
     component: ThemeLayout
   },
   {
-    name: "v-d3ed27c3d3a5f",
+    name: "v-86503805de7b3",
     path: "/zh/guide/theme",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/theme.md",
     component: ThemeLayout
   },
   {
-    name: "v-8e63babe42c64",
+    name: "v-f6aa367606bbe",
     path: "/zh/guide/usejsx",
     filePath: "/Users/yiwang/Desktop/node/gatsby-theme-antdsite/packages/docs/docs/zh/guide/usejsx.md",
     component: ThemeLayout

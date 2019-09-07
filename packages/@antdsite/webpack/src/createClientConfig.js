@@ -1,4 +1,4 @@
-module.exports = function createClientConfig (options, cliOptions) {
+module.exports = function createClientConfig(options, cliOptions) {
   const path = require('path')
   const WebpackBar = require('webpackbar')
   const createBaseConfig = require('./createBaseConfig')
@@ -7,7 +7,7 @@ module.exports = function createClientConfig (options, cliOptions) {
 
   config
     .entry('app')
-      .add(path.resolve(__dirname, '../app/clientEntry.js'))
+    .add('@antdsite/core/app/clientEntry.js')
 
   config.node
     .merge({
@@ -25,31 +25,6 @@ module.exports = function createClientConfig (options, cliOptions) {
       child_process: 'empty'
     })
 
-  // generate client manifest only during build
-  if (process.env.NODE_ENV === 'production') {
-    // This is a temp build of vue-server-renderer/client-plugin.
-    // TODO Switch back to original after problems are resolved.
-    // Fixes two things:
-    // 1. Include CSS in preload files
-    // 2. filter out useless styles.xxxxx.js chunk from mini-css-extract-plugin
-    // https://github.com/webpack-contrib/mini-css-extract-plugin/issues/85
-    config
-      .plugin('ssr-client')
-      .use(require('./ClientPlugin'), [{
-        filename: 'manifest/client.json'
-      }])
-
-    config
-      .plugin('optimize-css')
-      .use(require('optimize-css-assets-webpack-plugin'), [{
-        canPrint: false,
-        cssProcessorOptions: {
-          safe: true,
-          autoprefixer: { disable: true },
-          mergeLonghand: false
-        }
-      }])
-  }
 
   if (!cliOptions.debug) {
     config

@@ -4,7 +4,7 @@ export const siteData = {
   "base": "/",
   "pages": [
     {
-      "key": "v-731889cab319a",
+      "key": "v-ca8da828a181e",
       "path": "/guide/",
       "lastUpdated": 1567411541000,
       "title": "Introduction",
@@ -58,7 +58,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-482a871aad675",
+      "key": "v-e896bb2f5d3e1",
       "path": "/guide/cli",
       "lastUpdated": 1564892452000,
       "title": "Command Line Tool",
@@ -122,7 +122,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-a0f33d5f0c526",
+      "key": "v-925ae7a68e8e4",
       "path": "/guide/configuration",
       "lastUpdated": 1566356962000,
       "title": "Config File",
@@ -168,7 +168,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-6332f3e0570b",
+      "key": "v-2961e904ed6c7",
       "path": "/guide/getting-started",
       "lastUpdated": 1566889709000,
       "title": "Quick Start",
@@ -214,7 +214,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-04e1e582f9d98",
+      "key": "v-b4c5b547c76ab",
       "path": "/guide/global-component",
       "lastUpdated": 1565592907000,
       "title": "Global Components",
@@ -262,7 +262,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-b9f729b74713a",
+      "key": "v-9a473de2f9cb3",
       "path": "/guide/i18n",
       "lastUpdated": 1564729326000,
       "title": "Internationalization",
@@ -300,7 +300,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-5b96d99a00e59",
+      "key": "v-0a94ea29ecfa7",
       "path": "/guide/markdown",
       "lastUpdated": 1566742740000,
       "title": "Markdown Extensions",
@@ -364,7 +364,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-1015879fea9c9",
+      "key": "v-116844bc31e56",
       "path": "/guide/theme",
       "lastUpdated": 1564668625000,
       "title": "Custom Themes",
@@ -460,7 +460,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-6fcd1c887be56",
+      "key": "v-0ab7ddf0c3254",
       "path": "/guide/usejsx",
       "lastUpdated": 1565592907000,
       "title": "Using JSX in Markdown",
@@ -498,7 +498,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-e1d8b6f3cc8a1",
+      "key": "v-43600156fed5",
       "path": "/zh/guide/",
       "lastUpdated": 1567411541000,
       "title": "介绍",
@@ -552,7 +552,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-551aedb0d61fc",
+      "key": "v-a3e4553cafbea",
       "path": "/zh/guide/cli",
       "lastUpdated": 1564892452000,
       "title": "命令行工具",
@@ -616,7 +616,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-415909ae1f651",
+      "key": "v-12be87a9475e8",
       "path": "/zh/guide/configuration",
       "lastUpdated": 1566356962000,
       "title": "配置文件",
@@ -662,7 +662,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-1c1718ad8a073",
+      "key": "v-074de94e90c2b",
       "path": "/zh/guide/getting-started",
       "lastUpdated": 1566889709000,
       "title": "快速上手",
@@ -716,7 +716,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-55e31f0f00708",
+      "key": "v-79bf970a2ccd4",
       "path": "/zh/guide/global-component",
       "lastUpdated": 1565592907000,
       "title": "全局组件",
@@ -764,7 +764,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-ae96bab878c63",
+      "key": "v-d9815935e2363",
       "path": "/zh/guide/i18n",
       "lastUpdated": 1564668625000,
       "title": "多语言支持",
@@ -802,7 +802,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-a28888b634456",
+      "key": "v-4a642621e802b",
       "path": "/zh/guide/markdown",
       "lastUpdated": 1566742740000,
       "title": "Markdown 扩展",
@@ -866,7 +866,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-d3ed27c3d3a5f",
+      "key": "v-86503805de7b3",
       "path": "/zh/guide/theme",
       "lastUpdated": 1564668625000,
       "title": "自定义主题",
@@ -962,7 +962,7 @@ export const siteData = {
       }
     },
     {
-      "key": "v-8e63babe42c64",
+      "key": "v-f6aa367606bbe",
       "path": "/zh/guide/usejsx",
       "lastUpdated": 1565592907000,
       "title": "在 Markdown 中使用 JSX",

@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra');
 const { logger } = require('@antdsite/util')
+const LoadablePlugin = require('@loadable/webpack-plugin')
 
 module.exports = function createBaseConfig({
   siteConfig,
@@ -121,6 +122,9 @@ module.exports = function createBaseConfig({
       .end()
       .use('babel-loader')
       .loader('babel-loader')
+      .options({
+
+      })
 
   }
 
@@ -178,7 +182,7 @@ module.exports = function createBaseConfig({
         if (isProd) {
           rule.use('extract-css-loader').loader(CSSExtractPlugin.loader)
         } else {
-          rule.use('vue-style-loader').loader('vue-style-loader')
+          rule.use('style-loader').loader('style-loader')
         }
       }
 
@@ -211,9 +215,6 @@ module.exports = function createBaseConfig({
     preferPathResolver: 'webpack'
   }, siteConfig.stylus))
 
-  config
-    .plugin('vue-loader')
-    .use(VueLoaderPlugin)
 
   if (isProd && !isServer) {
     config
@@ -245,9 +246,14 @@ module.exports = function createBaseConfig({
       BASE_URL: JSON.stringify(siteConfig.base || '/'),
       GA_ID: siteConfig.ga ? JSON.stringify(siteConfig.ga) : false,
       SW_ENABLED: !!siteConfig.serviceWorker,
-      VUEPRESS_VERSION: JSON.stringify(require('../../package.json').version),
+      VUEPRESS_VERSION: JSON.stringify(require('@antdsite/core/package.json').version),
       LAST_COMMIT_HASH: JSON.stringify(getLastCommitHash())
     }])
+
+  // loadable webpack plugin
+  config
+    .plugin('LoadablePlugin')
+    .use(new LoadablePlugin())
 
   return config
 }

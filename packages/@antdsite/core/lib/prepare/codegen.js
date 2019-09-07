@@ -40,10 +40,10 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
   }`;
 
   return (
-    `import loadable from '@loadable/component'` +
-    `import React from 'react'` +
-    `const ThemeLayout = loadable((() => import('@themeLayout'))\n` +
-    `const ThemeNotFound = loadable((() => import('@themeNotFound'))\n` +
+    `import loadable from '@loadable/component';\n` +
+    `import React from 'react';\n` +
+    `const ThemeLayout = loadable(() => import('@themeLayout'));\n` +
+    `const ThemeNotFound = loadable(() => import('@themeNotFound'));\n` +
     `export const routes = [${pages.map(genRoute).join(',')}${notFoundRoute}\n]`
   );
 };

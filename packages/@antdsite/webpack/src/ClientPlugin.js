@@ -16,7 +16,7 @@ var onEmit = function (compiler, name, hook) {
 
 var hash = require('hash-sum')
 var uniq = require('lodash.uniq')
-var VueSSRClientPlugin = function VueSSRClientPlugin (options) {
+var VueSSRClientPlugin = function VueSSRClientPlugin(options) {
   if (options === void 0) options = {}
 
   this.options = Object.assign({
@@ -24,7 +24,7 @@ var VueSSRClientPlugin = function VueSSRClientPlugin (options) {
   }, options)
 }
 
-VueSSRClientPlugin.prototype.apply = function apply (compiler) {
+VueSSRClientPlugin.prototype.apply = function apply(compiler) {
   var this$1 = this
 
   onEmit(compiler, 'vue-client-plugin', function (compilation, cb) {
