@@ -1,8 +1,18 @@
 const path = require('path');
-const { fileToComponentName, resolveComponents } = require('./util');
+const {
+  fileToComponentName,
+  resolveComponents
+} = require('./util');
 
-exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFiles }) {
-  function genRoute({ path: pagePath, key: componentName }, index) {
+exports.genRoutesFile = async function({
+  siteData: { pages },
+  sourceDir,
+  pageFiles
+}) {
+  function genRoute(
+    { path: pagePath, key: componentName },
+    index
+  ) {
     const file = pageFiles[index];
     const filePath = path.resolve(sourceDir, file);
     let code = `
@@ -10,7 +20,8 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
     name: ${JSON.stringify(componentName)},
     path: ${JSON.stringify(pagePath)},
     filePath: ${JSON.stringify(filePath)},
-    component: ThemeLayout
+    component: ThemeLayout,
+    exact: true
   }`;
 
     const dncodedPath = decodeURIComponent(pagePath);
@@ -18,7 +29,8 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
       code += `,
   {
     path: ${JSON.stringify(dncodedPath)},
-    redirect: ${JSON.stringify(pagePath)}
+    redirect: ${JSON.stringify(pagePath)},
+    exact: true
   }`;
     }
 
@@ -26,7 +38,8 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
       code += `,
   {
     path: ${JSON.stringify(pagePath + 'index.html')},
-    redirect: ${JSON.stringify(pagePath)}
+    redirect: ${JSON.stringify(pagePath)},
+    exact: true
   }`;
     }
 
@@ -36,7 +49,8 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
   const notFoundRoute = `,
   {
     path: '*',
-    component: ThemeNotFound
+    component: ThemeNotFound,
+    exact: true
   }`;
 
   return (
@@ -44,7 +58,9 @@ exports.genRoutesFile = async function ({ siteData: { pages }, sourceDir, pageFi
     `import React from 'react';\n` +
     `const ThemeLayout = loadable(() => import('@themeLayout'));\n` +
     `const ThemeNotFound = loadable(() => import('@themeNotFound'));\n` +
-    `export const routes = [${pages.map(genRoute).join(',')}${notFoundRoute}\n]`
+    `export const routes = [${pages
+      .map(genRoute)
+      .join(',')}${notFoundRoute}\n]`
   );
 };
 

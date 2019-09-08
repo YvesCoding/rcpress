@@ -1,4 +1,7 @@
-module.exports = async function dev(sourceDir, cliOptions = {}) {
+module.exports = async function dev(
+  sourceDir,
+  cliOptions = {}
+) {
   const fs = require('fs');
   const path = require('path');
   const chalk = require('chalk');
@@ -18,7 +21,10 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
     createClientConfig,
     markdownLoader: { frontmatterEmitter }
   } = require('@rcpress/webpack');
-  const { applyUserWebpackConfig, logger } = require('@rcpress/util');
+  const {
+    applyUserWebpackConfig,
+    logger
+  } = require('@rcpress/util');
 
   logger.wait('\nExtracting site metadata...');
   const options = await prepare(sourceDir);
@@ -26,13 +32,19 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   // setup watchers to update options and dynamically generated files
   const update = () => {
     prepare(sourceDir).catch(err => {
-      console.error(logger.error(chalk.red(err.stack), false));
+      console.error(
+        logger.error(chalk.red(err.stack), false)
+      );
     });
   };
 
   // watch add/remove of files
   const pagesWatcher = chokidar.watch(
-    ['**/*.mdx?', '.rcpress/components/**/*.jsx?', '.rcpress/components/**/*.tsx?'],
+    [
+      '**/*.mdx?',
+      '.rcpress/components/**/*.jsx?',
+      '.rcpress/components/**/*.tsx?'
+    ],
     {
       cwd: sourceDir,
       ignored: '.rcpress/**/*.md',
@@ -46,7 +58,11 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
 
   // watch config file
   const configWatcher = chokidar.watch(
-    ['.rcpress/config.js', '.rcpress/config.yml', '.rcpress/config.toml'],
+    [
+      '.rcpress/config.js',
+      '.rcpress/config.yml',
+      '.rcpress/config.toml'
+    ],
     {
       cwd: sourceDir,
       ignoreInitial: true
@@ -66,7 +82,10 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
     // internals from an incompatible version.
     .use(require('vuepress-html-webpack-plugin'), [
       {
-        template: path.resolve(__dirname, 'app/index.dev.html')
+        template: path.resolve(
+          __dirname,
+          'app/index.dev.html'
+        )
       }
     ]);
 
@@ -76,8 +95,12 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
     }
   ]);
 
-  const port = await resolvePort(cliOptions.port || options.siteConfig.port);
-  const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
+  const port = await resolvePort(
+    cliOptions.port || options.siteConfig.port
+  );
+  const { host, displayHost } = await resolveHost(
+    cliOptions.host || options.siteConfig.host
+  );
 
   config.plugin('rcpress-log').use(DevLogPlugin, [
     {
@@ -90,53 +113,88 @@ module.exports = async function dev(sourceDir, cliOptions = {}) {
   config = config.toConfig();
   const userConfig = options.siteConfig.configureWebpack;
   if (userConfig) {
-    config = applyUserWebpackConfig(userConfig, config, false /* isServer */);
+    config = applyUserWebpackConfig(
+      userConfig,
+      config,
+      false /* isServer */
+    );
   }
 
   const compiler = webpack(config);
 
-  const nonExistentDir = path.resolve(__dirname, 'non-existent');
-  await serve({
-    // avoid project cwd from being served. Otherwise if the user has index.html
-    // in cwd it would break the server
-    content: [nonExistentDir],
-    compiler,
-    host,
-    dev: { logLevel: 'warn' },
-    hot: {
-      port: port + 1,
-      logLevel: 'error'
-    },
-    logLevel: 'error',
-    port,
-    add: app => {
-      const userPublic = path.resolve(sourceDir, '.rcpress/public');
+  const nonExistentDir = path.resolve(
+    __dirname,
+    'non-existent'
+  );
+  const contentBase = path.resolve(
+    sourceDir,
+    '.rcpress/public'
+  );
 
-      // enable range request
-      app.use(range);
+  const serverConfig = Object.assign(
+    {
+      disableHostCheck: true,
+      compress: true,
+      clientLogLevel: 'error',
+      hot: true,
+      quiet: true,
+      headers: {
+        'access-control-allow-origin': '*'
+      },
+      open: options.siteConfig.open,
+      publicPath: options.siteConfig.base,
+      watchOptions: {
+        ignored: [
+          /node_modules/,
+          `!${path.resolve(__dirname, 'app/.temp')}/**`
+        ]
+      },
+      historyApiFallback: {
+        disableDotRule: true,
+        rewrites: [
+          {
+            from: /./,
+            to: path.posix.join(
+              options.siteConfig.base,
+              'index.html'
+            )
+          }
+        ]
+      },
+      overlay: false,
+      host: this.host,
+      contentBase,
+      before: app => {
+        // enable range request
+        app.use(range);
 
-      // respect base when serving static files...
-      if (fs.existsSync(userPublic)) {
-        app.use(mount(options.publicPath, serveStatic(userPublic)));
+        // respect base when serving static files...
+        if (fs.existsSync(contentBase)) {
+          app.use(
+            mount(
+              options.siteConfig.base,
+              serveStatic(contentBase)
+            )
+          );
+        }
       }
+    },
+    options.siteConfig.devServer || {}
+  );
 
-      app.use(
-        convert(
-          history({
-            rewrites: [{ from: /\.html$/, to: '/' }]
-          })
-        )
-      );
-    }
-  });
+  await new serve(compiler, serverConfig);
 };
 
 function resolveHost(host) {
   // webpack-serve hot updates doesn't work properly over 0.0.0.0 on Windows,
   // but localhost does not allow visiting over network :/
-  const defaultHost = process.platform === 'win32' ? 'localhost' : '0.0.0.0';
+  const defaultHost =
+    process.platform === 'win32' ? 'localhost' : '0.0.0.0';
   host = host || defaultHost;
-  const displayHost = host === defaultHost && process.platform !== 'win32' ? 'localhost' : host;
+  const displayHost =
+    host === defaultHost && process.platform !== 'win32'
+      ? 'localhost'
+      : host;
   return {
     displayHost,
     host

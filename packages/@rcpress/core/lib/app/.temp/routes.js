@@ -1,127 +1,148 @@
 
 import loadable from '@loadable/component';
 import React from 'react';
-const ThemeLayout = loadable(() => import('@themeLayout'))
-const ThemeNotFound = loadable(() => import('@themeNotFound'))
+const ThemeLayout = loadable(() => import('@themeLayout'));
+const ThemeNotFound = loadable(() => import('@themeNotFound'));
 export const routes = [
   {
-    name: "v-ca8da828a181e",
+    name: "v-e812a01797814",
     path: "/guide/",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/README.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\README.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
     path: "/guide/index.html",
-    redirect: "/guide/"
+    redirect: "/guide/",
+    exact: true
   },
   {
-    name: "v-e896bb2f5d3e1",
+    name: "v-4dc9219a1afcd",
     path: "/guide/cli",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/cli.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\cli.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-925ae7a68e8e4",
+    name: "v-07fc9ecad62bb",
     path: "/guide/configuration",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/configuration.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\configuration.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-2961e904ed6c7",
+    name: "v-2212f14da5fd2",
     path: "/guide/getting-started",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/getting-started.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\getting-started.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-b4c5b547c76ab",
+    name: "v-7c8726c72d1cc",
     path: "/guide/global-component",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/global-component.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\global-component.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-9a473de2f9cb3",
+    name: "v-bacfab46d31d6",
     path: "/guide/i18n",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/i18n.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\i18n.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-0a94ea29ecfa7",
+    name: "v-26a043681b012",
     path: "/guide/markdown",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/markdown.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\markdown.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-116844bc31e56",
+    name: "v-2f53c887a6318",
     path: "/guide/theme",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/theme.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\theme.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-0ab7ddf0c3254",
+    name: "v-27c5f4497b5c6",
     path: "/guide/usejsx",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/guide/usejsx.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\guide\\usejsx.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-43600156fed5",
+    name: "v-1171c24e14b06",
     path: "/zh/guide/",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/README.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\README.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
     path: "/zh/guide/index.html",
-    redirect: "/zh/guide/"
+    redirect: "/zh/guide/",
+    exact: true
   },
   {
-    name: "v-a3e4553cafbea",
+    name: "v-88686f3914488",
     path: "/zh/guide/cli",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/cli.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\cli.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-12be87a9475e8",
+    name: "v-177c913f3e76d",
     path: "/zh/guide/configuration",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/configuration.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\configuration.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-074de94e90c2b",
+    name: "v-eb82a1be6ed89",
     path: "/zh/guide/getting-started",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/getting-started.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\getting-started.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-79bf970a2ccd4",
+    name: "v-3c2e3d15827ff",
     path: "/zh/guide/global-component",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/global-component.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\global-component.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-d9815935e2363",
+    name: "v-ffc8f8afafa39",
     path: "/zh/guide/i18n",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/i18n.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\i18n.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-4a642621e802b",
+    name: "v-c8cac1e4912af",
     path: "/zh/guide/markdown",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/markdown.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\markdown.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-86503805de7b3",
+    name: "v-a6072839591ad",
     path: "/zh/guide/theme",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/theme.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\theme.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
-    name: "v-f6aa367606bbe",
+    name: "v-afe41d612fb0d",
     path: "/zh/guide/usejsx",
-    filePath: "/Users/yiwang/Desktop/node/gatsby-theme-rcpress/packages/docs/docs/zh/guide/usejsx.md",
-    component: ThemeLayout
+    filePath: "E:\\antdsite\\packages\\docs\\docs\\zh\\guide\\usejsx.md",
+    component: ThemeLayout,
+    exact: true
   },
   {
     path: '*',
-    component: ThemeNotFound
+    component: ThemeNotFound,
+    exact: true
   }
 ]

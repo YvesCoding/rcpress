@@ -6,9 +6,7 @@
   "license": "MIT",
   "author": "",
   "scripts": {
-    "build": "yarn clean && gatsby build --prefix-paths",
-    "clean": "gatsby clean",
-    "start": "yarn clean && gatsby develop"
+    "dev": "node ../@rcpress/cli/src/index dev --debug"
   },
   "devDependencies": {
     "@rcpress/cli": "^0.0.0"

@@ -7,5 +7,10 @@
     "build": "yarn clean && gatsby build",
     "clean": "gatsby clean",
     "start": "yarn clean && gatsby develop"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "antd": "latest",
+    "rc-util": "^4.11.0"
   }
 }

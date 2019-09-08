@@ -3,11 +3,13 @@
 import { createApp } from './app';
 import SWUpdateEvent from './SWUpdateEvent';
 import { register } from 'register-service-worker';
+import { loadableReady } from '@loadable/component';
+import { render } from 'react-dom';
 
-const { app, router } = createApp();
+const app = createApp();
 
-window.__VUEPRESS_VERSION__ = {
-  version: VUEPRESS_VERSION,
+window.__RCPRESS_VERSION__ = {
+  version: RCPRESS_VERSION,
   hash: LAST_COMMIT_HASH
 };
 
@@ -26,7 +28,13 @@ if (process.env.NODE_ENV === 'production' && GA_ID) {
     a.async = 1;
     a.src = g;
     m.parentNode.insertBefore(a, m);
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  })(
+    window,
+    document,
+    'script',
+    'https://www.google-analytics.com/analytics.js',
+    'ga'
+  );
 
   ga('create', GA_ID, 'auto');
   ga('send', 'pageview');
@@ -37,10 +45,9 @@ if (process.env.NODE_ENV === 'production' && GA_ID) {
   });
 }
 
-router.onReady(() => {
-  app.$mount('#app');
-
+loadableReady(() => {
   // Register service worker
+  render(app, document.getElementById('app'));
   if (
     process.env.NODE_ENV === 'production' &&
     SW_ENABLED &&
@@ -48,24 +55,39 @@ router.onReady(() => {
   ) {
     register(`${BASE_URL}service-worker.js`, {
       ready() {
-        console.log('[rcpress:sw] Service worker is active.');
-        app.$refs.layout.$emit('sw-ready');
+        console.log(
+          '[rcpress:sw] Service worker is active.'
+        );
+        // app.$refs.layout.$emit('sw-ready');
       },
       cached(registration) {
-        console.log('[rcpress:sw] Content has been cached for offline use.');
-        app.$refs.layout.$emit('sw-cached', new SWUpdateEvent(registration));
+        console.log(
+          '[rcpress:sw] Content has been cached for offline use.'
+        );
+        // app.$refs.layout.$emit(
+        //   'sw-cached',
+        //   new SWUpdateEvent(registration)
+        // );
       },
       updated(registration) {
         console.log('[rcpress:sw] Content updated.');
-        app.$refs.layout.$emit('sw-updated', new SWUpdateEvent(registration));
+        // app.$refs.layout.$emit(
+        //   'sw-updated',
+        //   new SWUpdateEvent(registration)
+        // );
       },
       offline() {
-        console.log('[rcpress:sw] No internet connection found. App is running in offline mode.');
+        console.log(
+          '[rcpress:sw] No internet connection found. App is running in offline mode.'
+        );
         app.$refs.layout.$emit('sw-offline');
       },
       error(err) {
-        console.error('[rcpress:sw] Error during service worker registration:', err);
-        app.$refs.layout.$emit('sw-error', err);
+        console.error(
+          '[rcpress:sw] Error during service worker registration:',
+          err
+        );
+        // app.$refs.layout.$emit('sw-error', err);
         if (GA_ID) {
           ga('send', 'exception', {
             exDescription: err.message,

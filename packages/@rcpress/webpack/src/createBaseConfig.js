@@ -30,8 +30,13 @@ module.exports = function createBaseConfig(
   config
     .mode(isProd && !debug ? 'production' : 'development')
     .output.path(outDir)
-    .filename(isProd ? 'assets/js/[name].[chunkhash:8].js' : 'assets/js/[name].js')
-    .publicPath(isProd ? publicPath : '/');
+    .filename(
+      isProd
+        ? 'assets/js/[name].[chunkhash:8].js'
+        : 'assets/js/[name].js'
+    )
+    .publicPath(isProd ? publicPath : '/')
+    .end();
 
   if (debug) {
     config.devtool('source-map');
@@ -50,15 +55,26 @@ module.exports = function createBaseConfig(
     .set(
       '@AlgoliaSearchBox',
       isAlgoliaSearch
-        ? path.resolve(__dirname, '../default-theme/AlgoliaSearchBox.vue')
+        ? path.resolve(
+            __dirname,
+            '../default-theme/AlgoliaSearchBox.vue'
+          )
         : path.resolve(__dirname, './noopModule.js')
     )
     .end()
-    .extensions.merge(['.js', '.jsx', '.ts', '.tsx', '.less'])
+    .extensions.merge([
+      '.js',
+      '.jsx',
+      '.ts',
+      '.tsx',
+      '.less'
+    ])
     .end()
     .modules.merge(modulePaths);
 
-  config.resolveLoader.set('symlinks', true).modules.merge(modulePaths);
+  config.resolveLoader
+    .set('symlinks', true)
+    .modules.merge(modulePaths);
 
   if (cache === false) {
     logger.tip('Clean cache...\n');
@@ -67,23 +83,29 @@ module.exports = function createBaseConfig(
 
   const cacheIdentifier = JSON.stringify({
     rcpress: require('@rcpress/core/package.json').version,
-    'cache-loader': require('cache-loader').version,
+    '@babel/core': require('@babel/core').version,
     isProd,
     isServer,
     config:
-      (siteConfig.markdown ? JSON.stringify(siteConfig.markdown) : '') +
+      (siteConfig.markdown
+        ? JSON.stringify(siteConfig.markdown)
+        : '') +
       (siteConfig.chainWebpack || '').toString() +
       (siteConfig.configureWebpack || '').toString()
   });
 
-  const mdRule = config.module.rule('markdown').test(/\.mdx?$/);
+  const mdRule = config.module
+    .rule('markdown')
+    .test(/\.mdx?$/);
 
   mdRule
     .use('babel-loader')
+    .loader('babel-loader')
     .end()
     .use('@mdx-js/loader')
+    .loader('@mdx-js/loader')
     .end()
-    .use()
+    .use('markdownLoader')
     .loader(require.resolve('./markdownLoader'))
     .options({ sourceDir, markdown });
 
@@ -113,7 +135,18 @@ module.exports = function createBaseConfig(
       .options({
         cacheDirectory,
         cacheIdentifier,
-        presets: ['@babel/preset-typescript', '@babel/preset-env', '@babel/preset-react']
+        presets: [
+          ['@babel/preset-typescript'],
+          ['@babel/preset-env'],
+          ['@babel/preset-react']
+        ],
+        plugins: [
+          [
+            '@babel/plugin-proposal-decorators',
+            { legacy: true }
+          ],
+          ['@babel/plugin-proposal-class-properties']
+        ]
       });
   }
 
@@ -160,7 +193,9 @@ module.exports = function createBaseConfig(
 
   function createCSSRule(lang, test, loader, options) {
     const baseRule = config.module.rule(lang).test(test);
-    const modulesRule = baseRule.oneOf('modules').resourceQuery(/module/);
+    const modulesRule = baseRule
+      .oneOf('modules')
+      .resourceQuery(/module/);
     const normalRule = baseRule.oneOf('normal');
 
     applyLoaders(modulesRule, true);
@@ -169,7 +204,9 @@ module.exports = function createBaseConfig(
     function applyLoaders(rule, modules) {
       if (!isServer) {
         if (isProd) {
-          rule.use('extract-css-loader').loader(CSSExtractPlugin.loader);
+          rule
+            .use('extract-css-loader')
+            .loader(CSSExtractPlugin.loader);
         } else {
           rule.use('style-loader').loader('style-loader');
         }
@@ -177,7 +214,9 @@ module.exports = function createBaseConfig(
 
       rule
         .use('css-loader')
-        .loader(isServer ? 'css-loader/locals' : 'css-loader')
+        .loader(
+          isServer ? 'css-loader/locals' : 'css-loader'
+        )
         .options({
           modules,
           localIdentName: `[local]_[hash:base64:8]`,
@@ -209,14 +248,24 @@ module.exports = function createBaseConfig(
 
   createCSSRule('css', /\.css$/);
   createCSSRule('postcss', /\.p(ost)?css$/);
-  createCSSRule('scss', /\.scss$/, 'sass-loader', siteConfig.scss);
+  createCSSRule(
+    'scss',
+    /\.scss$/,
+    'sass-loader',
+    siteConfig.scss
+  );
   createCSSRule(
     'sass',
     /\.sass$/,
     'sass-loader',
     Object.assign({ indentedSyntax: true }, siteConfig.sass)
   );
-  createCSSRule('less', /\.less$/, 'less-loader', siteConfig.less);
+  createCSSRule(
+    'less',
+    /\.less$/,
+    'less-loader',
+    siteConfig.less
+  );
   createCSSRule(
     'stylus',
     /\.styl(us)?$/,
@@ -253,15 +302,23 @@ module.exports = function createBaseConfig(
   }
 
   // inject constants
-  config.plugin('injections').use(require('webpack/lib/DefinePlugin'), [
-    {
-      BASE_URL: JSON.stringify(siteConfig.base || '/'),
-      GA_ID: siteConfig.ga ? JSON.stringify(siteConfig.ga) : false,
-      SW_ENABLED: !!siteConfig.serviceWorker,
-      VUEPRESS_VERSION: JSON.stringify(require('@rcpress/core/package.json').version),
-      LAST_COMMIT_HASH: JSON.stringify(getLastCommitHash())
-    }
-  ]);
+  config
+    .plugin('injections')
+    .use(require('webpack/lib/DefinePlugin'), [
+      {
+        BASE_URL: JSON.stringify(siteConfig.base || '/'),
+        GA_ID: siteConfig.ga
+          ? JSON.stringify(siteConfig.ga)
+          : false,
+        SW_ENABLED: !!siteConfig.serviceWorker,
+        RCPRESS_VERSION: JSON.stringify(
+          require('@rcpress/core/package.json').version
+        ),
+        LAST_COMMIT_HASH: JSON.stringify(
+          getLastCommitHash()
+        )
+      }
+    ]);
 
   // loadable webpack plugin
   config.plugin('LoadablePlugin').use(new LoadablePlugin());
@@ -282,5 +339,7 @@ function getLastCommitHash() {
 }
 
 function getModulePaths() {
-  return module.paths.concat([path.resolve(process.cwd(), 'node_modules')]);
+  return module.paths.concat([
+    path.resolve(process.cwd(), 'node_modules')
+  ]);
 }

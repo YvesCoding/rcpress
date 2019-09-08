@@ -10,19 +10,35 @@ module.exports = class DevLogPlugin {
     let isFirst = true;
     compiler.hooks.done.tap('rcpress-log', stats => {
       clearScreen();
-
-      const { displayHost, port, publicPath } = this.options;
-      const time = new Date().toTimeString().match(/^[\d:]+/)[0];
+      const {
+        displayHost,
+        port,
+        publicPath
+      } = this.options;
+      if (
+        stats.compilation.errors &&
+        stats.compilation.errors.length
+      ) {
+        for (const e of stats.compilation.errors) {
+          logger.error(e.message);
+        }
+      }
+      const time = new Date()
+        .toTimeString()
+        .match(/^[\d:]+/)[0];
 
       logger.success(
         `\n${chalk.gray(`[${time}]`)} Build ${chalk.italic(
           stats.hash.slice(0, 6)
-        )} finished in ${stats.endTime - stats.startTime} ms!`
+        )} finished in ${stats.endTime -
+          stats.startTime} ms!`
       );
       if (isFirst) {
         isFirst = false;
         console.log(
-          `\n${chalk.gray('>')} RcPress dev server listening at ${chalk.cyan(
+          `\n${chalk.gray(
+            '>'
+          )} RcPress dev server listening at ${chalk.cyan(
             `http://${displayHost}:${port}${publicPath}`
           )}`
         );

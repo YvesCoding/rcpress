@@ -3,9 +3,17 @@ const path = require('path');
 const globby = require('globby');
 const createMarkdown = require('@rcpress/markdown');
 const loadConfig = require('./loadConfig');
-const { encodePath, fileToPath, sort, getGitLastUpdatedTimeStamp } = require('./util');
+const {
+  encodePath,
+  fileToPath,
+  sort,
+  getGitLastUpdatedTimeStamp
+} = require('./util');
 const { inferTitle, logger } = require('@rcpress/util');
-const { createResolveThmepath, createResolvePathWidthExts } = require('./theme');
+const {
+  createResolveThemeLayoutPath,
+  createResolvePathWidthExts
+} = require('./theme');
 
 module.exports = async function resolveOptions(sourceDir) {
   const antdsiteDir = path.resolve(sourceDir, '.rcpress');
@@ -35,10 +43,18 @@ module.exports = async function resolveOptions(sourceDir) {
     : path.resolve(sourceDir, '.rcpress/dist');
 
   // resolve theme
-  const resolveThemePath = createResolveThmepath(sourceDir);
-  const resolvePathWidthExts = createResolvePathWidthExts(sourceDir);
-  const useDefaultTheme = !siteConfig.theme && !fs.existsSync(path.resolve(antdsiteDir, 'theme'));
-  const defaultThemePath = resolveThemePath('@rcpress/theme-default');
+  const resolveThemeLayoutPath = createResolveThemeLayoutPath(
+    sourceDir
+  );
+  const resolvePathWidthExts = createResolvePathWidthExts(
+    sourceDir
+  );
+  const useDefaultTheme =
+    !siteConfig.theme &&
+    !fs.existsSync(path.resolve(antdsiteDir, 'theme'));
+  const defaultThemeLayoutPath = resolveThemeLayoutPath(
+    '@rcpress/theme-default'
+  );
   let themePath = null;
   let themeLayoutPath = null;
   let themeNotFoundPath = null;
@@ -46,34 +62,51 @@ module.exports = async function resolveOptions(sourceDir) {
 
   if (useDefaultTheme) {
     // use default theme
-    themePath = path.dirname(defaultThemePath);
-    themeLayoutPath = defaultThemePath;
-    themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`);
+    themePath = path.dirname(defaultThemeLayoutPath);
+    themeLayoutPath = defaultThemeLayoutPath;
+    themeNotFoundPath = resolvePathWidthExts(
+      `${defaultThemeLayoutPath}/NotFound`
+    );
   } else {
     // resolve theme Layout
     if (siteConfig.theme) {
       // use external theme
       try {
-        themeLayoutPath = resolveThemePath(siteConfig.theme);
+        themeLayoutPath = resolveThemeLayoutPath(
+          siteConfig.theme
+        );
         themePath = path.dirname(themeLayoutPath);
       } catch (e) {
         throw new Error(
-          logger.Error(`Failed to load custom theme layout at theme "${siteConfig.theme}".`, false)
+          logger.Error(
+            `Failed to load custom theme layout at theme "${siteConfig.theme}".`,
+            false
+          )
         );
       }
     } else {
       // use custom theme
       themePath = path.resolve(antdsiteDir, 'theme');
-      themeLayoutPath = resolvePathWidthExts(`${themePath}/Layout`);
+      themeLayoutPath = resolvePathWidthExts(
+        `${themePath}/Layout`
+      );
       if (!themeLayoutPath) {
-        throw new Error(logger.error(`Cannot resolve Layout file in .rcpress/theme`));
+        throw new Error(
+          logger.error(
+            `Cannot resolve Layout file in .rcpress/theme`
+          )
+        );
       }
     }
 
     // resolve theme NotFound
-    themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`);
+    themeNotFoundPath = resolvePathWidthExts(
+      `${themePath}/NotFound`
+    );
     if (!themeNotFoundPath) {
-      themeNotFoundPath = resolvePathWidthExts(`${defaultThemePath}/NotFound`);
+      themeNotFoundPath = resolvePathWidthExts(
+        `${path.dirname(defaultThemeLayoutPath)}/NotFound`
+      );
     }
 
     // TODO rcpress should also have a similar stuff to enhance app.
@@ -99,21 +132,27 @@ module.exports = async function resolveOptions(sourceDir) {
   const markdown = await createMarkdown(siteConfig);
 
   // resolve pageFiles
-  const patterns = ['**/*.md', '!.rcpress', '!node_modules'];
+  const patterns = [
+    '**/*.md',
+    '!.rcpress',
+    '!node_modules'
+  ];
   if (siteConfig.dest) {
     const outDirRelative = path.relative(sourceDir, outDir);
     if (!outDirRelative.includes('..')) {
       patterns.push('!' + outDirRelative);
     }
   }
-  const pageFiles = sort(await globby(patterns, { cwd: sourceDir }));
+  const pageFiles = sort(
+    await globby(patterns, { cwd: sourceDir })
+  );
 
   // resolve lastUpdated
   const shouldResolveLastUpdated =
     themeConfig.lastUpdated ||
-    Object.keys((siteConfig.locales && themeConfig.locales) || {}).some(
-      base => themeConfig.locales[base].lastUpdated
-    );
+    Object.keys(
+      (siteConfig.locales && themeConfig.locales) || {}
+    ).some(base => themeConfig.locales[base].lastUpdated);
 
   // resolve pagesData
   const pagesData = await Promise.all(
@@ -130,12 +169,16 @@ module.exports = async function resolveOptions(sourceDir) {
       };
 
       if (shouldResolveLastUpdated) {
-        data.lastUpdated = getGitLastUpdatedTimeStamp(filepath);
+        data.lastUpdated = getGitLastUpdatedTimeStamp(
+          filepath
+        );
       }
 
       // extract yaml frontMatter
       const content = await fs.readFile(filepath, 'utf-8');
-      const { headings, frontMatter, toc } = markdown(content);
+      const { headings, frontMatter, toc } = markdown(
+        content
+      );
 
       // infer title
       const title = inferTitle(frontMatter, headings);
