@@ -2,17 +2,17 @@
 
 ## 自定义布局
 
-开发自定义的主题需要在`,antdsite`目录下新建一个`theme`目录。
+开发自定义的主题需要在`,rcpress`目录下新建一个`theme`目录。
 
 ```bash
-├── .antdsite
+├── .rcpress
     ├── theme           # 主题文件夹，用于存放自定义主题
 ```
 
 你可以通过建立不同的文件来自定义整个布局或者部分布局。
 
 ```bash
-├── .antdsite
+├── .rcpress
     ├── theme                 # 主题文件夹，用于存放自定义主题
         ├── layout.js         # 自定义整个布局
         ├── header.js         # 自定义整个页面头部
@@ -28,10 +28,10 @@
 
 ## 获取网站数据和当前页面的数据
 
-页面的数据都存在从`antdsite`导出的`PageContext`中
+页面的数据都存在从`rcpress`导出的`PageContext`中
 
 ```js
-import { PageContext } from 'antdsite';
+import { PageContext } from 'rcpress';
 ```
 
 `PageContext`是由`React.createContext` api 创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#reactcreatecontext)。
@@ -55,7 +55,7 @@ import { PageContext } from 'antdsite';
 
 - 类型: `Object`
 
-也就是你`.antdsite/config.js`文件里的所有内容。
+也就是你`.rcpress/config.js`文件里的所有内容。
 
 ### slug
 
@@ -109,7 +109,7 @@ import { PageContext } from 'antdsite';
 在项目根目录下运行下列命令:
 
 ```bash
-antdsite-cli --eject
+rcpress-cli --eject
 ```
 
-即可把所有默认主题拷贝到当前工作目录下的`.antdsite/theme`文件夹下， 然后你就=可以修改整个默认主题了。
+即可把所有默认主题拷贝到当前工作目录下的`.rcpress/theme`文件夹下， 然后你就=可以修改整个默认主题了。

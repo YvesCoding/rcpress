@@ -1,0 +1,11 @@
+{
+  "name": "@rcpress/theme-blog",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The blog theme of RcPress",
+  "scripts": {
+    "build": "yarn clean && gatsby build",
+    "clean": "gatsby clean",
+    "start": "yarn clean && gatsby develop"
+  }
+}

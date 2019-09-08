@@ -1,56 +1,56 @@
- <p align="center"><a href="https://www.yvescoding.com/antdsite/"><img width="100" src="https://www.yvescoding.com/antdsite/favicon.png" /></a></p>
+ <p align="center"><a href="https://www.yvescoding.com/rcpress/"><img width="100" src="https://www.yvescoding.com/rcpress/favicon.png" /></a></p>
 
-<h1 align="center">AntdSite</h1>
+<h1 align="center">RcPress</h1>
 <p align="center">
 A static website generator build with Ant Design and driven by gatsby.js
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
-  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/l/antdsite.svg" alt="License"></a>
-<a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/dm/antdsite.svg" alt="Download"></a>
-<a href="https://github.com/YvesCoding/antdsite"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
+  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/v/rcpress.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/rcpress/tree/master"><img src="https://circleci.com/gh/YvesCoding/rcpress/tree/master.png?style=shield" alt="Build Status"></a> 
+  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/l/rcpress.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/dm/rcpress.svg" alt="Download"></a>
+<a href="https://github.com/YvesCoding/rcpress"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
 </p>
 
-[![](https://github.com/wangyi7099/pictureCdn/blob/master/allPic/antdsite/screenshot-readme.png?raw=true)](https://www.yvescoding.com/antdsite/)
+[![](https://github.com/wangyi7099/pictureCdn/blob/master/allPic/rcpress/screenshot-readme.png?raw=true)](https://www.yvescoding.com/rcpress/)
 
 English | [简体中文](./README-zh_CN.md)
 
 ## Introduction
 
-- AntdSite is a static website generator based on React.js.
+- RcPress is a static website generator based on React.js.
 - It's driven by [Gatsby Js](https://www.gatsbyjs.org/)
-- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://antdsite.vuejs.org/).
+- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://rcpress.vuejs.org/).
 
 ## Features
 
-- It only needs a simple configuration and some markdown knowledge to get started quickly. Users who are familiar with [Vuepress](https://antdsite.vuejs.org/) are more comfortable to use.
-- Supports rendering to common Ant Design components using markdown syntax, such as [Alert](https://www.yvescoding.com/antdsite/guide/markdown#prompt-box)
-- Support [mdx](https://github.com/mdx-js/mdx), support [custom layout](https://www.yvescoding.com/antdsite/guide/theme#custom-layout) (eg custom website header, bottom, home page, etc.)
+- It only needs a simple configuration and some markdown knowledge to get started quickly. Users who are familiar with [Vuepress](https://rcpress.vuejs.org/) are more comfortable to use.
+- Supports rendering to common Ant Design components using markdown syntax, such as [Alert](https://www.yvescoding.com/rcpress/guide/markdown#prompt-box)
+- Support [mdx](https://github.com/mdx-js/mdx), support [custom layout](https://www.yvescoding.com/rcpress/guide/theme#custom-layout) (eg custom website header, bottom, home page, etc.)
 
 ## Documentation
 
-For detailed docs, recommend to visit [guide section](https://www.yvescoding.com/antdsite/guide/getting-started) on the website.
+For detailed docs, recommend to visit [guide section](https://www.yvescoding.com/rcpress/guide/getting-started) on the website.
 
 ## Install
 
-Install command line tool `antdsite-cli`
+Install command line tool `rcpress-cli`
 
 ```bash
 
-yarn global add antdsite-cli
+yarn global add rcpress-cli
 
 # or if you use npm
 
-npm i antdsite-cli -g
+npm i rcpress-cli -g
 
 ```
 
 ## Usage
 
-Initialize a default starter project via `antdsite-cli`
+Initialize a default starter project via `rcpress-cli`
 
 ```bash
-antdsite my-docs
+rcpress my-docs
 ```
 
 Visit `8000` port and that's all.
@@ -58,7 +58,7 @@ Visit `8000` port and that's all.
 ## Homepage Screenshot
 
 <p align="center">
-<img src="https://www.yvescoding.com/antdsite/screenshot.png" width="700" />
+<img src="https://www.yvescoding.com/rcpress/screenshot.png" width="700" />
 </p>
 
 ## Todo List
@@ -69,7 +69,7 @@ Visit `8000` port and that's all.
 ## Thanks
 
 - [Ant Design](https://ant.design/)
-- [VuePress](https://antdsite.vuejs.org/)
+- [VuePress](https://rcpress.vuejs.org/)
 - [GatsbyJs](https://www.gatsbyjs.org/)
 
 ## WeChat Communication

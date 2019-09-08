@@ -1,9 +1,9 @@
 # 配置参考
 
-> 文本大部分复制于[antdsite](https://antdsite.vuejs.org/zh/config/)，略作修改
+> 文本大部分复制于[rcpress](https://rcpress.vuejs.org/zh/config/)，略作修改
 
 ::: tip-zh
-不必担心默认的设置会被覆盖掉，antdsite 会使用[deepMerge 函数](https://github.com/YvesCoding/antdsite/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/antdsite/lib/util.js#L5)将新设置的配置和默认配置进行**深度合并**
+不必担心默认的设置会被覆盖掉，rcpress 会使用[deepMerge 函数](https://github.com/YvesCoding/rcpress/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/rcpress/lib/util.js#L5)将新设置的配置和默认配置进行**深度合并**
 :::
 
 ## 基本配置
@@ -59,7 +59,7 @@ module.exports = {
 你可以在导航栏加上一个 logo 通过`logo`属性. logo 可以放在[静态文件夹](https://www.gatsbyjs.org/docs/static-folder/).
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     logo: '/assets/img/logo.png'
@@ -75,7 +75,7 @@ module.exports = {
 设置网站的足部。如果不设置则不显示足部。
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     footer:

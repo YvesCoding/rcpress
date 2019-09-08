@@ -1,7 +1,7 @@
 # Command Line Tool
 
 ```bash
-antdsite [projectName] [optons]
+rcpress [projectName] [optons]
 ```
 
 ## projectName
@@ -9,13 +9,13 @@ antdsite [projectName] [optons]
 Prject can be a project name such as:
 
 ```bash
-antdsite my-docs
+rcpress my-docs
 ```
 
 Can also be a path name such as:
 
 ```bash
-antdsite ./
+rcpress ./
 ```
 
 ## options

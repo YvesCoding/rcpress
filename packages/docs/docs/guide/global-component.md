@@ -4,7 +4,7 @@
 
 ## How to set up?
 
-Create a new file with the path: `.antdsite/globalComponent.js`. Import the global component you want to set and export a default Object. E.g:
+Create a new file with the path: `.rcpress/globalComponent.js`. Import the global component you want to set and export a default Object. E.g:
 
 ```js
 import { Alert, Button, Switch } from 'antd';

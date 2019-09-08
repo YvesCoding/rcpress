@@ -2,17 +2,17 @@
 
 ## Custom layout
 
-To develop custom themes, you need to create a new theme directory under the `antdsite` directory.
+To develop custom themes, you need to create a new theme directory under the `rcpress` directory.
 
 ```bash
-├── .antdsite
+├── .rcpress
     ├── theme           # Theme folder for storing custom themes
 ```
 
 You can customize the entire layout or partial layout by creating different files.
 
 ```bash
-├── .antdsite
+├── .rcpress
     ├── theme                 # Theme folder for storing custom themes
         ├── layout.js         # Customize the entire layout
         ├── header.js         # Customize the entire page header
@@ -28,10 +28,10 @@ Note:
 
 ## Get site data and current page data
 
-Page data stores in `PageContext`. which is exported from `antdsite`.
+Page data stores in `PageContext`. which is exported from `rcpress`.
 
 ```js
-import { PageContext } from 'antdsite';
+import { PageContext } from 'rcpress';
 ```
 
 `PageContext` is created by `React.createContext` api, you can refer to react's [document](https://reactjs.org/docs/context.html#reactcreatecontext).
@@ -55,7 +55,7 @@ The following are explained item by item:
 
 - Type: `Object`
 
-That's all in your `antdsite/config.js` file.
+That's all in your `rcpress/config.js` file.
 
 ### slug
 
@@ -109,7 +109,7 @@ Current page data, the value is:
 Run the following commands in the project root directory:
 
 ```bash
-antdsite-cli --eject
+rcpress-cli --eject
 ```
 
-You can copy all default topics to the `antdsite/theme` folder in the current working directory, and then you can modify the entire default theme.
+You can copy all default topics to the `rcpress/theme` folder in the current working directory, and then you can modify the entire default theme.

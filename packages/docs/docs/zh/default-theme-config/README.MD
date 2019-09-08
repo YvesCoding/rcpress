@@ -1,6 +1,6 @@
 # 默认主题
 
-> 本节大部分复制于[Vuepress](https://antdsite.vuejs.org/zh/default-theme-config),略作修改
+> 本节大部分复制于[Vuepress](https://rcpress.vuejs.org/zh/default-theme-config),略作修改
 
 ::: tip-zh
 本页所列的选项仅对默认主题生效。如果你在使用一个自定义主题，选项可能会有不同
@@ -42,7 +42,7 @@ The Navbar may contain your page title, [Search Box](#search-box), [Navbar Links
 你可以通过 `themeConfig.nav` 增加一些导航栏链接:
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     nav: [
@@ -77,7 +77,7 @@ module.exports = {
 想要使 侧边栏 Sidebar 生效，需要配置 `themeConfig.sidebar`，基本的配置，需要一个包含了多个链接的数组：
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
@@ -92,7 +92,7 @@ module.exports = {
 你可以通过使用**对象**来将侧边栏划分成多个组：
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: [
@@ -141,7 +141,7 @@ module.exports = {
 接着，遵循以下的侧边栏配置：
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: {
@@ -173,7 +173,7 @@ home: true
 ```
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: {
@@ -240,11 +240,11 @@ disableUpdateTime: true
 当你提供了 `themeConfig.repo` 选项，将会自动在每个页面的导航栏生成生成一个 GitHub 链接，以及在页面的底部生成一个 `"Edit this page"` 链接。
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
-    repo: 'YvesCoding/antdsite', // 假定是 GitHub. 同时也可以是一个完整的 Gitee URL,默认为Gihub仓库，支持Github,Bitbucket,Gitee。
-    docsRepo: 'YvesCoding/antdsite', // 自定义文档仓库，默认和docsRepo的值一致
+    repo: 'YvesCoding/rcpress', // 假定是 GitHub. 同时也可以是一个完整的 Gitee URL,默认为Gihub仓库，支持Github,Bitbucket,Gitee。
+    docsRepo: 'YvesCoding/rcpress', // 自定义文档仓库，默认和docsRepo的值一致
     docsRelativeDir: 'packages/docs', // 项目根目录到文档的相对地址，默认为''
     docsDir: 'docs', // 文档目录 默认为docs
     docsBranch: 'master', // 文档所在git分支

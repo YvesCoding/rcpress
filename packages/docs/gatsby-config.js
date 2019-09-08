@@ -1,5 +1,5 @@
 // gatsby-config.js
 module.exports = {
-  __experimentalThemes: ['antdsite'],
+  __experimentalThemes: ['rcpress'],
   plugins: ['gatsby-plugin-netlify']         
 };

@@ -1,9 +1,9 @@
 # Config Reference
 
-> Most of the text is copied in [antdsite](https://antdsite.vuejs.org/config/), with minor modifications
+> Most of the text is copied in [rcpress](https://rcpress.vuejs.org/config/), with minor modifications
 
 ::: tip
-Don't worry about the default settings being overwritten, antdsite will use the [deepMerge function](https://github.com/YvesCoding/antdsite/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/antdsite/lib/util.js#L5) to **deep merge** the new settings and default configuration.
+Don't worry about the default settings being overwritten, rcpress will use the [deepMerge function](https://github.com/YvesCoding/rcpress/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/rcpress/lib/util.js#L5) to **deep merge** the new settings and default configuration.
 :::
 
 ## Basic Config
@@ -59,7 +59,7 @@ Specify locales for i18n support. For more details, see the guide on [Internatio
 You can add a logo to the navbar via `logo`. Logo can be placed in [static folder](https://www.gatsbyjs.org/docs/static-folder/).
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     logo: '/assets/img/logo.png'
@@ -75,7 +75,7 @@ module.exports = {
 Set website footer. Footer will not display if it isn't set any value.
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     footer:

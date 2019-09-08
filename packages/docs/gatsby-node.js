@@ -4,7 +4,7 @@ exports.onCreateWebpackConfig = ({ stage, actions, loaders }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@components': path.resolve(__dirname, '.antdsite/components')
+        '@components': path.resolve(__dirname, '.rcpress/components')
       }
     }
   });
@@ -12,7 +12,7 @@ exports.onCreateWebpackConfig = ({ stage, actions, loaders }) => {
 
 var a = {
   dependencies: {
-    antdsite: '^0.0.7',
+    rcpress: '^0.0.7',
     gatsby: '^2.13.39',
     react: '^16.8.0',
     'react-dom': '^16.8.0'

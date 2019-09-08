@@ -1,56 +1,56 @@
-  <p align="center"><a href="https://www.yvescoding.com/antdsite/"><img width="100" src="https://www.yvescoding.com/antdsite/favicon.png" /></a></p>
+  <p align="center"><a href="https://www.yvescoding.com/rcpress/"><img width="100" src="https://www.yvescoding.com/rcpress/favicon.png" /></a></p>
 
-<h1 align="center">AntdSite</h1>
+<h1 align="center">RcPress</h1>
 <p align="center">
 一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/v/antdsite.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/antdsite/tree/master"><img src="https://circleci.com/gh/YvesCoding/antdsite/tree/master.png?style=shield" alt="Build Status"></a> 
-  <a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/l/antdsite.svg" alt="License"></a>
-<a href="https://www.npmjs.com/package/antdsite"><img src="https://img.shields.io/npm/dm/antdsite.svg" alt="Download"></a>
-<a href="https://github.com/YvesCoding/antdsite"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
+  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/v/rcpress.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/rcpress/tree/master"><img src="https://circleci.com/gh/YvesCoding/rcpress/tree/master.png?style=shield" alt="Build Status"></a> 
+  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/l/rcpress.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/dm/rcpress.svg" alt="Download"></a>
+<a href="https://github.com/YvesCoding/rcpress"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
 </p>
 
-[![](https://github.com/wangyi7099/pictureCdn/blob/master/allPic/antdsite/screenshot-readme.png?raw=true)](https://www.yvescoding.com/antdsite/)
+[![](https://github.com/wangyi7099/pictureCdn/blob/master/allPic/rcpress/screenshot-readme.png?raw=true)](https://www.yvescoding.com/rcpress/)
 
 [English](./README.md) | 简体中文
 
 ## 简介
 
-- Antdsite 是一个基于 React.js 的静态文档生成器。
+- RcPress 是一个基于 React.js 的静态文档生成器。
 - 它是由[Gatsby Js](https://www.gatsbyjs.org/)驱动的
-- 使用 [Ant Design](https://ant.design/)设计构建， 并且它的配置项借鉴了[Vuepress](https://antdsite.vuejs.org/)
+- 使用 [Ant Design](https://ant.design/)设计构建， 并且它的配置项借鉴了[Vuepress](https://rcpress.vuejs.org/)
 
 ## 特点
 
-- 只需要简单配置和会一些 markdown 知识就能快速上手，熟悉[Vuepress](https://antdsite.vuejs.org/)的用户使用起来更是得心应手
-- 支持用 markdown 语法渲染成常用的 Ant Design 组件，如[Alert](https://www.yvescoding.com/antdsite/zh/guide/markdown#%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88alert%EF%BC%89)
-- 支支持[mdx](https://github.com/mdx-js/mdx) ,支持[自定义布局](https://www.yvescoding.com/antdsite/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等)
+- 只需要简单配置和会一些 markdown 知识就能快速上手，熟悉[Vuepress](https://rcpress.vuejs.org/)的用户使用起来更是得心应手
+- 支持用 markdown 语法渲染成常用的 Ant Design 组件，如[Alert](https://www.yvescoding.com/rcpress/zh/guide/markdown#%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88alert%EF%BC%89)
+- 支支持[mdx](https://github.com/mdx-js/mdx) ,支持[自定义布局](https://www.yvescoding.com/rcpress/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等)
 
 ## 文档
 
-获取详细的文档， 推荐访问网站上的[向导一节](https://www.yvescoding.com/antdsite/guide/getting-started)。
+获取详细的文档， 推荐访问网站上的[向导一节](https://www.yvescoding.com/rcpress/guide/getting-started)。
 
 ## 安装
 
-安装命令行工具 `antdsite-cli`
+安装命令行工具 `rcpress-cli`
 
 ```bash
 
-yarn global add antdsite-cli
+yarn global add rcpress-cli
 
 # 或者如果你使用npm
 
-npm i antdsite-cli -g
+npm i rcpress-cli -g
 
 ```
 
 ## 用法
 
-使用命令行工具`antdsite-cli`初始化一个默认的入门项目
+使用命令行工具`rcpress-cli`初始化一个默认的入门项目
 
 ```bash
-antdsite my-docs
+rcpress my-docs
 ```
 
 访问`8000`端口即可。
@@ -58,7 +58,7 @@ antdsite my-docs
 ## 首页截图
 
 <p align="center">
-<img src="https://www.yvescoding.com/antdsite/screenshot.png" width="700" />
+<img src="https://www.yvescoding.com/rcpress/screenshot.png" width="700" />
 </p>
 
 ## 待办列表
@@ -69,7 +69,7 @@ antdsite my-docs
 ## 感谢
 
 - [Ant Design](https://ant.design/)
-- [VuePress](https://antdsite.vuejs.org/)
+- [VuePress](https://rcpress.vuejs.org/)
 - [GatsbyJs](https://www.gatsbyjs.org/)
 
 ## 微信交流

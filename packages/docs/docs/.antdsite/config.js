@@ -1,15 +1,15 @@
 module.exports = {
-  title: "antdsite",
+  title: 'rcpress',
   base: process.env.base || '/',
   locales: {
     '/': {
       lang: 'en-US',
-      title: 'AntdSite',
+      title: 'RcPress',
       description: 'A static website generator build with Ant Design and driven by gatsby.js'
     },
     '/zh/': {
       lang: 'zh-CN',
-      title: 'AntdSite',
+      title: 'RcPress',
       description: '一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器'
     }
   },
@@ -28,7 +28,7 @@ module.exports = {
     'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>',
   prefetch: false,
   themeConfig: {
-    repo: 'YvesCoding/antdsite',
+    repo: 'YvesCoding/rcpress',
     docsRelativeDir: 'packages/docs',
     locales: {
       '/': {
@@ -51,7 +51,7 @@ module.exports = {
           },
           {
             text: 'GitHub',
-            link: 'https://github.com/YvesCoding/antdsite',
+            link: 'https://github.com/YvesCoding/rcpress',
             important: true
           }
         ],
@@ -81,7 +81,7 @@ module.exports = {
           },
           {
             text: 'GitHub',
-            link: 'https://github.com/YvesCoding/antdsite',
+            link: 'https://github.com/YvesCoding/rcpress',
             important: true
           }
         ],

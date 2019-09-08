@@ -1,6 +1,6 @@
 # Default Theme Config
 
-> Most of the text is copied in [antdsite](https://antdsite.vuejs.org/zh/default-theme-config), with minor modifications
+> Most of the text is copied in [rcpress](https://rcpress.vuejs.org/zh/default-theme-config), with minor modifications
 
 ::: tip
 All options listed on this page apply to the default theme only. If you are using a custom theme, the options may be different.
@@ -42,7 +42,7 @@ The Navbar may contain your page title, [Search Box](#search-box), [Navbar Links
 You can add links to the navbar via `themeConfig.nav`:
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     nav: [
@@ -77,7 +77,7 @@ module.exports = {
 To enable the sidebar, use `themeConfig.sidebar`. The basic configuration expects an Array of links:
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
@@ -92,7 +92,7 @@ You can omit the `.md` extension, and paths ending with `/` are inferred as `*/R
 You can divide sidebar links into multiple groups by using **objects**:
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: [
@@ -141,7 +141,7 @@ If you wish to display different sidebars for different sections of content, fir
 Then, update your configuration to define your sidebar for each section.
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: {
@@ -173,7 +173,7 @@ home: true
 ```
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
     sidebar: {
@@ -240,11 +240,11 @@ disableUpdateTime: true
 Providing `themeConfig.repo` auto generates a GitHub link in the navbar and "Edit this page" links at the bottom of each page.
 
 ```js
-// .antdsite/config.js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
-    repo: 'YvesCoding/antdsite', // Assumes GitHub. Can also be a full Gitee url  Defaults to "GitHub"/"Gitee"/"Bitbucket" depending on `themeConfig.repo`
-    docsRepo: 'YvesCoding/antdsite', // Custom document repo, default to docsRepo
+    repo: 'YvesCoding/rcpress', // Assumes GitHub. Can also be a full Gitee url  Defaults to "GitHub"/"Gitee"/"Bitbucket" depending on `themeConfig.repo`
+    docsRepo: 'YvesCoding/rcpress', // Custom document repo, default to docsRepo
     docsRelativeDir: 'packages/docs', // Relative path from project root to docs folder.
     docsDir: 'docs', // The directory of document
     docsBranch: 'master', // The git branch of document

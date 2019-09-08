@@ -5,7 +5,7 @@ showStar: true
 home: true
 features:
   - title: Easy to get started
-    details: It only requires simple configuration and some markdown knowledge to get started quickly, users who are familiar with <a href="https://antdsite.vuejs.org/">Vuepress </a> are more comfortable to use
+    details: It only requires simple configuration and some markdown knowledge to get started quickly, users who are familiar with <a href="https://rcpress.vuejs.org/">Vuepress </a> are more comfortable to use
   - title: From markdown to antd
     details: Supports rendering to common Ant design components using the markdown syntax, such as <a href="guide/markdown#prompt-box">Alert</a>
   - title: Powerful
@@ -16,16 +16,16 @@ features:
 
 ## Install
 
-Install `antdsite-cli` via [yarn](https://yarnpkg.com)
+Install `rcpress-cli` via [yarn](https://yarnpkg.com)
 
 ```bash
-yarn global add antdsite-cli
+yarn global add rcpress-cli
 ```
 
 Or install via [npm](https://docs.npmjs.com/cli/install.html)
 
 ```bash
-npm install antdsite-cli -g
+npm install rcpress-cli -g
 
 ```
 
@@ -34,7 +34,7 @@ npm install antdsite-cli -g
 Use `cli` to initialize a default starter project
 
 ```bash
-antdsite my-docs
+rcpress my-docs
 ```
 
 Switch to the initialized site directory and run the Site

@@ -1,6 +1,6 @@
 import React from 'react';
-import { PageContext } from 'antdsite';
-import { resolvePathWithBase } from 'antdsite/src/default-theme/components/utils';
+import { PageContext } from 'rcpress';
+import { resolvePathWithBase } from 'rcpress/src/default-theme/components/utils';
 
 export default ({ url, width, height, ...rest }) => (
   <PageContext.Consumer>

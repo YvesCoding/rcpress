@@ -1,7 +1,7 @@
 # 命令行工具
 
 ```bash
-antdsite [projectName] [optons]
+rcpress [projectName] [optons]
 ```
 
 ## projectName
@@ -9,13 +9,13 @@ antdsite [projectName] [optons]
 prject 可以是一个项目名称，如：
 
 ```bash
-antdsite my-docs
+rcpress my-docs
 ```
 
 也可以是一个路径名称，如：
 
 ```bash
-antdsite ./
+rcpress ./
 ```
 
 ## options

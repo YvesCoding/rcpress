@@ -7,7 +7,7 @@ version: 2
 defaults: &defaults
   environment:
     - APP_VERSION: $CIRCLE_SHA1
-  working_directory: ~/project/antdsite
+  working_directory: ~/project/rcpress
   docker:
     # specify the version you desire here
     - image: circleci/node:10.15.2
@@ -24,9 +24,9 @@ jobs:
       - checkout
       - run: yarn && yarn bs
       - run: yarn build-with-prefix
-      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/antdsite/before-dep.sh"
-      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public root@$DOCKER_IP:~/antdsite/tmp
-      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/antdsite/after-dep.sh"
+      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/before-dep.sh"
+      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public root@$DOCKER_IP:~/rcpress/tmp
+      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/after-dep.sh"
 workflows:
   version: 2
   build-and-deploy:

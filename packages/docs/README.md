@@ -2,4 +2,4 @@
 
 ## Introduction
 
-This is the official website of `AntdSite`.
+This is the official website of `RcPress`.

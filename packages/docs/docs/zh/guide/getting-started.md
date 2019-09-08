@@ -2,16 +2,16 @@
 
 ## 安装 cli
 
-使用 [yarn](https://yarnpkg.com) 安装`antdsite-cli`
+使用 [yarn](https://yarnpkg.com) 安装`rcpress-cli`
 
 ```bash
-yarn global add antdsite-cli
+yarn global add rcpress-cli
 ```
 
 或者使用[npm](https://docs.npmjs.com/cli/install.html) 安装
 
 ```bash
-npm install antdsite-cli -g
+npm install rcpress-cli -g
 ```
 
 ## 使用 cli 创建一个初始的项目
@@ -19,13 +19,13 @@ npm install antdsite-cli -g
 使用 `cli` 来初始化一个默认的初始项目
 
 ```bash
-antdsite my-docs
+rcpress my-docs
 ```
 
 在已有的项目里初始化
 
 ```bash
-antdsite ./ --force
+rcpress ./ --force
 ```
 
 初始化完毕后，切换到初始化后的目录，运行网站
@@ -43,8 +43,8 @@ npm start
 初始化之后你会看到如下目录：
 
 ```bash{numberLines:true}
-├── .antdsite
-    ├── config.js # antdsite 配置文件
+├── .rcpress
+    ├── config.js # rcpress 配置文件
 ├── docs # 存放文档目录
     ├── guide
         ├── introduction.md
@@ -68,7 +68,7 @@ npm start
 module.exports = {
   title: 'my-docs', // 网站标题， 可以不用设置，默认为文档所在的目录名称
   // 网站描述，用于生成seo搜索和首页的描述。
-  description: 'My first antdsite app',
+  description: 'My first rcpress app',
   // 一般展示在首页和左上角
   logo: '/favicon.png',
   // 网站首页底部的文字，支持html格式
@@ -85,7 +85,7 @@ module.exports = {
       },
       {
         text: 'GitHub',
-        link: 'https://github.com/YvesCoding/antdsite',
+        link: 'https://github.com/YvesCoding/rcpress',
         important: true
       }
     ],

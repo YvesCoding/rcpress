@@ -4,7 +4,7 @@
 
 ## 如何设置？
 
-新建一个文件，路径为： `.antdsite/globalComponent.js`。在里面导入你想设置的全局组件，导出一个默认的 Object 即可。例如：
+新建一个文件，路径为： `.rcpress/globalComponent.js`。在里面导入你想设置的全局组件，导出一个默认的 Object 即可。例如：
 
 ```js
 import { Alert, Button, Switch } from 'antd';

@@ -11,6 +11,6 @@
     "start": "yarn clean && gatsby develop"
   },
   "devDependencies": {
-    "@antdsite/cli": "^0.0.0"
+    "@rcpress/cli": "^0.0.0"
   }
 }

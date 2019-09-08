@@ -2,7 +2,7 @@
 
 ## Ant Design 组件
 
-> Antdsite 可以将一些 markdown 语法标记渲染成常用的 Ant Design 组件
+> RcPress 可以将一些 markdown 语法标记渲染成常用的 Ant Design 组件
 
 ### 提示框
 

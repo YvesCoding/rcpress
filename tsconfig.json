@@ -12,6 +12,6 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es2017"]
   },
-  "include": ["packages/@antdsite/theme-blog", "packages/@antdsite/theme-default"],
+  "include": ["packages/@rcpress/theme-blog", "packages/@rcpress/theme-default"],
   "exclude": ["node_modules", "lib", "es"]
 }

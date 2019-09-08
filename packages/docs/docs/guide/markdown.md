@@ -2,7 +2,7 @@
 
 ## Ant Design Components
 
-> Antdsite can render some markdown syntax tags into common Ant Design components
+> RcPress can render some markdown syntax tags into common Ant Design components
 
 ### Prompt box
 

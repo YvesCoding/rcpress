@@ -1,0 +1,11 @@
+{
+  "name": "@rcpress/theme-default",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The default theme of RcPress",
+  "scripts": {
+    "build": "yarn clean && gatsby build",
+    "clean": "gatsby clean",
+    "start": "yarn clean && gatsby develop"
+  }
+}

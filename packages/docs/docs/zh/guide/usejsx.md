@@ -16,7 +16,7 @@
 ```js
 import React from 'react';
 import moment from 'moment';
-import { PageContext } from 'antdsite';
+import { PageContext } from 'rcpress';
 ```
 
 接着我们编写我们的`ShowTime`组件代码并导出

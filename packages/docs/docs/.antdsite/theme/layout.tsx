@@ -1,9 +1,9 @@
 import React from 'react';
-import 'antdsite/src/default-theme/assets/style';
-import Header from 'antdsite-header';
+import 'rcpress/src/default-theme/assets/style';
+import Header from 'rcpress-header';
 import { BackTop } from 'antd';
-import MainContent from 'antdsite-main-content';
-import { PageContext } from 'antdsite';
+import MainContent from 'rcpress-main-content';
+import { PageContext } from 'rcpress';
 import './hide-statistical-script.less';
 
 export interface LayoutProps {
