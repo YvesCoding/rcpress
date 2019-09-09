@@ -2,7 +2,7 @@ import React from 'react';
 import GitHubButton from 'react-github-button-fix-iebug';
 import { Button } from 'antd';
 import Link from '../MyLink';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 import * as utils from '../utils';
 
 function Banner(props) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 import { resolvePathWithBase } from 'rcpress/src/default-theme/components/utils';
 
 export default ({ url, width, height, ...rest }) => (
@@ -8,7 +8,7 @@ export default ({ url, width, height, ...rest }) => (
       return (
         <img
           {...rest}
-          src={resolvePathWithBase(url, ctx.webConfig.base)}
+          src={resolvePathWithBase(url, ctx.siteData.base)}
           width={width}
           height={height}
         />

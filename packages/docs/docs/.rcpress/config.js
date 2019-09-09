@@ -5,24 +5,26 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'RcPress',
-      description: 'A static website generator build with Ant Design and driven by gatsby.js'
+      description:
+        'A static website generator build with Ant Design and driven by gatsby.js'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'RcPress',
-      description: '一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器'
+      description:
+        '一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器'
     }
   },
   logo: '/favicon.png',
   head: [
-    ['link', { rel: 'icon', href: `/favicon.png` }],
-    [
-      'script',
-      {
-        type: 'text/javascript',
-        src: 'https://s4.cnzz.com/z_stat.php?id=1277950202&web_id=1277950202'
-      }
-    ]
+    ['link', { rel: 'icon', href: `/favicon.png` }]
+    // [
+    //   'script',
+    //   {
+    //     type: 'text/javascript',
+    //     src: 'https://s4.cnzz.com/z_stat.php?id=1277950202&web_id=1277950202'
+    //   }
+    // ]
   ],
   footer:
     'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>',

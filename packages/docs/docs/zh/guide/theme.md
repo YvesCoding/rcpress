@@ -31,7 +31,7 @@
 页面的数据都存在从`rcpress`导出的`PageContext`中
 
 ```js
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 ```
 
 `PageContext`是由`React.createContext` api 创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#reactcreatecontext)。
@@ -40,7 +40,7 @@ import { PageContext } from 'rcpress';
 
 ```js
 {
-  webConfig: {},
+  siteData: {},
   slug: '',
   currentLocaleWebConfig: {},
   currentPageSidebarItems: {},
@@ -51,7 +51,7 @@ import { PageContext } from 'rcpress';
 
 以下逐项进行讲解：
 
-### webConfig
+### siteData
 
 - 类型: `Object`
 
@@ -67,7 +67,7 @@ import { PageContext } from 'rcpress';
 
 - 类型: `Object`
 
-当前语言下的网站配置，如果没有设置多语言的话那么和`webConfig`一样
+当前语言下的网站配置，如果没有设置多语言的话那么和`siteData`一样
 
 ### currentPageSidebarItems
 

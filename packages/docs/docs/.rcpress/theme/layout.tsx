@@ -26,12 +26,12 @@ export default class Layout extends React.Component<
 
   render() {
     const {
-      currentLocaleWebConfig: webConfig,
+      currentLocaleWebConfig: siteData,
       slug,
       isWebsiteHome
     } = this.context;
-    const { showBackToTop } = webConfig.themeConfig;
-    const { locales } = webConfig;
+    const { showBackToTop } = siteData.themeConfig;
+    const { locales } = siteData;
 
     return (
       <div

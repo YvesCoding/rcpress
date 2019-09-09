@@ -5,6 +5,8 @@ import SWUpdateEvent from './SWUpdateEvent';
 import { register } from 'register-service-worker';
 import { loadableReady } from '@loadable/component';
 import { render } from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
 
 const app = createApp();
 
@@ -45,56 +47,55 @@ if (process.env.NODE_ENV === 'production' && GA_ID) {
   });
 }
 
-loadableReady(() => {
-  // Register service worker
-  render(app, document.getElementById('app'));
-  if (
-    process.env.NODE_ENV === 'production' &&
-    SW_ENABLED &&
-    window.location.protocol === 'https:'
-  ) {
-    register(`${BASE_URL}service-worker.js`, {
-      ready() {
-        console.log(
-          '[rcpress:sw] Service worker is active.'
-        );
-        // app.$refs.layout.$emit('sw-ready');
-      },
-      cached(registration) {
-        console.log(
-          '[rcpress:sw] Content has been cached for offline use.'
-        );
-        // app.$refs.layout.$emit(
-        //   'sw-cached',
-        //   new SWUpdateEvent(registration)
-        // );
-      },
-      updated(registration) {
-        console.log('[rcpress:sw] Content updated.');
-        // app.$refs.layout.$emit(
-        //   'sw-updated',
-        //   new SWUpdateEvent(registration)
-        // );
-      },
-      offline() {
-        console.log(
-          '[rcpress:sw] No internet connection found. App is running in offline mode.'
-        );
-        app.$refs.layout.$emit('sw-offline');
-      },
-      error(err) {
-        console.error(
-          '[rcpress:sw] Error during service worker registration:',
-          err
-        );
-        // app.$refs.layout.$emit('sw-error', err);
-        if (GA_ID) {
-          ga('send', 'exception', {
-            exDescription: err.message,
-            exFatal: false
-          });
-        }
+// Register service worker
+render(
+  <Router>{app}</Router>,
+  document.getElementById('app')
+);
+if (
+  process.env.NODE_ENV === 'production' &&
+  SW_ENABLED &&
+  window.location.protocol === 'https:'
+) {
+  register(`${BASE_URL}service-worker.js`, {
+    ready() {
+      console.log('[rcpress:sw] Service worker is active.');
+      // app.$refs.layout.$emit('sw-ready');
+    },
+    cached(registration) {
+      console.log(
+        '[rcpress:sw] Content has been cached for offline use.'
+      );
+      // app.$refs.layout.$emit(
+      //   'sw-cached',
+      //   new SWUpdateEvent(registration)
+      // );
+    },
+    updated(registration) {
+      console.log('[rcpress:sw] Content updated.');
+      // app.$refs.layout.$emit(
+      //   'sw-updated',
+      //   new SWUpdateEvent(registration)
+      // );
+    },
+    offline() {
+      console.log(
+        '[rcpress:sw] No internet connection found. App is running in offline mode.'
+      );
+      app.$refs.layout.$emit('sw-offline');
+    },
+    error(err) {
+      console.error(
+        '[rcpress:sw] Error during service worker registration:',
+        err
+      );
+      // app.$refs.layout.$emit('sw-error', err);
+      if (GA_ID) {
+        ga('send', 'exception', {
+          exDescription: err.message,
+          exFatal: false
+        });
       }
-    });
-  }
-});
+    }
+  });
+}

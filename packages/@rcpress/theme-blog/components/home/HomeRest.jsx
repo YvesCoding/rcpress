@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 
 export default class extends React.Component {
   static contextType = PageContext;

@@ -1,19 +1,12 @@
+import('@temp/style.less');
+import 'regenerator-runtime/runtime';
+import 'core-js/stage/3';
+
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-// import store from './store';
 import { routes } from '@temp/routes';
 import { siteData } from '@temp/siteData';
-// import enhanceApp from '@temp/enhanceApp';
-// import themeEnhanceApp from '@temp/themeEnhanceApp';
-
-// generated from user config
-import('@temp/style.less');
-
-// built-in components
-// import Content from './components/Content';
-// import OutboundLink from './components/OutboundLink.vue';
-// import ClientOnly from './components/ClientOnly';
 
 // suggest dev server restart on base change
 if (module.hot) {
@@ -35,6 +28,8 @@ const components = React.createContext({});
 export { components };
 
 export function createApp() {
+  console.log(routes);
+
   return (
     <PageContext.Provider
       value={{

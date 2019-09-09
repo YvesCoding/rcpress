@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 
 class Features extends React.PureComponent {
   static contextType = PageContext;

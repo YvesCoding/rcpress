@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'antd';
-import { PageContext } from 'rcpress';
-import HomePage from 'rcpress-home';
+import { PageContext } from '@app';
+import HomePage from './home';
 import LeftMenu from '../components/menu';
 import Content from '../components/content';
-import Footer from 'rcpress-footer';
+import Footer from './footer';
 import ReactDom from 'react-dom';
 
 export interface MainContentProps {
@@ -18,7 +18,10 @@ export interface MainContentState {
   next: React.Component | null;
 }
 
-export default class MainContent extends React.PureComponent<MainContentProps, MainContentState> {
+export default class MainContent extends React.PureComponent<
+  MainContentProps,
+  MainContentState
+> {
   static contextType = PageContext;
 
   constructor(props: MainContentProps) {
@@ -34,11 +37,16 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     const footer = this.refs.footer;
     if (!footer) return 0;
 
-    const footerNode = ReactDom.findDOMNode(footer) as HTMLDivElement;
+    const footerNode = ReactDom.findDOMNode(
+      footer
+    ) as HTMLDivElement;
     return footerNode.offsetHeight;
   };
 
-  getPreAndNextMenu = (prev: React.Component, next: React.Component) => {
+  getPreAndNextMenu = (
+    prev: React.Component,
+    next: React.Component
+  ) => {
     this.setState({
       prev,
       next
@@ -51,7 +59,7 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
     const {
       currentPageSidebarItems: menuList,
       slug,
-      webConfig: { footer: footerText }
+      siteData: { footer: footerText }
     } = this.context;
     const enableMenu = !!(menuList && menuList.length);
 
@@ -83,7 +91,9 @@ export default class MainContent extends React.PureComponent<MainContentProps, M
               </div>
             )}
           </div>
-          {footerText && isWebsiteHome ? <Footer footerText={footerText} ref="footer" /> : null}
+          {footerText && isWebsiteHome ? (
+            <Footer footerText={footerText} ref="footer" />
+          ) : null}
         </Col>
       </Row>
     );

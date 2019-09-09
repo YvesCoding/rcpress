@@ -16,7 +16,7 @@ Firstly, import `moment.js`, `PageContext` and `React` in `showTime.js`
 ```js
 import React from 'react';
 import moment from 'moment';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 ```
 
 Then we write code of our `ShowTime` component and export it.

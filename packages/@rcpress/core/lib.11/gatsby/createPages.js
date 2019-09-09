@@ -6,8 +6,8 @@
  */
 
 const { resolve } = require('path');
-const webConfig = require('../config').getFinalConfig();
-const { themeConfig } = webConfig;
+const siteData = require('../config').getFinalConfig();
+const { themeConfig } = siteData;
 const path = require('path');
 
 function isHome(frontmatter, slug) {
@@ -33,7 +33,7 @@ module.exports = async ({ graphql, actions }) => {
   createRedirect({
     fromPath: '/index.html',
     redirectInBrowser: true,
-    toPath: webConfig.base
+    toPath: siteData.base
   });
 
   const allMdx = await graphql(
@@ -86,9 +86,9 @@ module.exports = async ({ graphql, actions }) => {
         component: template,
         context: {
           isWebsiteHome,
-          webConfig,
+          siteData,
           slug,
-          maxTocDeep: frontmatter.maxTocDeep || webConfig.themeConfig.maxTocDeep
+          maxTocDeep: frontmatter.maxTocDeep || siteData.themeConfig.maxTocDeep
         }
       });
     };

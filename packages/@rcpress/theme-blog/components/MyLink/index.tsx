@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { Link as RouterLink } from '@reach/router';
-import { PageContext } from 'rcpress/src/templates/PageContext';
+import { PageContext } from '@app';
 import { resolvePathWithBase, normalize } from '../utils';
 import NProgress from 'nprogress';
 
@@ -27,7 +27,10 @@ const MyLink: React.SFC<any> = ({
 }) => {
   return (
     <PageContext.Consumer>
-      {({ webConfig: { base, prefetch: globalPrefetch }, slug }) => {
+      {({
+        siteData: { base, prefetch: globalPrefetch },
+        slug
+      }) => {
         let clickMerged = () => {
           handleLinkClick(slug, to);
         };
@@ -41,7 +44,11 @@ const MyLink: React.SFC<any> = ({
 
         if (!prefetch || !globalPrefetch) {
           return (
-            <RouterLink onClick={clickMerged} to={resolvePathWithBase(to, base)} {...rest}>
+            <RouterLink
+              onClick={clickMerged}
+              to={resolvePathWithBase(to, base)}
+              {...rest}
+            >
               {children}
             </RouterLink>
           );

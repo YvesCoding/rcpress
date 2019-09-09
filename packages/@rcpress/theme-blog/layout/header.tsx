@@ -3,7 +3,7 @@ import React from 'react';
 import Link from '../components/MyLink';
 import * as utils from '../components/utils';
 import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 import SearchBox from '../components/search-box';
 import SubMenu from 'antd/lib/menu/SubMenu';
 
@@ -92,12 +92,12 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   render() {
     const { menuMode, menuVisible } = this.state;
-    const { webConfig, slug, allPagesSidebarItems } = this.context;
-    let currentLocate = utils.getCurrentLoacle(webConfig, slug);
+    const { siteData, slug, allPagesSidebarItems } = this.context;
+    let currentLocate = utils.getCurrentLoacle(siteData, slug);
     let {
       currentLocaleWebConfig: { themeConfig, title, base, logo }
-    } = utils.getcurrentLocaleConfigBySlug(webConfig, slug);
-    const { locales } = webConfig.themeConfig;
+    } = utils.getcurrentLocaleConfigBySlug(siteData, slug);
+    const { locales } = siteData.themeConfig;
 
     const { nav = [], search, searchMaxSuggestions } = themeConfig;
     const activeMenuItem = nav

@@ -4,7 +4,7 @@ import SEO from '../components/SEO/SEO';
 import Banner from '../components/home/Banner.jsx';
 import Features from '../components/home/Features.jsx';
 import HomeRest from '../components/home/HomeRest.jsx';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 
 function Home(props: any) {
   return (

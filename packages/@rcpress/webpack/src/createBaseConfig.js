@@ -49,9 +49,9 @@ module.exports = function createBaseConfig(
     .set('@themeLayout', themeLayoutPath)
     .set('@themeNotFound', themeNotFoundPath)
     .set('@source', sourceDir)
-    .set('@app', path.resolve(__dirname, '../app'))
+    .set('@app', '@rcpress/core/lib/app/app.js')
     .set('@temp', cacheDirectory)
-    .set('@default-theme', '@antdiste/theme-default')
+    .set('@default-theme', '@rcpress/theme-default')
     .set(
       '@AlgoliaSearchBox',
       isAlgoliaSearch
@@ -145,7 +145,8 @@ module.exports = function createBaseConfig(
             '@babel/plugin-proposal-decorators',
             { legacy: true }
           ],
-          ['@babel/plugin-proposal-class-properties']
+          ['@babel/plugin-proposal-class-properties'],
+          ['@babel/plugin-transform-regenerator']
         ]
       });
   }
@@ -264,7 +265,10 @@ module.exports = function createBaseConfig(
     'less',
     /\.less$/,
     'less-loader',
-    siteConfig.less
+    Object.assign(
+      { javascriptEnabled: true },
+      siteConfig.sass
+    )
   );
   createCSSRule(
     'stylus',

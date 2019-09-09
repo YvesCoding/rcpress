@@ -4,7 +4,7 @@ import EditButton from './EditButton';
 import { OneToc } from '../../../templates';
 import moment from 'moment';
 import AvatarList from './AvatarList';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 import SEO from '../SEO/SEO';
 import { getPageTitle } from '../utils';
 import PrevAndNext from '../prevAndNext';

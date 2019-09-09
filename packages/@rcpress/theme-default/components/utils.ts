@@ -1,7 +1,7 @@
 import { IAllMdxData, Edges, IGraphqlFrontmatterData, Toc, PageEdge } from '../../templates';
 
-export function getCurrentLoacle(webConfig: any, slug: string) {
-  const locales = webConfig.themeConfig.locales;
+export function getCurrentLoacle(siteData: any, slug: string) {
+  const locales = siteData.themeConfig.locales;
   if (!locales) return false;
 
   let targetLocale = '/';
@@ -16,28 +16,28 @@ export function getCurrentLoacle(webConfig: any, slug: string) {
 }
 
 export function getcurrentLocaleConfigBySlug(
-  webConfig: any,
+  siteData: any,
   slug: string
 ): {
   localte: string;
   currentLocaleWebConfig: any;
 } {
-  const targetLocale = getCurrentLoacle(webConfig, slug);
+  const targetLocale = getCurrentLoacle(siteData, slug);
   if (!targetLocale) {
     return {
       localte: '/',
-      currentLocaleWebConfig: webConfig
+      currentLocaleWebConfig: siteData
     };
   }
 
   return {
     localte: targetLocale,
     currentLocaleWebConfig: {
-      ...webConfig,
-      ...webConfig.locales[targetLocale],
+      ...siteData,
+      ...siteData.locales[targetLocale],
       themeConfig: {
-        ...webConfig.themeConfig,
-        ...webConfig.themeConfig.locales[targetLocale]
+        ...siteData.themeConfig,
+        ...siteData.themeConfig.locales[targetLocale]
       }
     }
   };
@@ -178,7 +178,7 @@ function resolvePageSidebar(config: any, path: string, edges: Edges): PageInfo[]
 
 export function resolveSidebarItems(
   allMdxData: IAllMdxData,
-  webConfig: any,
+  siteData: any,
   currentSlug: string
 ): {
   currentPageSidebarItems: PageInfo[];
@@ -186,7 +186,7 @@ export function resolveSidebarItems(
 } {
   const { edges } = allMdxData;
 
-  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(webConfig, currentSlug);
+  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(siteData, currentSlug);
 
   const pageSidebarConfig = currentLocaleWebConfig.themeConfig.sidebar;
 

@@ -3,7 +3,7 @@ import '../assets/style';
 import Header from 'rcpress-header';
 import { BackTop } from 'antd';
 import MainContent from 'rcpress-main-content';
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 
 export interface LayoutProps {
   isMobile: boolean;
@@ -21,9 +21,9 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
   preSlug: String;
 
   render() {
-    const { currentLocaleWebConfig: webConfig, slug, isWebsiteHome } = this.context;
-    const { showBackToTop } = webConfig.themeConfig;
-    const { locales } = webConfig;
+    const { currentLocaleWebConfig: siteData, slug, isWebsiteHome } = this.context;
+    const { showBackToTop } = siteData.themeConfig;
+    const { locales } = siteData;
 
     return (
       <div

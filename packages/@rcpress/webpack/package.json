@@ -9,6 +9,7 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.6.0",
+    "@babel/plugin-transform-regenerator": "^7.4.5",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "5.10.2",
     "@loadable/webpack-plugin": "^5.7.1",

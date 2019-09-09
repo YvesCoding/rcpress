@@ -31,7 +31,7 @@ Note:
 Page data stores in `PageContext`. which is exported from `rcpress`.
 
 ```js
-import { PageContext } from 'rcpress';
+import { PageContext } from '@app';
 ```
 
 `PageContext` is created by `React.createContext` api, you can refer to react's [document](https://reactjs.org/docs/context.html#reactcreatecontext).
@@ -40,7 +40,7 @@ The value of `PageContext` is an `Object`, which contains six attributes:
 
 ```js
 {
-  webConfig: {},
+  siteData: {},
   slug: '',
   currentLocaleWebConfig: {},
   currentPageSidebarItems: {},
@@ -51,7 +51,7 @@ The value of `PageContext` is an `Object`, which contains six attributes:
 
 The following are explained item by item:
 
-### webConfig
+### siteData
 
 - Type: `Object`
 
@@ -67,7 +67,7 @@ Current Page Path of Website
 
 - Type: `Object`
 
-Website configuration in the current language, it will be the same as `webConfig` if there are not locates set.
+Website configuration in the current language, it will be the same as `siteData` if there are not locates set.
 
 ### currentPageSidebarItems
 

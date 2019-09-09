@@ -8,11 +8,6 @@ module.exports = async function dev(
   const webpack = require('webpack');
   const chokidar = require('chokidar');
   const serve = require('webpack-dev-server');
-  const convert = require('koa-connect');
-  const mount = require('koa-mount');
-  const range = require('koa-range');
-  const serveStatic = require('koa-static');
-  const history = require('connect-history-api-fallback');
 
   const prepare = require('./prepare');
   const {
@@ -165,16 +160,11 @@ module.exports = async function dev(
       host: this.host,
       contentBase,
       before: app => {
-        // enable range request
-        app.use(range);
-
         // respect base when serving static files...
         if (fs.existsSync(contentBase)) {
           app.use(
-            mount(
-              options.siteConfig.base,
-              serveStatic(contentBase)
-            )
+            options.siteConfig.base,
+            require('express').static(contentBase)
           );
         }
       }
@@ -182,7 +172,21 @@ module.exports = async function dev(
     options.siteConfig.devServer || {}
   );
 
-  await new serve(compiler, serverConfig);
+  const error = await new Promise(resolve => {
+    try {
+      new serve(compiler, serverConfig).listen(
+        port,
+        host,
+        resolve
+      );
+    } catch (error) {
+      resolve(error);
+    }
+  });
+
+  if (error) {
+    throw error;
+  }
 };
 
 function resolveHost(host) {
