@@ -28,68 +28,25 @@ if (module.hot) {
   });
 }
 
-// global helper for adding base path to absolute urlls
-// Vue.prototype.$withBase = function(path) {
-//   const base = this.$site.base;
-//   if (path.charAt(0) === '/') {
-//     return base + path.slice(1);
-//   } else {
-//     return path;
-//   }
-// };
+const PageContext = React.createContext({});
+export { PageContext };
+
+const components = React.createContext({});
+export { components };
 
 export function createApp() {
   return (
-    <Switch>
-      {routes.map(route => (
-        <Route key={route.path} {...route} />
-      ))}
-    </Switch>
+    <PageContext.Provider
+      value={{
+        routes,
+        siteData
+      }}
+    >
+      <Switch>
+        {routes.map(route => (
+          <Route key={route.path} {...route} />
+        ))}
+      </Switch>
+    </PageContext.Provider>
   );
-
-  // const router = new Router({
-  //   base: siteData.base,
-  //   mode: 'history',
-  //   fallback: false,
-  //   routes,
-  //   scrollBehavior: (to, from, saved) => {
-  //     if (saved) {
-  //       return saved;
-  //     } else if (to.hash) {
-  //       if (store.disableScrollBehavior) {
-  //         return false;
-  //       }
-  //       return {
-  //         selector: to.hash
-  //       };
-  //     } else {
-  //       return { x: 0, y: 0 };
-  //     }
-  //   }
-  // });
-  // // redirect /foo to /foo/
-  // router.beforeEach((to, from, next) => {
-  //   if (!/(\/|\.html)$/.test(to.path)) {
-  //     next(
-  //       Object.assign({}, to, {
-  //         path: to.path + '/'
-  //       })
-  //     );
-  //   } else {
-  //     next();
-  //   }
-  // });
-  // const options = {};
-  // // themeEnhanceApp({ Vue, options, router, siteData })
-  // // enhanceApp({ Vue, options, router, siteData })
-  // const app = new Vue(
-  //   Object.assign(options, {
-  //     router,
-  //     render(h) {
-  //       return h('div', { attrs: { id: 'app' } }, [
-  //         h('router-view', { ref: 'layout' })
-  //       ]);
-  //     }
-  //   })
-  // );
 }
