@@ -47,10 +47,8 @@ exports.genRoutesFile = async function({
   }
 
   const notFoundRoute = `,
-  {
-    path: '*',
-    component: ThemeNotFound,
-    exact: true
+  { 
+    component: ThemeNotFound 
   }`;
 
   return (

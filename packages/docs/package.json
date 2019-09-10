@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "",
   "scripts": {
-    "dev": "node ../@rcpress/cli/src/index dev --debug"
+    "dev": "node ../@rcpress/cli/src/index dev"
   },
   "devDependencies": {
     "@rcpress/cli": "^0.0.0"

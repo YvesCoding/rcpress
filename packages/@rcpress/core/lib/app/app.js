@@ -38,8 +38,8 @@ export function createApp() {
       }}
     >
       <Switch>
-        {routes.map(route => (
-          <Route key={route.path} {...route} />
+        {routes.map((route, index) => (
+          <Route key={index} {...route} />
         ))}
       </Switch>
     </PageContext.Provider>
