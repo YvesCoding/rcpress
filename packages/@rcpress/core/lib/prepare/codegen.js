@@ -1,12 +1,10 @@
 const path = require('path');
-const {
-  fileToComponentName,
-  resolveComponents
-} = require('./util');
 
 exports.genRoutesFile = async function({
-  siteData: { pages },
-  sourceDir,
+  siteData: {
+    pages,
+    themeConfig: { docsDir }
+  },
   pageFiles
 }) {
   function genRoute(
@@ -14,7 +12,7 @@ exports.genRoutesFile = async function({
     index
   ) {
     const file = pageFiles[index];
-    const filePath = path.resolve(sourceDir, file);
+    const filePath = path.join(docsDir, file);
     let code = `
   {
     name: ${JSON.stringify(componentName)},

@@ -8,7 +8,7 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 
-const app = createApp();
+const App = createApp();
 
 window.__RCPRESS_VERSION__ = {
   version: RCPRESS_VERSION,
@@ -49,7 +49,9 @@ if (process.env.NODE_ENV === 'production' && GA_ID) {
 
 // Register service worker
 render(
-  <Router>{app}</Router>,
+  <Router>
+    <App />
+  </Router>,
   document.getElementById('app')
 );
 if (

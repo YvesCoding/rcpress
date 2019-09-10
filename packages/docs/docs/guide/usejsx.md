@@ -28,8 +28,13 @@ export const ShowTime = () => {
       {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
-            {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
-            {moment(context.currentPageInfo.fields.modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
+            {
+              context.currentLocaleSiteData.themeConfig
+                .lastUpdated
+            }{' '}
+            {moment(
+              context.currentPageInfo.fields.modifiedTime
+            ).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         );
       }}
@@ -40,7 +45,7 @@ export const ShowTime = () => {
 
 > Note
 >
-> The `current Locale WebConfig` and `current PageInfo` used above are parts of `PageContext` and both mentioned in the section [Custom Themes](/guide/theme#get-site-data-and-current-page-data).
+> The `current Locale SiteData` and `current PageInfo` used above are parts of `PageContext` and both mentioned in the section [Custom Themes](/guide/theme#get-site-data-and-current-page-data).
 
 Finally, import and use it in our `showTime.MD`
 

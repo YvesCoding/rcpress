@@ -16,8 +16,8 @@ const {
 } = require('./theme');
 
 module.exports = async function resolveOptions(sourceDir) {
-  const antdsiteDir = path.resolve(sourceDir, '.rcpress');
-  const siteConfig = loadConfig(antdsiteDir);
+  const rcpressDir = path.resolve(sourceDir, '.rcpress');
+  const siteConfig = loadConfig(rcpressDir);
 
   // normalize head tag urls for base
   const base = siteConfig.base || '/';
@@ -51,7 +51,7 @@ module.exports = async function resolveOptions(sourceDir) {
   );
   const useDefaultTheme =
     !siteConfig.theme &&
-    !fs.existsSync(path.resolve(antdsiteDir, 'theme'));
+    !fs.existsSync(path.resolve(rcpressDir, 'theme'));
   const defaultThemeLayoutPath = resolveThemeLayoutPath(
     '@rcpress/theme-default'
   );
@@ -86,7 +86,7 @@ module.exports = async function resolveOptions(sourceDir) {
       }
     } else {
       // use custom theme
-      themePath = path.resolve(antdsiteDir, 'theme');
+      themePath = path.resolve(rcpressDir, 'theme');
       themeLayoutPath = resolvePathWidthExts(
         `${themePath}/Layout`
       );
@@ -134,6 +134,7 @@ module.exports = async function resolveOptions(sourceDir) {
   // resolve pageFiles
   const patterns = [
     '**/*.md',
+    '**/*.mdx',
     '!.rcpress',
     '!node_modules'
   ];
@@ -144,7 +145,7 @@ module.exports = async function resolveOptions(sourceDir) {
     }
   }
   const pageFiles = sort(
-    await globby(patterns, { cwd: sourceDir })
+    await globby(patterns, { cwd: sourceDir, nocase: true })
   );
 
   // resolve lastUpdated

@@ -2,7 +2,18 @@
 import React from 'react';
 import Link from '../components/MyLink';
 import * as utils from '../components/utils';
-import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
+import {
+  Row,
+  Col,
+  Icon,
+  Input,
+  Menu,
+  Button,
+  Popover,
+  Dropdown,
+  Affix,
+  Badge
+} from 'antd';
 import { PageContext } from '@app';
 import SearchBox from '../components/search-box';
 import SubMenu from 'antd/lib/menu/SubMenu';
@@ -13,12 +24,20 @@ interface HeaderProps {
 interface HeaderState {
   inputValue?: string;
   menuVisible: boolean;
-  menuMode?: 'vertical' | 'vertical-left' | 'vertical-right' | 'horizontal' | 'inline';
+  menuMode?:
+    | 'vertical'
+    | 'vertical-left'
+    | 'vertical-right'
+    | 'horizontal'
+    | 'inline';
   searchOption?: any[];
   searching?: boolean;
 }
 
-class Header extends React.Component<HeaderProps, HeaderState> {
+class Header extends React.Component<
+  HeaderProps,
+  HeaderState
+> {
   state: HeaderState = {
     inputValue: undefined,
     menuVisible: false,
@@ -35,7 +54,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
   }
 
   setMenuMode = (isMobile: boolean) => {
-    this.setState({ menuMode: isMobile ? 'inline' : 'horizontal' });
+    this.setState({
+      menuMode: isMobile ? 'inline' : 'horizontal'
+    });
   };
 
   componentDidUpdate(preProps: HeaderProps) {
@@ -60,7 +81,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     });
   };
 
-  setLocaleLinks = (localeLink: string, currentSlug: string, currentLocale: string) => {
+  setLocaleLinks = (
+    localeLink: string,
+    currentSlug: string,
+    currentLocale: string
+  ) => {
     return currentSlug.replace(currentLocale, localeLink);
   };
 
@@ -69,7 +94,9 @@ class Header extends React.Component<HeaderProps, HeaderState> {
       <Menu.SubMenu
         className="hide-in-home-page"
         key={index}
-        title={<Badge dot={item.important}>{item.text}</Badge>}
+        title={
+          <Badge dot={item.important}>{item.text}</Badge>
+        }
       >
         {item.items.map((ch: any, index: number) => {
           return this.renderNav(ch, index);
@@ -78,7 +105,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
     ) : (
       <Menu.Item key={item.link || index}>
         {utils.isExternal(item.link) ? (
-          <a href={item.link} target="_blank" className="menu-item-link-outside">
+          <a
+            href={item.link}
+            target="_blank"
+            className="menu-item-link-outside"
+          >
             <Badge dot={item.important}>{item.text}</Badge>
           </a>
         ) : (
@@ -92,33 +123,67 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   render() {
     const { menuMode, menuVisible } = this.state;
-    const { siteData, slug, allPagesSidebarItems } = this.context;
-    let currentLocate = utils.getCurrentLoacle(siteData, slug);
+    const {
+      siteData,
+      path,
+      allPagesSidebarItems
+    } = this.context;
+    let currentLocate = utils.getCurrentLoacle(
+      siteData,
+      path
+    );
     let {
-      currentLocaleWebConfig: { themeConfig, title, base, logo }
-    } = utils.getcurrentLocaleConfigBySlug(siteData, slug);
+      currentLocaleSiteData: {
+        themeConfig,
+        title,
+        base,
+        logo
+      }
+    } = utils.getcurrentLocaleConfigBySlug(siteData, path);
     const { locales } = siteData.themeConfig;
 
-    const { nav = [], search, searchMaxSuggestions } = themeConfig;
+    const {
+      nav = [],
+      search,
+      searchMaxSuggestions
+    } = themeConfig;
     const activeMenuItem = nav
       .filter((item: any) => {
-        return item.link && slug.startsWith(item.link);
+        return item.link && path.startsWith(item.link);
       })
       .map((_: string) => _.link);
     const menu = (
       <>
-        <Menu mode={menuMode} selectedKeys={activeMenuItem} id="nav" key="nav">
+        <Menu
+          mode={menuMode}
+          selectedKeys={activeMenuItem}
+          id="nav"
+          key="nav"
+        >
           {nav.map((item: any, index: number) => {
             return this.renderNav(item, index);
           })}
         </Menu>
         {menuMode === 'inline' && currentLocate ? (
-          <Menu key="choose-lang" selectedKeys={[currentLocate || '']} mode={menuMode}>
-            <SubMenu key="choose-lang" title={themeConfig.selectText}>
+          <Menu
+            key="choose-lang"
+            selectedKeys={[currentLocate || '']}
+            mode={menuMode}
+          >
+            <SubMenu
+              key="choose-lang"
+              title={themeConfig.selectText}
+            >
               {Object.keys(locales).map(item => {
                 return (
                   <Menu.Item key={item}>
-                    <Link to={this.setLocaleLinks(item, slug, currentLocate as string)}>
+                    <Link
+                      to={this.setLocaleLinks(
+                        item,
+                        path,
+                        currentLocate as string
+                      )}
+                    >
                       {locales[item].label}
                     </Link>
                   </Menu.Item>
@@ -135,7 +200,13 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         {Object.keys(locales).map(item => {
           return (
             <Menu.Item key={item}>
-              <Link to={this.setLocaleLinks(item, slug, currentLocate as string)}>
+              <Link
+                to={this.setLocaleLinks(
+                  item,
+                  path,
+                  currentLocate as string
+                )}
+              >
                 {locales[item].label}
               </Link>
             </Menu.Item>
@@ -150,7 +221,11 @@ class Header extends React.Component<HeaderProps, HeaderState> {
           {menuMode === 'inline' ? (
             <>
               {search && allPagesSidebarItems.length ? (
-                <SearchBox mobile datas={allPagesSidebarItems} max={searchMaxSuggestions} />
+                <SearchBox
+                  mobile
+                  datas={allPagesSidebarItems}
+                  max={searchMaxSuggestions}
+                />
               ) : null}
               <Popover
                 overlayClassName="popover-menu"
@@ -161,32 +236,72 @@ class Header extends React.Component<HeaderProps, HeaderState> {
                 arrowPointAtCenter
                 onVisibleChange={this.onMenuVisibleChange}
               >
-                <Icon className="nav-phone-icon" type="menu" onClick={this.handleShowMenu} />
+                <Icon
+                  className="nav-phone-icon"
+                  type="menu"
+                  onClick={this.handleShowMenu}
+                />
               </Popover>
             </>
           ) : null}
           <Row>
-            <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
-              <Link id="site-logo" to={currentLocate || base}>
-                {logo && <img src={utils.resolvePathWithBase(logo, base)} alt={title + '-logo'} />}
-                <span className="left-top-title">{title}</span>
+            <Col
+              xxl={4}
+              xl={5}
+              lg={8}
+              md={8}
+              sm={24}
+              xs={24}
+            >
+              <Link
+                id="site-logo"
+                to={currentLocate || base}
+              >
+                {logo && (
+                  <img
+                    src={utils.resolvePathWithBase(
+                      logo,
+                      base
+                    )}
+                    alt={title + '-logo'}
+                  />
+                )}
+                <span className="left-top-title">
+                  {title}
+                </span>
               </Link>
             </Col>
-            <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
+            <Col
+              xxl={20}
+              xl={19}
+              lg={16}
+              md={16}
+              sm={0}
+              xs={0}
+            >
               {search && allPagesSidebarItems.length ? (
-                <SearchBox datas={allPagesSidebarItems} max={searchMaxSuggestions} />
+                <SearchBox
+                  datas={allPagesSidebarItems}
+                  max={searchMaxSuggestions}
+                />
               ) : null}
               <div className="header-meta">
                 <div className="right-header">
                   {currentLocate ? (
-                    <Dropdown overlay={chooseLanguage} placement="bottomLeft">
+                    <Dropdown
+                      overlay={chooseLanguage}
+                      placement="bottomLeft"
+                    >
                       <Button size="small">
-                        {themeConfig.selectText} <Icon type="down" />
+                        {themeConfig.selectText}{' '}
+                        <Icon type="down" />
                       </Button>
                     </Dropdown>
                   ) : null}
                 </div>
-                {menuMode === 'horizontal' ? <div id="menu">{menu}</div> : null}
+                {menuMode === 'horizontal' ? (
+                  <div id="menu">{menu}</div>
+                ) : null}
               </div>
             </Col>
           </Row>

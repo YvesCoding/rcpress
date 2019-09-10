@@ -35,7 +35,7 @@ export default class Article extends React.PureComponent<{
     const {
       currentPageInfo,
       currentPageContent,
-      currentLocaleWebConfig: {
+      currentLocaleSiteData: {
         title,
         lang,
         description,

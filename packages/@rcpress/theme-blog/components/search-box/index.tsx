@@ -103,7 +103,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
       if (match(currentItem.title, query)) {
         results.push([
           {
-            url: currentItem.slug,
+            url: currentItem.path,
             title: hightlightRes(currentItem.title),
             important: currentItem.important
           }
@@ -119,7 +119,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
                 important: currentItem.important
               },
               {
-                url: currentItem.slug + t.url,
+                url: currentItem.path + t.url,
                 title: hightlightRes(t.title)
               }
             ]);
@@ -130,7 +130,7 @@ export default class Search extends React.Component<SearchProps, SearchState> {
 
     for (let i = 0; i < datas.length && results.length < max; i++) {
       const currentItem = datas[i];
-      if (currentItem.slug) {
+      if (currentItem.path) {
         resolveOnePageItem(currentItem);
       } else if (currentItem.children && currentItem.children.length) {
         for (let j = 0; j < currentItem.children.length; j++) {

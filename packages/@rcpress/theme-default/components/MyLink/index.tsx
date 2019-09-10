@@ -28,16 +28,16 @@ const MyLink: React.SFC<any> = ({
     <PageContext.Consumer>
       {({
         siteData: { base, prefetch: globalPrefetch },
-        slug
+        path
       }) => {
         let clickMerged = () => {
-          handleLinkClick(slug, to);
+          handleLinkClick(path, to);
         };
 
         if (onClick) {
           clickMerged = (...args) => {
             onClick.apply(null, args);
-            handleLinkClick(slug, to);
+            handleLinkClick(path, to);
           };
         }
 

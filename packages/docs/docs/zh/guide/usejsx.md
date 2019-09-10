@@ -28,8 +28,13 @@ export const ShowTime = () => {
       {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
-            {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
-            {moment(context.currentPageInfo.fields.modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
+            {
+              context.currentLocaleSiteData.themeConfig
+                .lastUpdated
+            }{' '}
+            {moment(
+              context.currentPageInfo.fields.modifiedTime
+            ).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         );
       }}
@@ -40,7 +45,7 @@ export const ShowTime = () => {
 
 > 注意
 >
-> 上面用到的`currentLocaleWebConfig`和`currentPageInfo`都是在[自定义主题](/zh/guide/theme)一节中提到过的，属于`PageContext`的一部分。
+> 上面用到的`currentLocaleSiteData`和`currentPageInfo`都是在[自定义主题](/zh/guide/theme)一节中提到过的，属于`PageContext`的一部分。
 
 最后，在我们的`showTime.md`里导入并使用
 

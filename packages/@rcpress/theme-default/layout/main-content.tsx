@@ -58,7 +58,7 @@ export default class MainContent extends React.PureComponent<
     const { prev, next } = this.state;
     const {
       currentPageSidebarItems: menuList,
-      slug,
+      path,
       siteData: { footer: footerText }
     } = this.context;
     const enableMenu = !!(menuList && menuList.length);
@@ -69,7 +69,7 @@ export default class MainContent extends React.PureComponent<
           <LeftMenu
             getPreAndNextMenu={this.getPreAndNextMenu}
             menuList={menuList}
-            currentPath={slug}
+            currentPath={path}
             isMobile={isMobile}
           />
         ) : null}

@@ -11,27 +11,27 @@ function Banner(props) {
       {context => {
         const {
           currentPageInfo: { frontmatter },
-          currentLocaleWebConfig
+          currentLocaleSiteData
         } = context;
-        const repoAddr = currentLocaleWebConfig.themeConfig.repo;
+        const repoAddr = currentLocaleSiteData.themeConfig.repo;
         const [namespace, repo] = repoAddr ? repoAddr.split('/') : [null, null];
 
         return (
           <div className="banner-wrapper">
-            {(frontmatter.heroImage || currentLocaleWebConfig.logo) && (
+            {(frontmatter.heroImage || currentLocaleSiteData.logo) && (
               <div className="banner-logo">
                 <img
                   src={utils.resolvePathWithBase(
-                    frontmatter.heroImage || currentLocaleWebConfig.logo,
-                    currentLocaleWebConfig.base
+                    frontmatter.heroImage || currentLocaleSiteData.logo,
+                    currentLocaleSiteData.base
                   )}
                   alt="Hero"
                 />
               </div>
             )}
             <div className="banner-title-wrapper">
-              <h1 key="h1">{currentLocaleWebConfig.title}</h1>
-              <p key="content">{currentLocaleWebConfig.description}</p>
+              <h1 key="h1">{currentLocaleSiteData.title}</h1>
+              <p key="content">{currentLocaleSiteData.description}</p>
               <div key="button" className="button-wrapper">
                 <Link to={frontmatter.actionLink}>
                   <Button style={{ margin: '0 16px' }} type="primary" ghost>

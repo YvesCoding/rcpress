@@ -1,13 +1,22 @@
-import { IAllMdxData, Edges, IGraphqlFrontmatterData, Toc, PageEdge } from '../../templates';
+import {
+  IAllMdxData,
+  Edges,
+  IGraphqlFrontmatterData,
+  Toc,
+  PageEdge
+} from '../../templates';
 
-export function getCurrentLoacle(siteData: any, slug: string) {
+export function getCurrentLoacle(
+  siteData: any,
+  path: string
+) {
   const locales = siteData.themeConfig.locales;
   if (!locales) return false;
 
   let targetLocale = '/';
 
   for (let path in locales) {
-    if (path != targetLocale && slug.startsWith(path)) {
+    if (path != targetLocale && path.startsWith(path)) {
       targetLocale = path;
     }
   }
@@ -17,22 +26,22 @@ export function getCurrentLoacle(siteData: any, slug: string) {
 
 export function getcurrentLocaleConfigBySlug(
   siteData: any,
-  slug: string
+  path: string
 ): {
   localte: string;
-  currentLocaleWebConfig: any;
+  currentLocaleSiteData: any;
 } {
-  const targetLocale = getCurrentLoacle(siteData, slug);
+  const targetLocale = getCurrentLoacle(siteData, path);
   if (!targetLocale) {
     return {
       localte: '/',
-      currentLocaleWebConfig: siteData
+      currentLocaleSiteData: siteData
     };
   }
 
   return {
     localte: targetLocale,
-    currentLocaleWebConfig: {
+    currentLocaleSiteData: {
       ...siteData,
       ...siteData.locales[targetLocale],
       themeConfig: {
@@ -44,7 +53,7 @@ export function getcurrentLocaleConfigBySlug(
 }
 
 // copy from rcpress
-// https://github.com/vuejs/rcpress/blob/master/packages/%40antdsite/theme-default/util/index.js
+// https://github.com/vuejs/rcpress/blob/master/packages/%40rcpress/theme-default/util/index.js
 
 export const hashRE = /#.*$/;
 export const extRE = /\.(md|html)$/;
@@ -76,11 +85,21 @@ export function normalize(path: string) {
 }
 
 export function getPageTitle(node: PageEdge) {
-  const topHeading = (node.headings || [{ depth: 1, value: '' }]).find(i => i.depth == 1);
-  return node.frontmatter.title || (topHeading && topHeading.value) || node.fields.slug;
+  const topHeading = (
+    node.headings || [{ depth: 1, value: '' }]
+  ).find(i => i.depth == 1);
+  return (
+    node.frontmatter.title ||
+    (topHeading && topHeading.value) ||
+    node.fields.path
+  );
 }
 
-export function resolvePage(pages: Edges, rawPath: string, base: string): PageInfo {
+export function resolvePage(
+  pages: Edges,
+  rawPath: string,
+  base: string
+): PageInfo {
   if (base) {
     rawPath = resolvePath(rawPath, base);
   }
@@ -89,7 +108,7 @@ export function resolvePage(pages: Edges, rawPath: string, base: string): PageIn
   for (let i = 0; i < pages.length; i++) {
     const node = pages[i].node;
 
-    if (normalize(node.fields.slug) === path) {
+    if (normalize(node.fields.path) === path) {
       return Object.assign(
         {
           children: []
@@ -104,18 +123,23 @@ export function resolvePage(pages: Edges, rawPath: string, base: string): PageIn
     }
   }
 
-  console.error(`[RcPress] No matching page found for sidebar item "${rawPath}"`);
+  console.error(
+    `[RcPress] No matching page found for sidebar item "${rawPath}"`
+  );
   return {
     children: [],
     title: rawPath,
-    slug: rawPath,
+    path: rawPath,
     toc: {
       items: []
     }
   };
 }
 
-export function resolvePathWithBase(path: string, base: string) {
+export function resolvePathWithBase(
+  path: string,
+  base: string
+) {
   if (!base.endsWith('/')) {
     base += '/';
   }
@@ -127,7 +151,11 @@ export function resolvePathWithBase(path: string, base: string) {
   return base + path;
 }
 
-function resolvePath(relative: string, base: string, append: string = '') {
+function resolvePath(
+  relative: string,
+  base: string,
+  append: string = ''
+) {
   const firstChar = relative.charAt(0);
   if (firstChar === '/') {
     return relative;
@@ -166,14 +194,22 @@ function resolvePath(relative: string, base: string, append: string = '') {
 }
 
 export interface PageInfo extends IGraphqlFrontmatterData {
-  slug?: string;
+  path?: string;
   collapsable?: boolean;
   children: PageInfo[];
   toc?: Toc;
 }
 
-function resolvePageSidebar(config: any, path: string, edges: Edges): PageInfo[] {
-  return config ? config.map((item: any) => resolveItem(item, edges, path, 1)) : [];
+function resolvePageSidebar(
+  config: any,
+  path: string,
+  edges: Edges
+): PageInfo[] {
+  return config
+    ? config.map((item: any) =>
+        resolveItem(item, edges, path, 1)
+      )
+    : [];
 }
 
 export function resolveSidebarItems(
@@ -186,9 +222,12 @@ export function resolveSidebarItems(
 } {
   const { edges } = allMdxData;
 
-  const { currentLocaleWebConfig } = getcurrentLocaleConfigBySlug(siteData, currentSlug);
+  const {
+    currentLocaleSiteData
+  } = getcurrentLocaleConfigBySlug(siteData, currentSlug);
 
-  const pageSidebarConfig = currentLocaleWebConfig.themeConfig.sidebar;
+  const pageSidebarConfig =
+    currentLocaleSiteData.themeConfig.sidebar;
 
   let currentPageSidebarItems: PageInfo[] = [];
   let allPagesSidebarItems: PageInfo[] = [];
@@ -199,8 +238,14 @@ export function resolveSidebarItems(
       allPagesSidebarItems
     };
   } else {
-    allPagesSidebarItems = Object.keys(pageSidebarConfig).reduce((pre, cur) => {
-      const resolvedConfig = resolvePageSidebar(pageSidebarConfig[cur], cur, edges);
+    allPagesSidebarItems = Object.keys(
+      pageSidebarConfig
+    ).reduce((pre, cur) => {
+      const resolvedConfig = resolvePageSidebar(
+        pageSidebarConfig[cur],
+        cur,
+        edges
+      );
 
       if (currentSlug.startsWith(cur)) {
         currentPageSidebarItems = resolvedConfig;
@@ -216,13 +261,21 @@ export function resolveSidebarItems(
   }
 }
 
-function resolveItem(item: any, pages: Edges, base: string, nestedLevel: number): PageInfo | null {
+function resolveItem(
+  item: any,
+  pages: Edges,
+  base: string,
+  nestedLevel: number
+): PageInfo | null {
   if (typeof item === 'string') {
     return resolvePage(pages, item, base);
   } else if (Array.isArray(item)) {
-    return Object.assign(resolvePage(pages, item[0], base), {
-      title: item[1]
-    });
+    return Object.assign(
+      resolvePage(pages, item[0], base),
+      {
+        title: item[1]
+      }
+    );
   } else {
     if (nestedLevel > 2) {
       console.error(
@@ -235,7 +288,9 @@ function resolveItem(item: any, pages: Edges, base: string, nestedLevel: number)
     const children = item.children || [];
     return {
       title: item.title,
-      children: children.map((child: any) => resolveItem(child, pages, base, nestedLevel + 1)),
+      children: children.map((child: any) =>
+        resolveItem(child, pages, base, nestedLevel + 1)
+      ),
       collapsable: item.collapsable !== false
     };
   }

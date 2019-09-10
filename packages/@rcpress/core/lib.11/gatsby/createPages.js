@@ -10,15 +10,15 @@ const siteData = require('../config').getFinalConfig();
 const { themeConfig } = siteData;
 const path = require('path');
 
-function isHome(frontmatter, slug) {
+function isHome(frontmatter, path) {
   return (
     frontmatter.home === true &&
-    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(slug) !== -1) || slug === '/')
+    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(path) !== -1) || path === '/')
   );
 }
 
-function resolveDirPath(slug, endSlash) {
-  const dirPath = path.dirname(slug);
+function resolveDirPath(path, endSlash) {
+  const dirPath = path.dirname(path);
 
   return endSlash ? dirPath : dirPath + '/';
 }
@@ -43,7 +43,7 @@ module.exports = async ({ graphql, actions }) => {
           edges {
             node {
               fields {
-                slug
+                path
                 path
               }
               frontmatter {
@@ -68,16 +68,16 @@ module.exports = async ({ graphql, actions }) => {
 
   edges.forEach(edge => {
     const { fields, frontmatter } = edge.node;
-    const { slug } = fields;
+    const { path } = fields;
     let isWebsiteHome = false;
 
-    if (isHome(frontmatter, slug)) {
+    if (isHome(frontmatter, path)) {
       isWebsiteHome = true;
     }
 
     if (frontmatter.home === true && !isWebsiteHome) {
-      redirects[resolveDirPath(slug)] = slug;
-      redirects[resolveDirPath(slug, true)] = slug;
+      redirects[resolveDirPath(path)] = path;
+      redirects[resolveDirPath(path, true)] = path;
     }
 
     const createArticlePage = path => {
@@ -87,14 +87,14 @@ module.exports = async ({ graphql, actions }) => {
         context: {
           isWebsiteHome,
           siteData,
-          slug,
+          path,
           maxTocDeep: frontmatter.maxTocDeep || siteData.themeConfig.maxTocDeep
         }
       });
     };
 
     // Register primary URL.
-    createArticlePage(slug);
+    createArticlePage(path);
   });
 
   Object.keys(redirects).map(path => {

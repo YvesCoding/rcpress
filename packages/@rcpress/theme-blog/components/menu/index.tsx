@@ -15,10 +15,10 @@ function getFlatMenuList(menuList: PageInfo[]): PageInfo[] {
   }, []);
 }
 
-function getActiveMenuItem(slug: string, currentPageSidebarItems: PageInfo[]): PageInfo {
+function getActiveMenuItem(path: string, currentPageSidebarItems: PageInfo[]): PageInfo {
   const newMenusList = getFlatMenuList(currentPageSidebarItems);
-  const activeMenu = newMenusList.find(menu => menu.slug == slug);
-  if (!activeMenu) return { title: '', slug: '', children: [] };
+  const activeMenu = newMenusList.find(menu => menu.path == path);
+  if (!activeMenu) return { title: '', path: '', children: [] };
 
   return activeMenu;
 }
@@ -115,7 +115,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     const disabled = item.disabled;
 
     const child = !item.link ? (
-      <Link to={item.slug || ''}>
+      <Link to={item.path || ''}>
         <Badge dot={item.important}>
           {before}
           {text}
@@ -137,7 +137,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
       </a>
     );
     return (
-      <Menu.Item key={item.slug || item.link} disabled={disabled}>
+      <Menu.Item key={item.path || item.link} disabled={disabled}>
         {child}
       </Menu.Item>
     );
@@ -192,7 +192,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
         className="aside-container"
         mode="inline"
         openKeys={openKeys}
-        selectedKeys={[(activeMenuItem && activeMenuItem.slug) || '/']}
+        selectedKeys={[(activeMenuItem && activeMenuItem.path) || '/']}
         onOpenChange={this.handleMenuOpenChange}
       >
         {this.menuItems}

@@ -11,7 +11,10 @@ export interface LayoutProps {
 
 interface LayoutState {}
 
-export default class Layout extends React.Component<LayoutProps, LayoutState> {
+export default class Layout extends React.Component<
+  LayoutProps,
+  LayoutState
+> {
   static contextType = PageContext;
 
   constructor(props: LayoutProps) {
@@ -21,38 +24,53 @@ export default class Layout extends React.Component<LayoutProps, LayoutState> {
   preSlug: String;
 
   render() {
-    const { currentLocaleWebConfig: siteData, slug, isWebsiteHome } = this.context;
+    const {
+      currentLocaleSiteData: siteData,
+      path,
+      isWebsiteHome
+    } = this.context;
     const { showBackToTop } = siteData.themeConfig;
     const { locales } = siteData;
 
     return (
       <div
-        className={`page-wrapper ${((!locales && slug == '/') ||
-          (locales && Object.keys(locales).includes(slug))) &&
+        className={`page-wrapper ${((!locales &&
+          path == '/') ||
+          (locales &&
+            Object.keys(locales).includes(path))) &&
           'index-page-wrapper'}`}
       >
         <Header {...this.props} />
-        <MainContent {...this.props} isWebsiteHome={isWebsiteHome} />
+        <MainContent
+          {...this.props}
+          isWebsiteHome={isWebsiteHome}
+        />
         {showBackToTop ? <BackTop /> : null}
       </div>
     );
   }
 
   componentDidMount() {
-    this.chekScrollPosition(this.context.slug);
+    this.chekScrollPosition(this.context.path);
   }
 
   componentDidUpdate() {
-    this.chekScrollPosition(this.context.slug);
+    this.chekScrollPosition(this.context.path);
   }
 
-  chekScrollPosition(slug?: string) {
-    if (!window.location.hash && slug && slug !== this.preSlug) {
+  chekScrollPosition(path?: string) {
+    if (
+      !window.location.hash &&
+      path &&
+      path !== this.preSlug
+    ) {
       window.scrollTo(0, 0);
-      this.preSlug = slug;
+      this.preSlug = path;
     } else if (window.location.hash) {
       const element = document.getElementById(
-        decodeURIComponent(window.location.hash.replace('#', ''))
+        decodeURIComponent(
+          window.location.hash.replace('#', '')
+        )
       );
       setTimeout(() => {
         if (element) {

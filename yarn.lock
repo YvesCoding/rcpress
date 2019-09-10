@@ -5129,9 +5129,9 @@ gitconfiglocal@^1.0.0:
   dependencies:
     ini "^1.3.2"
 
-github-slugger@^1.2.1:
+github-pathger@^1.2.1:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/github-slugger/-/github-slugger-1.2.1.tgz#47e904e70bf2dccd0014748142d31126cfd49508"
+  resolved "https://registry.yarnpkg.com/github-pathger/-/github-pathger-1.2.1.tgz#47e904e70bf2dccd0014748142d31126cfd49508"
   dependencies:
     emoji-regex ">=6.0.0 <=6.1.1"
 
@@ -7192,7 +7192,7 @@ mdast-util-toc@:
   resolved "https://registry.yarnpkg.com/mdast-util-toc/-/mdast-util-toc-4.2.0.tgz#9085c4313359c981e4c1d22efe02f8ce01072da4"
   dependencies:
     extend "^3.0.2"
-    github-slugger "^1.2.1"
+    github-pathger "^1.2.1"
     mdast-util-to-string "^1.0.5"
     unist-util-is "^3.0.0"
     unist-util-visit "^1.1.0"
@@ -11542,11 +11542,11 @@ unique-filename@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/unique-filename/-/unique-filename-1.1.1.tgz#1d69769369ada0583103a1e6ae87681b56573230"
   dependencies:
-    unique-slug "^2.0.0"
+    unique-path "^2.0.0"
 
-unique-slug@^2.0.0:
+unique-path@^2.0.0:
   version "2.0.2"
-  resolved "https://registry.yarnpkg.com/unique-slug/-/unique-slug-2.0.2.tgz#baabce91083fc64e945b0f3ad613e264f7cd4e6c"
+  resolved "https://registry.yarnpkg.com/unique-path/-/unique-path-2.0.2.tgz#baabce91083fc64e945b0f3ad613e264f7cd4e6c"
   dependencies:
     imurmurhash "^0.1.4"
 

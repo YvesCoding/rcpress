@@ -1,54 +1,67 @@
-const fs = require('fs-extra')
-const path = require('path')
-const yamlParser = require('js-yaml')
-const tomlParser = require('toml')
+const fs = require('fs-extra');
+const path = require('path');
+const yamlParser = require('js-yaml');
+const tomlParser = require('toml');
+const { deepMerge } = require('@rcpress/util');
+const defaultConf = require('./defaultConfig');
 
-module.exports = function loadConfig (antdsiteDir, bustCache = true) {
-  const configPath = path.resolve(antdsiteDir, 'config.js')
-  const configYmlPath = path.resolve(antdsiteDir, 'config.yml')
-  const configTomlPath = path.resolve(antdsiteDir, 'config.toml')
+module.exports = function loadConfig(
+  rcpressDir,
+  bustCache = true
+) {
+  const configPath = path.resolve(rcpressDir, 'config.js');
+  const configYmlPath = path.resolve(
+    rcpressDir,
+    'config.yml'
+  );
+  const configTomlPath = path.resolve(
+    rcpressDir,
+    'config.toml'
+  );
 
   if (bustCache) {
-    delete require.cache[configPath]
+    delete require.cache[configPath];
   }
 
   // resolve siteConfig
-  let siteConfig = {}
+  let siteConfig = {};
   if (fs.existsSync(configYmlPath)) {
-    siteConfig = parseConfig(configYmlPath)
+    siteConfig = parseConfig(configYmlPath);
   } else if (fs.existsSync(configTomlPath)) {
-    siteConfig = parseConfig(configTomlPath)
+    siteConfig = parseConfig(configTomlPath);
   } else if (fs.existsSync(configPath)) {
-    siteConfig = require(configPath)
+    siteConfig = require(configPath);
   }
 
-  return siteConfig
-}
+  siteConfig = deepMerge(siteConfig, defaultConf);
 
-function parseConfig (file) {
-  const content = fs.readFileSync(file, 'utf-8')
-  const [extension] = /.\w+$/.exec(file)
-  let data
+  return siteConfig;
+};
+
+function parseConfig(file) {
+  const content = fs.readFileSync(file, 'utf-8');
+  const [extension] = /.\w+$/.exec(file);
+  let data;
 
   switch (extension) {
-  case '.yml':
-  case '.yaml':
-    data = yamlParser.safeLoad(content)
-    break
+    case '.yml':
+    case '.yaml':
+      data = yamlParser.safeLoad(content);
+      break;
 
-  case '.toml':
-    data = tomlParser.parse(content)
-    // reformat to match config since TOML does not allow different data type
-    // https://github.com/toml-lang/toml#array
-    const format = []
-    Object.keys(data.head).forEach(meta => {
-      data.head[meta].forEach(values => {
-        format.push([meta, values])
-      })
-    })
-    data.head = format
-    break
+    case '.toml':
+      data = tomlParser.parse(content);
+      // reformat to match config since TOML does not allow different data type
+      // https://github.com/toml-lang/toml#array
+      const format = [];
+      Object.keys(data.head).forEach(meta => {
+        data.head[meta].forEach(values => {
+          format.push([meta, values]);
+        });
+      });
+      data.head = format;
+      break;
   }
 
-  return data || {}
+  return data || {};
 }

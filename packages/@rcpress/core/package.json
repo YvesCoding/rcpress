@@ -28,7 +28,7 @@
     "axios": "^0.18.0",
     "chalk": "2.4.2",
     "change-case": "^3.1.0",
-    "github-slugger": "^1.2.1",
+    "github-pathger": "^1.2.1",
     "globby": "^6.1.0",
     "gray-matter": "^4.0.1",
     "himalaya": "^1.1.0",

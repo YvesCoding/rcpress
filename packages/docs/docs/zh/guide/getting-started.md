@@ -58,7 +58,7 @@ npm start
         ├── 404.css
 ├── static # 用于存放网站的一些静态文件，能直接被访问：如： www.xxx.com/favicon.png
     ├── favicon.png # 用于存放网站logo
-├── package.json # 主要包含了devDependencies依赖项：antdsite和gatsby
+├── package.json # 主要包含了devDependencies依赖项：rcpress和gatsby
 ├── gatsby-config.js # gatsby配置文件，已配置好，无需更改。
 ```
 
@@ -72,7 +72,8 @@ module.exports = {
   // 一般展示在首页和左上角
   logo: '/favicon.png',
   // 网站首页底部的文字，支持html格式
-  footer: 'MIT Licensed | Copyright © 2019-present Yi(Yves) Wang',
+  footer:
+    'MIT Licensed | Copyright © 2019-present Yi(Yves) Wang',
   // 生成网站时会向网站头部插入的一些元素，
   // 其中每个元素格式为[tagName, {/*元素属性，会原封不动附加到生成的元素上。*/},/*子节点*/]
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
@@ -92,7 +93,7 @@ module.exports = {
     sidebar: {
       // 注意 重点。
       // 设置的属性名必须是 你的文档目录(默认为docs)下存在的文件/目录
-      // antdsite查找文件的物理路径为: docs(你设置的文档目录) + sidebar里的键名
+      // rcpress查找文件的物理路径为: docs(你设置的文档目录) + sidebar里的键名
       // 例如下面的 /guide/ 对应的物理路径是 docs/guide/
       '/guide/': [
         // 对应物理路径： docs/guide/introduction.md

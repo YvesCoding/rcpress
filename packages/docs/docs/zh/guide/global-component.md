@@ -36,7 +36,7 @@ export default {
 ```js
 <PageCustomer>
   {ctx => {
-    return `当前页面路径(不包含base)： ${ctx.slug}`;
+    return `当前页面路径(不包含base)： ${ctx.path}`;
   }}
 </PageCustomer>
 ```
@@ -44,7 +44,7 @@ export default {
 <PageCustomer>
 {
     ctx => {
-        return `当前页面路径(不包含base)： ${ctx.slug}`
+        return `当前页面路径(不包含base)： ${ctx.path}`
     }
 }
 </PageCustomer>

@@ -8,7 +8,7 @@ export const ShowTime = () => {
       {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
-            {context.currentLocaleWebConfig.themeConfig.lastUpdated}{' '}
+            {context.currentLocaleSiteData.themeConfig.lastUpdated}{' '}
             {moment(context.currentPageInfo.fields.modifiedTime).format(
               'YYYY-MM-DD HH:mm:SS'
             )}

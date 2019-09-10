@@ -40,12 +40,12 @@ const getAvatarList = async filename => {
   return data;
 };
 
-function normalizeSlug(slug) {
-  if (!slug.startsWith('/')) {
-    slug = '/' + slug;
+function normalizeSlug(path) {
+  if (!path.startsWith('/')) {
+    path = '/' + path;
   }
 
-  return slug;
+  return path;
 }
 
 // Add custom fields to MarkdownRemark nodes.
@@ -55,7 +55,7 @@ module.exports = exports.onCreateNode = async ({ node, actions, getNode }) => {
     case 'Mdx':
       const { relativePath, sourceInstanceName } = getNode(node.parent);
 
-      let slug;
+      let path;
       const filePath = node.fileAbsolutePath; // path.join(process.cwd(), sourceInstanceName, relativePath);
       const stats = fs.statSync(filePath);
       const mtime = new Date(stats.mtime).getTime();
@@ -67,12 +67,12 @@ module.exports = exports.onCreateNode = async ({ node, actions, getNode }) => {
         value: mtime
       });
 
-      slug = normalizeSlug(`${relativePath.replace(/(readme)?\.mdx?/i, '')}`);
+      path = normalizeSlug(`${relativePath.replace(/(readme)?\.mdx?/i, '')}`);
 
       createNodeField({
         node,
-        name: 'slug',
-        value: slug
+        name: 'path',
+        value: path
       });
 
       createNodeField({

@@ -31,7 +31,7 @@ module.exports = {
   prefetch: false,
   themeConfig: {
     repo: 'YvesCoding/rcpress',
-    docsRelativeDir: 'packages/docs',
+    docsDir: 'packages/docs/docs',
     locales: {
       '/': {
         label: 'English',

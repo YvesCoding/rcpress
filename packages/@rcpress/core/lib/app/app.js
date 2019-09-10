@@ -3,7 +3,12 @@ import 'regenerator-runtime/runtime';
 import 'core-js/stage/3';
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {
+  Route,
+  Switch,
+  withRouter,
+  Redirect
+} from 'react-router-dom';
 
 import { routes } from '@temp/routes';
 import { siteData } from '@temp/siteData';
@@ -21,27 +26,55 @@ if (module.hot) {
   });
 }
 
-const PageContext = React.createContext({});
+const PageContext = React.createContext({
+  siteData: {},
+  path: '',
+  currentLocaleSiteData: {},
+  currentPageSidebarItems: {},
+  allPagesSidebarItems: {},
+  currentPageInfo: {},
+  currentPageContent: {},
+  isWebsiteHome: false
+});
 export { PageContext };
 
 const components = React.createContext({});
 export { components };
 
 export function createApp() {
-  console.log(routes);
+  return withRouter(props => {
+    console.log(siteData);
 
-  return (
-    <PageContext.Provider
-      value={{
-        routes,
-        siteData
-      }}
-    >
-      <Switch>
-        {routes.map((route, index) => (
-          <Route key={index} {...route} />
-        ))}
-      </Switch>
-    </PageContext.Provider>
-  );
+    return (
+      <PageContext.Provider
+        value={{
+          siteData,
+          path: props.match.path,
+          currentLocaleSiteData: {},
+          currentPageSidebarItems: {},
+          allPagesSidebarItems: {},
+          currentPageInfo: {},
+          currentPageContent: {},
+          isWebsiteHome: false
+        }}
+      >
+        <Switch>
+          {routes.map((route, index) => {
+            if (route.redirect) {
+              return (
+                <Route
+                  key={index}
+                  {...route}
+                  render={() => (
+                    <Redirect to={route.redirect} />
+                  )}
+                />
+              );
+            }
+            return <Route key={index} {...route} />;
+          })}
+        </Switch>
+      </PageContext.Provider>
+    );
+  });
 }

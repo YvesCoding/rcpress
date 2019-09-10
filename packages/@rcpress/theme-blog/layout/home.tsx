@@ -10,8 +10,8 @@ function Home(props: any) {
   return (
     <PageContext.Consumer>
       {(value: any) => {
-        const { currentLocaleWebConfig } = value;
-        const { title, description, head, lang } = currentLocaleWebConfig as any;
+        const { currentLocaleSiteData } = value;
+        const { title, description, head, lang } = currentLocaleSiteData as any;
 
         return (
           <>

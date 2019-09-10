@@ -36,7 +36,7 @@ Global component
 ```js
 <PageCustomer>
   {ctx => {
-    return `Current page path (not including base): ${ctx.slug}`;
+    return `Current page path (not including base): ${ctx.path}`;
   }}
 </PageCustomer>
 ```
@@ -44,7 +44,7 @@ Global component
 <PageCustomer>
 {
     ctx => {
-        return `Current page path (not including base): ${ctx.slug}`
+        return `Current page path (not including base): ${ctx.path}`
     }
 }
 </PageCustomer>

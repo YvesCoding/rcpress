@@ -25,8 +25,8 @@ export default class Layout extends React.Component<
 
   render() {
     const {
-      currentLocaleWebConfig: siteData,
-      slug,
+      currentLocaleSiteData: siteData,
+      path,
       isWebsiteHome
     } = this.context;
     const { showBackToTop } = siteData.themeConfig;
@@ -35,9 +35,9 @@ export default class Layout extends React.Component<
     return (
       <div
         className={`page-wrapper ${((!locales &&
-          slug == '/') ||
+          path == '/') ||
           (locales &&
-            Object.keys(locales).includes(slug))) &&
+            Object.keys(locales).includes(path))) &&
           'index-page-wrapper'}`}
       >
         <Header {...this.props} />
@@ -51,21 +51,21 @@ export default class Layout extends React.Component<
   }
 
   componentDidMount() {
-    this.chekScrollPosition(this.context.slug);
+    this.chekScrollPosition(this.context.path);
   }
 
   componentDidUpdate() {
-    this.chekScrollPosition(this.context.slug);
+    this.chekScrollPosition(this.context.path);
   }
 
-  chekScrollPosition(slug?: string) {
+  chekScrollPosition(path?: string) {
     if (
       !window.location.hash &&
-      slug &&
-      slug !== this.preSlug
+      path &&
+      path !== this.preSlug
     ) {
       window.scrollTo(0, 0);
-      this.preSlug = slug;
+      this.preSlug = path;
     } else if (window.location.hash) {
       const element = document.getElementById(
         decodeURIComponent(

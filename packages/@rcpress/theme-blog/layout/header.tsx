@@ -92,17 +92,17 @@ class Header extends React.Component<HeaderProps, HeaderState> {
 
   render() {
     const { menuMode, menuVisible } = this.state;
-    const { siteData, slug, allPagesSidebarItems } = this.context;
-    let currentLocate = utils.getCurrentLoacle(siteData, slug);
+    const { siteData, path, allPagesSidebarItems } = this.context;
+    let currentLocate = utils.getCurrentLoacle(siteData, path);
     let {
-      currentLocaleWebConfig: { themeConfig, title, base, logo }
-    } = utils.getcurrentLocaleConfigBySlug(siteData, slug);
+      currentLocaleSiteData: { themeConfig, title, base, logo }
+    } = utils.getcurrentLocaleConfigBySlug(siteData, path);
     const { locales } = siteData.themeConfig;
 
     const { nav = [], search, searchMaxSuggestions } = themeConfig;
     const activeMenuItem = nav
       .filter((item: any) => {
-        return item.link && slug.startsWith(item.link);
+        return item.link && path.startsWith(item.link);
       })
       .map((_: string) => _.link);
     const menu = (
@@ -118,7 +118,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
               {Object.keys(locales).map(item => {
                 return (
                   <Menu.Item key={item}>
-                    <Link to={this.setLocaleLinks(item, slug, currentLocate as string)}>
+                    <Link to={this.setLocaleLinks(item, path, currentLocate as string)}>
                       {locales[item].label}
                     </Link>
                   </Menu.Item>
@@ -135,7 +135,7 @@ class Header extends React.Component<HeaderProps, HeaderState> {
         {Object.keys(locales).map(item => {
           return (
             <Menu.Item key={item}>
-              <Link to={this.setLocaleLinks(item, slug, currentLocate as string)}>
+              <Link to={this.setLocaleLinks(item, path, currentLocate as string)}>
                 {locales[item].label}
               </Link>
             </Menu.Item>

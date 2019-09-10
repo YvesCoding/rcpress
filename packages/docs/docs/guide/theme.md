@@ -41,8 +41,8 @@ The value of `PageContext` is an `Object`, which contains six attributes:
 ```js
 {
   siteData: {},
-  slug: '',
-  currentLocaleWebConfig: {},
+  path: '',
+  currentLocaleSiteData: {},
   currentPageSidebarItems: {},
   allPagesSidebarItems: {},
   currentPageInfo: {},
@@ -57,13 +57,13 @@ The following are explained item by item:
 
 That's all in your `rcpress/config.js` file.
 
-### slug
+### path
 
 - Type: `String`
 
 Current Page Path of Website
 
-### currentLocaleWebConfig
+### currentLocaleSiteData
 
 - Type: `Object`
 

@@ -41,8 +41,8 @@ import { PageContext } from '@app';
 ```js
 {
   siteData: {},
-  slug: '',
-  currentLocaleWebConfig: {},
+  path: '',
+  currentLocaleSiteData: {},
   currentPageSidebarItems: {},
   allPagesSidebarItems: {},
   currentPageInfo: {},
@@ -57,13 +57,13 @@ import { PageContext } from '@app';
 
 也就是你`.rcpress/config.js`文件里的所有内容。
 
-### slug
+### path
 
 - 类型: `String`
 
 网站当前页面路径
 
-### currentLocaleWebConfig
+### currentLocaleSiteData
 
 - 类型: `Object`
 
