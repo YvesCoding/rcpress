@@ -97,7 +97,7 @@ module.exports = {
       // 例如下面的 /guide/ 对应的物理路径是 docs/guide/
       '/guide/': [
         // 对应物理路径： docs/guide/introduction.md
-        // 由于里面frontmatter设置home为true的话访问路径不带introduction，直接/guide/
+        // 由于里面frontMatter设置home为true的话访问路径不带introduction，直接/guide/
         'introduction',
         {
           title: 'page-collapsed',

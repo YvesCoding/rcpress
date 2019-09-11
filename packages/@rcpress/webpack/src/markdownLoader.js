@@ -13,29 +13,30 @@ module.exports = function(src) {
   const file = this.resourcePath;
 
   const results = markdown(src);
-  const frontmatter = results.frontmatter;
+  const frontMatter = results.frontMatter;
 
   if (!isProd && !isServer) {
-    const inferredTitle = inferTitle(frontmatter);
+    const inferredTitle = inferTitle(frontMatter);
     const headers = results.headings;
-    delete frontmatter.content;
+    delete frontMatter.content;
 
-    // diff frontmatter and title, since they are not going to be part of the
-    // returned component, changes in frontmatter do not trigger proper updates
+    // diff frontMatter and title, since they are not going to be part of the
+    // returned component, changes in frontMatter do not trigger proper updates
     const cachedData = devCache.get(file);
     if (
       cachedData &&
       (cachedData.inferredTitle !== inferredTitle ||
-        JSON.stringify(cachedData.frontmatter) !== JSON.stringify(frontmatter) ||
+        JSON.stringify(cachedData.frontMatter) !==
+          JSON.stringify(frontMatter) ||
         headersChanged(cachedData.headers, headers))
     ) {
-      // frontmatter changed... need to do a full reload
-      module.exports.frontmatterEmitter.emit('update');
+      // frontMatter changed... need to do a full reload
+      module.exports.frontMatterEmitter.emit('update');
     }
 
     devCache.set(file, {
       headers,
-      frontmatter,
+      frontMatter,
       inferredTitle
     });
   }
@@ -45,7 +46,10 @@ module.exports = function(src) {
 
 function headersChanged(a, b) {
   if (a.length !== b.length) return true;
-  return a.some((h, i) => h.title !== b[i].title || h.level !== b[i].level);
+  return a.some(
+    (h, i) =>
+      h.title !== b[i].title || h.level !== b[i].level
+  );
 }
 
-module.exports.frontmatterEmitter = new EventEmitter();
+module.exports.frontMatterEmitter = new EventEmitter();

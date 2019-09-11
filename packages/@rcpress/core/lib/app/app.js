@@ -1,6 +1,10 @@
 import('@temp/style.less');
 import 'regenerator-runtime/runtime';
 import 'core-js/stage/3';
+import {
+  getcurrentLocaleConfigByPath,
+  resolveSidebarItems
+} from './util';
 
 import React from 'react';
 import {
@@ -38,24 +42,26 @@ const PageContext = React.createContext({
 });
 export { PageContext };
 
-const components = React.createContext({});
-export { components };
-
 export function createApp() {
   return withRouter(props => {
-    console.log(siteData);
+    const path = props.match.path;
+    const {
+      currentLocaleSiteData
+    } = getcurrentLocaleConfigByPath(siteData, path);
+
+    const sidebarItems = resolveSidebarItems(
+      siteData,
+      path
+    );
 
     return (
       <PageContext.Provider
         value={{
           siteData,
-          path: props.match.path,
-          currentLocaleSiteData: {},
-          currentPageSidebarItems: {},
-          allPagesSidebarItems: {},
-          currentPageInfo: {},
-          currentPageContent: {},
-          isWebsiteHome: false
+          path,
+          currentLocaleSiteData,
+          ...sidebarItems,
+          currentPageInfo: {}
         }}
       >
         <Switch>
@@ -63,7 +69,7 @@ export function createApp() {
             if (route.redirect) {
               return (
                 <Route
-                  key={index}
+                  key={route.key}
                   {...route}
                   render={() => (
                     <Redirect to={route.redirect} />
@@ -71,10 +77,13 @@ export function createApp() {
                 />
               );
             }
-            return <Route key={index} {...route} />;
+            return <Route key={route.key} {...route} />;
           })}
         </Switch>
       </PageContext.Provider>
     );
   });
 }
+
+const components = React.createContext({});
+export { components };

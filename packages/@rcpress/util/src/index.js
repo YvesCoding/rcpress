@@ -1,6 +1,6 @@
 const { deeplyParseHeaders } = require('./parseHeaders');
 
-exports.normalizeHeadTag = function (tag) {
+exports.normalizeHeadTag = function(tag) {
   if (typeof tag === 'string') {
     tag = [tag];
   }
@@ -13,7 +13,11 @@ exports.normalizeHeadTag = function (tag) {
   };
 };
 
-exports.applyUserWebpackConfig = function (userConfig, config, isServer) {
+exports.applyUserWebpackConfig = function(
+  userConfig,
+  config,
+  isServer
+) {
   const merge = require('webpack-merge');
   if (typeof userConfig === 'object') {
     return merge(config, userConfig);
@@ -27,17 +31,19 @@ exports.applyUserWebpackConfig = function (userConfig, config, isServer) {
   return config;
 };
 
-exports.inferTitle = function (frontmatter, headers) {
-  if (frontmatter.data.home) {
+exports.inferTitle = function(frontMatter, headers) {
+  if (frontMatter.data.home) {
     return 'Home';
   }
-  if (frontmatter.data.title) {
-    return deeplyParseHeaders(frontmatter.data.title);
+  if (frontMatter.data.title) {
+    return deeplyParseHeaders(frontMatter.data.title);
   }
 
   const levelOneHead = headers.find(h => h.depth == 1);
 
-  return levelOneHead ? deeplyParseHeaders(levelOneHead.value) : ''
+  return levelOneHead
+    ? deeplyParseHeaders(levelOneHead.value)
+    : '';
 };
 
 // ensure only one `/` in new url

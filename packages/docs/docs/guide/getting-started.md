@@ -97,7 +97,7 @@ module.exports = {
       // For example, the physical path corresponding to /guide/ below is docs/guide/
       '/guide/': [
         // Corresponding physical path: docs/guide/introduction.md
-        // Since the frontmatter setting home is true, the access path does not have introduction, direct /guide/
+        // Since the frontMatter setting home is true, the access path does not have introduction, direct /guide/
         'introduction',
         {
           title: 'page-collapsed',

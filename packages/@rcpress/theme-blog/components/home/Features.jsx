@@ -16,7 +16,7 @@ class Features extends React.PureComponent {
   render() {
     const {
       currentPageInfo: {
-        frontmatter: { features }
+        frontMatter: { features }
       }
     } = this.context;
     let children = [];

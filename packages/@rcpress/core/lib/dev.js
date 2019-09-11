@@ -14,7 +14,7 @@ module.exports = async function dev(
     HeadPlugin,
     DevLogPlugin,
     createClientConfig,
-    markdownLoader: { frontmatterEmitter }
+    markdownLoader: { frontMatterEmitter }
   } = require('@rcpress/webpack');
   const {
     applyUserWebpackConfig,
@@ -65,8 +65,8 @@ module.exports = async function dev(
   );
   configWatcher.on('change', update);
 
-  // also listen for frontmatter changes from markdown files
-  frontmatterEmitter.on('update', update);
+  // also listen for frontMatter changes from markdown files
+  frontMatterEmitter.on('update', update);
 
   // resolve webpack config
   let config = createClientConfig(options, cliOptions);

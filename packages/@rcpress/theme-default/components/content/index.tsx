@@ -53,7 +53,7 @@ export default class Article extends React.PureComponent<{
       }
     } = this.context;
 
-    const { subtitle, disableEditLink, disableUpdateTime } = currentPageInfo.frontmatter;
+    const { subtitle, disableEditLink, disableUpdateTime } = currentPageInfo.frontMatter;
     const { path, modifiedTime, avatarList } = currentPageInfo.fields;
     const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
     const editPath = this.getEditLink(editLink, docsRepo || repo, docsBranch, path);

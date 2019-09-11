@@ -227,7 +227,7 @@ module.exports = {
 
 Note that it's `on` by default. If given a `string`, it will be displayed as a prefix (default value: `Last Updated`).
 
-You can set the frontmatter `disableUpdateTime` to `true` to disable `lastUpdated` in certain page.
+You can set the frontMatter `disableUpdateTime` to `true` to disable `lastUpdated` in certain page.
 
 ```md
 ---
@@ -255,7 +255,7 @@ module.exports = {
 };
 ```
 
-You can set the frontmatter `disableEditLink` to `true` to disable `editLinks` in certain page.
+You can set the frontMatter `disableEditLink` to `true` to disable `editLinks` in certain page.
 
 ```md
 ---

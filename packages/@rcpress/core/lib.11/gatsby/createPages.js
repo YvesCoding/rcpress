@@ -10,10 +10,13 @@ const siteData = require('../config').getFinalConfig();
 const { themeConfig } = siteData;
 const path = require('path');
 
-function isHome(frontmatter, path) {
+function isHome(frontMatter, path) {
   return (
-    frontmatter.home === true &&
-    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(path) !== -1) || path === '/')
+    frontMatter.home === true &&
+    ((themeConfig.locales &&
+      Object.keys(themeConfig.locales).indexOf(path) !==
+        -1) ||
+      path === '/')
   );
 }
 
@@ -27,7 +30,10 @@ module.exports = async ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
   // Used to detect and prevent duplicate redirects
 
-  const template = resolve(__dirname, '../../src/templates/index.tsx');
+  const template = resolve(
+    __dirname,
+    '../../src/templates/index.tsx'
+  );
 
   // Redirect /index.html to root.
   createRedirect({
@@ -46,7 +52,7 @@ module.exports = async ({ graphql, actions }) => {
                 path
                 path
               }
-              frontmatter {
+              frontMatter {
                 home
                 maxTocDeep
               }
@@ -67,15 +73,15 @@ module.exports = async ({ graphql, actions }) => {
   const edges = allMdx.data.allMdx.edges;
 
   edges.forEach(edge => {
-    const { fields, frontmatter } = edge.node;
+    const { fields, frontMatter } = edge.node;
     const { path } = fields;
     let isWebsiteHome = false;
 
-    if (isHome(frontmatter, path)) {
+    if (isHome(frontMatter, path)) {
       isWebsiteHome = true;
     }
 
-    if (frontmatter.home === true && !isWebsiteHome) {
+    if (frontMatter.home === true && !isWebsiteHome) {
       redirects[resolveDirPath(path)] = path;
       redirects[resolveDirPath(path, true)] = path;
     }
@@ -88,7 +94,9 @@ module.exports = async ({ graphql, actions }) => {
           isWebsiteHome,
           siteData,
           path,
-          maxTocDeep: frontmatter.maxTocDeep || siteData.themeConfig.maxTocDeep
+          maxTocDeep:
+            frontMatter.maxTocDeep ||
+            siteData.themeConfig.maxTocDeep
         }
       });
     };

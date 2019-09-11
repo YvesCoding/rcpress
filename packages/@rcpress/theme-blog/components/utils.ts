@@ -89,7 +89,7 @@ export function getPageTitle(node: PageEdge) {
     node.headings || [{ depth: 1, value: '' }]
   ).find(i => i.depth == 1);
   return (
-    node.frontmatter.title ||
+    node.frontMatter.title ||
     (topHeading && topHeading.value) ||
     node.fields.path
   );
@@ -113,7 +113,7 @@ export function resolvePage(
         {
           children: []
         },
-        node.frontmatter,
+        node.frontMatter,
         {
           title: getPageTitle(node)
         },

@@ -227,7 +227,7 @@ module.exports = {
 
 请注意，`themeConfig.lastUpdated` 默认是开启的，如果给定一个字符串，它将会作为前缀显示（默认值是：`Last Updated`）。
 
-你可以通过设置 frontmatter `disableUpdateTime`为`true`来关闭特定页面的`lastUpdated`
+你可以通过设置 frontMatter `disableUpdateTime`为`true`来关闭特定页面的`lastUpdated`
 
 ```md
 ---
@@ -255,7 +255,7 @@ module.exports = {
 };
 ```
 
-你可以通过在特定的页面设置 frontmatter `disableEditLink`为`true`来关闭它的`editLinks`
+你可以通过在特定的页面设置 frontMatter `disableEditLink`为`true`来关闭它的`editLinks`
 
 ```md
 ---

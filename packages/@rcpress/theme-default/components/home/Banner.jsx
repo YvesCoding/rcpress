@@ -10,7 +10,7 @@ function Banner(props) {
     <PageContext.Consumer>
       {context => {
         const {
-          currentPageInfo: { frontmatter },
+          currentPageInfo: { frontMatter },
           currentLocaleSiteData
         } = context;
         const repoAddr = currentLocaleSiteData.themeConfig.repo;
@@ -18,11 +18,11 @@ function Banner(props) {
 
         return (
           <div className="banner-wrapper">
-            {(frontmatter.heroImage || currentLocaleSiteData.logo) && (
+            {(frontMatter.heroImage || currentLocaleSiteData.logo) && (
               <div className="banner-logo">
                 <img
                   src={utils.resolvePathWithBase(
-                    frontmatter.heroImage || currentLocaleSiteData.logo,
+                    frontMatter.heroImage || currentLocaleSiteData.logo,
                     currentLocaleSiteData.base
                   )}
                   alt="Hero"
@@ -33,12 +33,12 @@ function Banner(props) {
               <h1 key="h1">{currentLocaleSiteData.title}</h1>
               <p key="content">{currentLocaleSiteData.description}</p>
               <div key="button" className="button-wrapper">
-                <Link to={frontmatter.actionLink}>
+                <Link to={frontMatter.actionLink}>
                   <Button style={{ margin: '0 16px' }} type="primary" ghost>
-                    {frontmatter.actionText}
+                    {frontMatter.actionText}
                   </Button>
                 </Link>
-                {frontmatter.showStar && repo && namespace ? (
+                {frontMatter.showStar && repo && namespace ? (
                   <GitHubButton
                     key="github-button"
                     type="stargazers"

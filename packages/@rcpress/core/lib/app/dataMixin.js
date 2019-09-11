@@ -33,12 +33,16 @@ export default function dataMixin(siteData) {
         return targetLang || defaultLang || {};
       },
       $siteTitle() {
-        return this.$localeConfig.title || this.$site.title || '';
+        return (
+          this.$localeConfig.title || this.$site.title || ''
+        );
       },
       $title() {
         const page = this.$page;
         const siteTitle = this.$siteTitle;
-        const selfTitle = page.frontmatter.home ? null : page.frontmatter.title || page.title; // explicit title // inferred title
+        const selfTitle = page.frontMatter.home
+          ? null
+          : page.frontMatter.title || page.title; // explicit title // inferred title
         return siteTitle
           ? selfTitle
             ? selfTitle + ' | ' + siteTitle
@@ -47,30 +51,42 @@ export default function dataMixin(siteData) {
       },
       $description() {
         // #565 hoist description from meta
-        if (this.$page.frontmatter.meta) {
-          const descriptionMeta = this.$page.frontmatter.meta.filter(
+        if (this.$page.frontMatter.meta) {
+          const descriptionMeta = this.$page.frontMatter.meta.filter(
             item => item.name === 'description'
           )[0];
-          if (descriptionMeta) return descriptionMeta.content;
+          if (descriptionMeta)
+            return descriptionMeta.content;
         }
         return (
-          this.$page.frontmatter.description ||
+          this.$page.frontMatter.description ||
           this.$localeConfig.description ||
           this.$site.description ||
           ''
         );
       },
       $lang() {
-        return this.$page.frontmatter.lang || this.$localeConfig.lang || 'en-US';
+        return (
+          this.$page.frontMatter.lang ||
+          this.$localeConfig.lang ||
+          'en-US'
+        );
       },
       $localePath() {
         return this.$localeConfig.path || '/';
       },
       $themeLocaleConfig() {
-        return (this.$site.themeConfig.locales || {})[this.$localePath] || {};
+        return (
+          (this.$site.themeConfig.locales || {})[
+            this.$localePath
+          ] || {}
+        );
       },
       $page() {
-        return findPageForPath(this.$site.pages, this.$route.path);
+        return findPageForPath(
+          this.$site.pages,
+          this.$route.path
+        );
       }
     }
   };
@@ -78,8 +94,8 @@ export default function dataMixin(siteData) {
 
 function prepare(siteData) {
   siteData.pages.forEach(page => {
-    if (!page.frontmatter) {
-      page.frontmatter = {};
+    if (!page.frontMatter) {
+      page.frontMatter = {};
     }
   });
   if (siteData.locales) {

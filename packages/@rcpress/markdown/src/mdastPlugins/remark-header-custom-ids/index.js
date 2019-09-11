@@ -6,7 +6,7 @@
 
 const toString = require('mdast-util-to-string');
 const visit = require('unist-util-visit');
-const paths = require('github-pathger')();
+const paths = require('github-slugger')();
 
 function patch(context, key, value) {
   if (!context[key]) {
@@ -16,17 +16,25 @@ function patch(context, key, value) {
   return context[key];
 }
 
-module.exports = ({ markdownAST }, { icon = '#', className = `anchor`, maintainCase = false }) => {
+module.exports = (
+  { markdownAST },
+  { icon = '#', className = `anchor`, maintainCase = false }
+) => {
   paths.reset();
 
   visit(markdownAST, 'heading', node => {
     // Support custom-id syntax.
     const rawHeader = toString(node);
-    const match = /^.+(\s*\{#([a-z0-9\-_]+?)\}\s*)$/.exec(rawHeader);
-    const id = match ? match[2] : paths.path(rawHeader, maintainCase);
+    const match = /^.+(\s*\{#([a-z0-9\-_]+?)\}\s*)$/.exec(
+      rawHeader
+    );
+    const id = match
+      ? match[2]
+      : paths.path(rawHeader, maintainCase);
     if (match) {
       // Remove the custom ID part from the text node.
-      const lastNode = node.children[node.children.length - 1];
+      const lastNode =
+        node.children[node.children.length - 1];
       lastNode.value = lastNode.value.replace(match[1], '');
     }
 
@@ -46,16 +54,16 @@ module.exports = ({ markdownAST }, { icon = '#', className = `anchor`, maintainC
         data: {
           hProperties: {
             'aria-hidden': true,
-            class: className,
-          },
+            class: className
+          }
         },
         children: [
           {
             type: 'raw',
             // The Octicon link icon is the default. But users can set their own icon via the "icon" option.
-            value: icon,
-          },
-        ],
+            value: icon
+          }
+        ]
       });
     }
   });

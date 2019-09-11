@@ -36,7 +36,7 @@ module.exports = ({ actions }) => {
     }
   
     type Mdx implements Node @infer {
-      frontmatter: MdxFrontmatter
+      frontMatter: MdxFrontmatter
       fields: MdxFields
     }
 
