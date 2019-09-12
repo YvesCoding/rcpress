@@ -69,7 +69,7 @@ export function createApp() {
             if (route.redirect) {
               return (
                 <Route
-                  key={route.key}
+                  key={index}
                   {...route}
                   render={() => (
                     <Redirect to={route.redirect} />
@@ -77,7 +77,7 @@ export function createApp() {
                 />
               );
             }
-            return <Route key={route.key} {...route} />;
+            return <Route key={index} {...route} />;
           })}
         </Switch>
       </PageContext.Provider>

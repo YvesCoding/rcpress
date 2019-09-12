@@ -159,13 +159,8 @@ module.exports = async function resolveOptions(sourceDir) {
   const pagesData = await Promise.all(
     pageFiles.map(async file => {
       const filepath = path.resolve(sourceDir, file);
-      const key =
-        'v-' +
-        Math.random()
-          .toString(16)
-          .slice(2);
+
       const data = {
-        key,
         path: encodePath(fileToPath(file))
       };
 
