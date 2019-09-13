@@ -1,10 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 
 class Features extends React.PureComponent {
-  static contextType = PageContext;
+  static contextType = SiteContext;
 
   constructor(props) {
     super(props);
@@ -55,7 +55,10 @@ class Features extends React.PureComponent {
 
     return (
       <div className="home-page page1">
-        <div className="home-page-wrapper" id="page1-wrapper">
+        <div
+          className="home-page-wrapper"
+          id="page1-wrapper"
+        >
           {children}
         </div>
       </div>

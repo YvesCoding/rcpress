@@ -11,12 +11,12 @@ Let's make a component that shows the current file modified time. The structure 
 ├── showTime.js
 ```
 
-Firstly, import `moment.js`, `PageContext` and `React` in `showTime.js`
+Firstly, import `moment.js`, `SiteContext` and `React` in `showTime.js`
 
 ```js
 import React from 'react';
 import moment from 'moment';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 ```
 
 Then we write code of our `ShowTime` component and export it.
@@ -24,7 +24,7 @@ Then we write code of our `ShowTime` component and export it.
 ```js
 export const ShowTime = () => {
   return (
-    <PageContext.Consumer>
+    <SiteContext.Consumer>
       {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
@@ -38,14 +38,14 @@ export const ShowTime = () => {
           </div>
         );
       }}
-    </PageContext.Consumer>
+    </SiteContext.Consumer>
   );
 };
 ```
 
 > Note
 >
-> The `current Locale SiteData` and `current PageInfo` used above are parts of `PageContext` and both mentioned in the section [Custom Themes](/guide/theme#get-site-data-and-current-page-data).
+> The `current Locale SiteData` and `current PageInfo` used above are parts of `SiteContext` and both mentioned in the section [Custom Themes](/guide/theme#get-site-data-and-current-page-data).
 
 Finally, import and use it in our `showTime.MD`
 

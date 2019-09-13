@@ -11,12 +11,12 @@
 ├── showTime.js
 ```
 
-首先在 `showTime.js` 中引入`moment.js`, `PageContext` 和 `React`
+首先在 `showTime.js` 中引入`moment.js`, `SiteContext` 和 `React`
 
 ```js
 import React from 'react';
 import moment from 'moment';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 ```
 
 接着我们编写我们的`ShowTime`组件代码并导出
@@ -24,7 +24,7 @@ import { PageContext } from '@app';
 ```js
 export const ShowTime = () => {
   return (
-    <PageContext.Consumer>
+    <SiteContext.Consumer>
       {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
@@ -38,14 +38,14 @@ export const ShowTime = () => {
           </div>
         );
       }}
-    </PageContext.Consumer>
+    </SiteContext.Consumer>
   );
 };
 ```
 
 > 注意
 >
-> 上面用到的`currentLocaleSiteData`和`currentPageInfo`都是在[自定义主题](/zh/guide/theme)一节中提到过的，属于`PageContext`的一部分。
+> 上面用到的`currentLocaleSiteData`和`currentPageInfo`都是在[自定义主题](/zh/guide/theme)一节中提到过的，属于`SiteContext`的一部分。
 
 最后，在我们的`showTime.md`里导入并使用
 

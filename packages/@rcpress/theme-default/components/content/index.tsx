@@ -4,7 +4,7 @@ import EditButton from './EditButton';
 import { OneToc } from '../../../templates';
 import moment from 'moment';
 import AvatarList from './AvatarList';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 import SEO from '../SEO/SEO';
 import { getPageTitle } from '../utils';
 import PrevAndNext from '../prevAndNext';
@@ -15,7 +15,7 @@ export default class Article extends React.PureComponent<{
   prev: React.Component | null;
   next: React.Component | null;
 }> {
-  static contextType = PageContext;
+  static contextType = SiteContext;
 
   node: HTMLElement | null | undefined;
 
@@ -27,8 +27,13 @@ export default class Article extends React.PureComponent<{
     );
   };
 
-  getPageTitle = (currentPageTitle: string, webAppName: string) => {
-    return currentPageTitle ? `${currentPageTitle} | ${webAppName}` : webAppName;
+  getPageTitle = (
+    currentPageTitle: string,
+    webAppName: string
+  ) => {
+    return currentPageTitle
+      ? `${currentPageTitle} | ${webAppName}`
+      : webAppName;
   };
 
   render() {
@@ -53,10 +58,24 @@ export default class Article extends React.PureComponent<{
       }
     } = this.context;
 
-    const { subtitle, disableEditLink, disableUpdateTime } = currentPageInfo.frontMatter;
-    const { path, modifiedTime, avatarList } = currentPageInfo.fields;
-    const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
-    const editPath = this.getEditLink(editLink, docsRepo || repo, docsBranch, path);
+    const {
+      subtitle,
+      disableEditLink,
+      disableUpdateTime
+    } = currentPageInfo.frontMatter;
+    const {
+      path,
+      modifiedTime,
+      avatarList
+    } = currentPageInfo.fields;
+    const noAvatar =
+      !showAvatarList || !avatarList || !avatarList.length;
+    const editPath = this.getEditLink(
+      editLink,
+      docsRepo || repo,
+      docsBranch,
+      path
+    );
 
     const currentPageTitle = getPageTitle(currentPageInfo);
 
@@ -76,27 +95,52 @@ export default class Article extends React.PureComponent<{
               this.node = node;
             }}
           >
-            {(docsRepo || repo) && editLinkText && editLinks && !disableEditLink ? (
+            {(docsRepo || repo) &&
+            editLinkText &&
+            editLinks &&
+            !disableEditLink ? (
               <h1>
                 {currentPageTitle}
-                {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
+                {!subtitle ? null : (
+                  <span className="subtitle">
+                    {subtitle}
+                  </span>
+                )}
 
-                <EditButton path={editPath} title={editLinkText} />
+                <EditButton
+                  path={editPath}
+                  title={editLinkText}
+                />
               </h1>
             ) : null}
 
             {lastUpdated && !disableUpdateTime && (
-              <div className={`modifiedTime ${noAvatar ? 'modifiedTimeLeft' : ''}`}>
-                {!noAvatar && <AvatarList avatarList={avatarList} />}
-                {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
+              <div
+                className={`modifiedTime ${
+                  noAvatar ? 'modifiedTimeLeft' : ''
+                }`}
+              >
+                {!noAvatar && (
+                  <AvatarList avatarList={avatarList} />
+                )}
+                {lastUpdated}{' '}
+                {moment(modifiedTime).format(
+                  'YYYY-MM-DD HH:mm:SS'
+                )}
               </div>
             )}
 
             {currentPageInfo.tableOfContents.items &&
             currentPageInfo.tableOfContents.items.length ? (
               <div className="toc-affix">
-                <Anchor offsetTop={70} className="toc" targetOffset={0}>
-                  {currentPageInfo.tableOfContents.items.map(this.getTocs)}
+                <Anchor
+                  offsetTop={70}
+                  className="toc"
+                  targetOffset={0}
+                >
+                  {currentPageInfo.tableOfContents.items.map(
+                    this.getTocs
+                  )}
                 </Anchor>
               </div>
             ) : null}
@@ -109,7 +153,12 @@ export default class Article extends React.PureComponent<{
       </>
     );
   }
-  getEditLink(editLink: string, docsRepo: string, docsBranch: string, path: string) {
+  getEditLink(
+    editLink: string,
+    docsRepo: string,
+    docsBranch: string,
+    path: string
+  ) {
     if (editLink) return editLink;
 
     const bitbucket = /bitbucket.org/;

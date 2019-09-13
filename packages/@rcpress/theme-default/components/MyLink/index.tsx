@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 import { resolvePathWithBase, normalize } from '../utils';
 import NProgress from 'nprogress';
 
@@ -25,7 +25,7 @@ const MyLink: React.SFC<any> = ({
   onClick: (e: any) => void;
 }) => {
   return (
-    <PageContext.Consumer>
+    <SiteContext.Consumer>
       {({
         siteData: { base, prefetch: globalPrefetch },
         path
@@ -58,7 +58,7 @@ const MyLink: React.SFC<any> = ({
           </Link>
         );
       }}
-    </PageContext.Consumer>
+    </SiteContext.Consumer>
   );
 };
 

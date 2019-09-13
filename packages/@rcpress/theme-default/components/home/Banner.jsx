@@ -2,27 +2,32 @@ import React from 'react';
 import GitHubButton from 'react-github-button-fix-iebug';
 import { Button } from 'antd';
 import Link from '../MyLink';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 import * as utils from '../utils';
 
 function Banner(props) {
   return (
-    <PageContext.Consumer>
+    <SiteContext.Consumer>
       {context => {
         const {
           currentPageInfo: { frontMatter },
           currentLocaleSiteData
         } = context;
-        const repoAddr = currentLocaleSiteData.themeConfig.repo;
-        const [namespace, repo] = repoAddr ? repoAddr.split('/') : [null, null];
+        const repoAddr =
+          currentLocaleSiteData.themeConfig.repo;
+        const [namespace, repo] = repoAddr
+          ? repoAddr.split('/')
+          : [null, null];
 
         return (
           <div className="banner-wrapper">
-            {(frontMatter.heroImage || currentLocaleSiteData.logo) && (
+            {(frontMatter.heroImage ||
+              currentLocaleSiteData.logo) && (
               <div className="banner-logo">
                 <img
                   src={utils.resolvePathWithBase(
-                    frontMatter.heroImage || currentLocaleSiteData.logo,
+                    frontMatter.heroImage ||
+                      currentLocaleSiteData.logo,
                     currentLocaleSiteData.base
                   )}
                   alt="Hero"
@@ -30,15 +35,25 @@ function Banner(props) {
               </div>
             )}
             <div className="banner-title-wrapper">
-              <h1 key="h1">{currentLocaleSiteData.title}</h1>
-              <p key="content">{currentLocaleSiteData.description}</p>
+              <h1 key="h1">
+                {currentLocaleSiteData.title}
+              </h1>
+              <p key="content">
+                {currentLocaleSiteData.description}
+              </p>
               <div key="button" className="button-wrapper">
                 <Link to={frontMatter.actionLink}>
-                  <Button style={{ margin: '0 16px' }} type="primary" ghost>
+                  <Button
+                    style={{ margin: '0 16px' }}
+                    type="primary"
+                    ghost
+                  >
                     {frontMatter.actionText}
                   </Button>
                 </Link>
-                {frontMatter.showStar && repo && namespace ? (
+                {frontMatter.showStar &&
+                repo &&
+                namespace ? (
                   <GitHubButton
                     key="github-button"
                     type="stargazers"
@@ -51,7 +66,7 @@ function Banner(props) {
           </div>
         );
       }}
-    </PageContext.Consumer>
+    </SiteContext.Consumer>
   );
 }
 

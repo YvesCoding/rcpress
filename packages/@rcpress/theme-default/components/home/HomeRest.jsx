@@ -1,8 +1,8 @@
 import React from 'react';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 
 export default class extends React.Component {
-  static contextType = PageContext;
+  static contextType = SiteContext;
 
   setConentVisible = () => {
     const container = this.refs['rest-content'];

@@ -28,15 +28,15 @@
 
 ## 获取网站数据和当前页面的数据
 
-页面的数据都存在从`rcpress`导出的`PageContext`中
+页面的数据都存在从`rcpress`导出的`SiteContext`中
 
 ```js
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 ```
 
-`PageContext`是由`React.createContext` api 创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#reactcreatecontext)。
+`SiteContext`是由`React.createContext` api 创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#reactcreatecontext)。
 
-`PageContext`的值为一个`Object`，其中包含 6 个属性：
+`SiteContext`的值为一个`Object`，其中包含 6 个属性：
 
 ```js
 {

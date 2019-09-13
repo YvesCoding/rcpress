@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Row, Col } from 'antd';
-import { PageContext } from '@app';
+import { useSiteContext } from '@rcpress/core';
 import HomePage from './home';
 import LeftMenu from '../components/menu';
 import Content from '../components/content';
 import Footer from './footer';
 import ReactDom from 'react-dom';
 
+const MainContent: FunctionComponent<{
+  isMobile: boolean;
+}> = ({ isMobile }) => {};
+
+/*
+
 export interface MainContentProps {
   isMobile: boolean;
-  isWebsiteHome: boolean;
-  footer: any;
 }
 
 export interface MainContentState {
@@ -22,7 +26,7 @@ export default class MainContent extends React.PureComponent<
   MainContentProps,
   MainContentState
 > {
-  static contextType = PageContext;
+  static contextType = SiteContext;
 
   constructor(props: MainContentProps) {
     super(props);
@@ -99,3 +103,5 @@ export default class MainContent extends React.PureComponent<
     );
   }
 }
+
+*/

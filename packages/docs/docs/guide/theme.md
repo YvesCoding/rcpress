@@ -28,15 +28,15 @@ Note:
 
 ## Get site data and current page data
 
-Page data stores in `PageContext`. which is exported from `rcpress`.
+Page data stores in `SiteContext`. which is exported from `rcpress`.
 
 ```js
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 ```
 
-`PageContext` is created by `React.createContext` api, you can refer to react's [document](https://reactjs.org/docs/context.html#reactcreatecontext).
+`SiteContext` is created by `React.createContext` api, you can refer to react's [document](https://reactjs.org/docs/context.html#reactcreatecontext).
 
-The value of `PageContext` is an `Object`, which contains six attributes:
+The value of `SiteContext` is an `Object`, which contains six attributes:
 
 ```js
 {

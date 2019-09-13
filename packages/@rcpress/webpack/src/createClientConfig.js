@@ -10,7 +10,7 @@ module.exports = function createClientConfig(
 
   config
     .entry('app')
-    .add('@rcpress/core/lib/app/clientEntry.js');
+    .add('@rcpress/core/lib/web/app/clientEntry.js');
 
   config.node.merge({
     // prevent webpack from injecting useless setImmediate polyfill because Vue

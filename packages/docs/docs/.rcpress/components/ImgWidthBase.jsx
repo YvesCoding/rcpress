@@ -1,9 +1,9 @@
 import React from 'react';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 import { resolvePathWithBase } from 'rcpress/src/default-theme/components/utils';
 
 export default ({ url, width, height, ...rest }) => (
-  <PageContext.Consumer>
+  <SiteContext.Consumer>
     {ctx => {
       return (
         <img
@@ -14,5 +14,5 @@ export default ({ url, width, height, ...rest }) => (
         />
       );
     }}
-  </PageContext.Consumer>
+  </SiteContext.Consumer>
 );

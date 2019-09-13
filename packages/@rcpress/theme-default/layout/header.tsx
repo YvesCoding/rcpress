@@ -14,7 +14,7 @@ import {
   Affix,
   Badge
 } from 'antd';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 import SearchBox from '../components/search-box';
 import SubMenu from 'antd/lib/menu/SubMenu';
 
@@ -44,7 +44,7 @@ class Header extends React.Component<
     menuMode: 'horizontal'
   };
 
-  static contextType = PageContext;
+  static contextType = SiteContext;
 
   searchInput: Input | null | undefined;
 

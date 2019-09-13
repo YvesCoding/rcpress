@@ -1,10 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 
 export const ShowTime = () => {
   return (
-    <PageContext.Consumer>
+    <SiteContext.Consumer>
       {context => {
         return (
           <div className="modifiedTime modifiedTimeLeft">
@@ -15,6 +15,6 @@ export const ShowTime = () => {
           </div>
         );
       }}
-    </PageContext.Consumer>
+    </SiteContext.Consumer>
   );
 };

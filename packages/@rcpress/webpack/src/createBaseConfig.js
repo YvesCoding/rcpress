@@ -21,7 +21,7 @@ module.exports = function createBaseConfig(
 ) {
   const Config = require('webpack-chain');
   const CSSExtractPlugin = require('mini-css-extract-plugin');
-  const cacheDirectory = '@rcpress/core/lib/app/.temp';
+  const cacheDirectory = '@rcpress/core/.temp';
   const isProd = process.env.NODE_ENV === 'production';
   const inlineLimit = 10000;
   const modulePaths = getModulePaths();
@@ -49,7 +49,6 @@ module.exports = function createBaseConfig(
     .set('@themeLayout', themeLayoutPath)
     .set('@themeNotFound', themeNotFoundPath)
     .set('@source', sourceDir)
-    .set('@app', '@rcpress/core/lib/app/app.js')
     .set('@temp', cacheDirectory)
     .set('@default-theme', '@rcpress/theme-default')
     .set(

@@ -4,14 +4,19 @@ import SEO from '../components/SEO/SEO';
 import Banner from '../components/home/Banner.jsx';
 import Features from '../components/home/Features.jsx';
 import HomeRest from '../components/home/HomeRest.jsx';
-import { PageContext } from '@app';
+import { SiteContext } from '@rcpress/core';
 
 function Home(props: any) {
   return (
-    <PageContext.Consumer>
+    <SiteContext.Consumer>
       {(value: any) => {
         const { currentLocaleSiteData } = value;
-        const { title, description, head, lang } = currentLocaleSiteData as any;
+        const {
+          title,
+          description,
+          head,
+          lang
+        } = currentLocaleSiteData as any;
 
         return (
           <>
@@ -29,7 +34,7 @@ function Home(props: any) {
           </>
         );
       }}
-    </PageContext.Consumer>
+    </SiteContext.Consumer>
   );
 }
 

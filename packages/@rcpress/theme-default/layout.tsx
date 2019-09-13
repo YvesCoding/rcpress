@@ -1,82 +1,70 @@
-import React from 'react';
-import '../assets/style';
+import React, { useEffect, useState } from 'react';
+import './assets/style';
 import Header from './layout/header';
 import { BackTop } from 'antd';
 import MainContent from './layout/main-content';
-import { PageContext } from '@app';
+import { useSiteContext } from '@rcpress/core';
+import Media from 'react-media';
 
-export interface LayoutProps {
-  isMobile: boolean;
-}
-
-interface LayoutState {}
-
-export default class Layout extends React.Component<
-  LayoutProps,
-  LayoutState
-> {
-  static contextType = PageContext;
-
-  constructor(props: LayoutProps) {
-    super(props);
-  }
-
-  preSlug: String;
-
-  render() {
-    const {
-      currentLocaleSiteData: siteData,
-      path,
-      isWebsiteHome
-    } = this.context;
-    const { showBackToTop } = siteData.themeConfig;
-    const { locales } = siteData;
-
-    return (
-      <div
-        className={`page-wrapper ${((!locales &&
-          path == '/') ||
-          (locales &&
-            Object.keys(locales).includes(path))) &&
-          'index-page-wrapper'}`}
-      >
-        <Header {...this.props} />
-        <MainContent
-          {...this.props}
-          isWebsiteHome={isWebsiteHome}
-        />
-        {showBackToTop ? <BackTop /> : null}
-      </div>
+const chekScrollPosition = (
+  path: string,
+  prePath: string,
+  setPath: (path: string) => void
+) => {
+  if (!window.location.hash && path && path !== prePath) {
+    window.scrollTo(0, 0);
+    setPath(path);
+  } else if (window.location.hash) {
+    const element = document.getElementById(
+      decodeURIComponent(
+        window.location.hash.replace('#', '')
+      )
     );
+    setTimeout(() => {
+      if (element) {
+        element.scrollIntoView(true);
+      }
+    }, 100);
   }
+};
 
-  componentDidMount() {
-    this.chekScrollPosition(this.context.path);
-  }
+const Layout = () => {
+  const siteContext = useSiteContext();
+  const {
+    currentLocaleSiteData: siteData,
+    path
+  } = siteContext;
 
-  componentDidUpdate() {
-    this.chekScrollPosition(this.context.path);
-  }
+  const [prePath, setPrePath] = useState();
 
-  chekScrollPosition(path?: string) {
-    if (
-      !window.location.hash &&
-      path &&
-      path !== this.preSlug
-    ) {
-      window.scrollTo(0, 0);
-      this.preSlug = path;
-    } else if (window.location.hash) {
-      const element = document.getElementById(
-        decodeURIComponent(
-          window.location.hash.replace('#', '')
-        )
-      );
-      setTimeout(() => {
-        if (element) {
-          element.scrollIntoView(true);
-        }
-      }, 100);
-    }
-  }
-}
+  const { showBackToTop } = siteData.themeConfig;
+  const { locales } = siteData;
+
+  useEffect(() => {
+    chekScrollPosition(path, prePath, setPrePath);
+  }, [path]);
+
+  return (
+    <Media query="(max-width: 996px)">
+      {smallScreen => {
+        const isMobile =
+          smallScreen && typeof window !== `undefined`;
+        return (
+          <div
+            className={`page-wrapper ${((!locales &&
+              path == '/') ||
+              (locales &&
+                Object.keys(locales).includes(path))) &&
+              'index-page-wrapper'}`}
+          >
+            <Header isMobile={isMobile} />
+            <MainContent isMobile={isMobile} />
+            {showBackToTop ? <BackTop /> : null}
+          </div>
+        );
+      }}
+    </Media>
+  );
+};
+
+export default Layout;
