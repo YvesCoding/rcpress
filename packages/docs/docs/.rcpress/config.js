@@ -1,3 +1,4 @@
+const path = require('path');
 module.exports = {
   title: 'rcpress',
   base: process.env.base || '/',
@@ -92,6 +93,16 @@ module.exports = {
           '/zh/config/': [''],
           '/zh/default-theme-config/': ['']
         }
+      }
+    }
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@components': path.resolve(
+          __dirname,
+          './components'
+        )
       }
     }
   }

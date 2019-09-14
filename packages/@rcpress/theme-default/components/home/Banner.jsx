@@ -2,71 +2,61 @@ import React from 'react';
 import GitHubButton from 'react-github-button-fix-iebug';
 import { Button } from 'antd';
 import Link from '../MyLink';
-import { SiteContext } from '@rcpress/core';
+import { useSiteContext } from '@rcpress/core';
 import * as utils from '../utils';
 
-function Banner(props) {
-  return (
-    <SiteContext.Consumer>
-      {context => {
-        const {
-          currentPageInfo: { frontMatter },
-          currentLocaleSiteData
-        } = context;
-        const repoAddr =
-          currentLocaleSiteData.themeConfig.repo;
-        const [namespace, repo] = repoAddr
-          ? repoAddr.split('/')
-          : [null, null];
+function Banner() {
+  const {
+    currentPageInfo: { frontMatter },
+    currentLocaleSiteData
+  } = useSiteContext();
 
-        return (
-          <div className="banner-wrapper">
-            {(frontMatter.heroImage ||
-              currentLocaleSiteData.logo) && (
-              <div className="banner-logo">
-                <img
-                  src={utils.resolvePathWithBase(
-                    frontMatter.heroImage ||
-                      currentLocaleSiteData.logo,
-                    currentLocaleSiteData.base
-                  )}
-                  alt="Hero"
-                />
-              </div>
+  const repoAddr = currentLocaleSiteData.themeConfig.repo;
+  const [namespace, repo] = repoAddr
+    ? repoAddr.split('/')
+    : [null, null];
+
+  return (
+    <div className="banner-wrapper">
+      {(frontMatter.heroImage ||
+        currentLocaleSiteData.logo) && (
+        <div className="banner-logo">
+          <img
+            src={utils.resolvePathWithBase(
+              frontMatter.heroImage ||
+                currentLocaleSiteData.logo,
+              currentLocaleSiteData.base
             )}
-            <div className="banner-title-wrapper">
-              <h1 key="h1">
-                {currentLocaleSiteData.title}
-              </h1>
-              <p key="content">
-                {currentLocaleSiteData.description}
-              </p>
-              <div key="button" className="button-wrapper">
-                <Link to={frontMatter.actionLink}>
-                  <Button
-                    style={{ margin: '0 16px' }}
-                    type="primary"
-                    ghost
-                  >
-                    {frontMatter.actionText}
-                  </Button>
-                </Link>
-                {frontMatter.showStar &&
-                repo &&
-                namespace ? (
-                  <GitHubButton
-                    key="github-button"
-                    type="stargazers"
-                    namespace={namespace}
-                    repo={repo}
-                  />
-                ) : null}
-              </div>
-            </div>
-          </div>
-        );
-      }}
-    </SiteContext.Consumer>
+            alt="Hero"
+          />
+        </div>
+      )}
+      <div className="banner-title-wrapper">
+        <h1 key="h1">{currentLocaleSiteData.title}</h1>
+        <p key="content">
+          {currentLocaleSiteData.description}
+        </p>
+        <div key="button" className="button-wrapper">
+          <Link to={frontMatter.actionLink}>
+            <Button
+              style={{ margin: '0 16px' }}
+              type="primary"
+              ghost
+            >
+              {frontMatter.actionText}
+            </Button>
+          </Link>
+          {frontMatter.showStar && repo && namespace ? (
+            <GitHubButton
+              key="github-button"
+              type="stargazers"
+              namespace={namespace}
+              repo={repo}
+            />
+          ) : null}
+        </div>
+      </div>
+    </div>
   );
 }
 

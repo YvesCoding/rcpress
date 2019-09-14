@@ -218,7 +218,8 @@ module.exports = async function resolveOptions(sourceDir) {
     base,
     pages: pagesData,
     themeConfig,
-    locales: siteConfig.locales
+    locales: siteConfig.locales,
+    head: siteConfig.head
   };
 
   const options = {

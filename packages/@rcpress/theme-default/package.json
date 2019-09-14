@@ -11,6 +11,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "antd": "latest",
-    "react-media": "^1.9.2"
+    "react-media": "next"
   }
 }

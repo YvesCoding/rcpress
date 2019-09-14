@@ -5,20 +5,22 @@ exports.genRoutesFile = async function({
     pages,
     themeConfig: { docsDir }
   },
-  pageFiles
+  pageFiles,
+  sourceDir
 }) {
-  function genRoute(
-    { path: pagePath, key: componentName },
-    index
-  ) {
+  function genRoute({ path: pagePath }, index) {
     const file = pageFiles[index];
     const filePath = path.join(docsDir, file);
     let code = `
   {
-    name: ${JSON.stringify(componentName)},
     path: ${JSON.stringify(pagePath)},
     filePath: ${JSON.stringify(filePath)},
-    component: ThemeLayout,
+    markdown: loadable(() => import('${path.resolve(
+      sourceDir,
+      file
+    )}')),
+    name: '${pagePath}' ,
+    route_component:ThemeLayout,
     exact: true
   }`;
 
@@ -46,7 +48,7 @@ exports.genRoutesFile = async function({
 
   const notFoundRoute = `,
   { 
-    component: ThemeNotFound 
+    route_component: ThemeNotFound 
   }`;
 
   return (

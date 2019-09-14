@@ -1,55 +1,86 @@
-const grayMatter = require(`gray-matter`);
 const mdx = require(`@mdx-js/mdx`);
 const generateTOC = require(`mdast-util-toc`);
-const { deepMerge, emoji } = require('@rcpress/util');
+const {
+  deepMerge,
+  emoji,
+  parseFrontmatter
+} = require('@rcpress/util');
 const toString = require(`mdast-util-to-string`);
-const { unifiedPlugins, reamrk2mdast } = require('../util')
-const path = require("path")
-const visit = require("unist-util-visit");
+const { unifiedPlugins, reamrk2mdast } = require('../util');
+const path = require('path');
+const visit = require('unist-util-visit');
+const LRU = require('lru-cache');
+const hash = require('hash-sum');
 
 /**
  * @returns html, toc, frontMatter, headings
  * @param {*} mdContent mdx content
  */
-const createMarkdown = async ({ markdown: options = {}, base = "/" }) => {
+const createMarkdown = async ({
+  markdown: options = {},
+  base = '/'
+}) => {
+  const cache = new LRU({ max: 1000 });
   const resolvePlugin = (plugins, dirName) =>
-    plugins.map(plugin => require(path.resolve(__dirname, `./${dirName}/${plugin}`)));
+    plugins.map(plugin =>
+      require(path.resolve(
+        __dirname,
+        `./${dirName}/${plugin}`
+      ))
+    );
 
   const defaultOptions = {
     maxTocDepth: 3,
-    mdastPlugins: resolvePlugin([
-      'remark-default-class-name',
-      'remark-header-custom-ids',
-      'remark-img-warpper-p',
-      'remark-emoji'
-    ], "mdastPlugins"),
-    remarkPlugins: resolvePlugin([
-      'gatsby-remark-ant-alert'
-    ], "remarkPlugins")
+    mdastPlugins: resolvePlugin(
+      [
+        'remark-default-class-name',
+        'remark-header-custom-ids',
+        'remark-img-warpper-p',
+        'remark-emoji'
+      ],
+      'mdastPlugins'
+    ),
+    remarkPlugins: resolvePlugin(
+      ['gatsby-remark-ant-alert'],
+      'remarkPlugins'
+    )
   };
 
   options = deepMerge(defaultOptions, options);
 
-  options.remarkPlugins = [...unifiedPlugins(options.remarkPlugins), ...await reamrk2mdast({
-    remarkPlugins: unifiedPlugins(options.mdastPlugins),
-    pathPrefix: base
-  })]
+  options.remarkPlugins = [
+    ...unifiedPlugins(options.remarkPlugins),
+    ...(await reamrk2mdast({
+      remarkPlugins: unifiedPlugins(options.mdastPlugins),
+      pathPrefix: base
+    }))
+  ];
 
   const compiler = mdx.createMdxAstCompiler(options);
 
   const md = rawMDX => {
+    const key = hash(rawMDX);
+    const cached = cache.get(key);
+    if (cached) return cached;
+
     let results = {
       toc: [],
       headings: [],
       frontMatter: {}
     };
 
-    const { content: frontMatterCodeResult } = (results.frontMatter = grayMatter(rawMDX));
+    const {
+      content: frontMatterCodeResult
+    } = (results.frontMatter = parseFrontmatter(rawMDX));
     const content = `${frontMatterCodeResult}`;
     const mdast = compiler.parse(content);
 
     // toc
-    results.toc = getItems(generateTOC(mdast, { maxDepth: options.maxTocDepth }).map, {});
+    results.toc = getItems(
+      generateTOC(mdast, { maxDepth: options.maxTocDepth })
+        .map,
+      {}
+    );
 
     // headings
     visit(mdast, `heading`, heading => {
@@ -58,6 +89,9 @@ const createMarkdown = async ({ markdown: options = {}, base = "/" }) => {
         depth: heading.depth
       });
     });
+
+    cache.set(key, results);
+
     return results;
   };
   md.render = input => mdx.sync(input);
@@ -82,7 +116,9 @@ function getItems(node, current) {
     return current;
   } else {
     if (node.type === 'list') {
-      current.items = node.children.map(i => getItems(i, {}));
+      current.items = node.children.map(i =>
+        getItems(i, {})
+      );
       return current;
     } else if (node.type === 'listItem') {
       const heading = getItems(node.children[0], {});

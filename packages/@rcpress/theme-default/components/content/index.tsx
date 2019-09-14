@@ -1,182 +1,171 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Anchor } from 'antd';
 import EditButton from './EditButton';
-import { OneToc } from '../../../templates';
 import moment from 'moment';
 import AvatarList from './AvatarList';
-import { SiteContext } from '@rcpress/core';
+import { useSiteContext } from '@rcpress/core';
 import SEO from '../SEO/SEO';
 import { getPageTitle } from '../utils';
 import PrevAndNext from '../prevAndNext';
 
 const Link = Anchor.Link;
 
-export default class Article extends React.PureComponent<{
+const Article: FunctionComponent<{
   prev: React.Component | null;
   next: React.Component | null;
-}> {
-  static contextType = SiteContext;
-
-  node: HTMLElement | null | undefined;
-
-  getTocs = (toc: OneToc): any => {
+}> = props => {
+  const getTocs = (toc: any): any => {
     return (
       <Link key={toc.url} href={toc.url} title={toc.title}>
-        {toc.items && toc.items.map(this.getTocs)}
+        {toc.items && toc.items.map(getTocs)}
       </Link>
     );
   };
 
-  getPageTitle = (
+  const getPageTitle = (
     currentPageTitle: string,
-    webAppName: string
+    siteName: string
   ) => {
     return currentPageTitle
-      ? `${currentPageTitle} | ${webAppName}`
-      : webAppName;
+      ? `${currentPageTitle} | ${siteName}`
+      : siteName;
   };
 
-  render() {
-    const {
-      currentPageInfo,
-      currentPageContent,
-      currentLocaleSiteData: {
-        title,
-        lang,
-        description,
-        head,
-        themeConfig: {
-          lastUpdated,
-          editLinkText,
-          editLinks,
-          repo,
-          docsRepo,
-          docsBranch,
-          showAvatarList,
-          editLink
-        }
+  const {
+    currentPageInfo,
+    currentLocaleSiteData: {
+      title,
+      lang,
+      description,
+      head,
+      themeConfig: {
+        lastUpdated,
+        editLinkText,
+        editLinks,
+        repo,
+        docsRepo,
+        docsBranch,
+        showAvatarList
       }
-    } = this.context;
+    }
+  } = useSiteContext();
 
-    const {
-      subtitle,
-      disableEditLink,
-      disableUpdateTime
-    } = currentPageInfo.frontMatter;
-    const {
-      path,
-      modifiedTime,
-      avatarList
-    } = currentPageInfo.fields;
-    const noAvatar =
-      !showAvatarList || !avatarList || !avatarList.length;
-    const editPath = this.getEditLink(
-      editLink,
-      docsRepo || repo,
-      docsBranch,
-      path
-    );
+  const {
+    subtitle,
+    disableEditLink,
+    disableUpdateTime,
+    editLink
+  } = currentPageInfo.frontMatter;
+  const {
+    filePath,
+    lastUpdated: modifiedTime,
+    avatarList,
+    Markdown
+  } = currentPageInfo;
+  const noAvatar =
+    !showAvatarList || !avatarList || !avatarList.length;
+  const editPath = getEditLink(
+    editLink,
+    docsRepo || repo,
+    docsBranch,
+    filePath
+  );
 
-    const currentPageTitle = getPageTitle(currentPageInfo);
+  const currentPageTitle = getPageTitle(
+    currentPageInfo.title,
+    title
+  );
 
-    const { prev, next } = this.props;
-    return (
-      <>
-        <SEO
-          head={head as Array<any>}
-          lang={lang}
-          title={this.getPageTitle(currentPageTitle, title)}
-          description={description}
-        />
-        <div className="main-container">
-          <article
-            className="markdown"
-            ref={node => {
-              this.node = node;
-            }}
-          >
-            {(docsRepo || repo) &&
-            editLinkText &&
-            editLinks &&
-            !disableEditLink ? (
-              <h1>
-                {currentPageTitle}
-                {!subtitle ? null : (
-                  <span className="subtitle">
-                    {subtitle}
-                  </span>
-                )}
+  const { prev, next } = props;
+  return (
+    <>
+      <SEO
+        head={head as Array<any>}
+        lang={lang}
+        title={currentPageTitle}
+        description={description}
+      />
+      <div className="main-container">
+        <article className="markdown">
+          {(docsRepo || repo) &&
+          editLinkText &&
+          editLinks &&
+          !disableEditLink ? (
+            <h1>
+              {currentPageTitle}
+              {!subtitle ? null : (
+                <span className="subtitle">{subtitle}</span>
+              )}
 
-                <EditButton
-                  path={editPath}
-                  title={editLinkText}
-                />
-              </h1>
-            ) : null}
+              <EditButton
+                path={editPath}
+                title={editLinkText}
+              />
+            </h1>
+          ) : null}
 
-            {lastUpdated && !disableUpdateTime && (
-              <div
-                className={`modifiedTime ${
-                  noAvatar ? 'modifiedTimeLeft' : ''
-                }`}
+          {lastUpdated && !disableUpdateTime && (
+            <div
+              className={`modifiedTime ${
+                noAvatar ? 'modifiedTimeLeft' : ''
+              }`}
+            >
+              {!noAvatar && (
+                <AvatarList avatarList={avatarList} />
+              )}
+              {lastUpdated}{' '}
+              {moment(modifiedTime).format(
+                'YYYY-MM-DD HH:mm:SS'
+              )}
+            </div>
+          )}
+
+          {currentPageInfo.toc &&
+          currentPageInfo.toc.items.length ? (
+            <div className="toc-affix">
+              <Anchor
+                offsetTop={70}
+                className="toc"
+                targetOffset={0}
               >
-                {!noAvatar && (
-                  <AvatarList avatarList={avatarList} />
-                )}
-                {lastUpdated}{' '}
-                {moment(modifiedTime).format(
-                  'YYYY-MM-DD HH:mm:SS'
-                )}
-              </div>
-            )}
+                {currentPageInfo.toc.items.map(getTocs)}
+              </Anchor>
+            </div>
+          ) : null}
+          <section className="markdown api-container">
+            <Markdown />
+          </section>
+          <PrevAndNext prev={prev} next={next} />
+        </article>
+      </div>
+    </>
+  );
+};
+const getEditLink = (
+  editLink: string,
+  docsRepo: string,
+  docsBranch: string,
+  path: string
+) => {
+  if (editLink) return editLink;
 
-            {currentPageInfo.tableOfContents.items &&
-            currentPageInfo.tableOfContents.items.length ? (
-              <div className="toc-affix">
-                <Anchor
-                  offsetTop={70}
-                  className="toc"
-                  targetOffset={0}
-                >
-                  {currentPageInfo.tableOfContents.items.map(
-                    this.getTocs
-                  )}
-                </Anchor>
-              </div>
-            ) : null}
-            <section className="markdown api-container">
-              {React.createElement(currentPageContent)}
-            </section>
-            <PrevAndNext prev={prev} next={next} />
-          </article>
-        </div>
-      </>
+  const bitbucket = /bitbucket.org/;
+  if (bitbucket.test(docsRepo)) {
+    return (
+      docsRepo +
+      `/src` +
+      `/${docsBranch}/` +
+      path +
+      `?mode=edit&spa=0&at=${docsBranch}&fileviewer=file-view-default`
     );
   }
-  getEditLink(
-    editLink: string,
-    docsRepo: string,
-    docsBranch: string,
-    path: string
-  ) {
-    if (editLink) return editLink;
 
-    const bitbucket = /bitbucket.org/;
-    if (bitbucket.test(docsRepo)) {
-      return (
-        docsRepo +
-        `/src` +
-        `/${docsBranch}/` +
-        path +
-        `?mode=edit&spa=0&at=${docsBranch}&fileviewer=file-view-default`
-      );
-    }
-
-    const gitee = /gitee.com/;
-    if (gitee.test(docsRepo)) {
-      return `${docsRepo}/edit/${docsBranch}/${path}`;
-    }
-
-    return `https://github.com/${docsRepo}/edit/${docsBranch}/${path}`;
+  const gitee = /gitee.com/;
+  if (gitee.test(docsRepo)) {
+    return `${docsRepo}/edit/${docsBranch}/${path}`;
   }
-}
+
+  return `https://github.com/${docsRepo}/edit/${docsBranch}/${path}`;
+};
+
+export default Article;

@@ -7,7 +7,7 @@ import {
   getCurrentPage
 } from './util';
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Route,
   Switch,
@@ -37,19 +37,16 @@ const SiteContext = React.createContext({
   currentLocaleSiteData: {},
   currentPageSidebarItems: {},
   allPagesSidebarItems: {},
-  currentPageInfo: {},
-  currentPageContent: {},
-  isWebsiteHome: false
+  currentPageInfo: {}
 });
 export { SiteContext };
 
-export function createApp() {
-  return withRouter(props => {
-    const path = props.match.path;
+export function createApp(opts) {
+  return () => {
+    const [path, setPath] = useState('/');
     const {
       currentLocaleSiteData
     } = getcurrentLocaleConfigByPath(siteData, path);
-
     const sidebarItems = resolveSidebarItems(
       siteData,
       path
@@ -57,6 +54,7 @@ export function createApp() {
 
     const currentPageInfo = getCurrentPage(
       siteData.pages,
+      routes,
       path
     );
 
@@ -83,12 +81,24 @@ export function createApp() {
                 />
               );
             }
-            return <Route key={index} {...route} />;
+            const Comp = route.route_component;
+            return (
+              <Route
+                key={index}
+                {...route}
+                render={props => {
+                  if (path != props.match.path) {
+                    setPath(props.match.path);
+                  }
+                  return <Comp {...props} />;
+                }}
+              />
+            );
           })}
         </Switch>
       </SiteContext.Provider>
     );
-  });
+  };
 }
 
 const components = React.createContext({});

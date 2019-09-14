@@ -12,14 +12,13 @@
     "name": "Yves Wang"
   },
   "main": "lib/web/app/index.js",
+  "typings": "types/index.d.ts",
   "dependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/generator": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.1.6",
     "@babel/traverse": "^7.0.0",
-    "@mdx-js/mdx": "^1.0.0-rc.4",
-    "@mdx-js/react": "^1.0.0-rc.5",
     "@rcpress/markdown": "^0.0.0",
     "@rcpress/util": "^0.0.0",
     "@rcpress/webpack": "^0.0.0",
@@ -28,9 +27,8 @@
     "axios": "^0.18.0",
     "chalk": "2.4.2",
     "change-case": "^3.1.0",
-    "github-pathger": "^1.2.1",
+    "github-slugger": "^1.2.1",
     "globby": "^6.1.0",
-    "gray-matter": "^4.0.1",
     "himalaya": "^1.1.0",
     "js-yaml": "^3.13.1",
     "less": "^3.8.1",
@@ -43,7 +41,6 @@
     "react-dom": "^16.8.0",
     "react-github-button-fix-iebug": "^0.0.1",
     "react-helmet": "^5.2.1",
-    "react-media": "^1.9.2",
     "react-router-dom": "^5.0.1",
     "register-service-worker": "^1.6.2",
     "space-separated-tokens": "^1.1.1",
@@ -53,8 +50,6 @@
     "unist-util-select": "^2.0.2"
   },
   "devDependencies": {
-    "@rcpress/util": "^0.0.0",
-    "@rcpress/webpack": "^0.0.0",
     "@types/react-helmet": "^5.0.8",
     "dedent": "^0.7.0",
     "eslint": "^5.3.0",

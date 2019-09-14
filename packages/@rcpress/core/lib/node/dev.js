@@ -11,7 +11,6 @@ module.exports = async function dev(
 
   const prepare = require('./prepare');
   const {
-    HeadPlugin,
     DevLogPlugin,
     createClientConfig,
     markdownLoader: { frontMatterEmitter }
@@ -79,16 +78,10 @@ module.exports = async function dev(
       {
         template: path.resolve(
           __dirname,
-          'app/index.dev.html'
+          '../web/app/index.dev.html'
         )
       }
     ]);
-
-  config.plugin('site-data').use(HeadPlugin, [
-    {
-      tags: options.siteConfig.head || []
-    }
-  ]);
 
   const port = await resolvePort(
     cliOptions.port || options.siteConfig.port

@@ -1,12 +1,12 @@
 export function getCurrentLoacle(siteData, path) {
-  const locales = siteData.themeConfig.locales;
-  if (!locales) return false;
-
   let targetLocale = '/';
 
-  for (let path in locales) {
-    if (path != targetLocale && path.startsWith(path)) {
-      targetLocale = path;
+  const locales = siteData.themeConfig.locales;
+  if (!locales) return targetLocale;
+
+  for (let locale in locales) {
+    if (path != targetLocale && path.startsWith(locale)) {
+      targetLocale = locale;
     }
   }
 
@@ -20,13 +20,13 @@ export function getcurrentLocaleConfigByPath(
   const targetLocale = getCurrentLoacle(siteData, path);
   if (!targetLocale) {
     return {
-      localte: '/',
+      locale: '/',
       currentLocaleSiteData: siteData
     };
   }
 
   return {
-    localte: targetLocale,
+    locale: targetLocale,
     currentLocaleSiteData: {
       ...siteData,
       ...siteData.locales[targetLocale],
@@ -78,7 +78,6 @@ function resolvePath(relative, base, append = '') {
 
 export function resolveSidebarItems(siteData, currentPath) {
   const { pages } = siteData;
-
   const {
     currentLocaleSiteData
   } = getcurrentLocaleConfigByPath(siteData, currentPath);
@@ -194,6 +193,11 @@ export function normalize(path) {
     .replace(extRE, '');
 }
 
-export function getCurrentPage(pages, curPath) {
-  return pages.find(p => p.path == curPath);
+export function getCurrentPage(pages, routes, curPath) {
+  const page = pages.find(p => p.path == curPath) || {};
+  const route = routes.find(p => p.path == curPath);
+
+  page.Markdown = (route || {}).markdown;
+
+  return page;
 }

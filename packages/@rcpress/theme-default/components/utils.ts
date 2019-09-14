@@ -28,19 +28,19 @@ export function getcurrentLocaleConfigBySlug(
   siteData: any,
   path: string
 ): {
-  localte: string;
+  locale: string;
   currentLocaleSiteData: any;
 } {
   const targetLocale = getCurrentLoacle(siteData, path);
   if (!targetLocale) {
     return {
-      localte: '/',
+      locale: '/',
       currentLocaleSiteData: siteData
     };
   }
 
   return {
-    localte: targetLocale,
+    locale: targetLocale,
     currentLocaleSiteData: {
       ...siteData,
       ...siteData.locales[targetLocale],

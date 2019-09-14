@@ -1,6 +1,9 @@
 import React from 'react';
 import { SiteContext } from '@rcpress/core';
-import { resolvePathWithBase } from 'rcpress/src/default-theme/components/utils';
+
+const resolvePathWithBase = (p1, p2) => {
+  return (p1 + p2).replace(/\/\//g, '/');
+};
 
 export default ({ url, width, height, ...rest }) => (
   <SiteContext.Consumer>

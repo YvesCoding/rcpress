@@ -36,6 +36,7 @@ module.exports = function createBaseConfig(
         : 'assets/js/[name].js'
     )
     .publicPath(isProd ? publicPath : '/')
+    .chunkFilename('[name].[hash:8]')
     .end();
 
   if (debug) {
@@ -93,16 +94,32 @@ module.exports = function createBaseConfig(
       (siteConfig.configureWebpack || '').toString()
   });
 
+  const babelOption = {
+    cacheDirectory,
+    cacheIdentifier,
+    presets: [
+      ['@babel/preset-typescript'],
+      ['@babel/preset-env'],
+      ['@babel/preset-react']
+    ],
+    plugins: [
+      [
+        '@babel/plugin-proposal-decorators',
+        { legacy: true }
+      ],
+      ['@babel/plugin-proposal-class-properties'],
+      ['@babel/plugin-transform-regenerator']
+    ]
+  };
+
   const mdRule = config.module
     .rule('markdown')
-    .test(/\.mdx?$/);
+    .test(/\.mdx?$/i);
 
   mdRule
     .use('babel-loader')
     .loader('babel-loader')
-    .end()
-    .use('@mdx-js/loader')
-    .loader('@mdx-js/loader')
+    .options(babelOption)
     .end()
     .use('markdownLoader')
     .loader(require.resolve('./markdownLoader'))
@@ -115,40 +132,22 @@ module.exports = function createBaseConfig(
     .loader('pug-plain-loader')
     .end();
 
-  if (!siteConfig.evergreen) {
-    config.module
-      .rule('js')
-      .test(/\.(jsx?)|(tsx?)$/)
-      .exclude.add(filepath => {
-        // transpile rcpress
-        if (/@rcpress/.test(filepath)) {
-          return false;
-        }
+  config.module
+    .rule('js')
+    .test(/\.(jsx?)|(tsx?)$/)
+    .exclude.add(filepath => {
+      // transpile rcpress
+      if (/@rcpress/.test(filepath)) {
+        return false;
+      }
 
-        // Don't transpile node_modules
-        return /node_modules/.test(filepath);
-      })
-      .end()
-      .use('babel-loader')
-      .loader('babel-loader')
-      .options({
-        cacheDirectory,
-        cacheIdentifier,
-        presets: [
-          ['@babel/preset-typescript'],
-          ['@babel/preset-env'],
-          ['@babel/preset-react']
-        ],
-        plugins: [
-          [
-            '@babel/plugin-proposal-decorators',
-            { legacy: true }
-          ],
-          ['@babel/plugin-proposal-class-properties'],
-          ['@babel/plugin-transform-regenerator']
-        ]
-      });
-  }
+      // Don't transpile node_modules
+      return /node_modules/.test(filepath);
+    })
+    .end()
+    .use('babel-loader')
+    .loader('babel-loader')
+    .options(babelOption);
 
   config.module
     .rule('images')
