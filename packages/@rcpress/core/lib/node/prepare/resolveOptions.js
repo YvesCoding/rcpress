@@ -7,13 +7,12 @@ const {
   encodePath,
   fileToPath,
   sort,
-  getGitLastUpdatedTimeStamp
+  getGitLastUpdatedTimeStamp,
+  createResolveThemeLayoutPath,
+  createResolvePathWithExts,
+  getCompWithExt
 } = require('./util');
 const { inferTitle, logger } = require('@rcpress/util');
-const {
-  createResolveThemeLayoutPath,
-  createResolvePathWidthExts
-} = require('./theme');
 
 function isHome(frontmatter, path, themeConfig) {
   return (
@@ -56,7 +55,7 @@ module.exports = async function resolveOptions(sourceDir) {
   const resolveThemeLayoutPath = createResolveThemeLayoutPath(
     sourceDir
   );
-  const resolvePathWidthExts = createResolvePathWidthExts(
+  const resolvePathWidthExts = createResolvePathWithExts(
     sourceDir
   );
   const useDefaultTheme =
@@ -130,6 +129,18 @@ module.exports = async function resolveOptions(sourceDir) {
   // resolve theme config
   const themeConfig = siteConfig.themeConfig || {};
 
+  // resolve global component
+  let globalComponentPath = getCompWithExt(
+    path.resolve(sourceDir, '.rcpress/globalComponent')
+  );
+
+  if (!globalComponentPath) {
+    globalComponentPath = path.resolve(
+      __dirname,
+      '../../web/app/noop.js'
+    );
+  }
+
   // TODO Algolia supported
   // resolve algolia
   const isAlgoliaSearch = false;
@@ -194,6 +205,7 @@ module.exports = async function resolveOptions(sourceDir) {
 
       data.headings = headings || [];
       data.frontMatter = frontMatter.data || {};
+
       data.isWebsiteHome = isHome(
         data.frontMatter,
         data.path,
@@ -234,6 +246,7 @@ module.exports = async function resolveOptions(sourceDir) {
     themeLayoutPath,
     themeNotFoundPath,
     themeEnhanceAppPath,
+    globalComponentPath,
     useDefaultTheme,
     isAlgoliaSearch,
     markdown

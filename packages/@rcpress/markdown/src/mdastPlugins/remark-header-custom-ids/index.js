@@ -30,7 +30,7 @@ module.exports = (
     );
     const id = match
       ? match[2]
-      : paths.path(rawHeader, maintainCase);
+      : paths.slug(rawHeader, maintainCase);
     if (match) {
       // Remove the custom ID part from the text node.
       const lastNode =

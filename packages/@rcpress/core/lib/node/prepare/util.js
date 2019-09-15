@@ -2,6 +2,7 @@ const path = require('path');
 const spawn = require('cross-spawn');
 const fs = require('fs-extra');
 const globby = require('globby');
+const { logger } = require('@rcpress/util');
 
 const tempPath = path.resolve(__dirname, '../../../.temp');
 fs.ensureDirSync(tempPath);
@@ -105,3 +106,53 @@ exports.getGitLastUpdatedTimeStamp = function(filepath) {
     ) * 1000
   );
 };
+
+module.exports.createResolveThemeLayoutPath = sourceDir => name => {
+  let themePath = '';
+  try {
+    themePath = createResolvePathWithExts(sourceDir)(
+      `${name}/Layout`
+    );
+  } catch (error) {
+    throw new Error(
+      logger.error(`Failed to load theme "${name}"`, false)
+    );
+  }
+
+  return themePath;
+};
+
+const createResolvePathWithExts = sourceDir => basePath => {
+  const extensions = ['ts', 'tsx', 'js', 'jsx'];
+
+  for (let index = 0; index < extensions.length; index++) {
+    const ext = extensions[index];
+    try {
+      return require.resolve(`${basePath}.${ext}`, {
+        paths: [
+          path.resolve(__dirname, '../../node_modules'),
+          path.resolve(sourceDir)
+        ]
+      });
+    } catch (error) {}
+  }
+
+  return '';
+};
+
+const getCompWithExt = pathWithoutExt => {
+  const extensions = ['ts', 'tsx', 'js', 'jsx'];
+
+  for (let index = 0; index < extensions.length; index++) {
+    const ext = extensions[index];
+    const fullPath = pathWithoutExt + '.' + ext;
+    if (fs.existsSync(fullPath)) {
+      return fullPath;
+    }
+  }
+
+  return '';
+};
+
+module.exports.createResolvePathWithExts = createResolvePathWithExts;
+module.exports.getCompWithExt = getCompWithExt;

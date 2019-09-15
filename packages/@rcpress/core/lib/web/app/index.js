@@ -6,14 +6,12 @@ import {
   resolveSidebarItems,
   getCurrentPage
 } from './util';
+import { MDXProvider } from '@mdx-js/react';
+import globalComponent from '@globalComp';
+import createInternalGlobalComponent from './internalGlobalComponent';
 
 import React, { useContext, useState } from 'react';
-import {
-  Route,
-  Switch,
-  withRouter,
-  Redirect
-} from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { routes } from '@temp/routes';
 import { siteData } from '@temp/siteData';
@@ -68,34 +66,41 @@ export function createApp(opts) {
           currentPageInfo
         }}
       >
-        <Switch>
-          {routes.map((route, index) => {
-            if (route.redirect) {
+        <MDXProvider
+          components={{
+            ...globalComponent,
+            ...createInternalGlobalComponent(SiteContext)
+          }}
+        >
+          <Switch>
+            {routes.map((route, index) => {
+              if (route.redirect) {
+                return (
+                  <Route
+                    key={index}
+                    {...route}
+                    render={() => (
+                      <Redirect to={route.redirect} />
+                    )}
+                  />
+                );
+              }
+              const Comp = route.route_component;
               return (
                 <Route
                   key={index}
                   {...route}
-                  render={() => (
-                    <Redirect to={route.redirect} />
-                  )}
+                  render={props => {
+                    if (path != props.match.path) {
+                      setPath(props.match.path);
+                    }
+                    return <Comp {...props} />;
+                  }}
                 />
               );
-            }
-            const Comp = route.route_component;
-            return (
-              <Route
-                key={index}
-                {...route}
-                render={props => {
-                  if (path != props.match.path) {
-                    setPath(props.match.path);
-                  }
-                  return <Comp {...props} />;
-                }}
-              />
-            );
-          })}
-        </Switch>
+            })}
+          </Switch>
+        </MDXProvider>
       </SiteContext.Provider>
     );
   };

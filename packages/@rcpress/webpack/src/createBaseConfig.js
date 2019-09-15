@@ -14,7 +14,8 @@ module.exports = function createBaseConfig(
     themeNotFoundPath,
     isAlgoliaSearch,
     markdown,
-    cache
+    cache,
+    globalComponentPath
   },
   { debug } = {},
   isServer
@@ -49,6 +50,7 @@ module.exports = function createBaseConfig(
     .set('@theme', themePath)
     .set('@themeLayout', themeLayoutPath)
     .set('@themeNotFound', themeNotFoundPath)
+    .set('@globalComp', globalComponentPath)
     .set('@source', sourceDir)
     .set('@temp', cacheDirectory)
     .set('@default-theme', '@rcpress/theme-default')

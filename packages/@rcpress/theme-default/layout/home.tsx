@@ -24,8 +24,8 @@ function Home() {
         description={description}
       />
       <div className="home-wrapper">
-        {/* <Banner />
-        <Features /> */}
+        <Banner />
+        <Features />
         <HomeRest />
       </div>
     </>

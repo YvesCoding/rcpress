@@ -5,6 +5,39 @@ const tomlParser = require('toml');
 const { deepMerge } = require('@rcpress/util');
 const defaultConf = require('./defaultConfig');
 
+function validateConfig(config) {
+  const themeLocales = config.themeConfig.locales;
+  const locales = config.locales;
+
+  if (locales) {
+    for (let key in locales) {
+      if (key != '/') {
+        const newKey =
+          '/' + key.replace(/(^\/)|(\/$)/g, '') + '/';
+
+        if (key !== newKey) {
+          locales[newKey] = locales[key];
+          delete locales[key];
+        }
+      }
+    }
+  }
+
+  if (themeLocales) {
+    for (let key in themeLocales) {
+      if (key != '/') {
+        const newKey =
+          '/' + key.replace(/(^\/)|(\/$)/g, '') + '/';
+
+        if (key !== newKey) {
+          themeLocales[newKey] = themeLocales[key];
+          delete themeLocales[key];
+        }
+      }
+    }
+  }
+}
+
 module.exports = function loadConfig(
   rcpressDir,
   bustCache = true
@@ -34,6 +67,8 @@ module.exports = function loadConfig(
   }
 
   siteConfig = deepMerge(siteConfig, defaultConf);
+
+  validateConfig(siteConfig);
 
   return siteConfig;
 };

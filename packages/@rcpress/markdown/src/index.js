@@ -6,7 +6,7 @@ const {
   parseFrontmatter
 } = require('@rcpress/util');
 const toString = require(`mdast-util-to-string`);
-const { unifiedPlugins, reamrk2mdast } = require('../util');
+const { unifiedPlugins, reamrk2mdast } = require('./util');
 const path = require('path');
 const visit = require('unist-util-visit');
 const LRU = require('lru-cache');
@@ -36,7 +36,8 @@ const createMarkdown = async ({
         'remark-default-class-name',
         'remark-header-custom-ids',
         'remark-img-warpper-p',
-        'remark-emoji'
+        'remark-emoji',
+        'reamrk-prism'
       ],
       'mdastPlugins'
     ),
@@ -49,9 +50,11 @@ const createMarkdown = async ({
   options = deepMerge(defaultOptions, options);
 
   options.remarkPlugins = [
-    ...unifiedPlugins(options.remarkPlugins),
+    ...unifiedPlugins(options.remarkPlugins || []),
     ...(await reamrk2mdast({
-      remarkPlugins: unifiedPlugins(options.mdastPlugins),
+      remarkPlugins: unifiedPlugins(
+        options.mdastPlugins || []
+      ),
       pathPrefix: base
     }))
   ];
@@ -94,7 +97,15 @@ const createMarkdown = async ({
 
     return results;
   };
-  md.render = input => mdx.sync(input);
+  md.render = input => {
+    const key = hash(input + '__raw__');
+    const cached = cache.get(key);
+    if (cached) return cached;
+
+    const res = mdx.sync(input, options);
+    cache.set(key, res);
+    return res;
+  };
 
   return md;
 };
