@@ -15,10 +15,9 @@ exports.genRoutesFile = async function({
   {
     path: ${JSON.stringify(pagePath)},
     filePath: ${JSON.stringify(filePath)},
-    markdown: loadable(() => import('${path.resolve(
-      sourceDir,
-      file
-    )}')),
+    markdown: loadable(() => import(${JSON.stringify(
+      path.resolve(sourceDir, file)
+    )})),
     name: '${pagePath}' ,
     route_component:ThemeLayout,
     exact: true

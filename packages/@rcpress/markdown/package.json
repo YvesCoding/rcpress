@@ -10,7 +10,8 @@
     "mdast-util-to-string": "^1.0.5",
     "toml": "^3.0.0",
     "unist-util-find": "^1.0.1",
-    "unist-util-select": "^2.0.2"
+    "unist-util-select": "^2.0.2",
+    "parse-numeric-range": "^0.0.2"
   },
   "devDependencies": {}
 }

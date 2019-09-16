@@ -19,7 +19,7 @@ module.exports.reamrk2mdast = async function reamrk2mdast({
   let pathPlugin = undefined;
   if (pathPrefix && pathPrefix != '/') {
     pathPlugin = () =>
-      async function transformer(markdownAST) {
+      function transformer(markdownAST) {
         // Ensure relative links include `pathPrefix`
         visit(markdownAST, `link`, node => {
           if (
