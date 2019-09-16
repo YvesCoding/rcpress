@@ -16,6 +16,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { routes } from '@temp/routes';
 import { siteData } from '@temp/siteData';
 
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+
 // suggest dev server restart on base change
 if (module.hot) {
   const prevBase = siteData.base;

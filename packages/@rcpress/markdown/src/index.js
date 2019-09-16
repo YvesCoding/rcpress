@@ -22,12 +22,15 @@ const createMarkdown = async ({
 }) => {
   const cache = new LRU({ max: 1000 });
   const resolvePlugin = (plugins, dirName) =>
-    plugins.map(plugin =>
+    plugins.map(plugin => [
       require(path.resolve(
         __dirname,
-        `./${dirName}/${plugin}`
-      ))
-    );
+        `./${dirName}/${
+          Array.isArray(plugin) ? plugin[0] : plugin
+        }`
+      )),
+      plugin[1]
+    ]);
 
   const defaultOptions = {
     maxTocDepth: 3,
@@ -43,39 +46,41 @@ const createMarkdown = async ({
     ),
     remarkPlugins: resolvePlugin(
       [
-        'gatsby-remark-ant-alert',
-        {
-          info: [
-            {
-              alias: 'tip',
-              defaultTitle: 'Tip'
-            },
-            {
-              alias: 'tip-zh',
-              defaultTitle: '提示'
-            }
-          ],
-          warning: [
-            {
-              alias: 'warning',
-              defaultTitle: 'Warning'
-            },
-            {
-              alias: 'warning-zh',
-              defaultTitle: '警告'
-            }
-          ],
-          error: [
-            {
-              alias: 'error',
-              defaultTitle: 'Caveat'
-            },
-            {
-              alias: 'error-zh',
-              defaultTitle: '严重警告'
-            }
-          ]
-        }
+        [
+          'gatsby-remark-ant-alert',
+          {
+            info: [
+              {
+                alias: 'tip',
+                defaultTitle: 'Tip'
+              },
+              {
+                alias: 'tip-zh',
+                defaultTitle: '提示'
+              }
+            ],
+            warning: [
+              {
+                alias: 'warning',
+                defaultTitle: 'Warning'
+              },
+              {
+                alias: 'warning-zh',
+                defaultTitle: '警告'
+              }
+            ],
+            error: [
+              {
+                alias: 'error',
+                defaultTitle: 'Caveat'
+              },
+              {
+                alias: 'error-zh',
+                defaultTitle: '严重警告'
+              }
+            ]
+          }
+        ]
       ],
       'remarkPlugins'
     )
