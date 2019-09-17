@@ -240,7 +240,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({
               <SearchBox
                 mobile
                 datas={allPagesSidebarItems}
-                max={searchMaxSuggestions}
+                max={searchMaxSuggestions || 5}
               />
             ) : null}
             <Popover

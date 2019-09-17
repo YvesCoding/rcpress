@@ -13,14 +13,12 @@ const {
   getCompWithExt
 } = require('./util');
 const { inferTitle, logger } = require('@rcpress/util');
+const { omit } = require('lodash');
 
 function isHome(frontmatter, path, themeConfig) {
   return (
     frontmatter.home === true &&
-    ((themeConfig.locales &&
-      Object.keys(themeConfig.locales).indexOf(path) !==
-        -1) ||
-      path === '/')
+    ((themeConfig.locales && Object.keys(themeConfig.locales).indexOf(path) !== -1) || path === '/')
   );
 }
 
@@ -52,18 +50,10 @@ module.exports = async function resolveOptions(sourceDir) {
     : path.resolve(sourceDir, '.rcpress/dist');
 
   // resolve theme
-  const resolveThemeLayoutPath = createResolveThemeLayoutPath(
-    sourceDir
-  );
-  const resolvePathWidthExts = createResolvePathWithExts(
-    sourceDir
-  );
-  const useDefaultTheme =
-    !siteConfig.theme &&
-    !fs.existsSync(path.resolve(rcpressDir, 'theme'));
-  const defaultThemeLayoutPath = resolveThemeLayoutPath(
-    '@rcpress/theme-default'
-  );
+  const resolveThemeLayoutPath = createResolveThemeLayoutPath(sourceDir);
+  const resolvePathWidthExts = createResolvePathWithExts(sourceDir);
+  const useDefaultTheme = !siteConfig.theme && !fs.existsSync(path.resolve(rcpressDir, 'theme'));
+  const defaultThemeLayoutPath = resolveThemeLayoutPath('@rcpress/theme-default');
   let themePath = null;
   let themeLayoutPath = null;
   let themeNotFoundPath = null;
@@ -73,52 +63,35 @@ module.exports = async function resolveOptions(sourceDir) {
     // use default theme
     themePath = path.dirname(defaultThemeLayoutPath);
     themeLayoutPath = defaultThemeLayoutPath;
-    themeNotFoundPath = resolvePathWidthExts(
-      `${themePath}/NotFound`
-    );
+    themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`);
   } else {
     // resolve theme Layout
     if (siteConfig.theme) {
       // use external theme
       try {
-        themeLayoutPath = resolveThemeLayoutPath(
-          siteConfig.theme
-        );
+        themeLayoutPath = resolveThemeLayoutPath(siteConfig.theme);
         themePath = path.dirname(themeLayoutPath);
       } catch (e) {
         throw new Error(
-          logger.Error(
-            `Failed to load custom theme layout at theme "${siteConfig.theme}".`,
-            false
-          )
+          logger.Error(`Failed to load custom theme layout at theme "${siteConfig.theme}".`, false)
         );
       }
     } else {
       // use custom theme
       themePath = path.resolve(rcpressDir, 'theme');
-      themeLayoutPath = resolvePathWidthExts(
-        `${themePath}/Layout`
-      );
+      themeLayoutPath = resolvePathWidthExts(`${themePath}/Layout`);
       if (!themeLayoutPath) {
-        throw new Error(
-          logger.error(
-            `Cannot resolve Layout file in .rcpress/theme`
-          )
-        );
+        throw new Error(logger.error(`Cannot resolve Layout file in .rcpress/theme`));
       }
     }
 
     // resolve theme NotFound
-    themeNotFoundPath = resolvePathWidthExts(
-      `${themePath}/NotFound`
-    );
+    themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`);
     if (!themeNotFoundPath) {
-      themeNotFoundPath = resolvePathWidthExts(
-        `${path.dirname(defaultThemeLayoutPath)}/NotFound`
-      );
+      themeNotFoundPath = resolvePathWidthExts(`${path.dirname(defaultThemeLayoutPath)}/NotFound`);
     }
 
-    // TODO rcpress should also have a similar stuff to enhance app.
+    // TODO rcpress should also have a similar config file to enhance app.
     // resolve theme enhanceApp
     // themeEnhanceAppPath = path.resolve(themePath, 'enhanceApp.js');
     // if (!fs.existsSync(themeEnhanceAppPath)) {
@@ -130,15 +103,10 @@ module.exports = async function resolveOptions(sourceDir) {
   const themeConfig = siteConfig.themeConfig || {};
 
   // resolve global component
-  let globalComponentPath = getCompWithExt(
-    path.resolve(sourceDir, '.rcpress/globalComponent')
-  );
+  let globalComponentPath = getCompWithExt(path.resolve(sourceDir, '.rcpress/globalComponent'));
 
   if (!globalComponentPath) {
-    globalComponentPath = path.resolve(
-      __dirname,
-      '../../web/app/noop.js'
-    );
+    globalComponentPath = path.resolve(__dirname, '../../web/app/noop.js');
   }
 
   // TODO Algolia supported
@@ -153,28 +121,21 @@ module.exports = async function resolveOptions(sourceDir) {
   const markdown = await createMarkdown(siteConfig);
 
   // resolve pageFiles
-  const patterns = [
-    '**/*.md',
-    '**/*.mdx',
-    '!.rcpress',
-    '!node_modules'
-  ];
+  const patterns = ['**/*.md', '**/*.mdx', '!.rcpress', '!node_modules'];
   if (siteConfig.dest) {
     const outDirRelative = path.relative(sourceDir, outDir);
     if (!outDirRelative.includes('..')) {
       patterns.push('!' + outDirRelative);
     }
   }
-  const pageFiles = sort(
-    await globby(patterns, { cwd: sourceDir, nocase: true })
-  );
+  const pageFiles = sort(await globby(patterns, { cwd: sourceDir, nocase: true }));
 
   // resolve lastUpdated
   const shouldResolveLastUpdated =
     themeConfig.lastUpdated ||
-    Object.keys(
-      (siteConfig.locales && themeConfig.locales) || {}
-    ).some(base => themeConfig.locales[base].lastUpdated);
+    Object.keys((siteConfig.locales && themeConfig.locales) || {}).some(
+      base => themeConfig.locales[base].lastUpdated
+    );
   const docsDir = siteConfig.themeConfig.docsDir;
 
   // resolve pagesData
@@ -188,16 +149,12 @@ module.exports = async function resolveOptions(sourceDir) {
       };
 
       if (shouldResolveLastUpdated) {
-        data.lastUpdated = getGitLastUpdatedTimeStamp(
-          filepath
-        );
+        data.lastUpdated = getGitLastUpdatedTimeStamp(filepath);
       }
 
       // extract yaml frontMatter
       const content = await fs.readFile(filepath, 'utf-8');
-      const { headings, frontMatter, toc } = markdown(
-        content
-      );
+      const { headings, frontMatter, toc } = markdown(content);
 
       // infer title
       const title = inferTitle(frontMatter, headings);
@@ -206,11 +163,7 @@ module.exports = async function resolveOptions(sourceDir) {
       data.headings = headings || [];
       data.frontMatter = frontMatter.data || {};
 
-      data.isWebsiteHome = isHome(
-        data.frontMatter,
-        data.path,
-        siteConfig.themeConfig
-      );
+      data.isWebsiteHome = isHome(data.frontMatter, data.path, siteConfig.themeConfig);
 
       if (frontMatter.excerpt) {
         const html = markdown.render(frontMatter.excerpt);
@@ -226,7 +179,7 @@ module.exports = async function resolveOptions(sourceDir) {
   // resolve site data
   const siteData = {
     title: siteConfig.title || path.dirname(sourceDir),
-    ...siteConfig,
+    ...omit(siteConfig, ['configureWebpack', 'chainWebpack']),
     pages: pagesData
   };
 

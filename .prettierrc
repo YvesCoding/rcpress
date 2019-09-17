@@ -1,6 +1,6 @@
 {
   "singleQuote": true,
-  "printWidth": 60,
+  "printWidth": 100,
   "overrides": [
     {
       "files": ".prettierrc",

@@ -12,8 +12,7 @@ module.exports = {
     {
       name: 'moment',
       umdName: 'moment',
-      cdnLink:
-        'https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js'
+      cdnLink: 'https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js'
     },
     {
       order: 2,
@@ -26,11 +25,9 @@ module.exports = {
       order: 1,
       name: 'react',
       umdName: 'React',
-      cdnLink:
-        'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
+      cdnLink: 'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
     }
   ],
-  theme: 'rcpress-default-theme',
   themeConfig: {
     themeColors: null,
     repo: null,
@@ -38,6 +35,14 @@ module.exports = {
     docsDir: 'docs',
     docsRelativeDir: '',
     docsBranch: 'master',
-    showBackToTop: true
+    editLinks: true,
+    editLinkText: 'Edit this page',
+    lastUpdated: 'Last Updated', // string | boolean
+    locales: null,
+    showAvatarList: true,
+    showBackToTop: true,
+    maxTocDeep: 3,
+    search: true,
+    searchMaxSuggestions: 10
   }
 };

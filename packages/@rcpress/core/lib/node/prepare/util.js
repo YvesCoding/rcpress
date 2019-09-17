@@ -17,10 +17,7 @@ exports.writeTemp = async function(file, content) {
   }
 };
 
-exports.writeEnhanceTemp = async function(
-  destName,
-  srcPath
-) {
+exports.writeEnhanceTemp = async function(destName, srcPath) {
   await exports.writeTemp(
     destName,
     fs.existsSync(srcPath)
@@ -40,21 +37,14 @@ exports.fileToPath = function(file) {
   } else {
     // foo.md -> /foo.html
     // foo/bar.md -> /foo/bar.html
-    return `/${file
-      .replace(extRE, '')
-      .replace(/\\/g, '/')}`;
+    return `/${file.replace(extRE, '').replace(/\\/g, '/')}`;
   }
 };
 
 exports.fileToComponentName = function(file) {
-  let normalizedName = file
-    .replace(/\/|\\/g, '-')
-    .replace(extRE, '');
+  let normalizedName = file.replace(/\/|\\/g, '-').replace(extRE, '');
   if (exports.isIndexFile(file)) {
-    normalizedName = normalizedName.replace(
-      /readme$/i,
-      'index'
-    );
+    normalizedName = normalizedName.replace(/readme$/i, 'index');
   }
   const pagePrefix = /\.md$/.test(file) ? `page-` : ``;
   return `${pagePrefix}${normalizedName}`;
@@ -65,16 +55,11 @@ exports.isIndexFile = function(file) {
 };
 
 exports.resolveComponents = async function(sourceDir) {
-  const componentDir = path.resolve(
-    sourceDir,
-    '.rcpress/components'
-  );
+  const componentDir = path.resolve(sourceDir, '.rcpress/components');
   if (!fs.existsSync(componentDir)) {
     return;
   }
-  return exports.sort(
-    await globby(['**/*.vue'], { cwd: componentDir })
-  );
+  return exports.sort(await globby(['**/*.vue'], { cwd: componentDir }));
 };
 
 exports.sort = function(arr) {
@@ -94,29 +79,17 @@ exports.encodePath = function(userpath) {
 
 exports.getGitLastUpdatedTimeStamp = function(filepath) {
   return (
-    parseInt(
-      spawn
-        .sync('git', [
-          'log',
-          '-1',
-          '--format=%ct',
-          filepath
-        ])
-        .stdout.toString('utf-8')
-    ) * 1000
+    parseInt(spawn.sync('git', ['log', '-1', '--format=%ct', filepath]).stdout.toString('utf-8')) *
+    1000
   );
 };
 
 module.exports.createResolveThemeLayoutPath = sourceDir => name => {
   let themePath = '';
   try {
-    themePath = createResolvePathWithExts(sourceDir)(
-      `${name}/Layout`
-    );
+    themePath = createResolvePathWithExts(sourceDir)(`${name}/Layout`);
   } catch (error) {
-    throw new Error(
-      logger.error(`Failed to load theme "${name}"`, false)
-    );
+    throw new Error(logger.error(`Failed to load theme "${name}"`, false));
   }
 
   return themePath;
@@ -129,10 +102,7 @@ const createResolvePathWithExts = sourceDir => basePath => {
     const ext = extensions[index];
     try {
       return require.resolve(`${basePath}.${ext}`, {
-        paths: [
-          path.resolve(__dirname, '../../node_modules'),
-          path.resolve(sourceDir)
-        ]
+        paths: [path.resolve(__dirname, '../../../node_modules'), path.resolve(sourceDir)]
       });
     } catch (error) {}
   }

@@ -12,8 +12,7 @@ function validateConfig(config) {
   if (locales) {
     for (let key in locales) {
       if (key != '/') {
-        const newKey =
-          '/' + key.replace(/(^\/)|(\/$)/g, '') + '/';
+        const newKey = '/' + key.replace(/(^\/)|(\/$)/g, '') + '/';
 
         if (key !== newKey) {
           locales[newKey] = locales[key];
@@ -26,8 +25,7 @@ function validateConfig(config) {
   if (themeLocales) {
     for (let key in themeLocales) {
       if (key != '/') {
-        const newKey =
-          '/' + key.replace(/(^\/)|(\/$)/g, '') + '/';
+        const newKey = '/' + key.replace(/(^\/)|(\/$)/g, '') + '/';
 
         if (key !== newKey) {
           themeLocales[newKey] = themeLocales[key];
@@ -38,19 +36,10 @@ function validateConfig(config) {
   }
 }
 
-module.exports = function loadConfig(
-  rcpressDir,
-  bustCache = true
-) {
+module.exports = function loadConfig(rcpressDir, bustCache = true) {
   const configPath = path.resolve(rcpressDir, 'config.js');
-  const configYmlPath = path.resolve(
-    rcpressDir,
-    'config.yml'
-  );
-  const configTomlPath = path.resolve(
-    rcpressDir,
-    'config.toml'
-  );
+  const configYmlPath = path.resolve(rcpressDir, 'config.yml');
+  const configTomlPath = path.resolve(rcpressDir, 'config.toml');
 
   if (bustCache) {
     delete require.cache[configPath];
@@ -66,7 +55,7 @@ module.exports = function loadConfig(
     siteConfig = require(configPath);
   }
 
-  siteConfig = deepMerge(siteConfig, defaultConf);
+  siteConfig = deepMerge(defaultConf, siteConfig);
 
   validateConfig(siteConfig);
 
