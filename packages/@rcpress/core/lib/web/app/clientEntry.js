@@ -7,6 +7,7 @@ import { loadableReady } from '@loadable/component';
 import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
+import { siteData } from '@temp/siteData';
 
 const App = createApp();
 
@@ -30,13 +31,7 @@ if (process.env.NODE_ENV === 'production' && GA_ID) {
     a.async = 1;
     a.src = g;
     m.parentNode.insertBefore(a, m);
-  })(
-    window,
-    document,
-    'script',
-    'https://www.google-analytics.com/analytics.js',
-    'ga'
-  );
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
   ga('create', GA_ID, 'auto');
   ga('send', 'pageview');
@@ -49,25 +44,19 @@ if (process.env.NODE_ENV === 'production' && GA_ID) {
 
 // Register service worker
 render(
-  <Router>
+  <Router basename={siteData.base}>
     <App />
   </Router>,
   document.getElementById('app')
 );
-if (
-  process.env.NODE_ENV === 'production' &&
-  SW_ENABLED &&
-  window.location.protocol === 'https:'
-) {
+if (process.env.NODE_ENV === 'production' && SW_ENABLED && window.location.protocol === 'https:') {
   register(`${BASE_URL}service-worker.js`, {
     ready() {
       console.log('[rcpress:sw] Service worker is active.');
       // app.$refs.layout.$emit('sw-ready');
     },
     cached(registration) {
-      console.log(
-        '[rcpress:sw] Content has been cached for offline use.'
-      );
+      console.log('[rcpress:sw] Content has been cached for offline use.');
       // app.$refs.layout.$emit(
       //   'sw-cached',
       //   new SWUpdateEvent(registration)
@@ -81,16 +70,11 @@ if (
       // );
     },
     offline() {
-      console.log(
-        '[rcpress:sw] No internet connection found. App is running in offline mode.'
-      );
+      console.log('[rcpress:sw] No internet connection found. App is running in offline mode.');
       app.$refs.layout.$emit('sw-offline');
     },
     error(err) {
-      console.error(
-        '[rcpress:sw] Error during service worker registration:',
-        err
-      );
+      console.error('[rcpress:sw] Error during service worker registration:', err);
       // app.$refs.layout.$emit('sw-error', err);
       if (GA_ID) {
         ga('send', 'exception', {

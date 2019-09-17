@@ -1,7 +1,4 @@
-module.exports = async function dev(
-  sourceDir,
-  cliOptions = {}
-) {
+module.exports = async function dev(sourceDir, cliOptions = {}) {
   const fs = require('fs');
   const path = require('path');
   const chalk = require('chalk');
@@ -15,10 +12,7 @@ module.exports = async function dev(
     createClientConfig,
     markdownLoader: { frontMatterEmitter }
   } = require('@rcpress/webpack');
-  const {
-    applyUserWebpackConfig,
-    logger
-  } = require('@rcpress/util');
+  const { applyUserWebpackConfig, logger } = require('@rcpress/util');
 
   logger.wait('\nExtracting site metadata...');
   const options = await prepare(sourceDir);
@@ -26,19 +20,13 @@ module.exports = async function dev(
   // setup watchers to update options and dynamically generated files
   const update = () => {
     prepare(sourceDir).catch(err => {
-      console.error(
-        logger.error(chalk.red(err.stack), false)
-      );
+      console.error(logger.error(chalk.red(err.stack), false));
     });
   };
 
   // watch add/remove of files
   const pagesWatcher = chokidar.watch(
-    [
-      '**/*.mdx?',
-      '.rcpress/components/**/*.jsx?',
-      '.rcpress/components/**/*.tsx?'
-    ],
+    ['**/*.mdx?', '.rcpress/components/**/*.jsx?', '.rcpress/components/**/*.tsx?'],
     {
       cwd: sourceDir,
       ignored: '.rcpress/**/*.md',
@@ -52,11 +40,7 @@ module.exports = async function dev(
 
   // watch config file
   const configWatcher = chokidar.watch(
-    [
-      '.rcpress/config.js',
-      '.rcpress/config.yml',
-      '.rcpress/config.toml'
-    ],
+    ['.rcpress/config.js', '.rcpress/config.yml', '.rcpress/config.toml'],
     {
       cwd: sourceDir,
       ignoreInitial: true
@@ -76,19 +60,12 @@ module.exports = async function dev(
     // internals from an incompatible version.
     .use(require('vuepress-html-webpack-plugin'), [
       {
-        template: path.resolve(
-          __dirname,
-          '../web/app/index.dev.html'
-        )
+        template: path.resolve(__dirname, './index.dev.html')
       }
     ]);
 
-  const port = await resolvePort(
-    cliOptions.port || options.siteConfig.port
-  );
-  const { host, displayHost } = await resolveHost(
-    cliOptions.host || options.siteConfig.host
-  );
+  const port = await resolvePort(cliOptions.port || options.siteConfig.port);
+  const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
 
   config.plugin('rcpress-log').use(DevLogPlugin, [
     {
@@ -101,19 +78,12 @@ module.exports = async function dev(
   config = config.toConfig();
   const userConfig = options.siteConfig.configureWebpack;
   if (userConfig) {
-    config = applyUserWebpackConfig(
-      userConfig,
-      config,
-      false /* isServer */
-    );
+    config = applyUserWebpackConfig(userConfig, config, false /* isServer */);
   }
 
   const compiler = webpack(config);
 
-  const contentBase = path.resolve(
-    sourceDir,
-    '.rcpress/public'
-  );
+  const contentBase = path.resolve(sourceDir, '.rcpress/public');
 
   const serverConfig = Object.assign(
     {
@@ -128,20 +98,14 @@ module.exports = async function dev(
       open: options.siteConfig.open,
       publicPath: options.siteConfig.base,
       watchOptions: {
-        ignored: [
-          /node_modules/,
-          `!${path.resolve(__dirname, 'app/.temp')}/**`
-        ]
+        ignored: [/node_modules/, `!${path.resolve(__dirname, 'app/.temp')}/**`]
       },
       historyApiFallback: {
         disableDotRule: true,
         rewrites: [
           {
             from: /./,
-            to: path.posix.join(
-              options.siteConfig.base,
-              'index.html'
-            )
+            to: path.posix.join(options.siteConfig.base, 'index.html')
           }
         ]
       },
@@ -151,10 +115,7 @@ module.exports = async function dev(
       before: app => {
         // respect base when serving static files...
         if (fs.existsSync(contentBase)) {
-          app.use(
-            options.siteConfig.base,
-            require('express').static(contentBase)
-          );
+          app.use(options.siteConfig.base, require('express').static(contentBase));
         }
       }
     },
@@ -163,11 +124,7 @@ module.exports = async function dev(
 
   const error = await new Promise(resolve => {
     try {
-      new serve(compiler, serverConfig).listen(
-        port,
-        host,
-        resolve
-      );
+      new serve(compiler, serverConfig).listen(port, host, resolve);
     } catch (error) {
       resolve(error);
     }
@@ -181,13 +138,9 @@ module.exports = async function dev(
 function resolveHost(host) {
   // webpack-serve hot updates doesn't work properly over 0.0.0.0 on Windows,
   // but localhost does not allow visiting over network :/
-  const defaultHost =
-    process.platform === 'win32' ? 'localhost' : '0.0.0.0';
+  const defaultHost = process.platform === 'win32' ? 'localhost' : '0.0.0.0';
   host = host || defaultHost;
-  const displayHost =
-    host === defaultHost && process.platform !== 'win32'
-      ? 'localhost'
-      : host;
+  const displayHost = host === defaultHost && process.platform !== 'win32' ? 'localhost' : host;
   return {
     displayHost,
     host
