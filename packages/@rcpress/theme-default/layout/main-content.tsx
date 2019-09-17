@@ -15,6 +15,7 @@ const MainContent: FunctionComponent<{
   const [next, setNext] = useState<React.Component | null>(
     null
   );
+
   const {
     currentPageInfo: { isWebsiteHome },
     currentPageSidebarItems: menuList,
@@ -61,7 +62,7 @@ const MainContent: FunctionComponent<{
           )}
         </div>
         {footerText && isWebsiteHome ? (
-          <Footer footerText={footerText} ref="footer" />
+          <Footer footerText={footerText} />
         ) : null}
       </Col>
     </Row>

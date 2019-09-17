@@ -226,12 +226,8 @@ module.exports = async function resolveOptions(sourceDir) {
   // resolve site data
   const siteData = {
     title: siteConfig.title || path.dirname(sourceDir),
-    description: siteConfig.description || '',
-    base,
-    pages: pagesData,
-    themeConfig,
-    locales: siteConfig.locales,
-    head: siteConfig.head
+    ...siteConfig,
+    pages: pagesData
   };
 
   const options = {

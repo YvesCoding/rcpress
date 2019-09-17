@@ -35,16 +35,21 @@ interface SiteData {
     title?: string;
     description?: string;
     showBackToTop?: boolean;
-    locales?: Array<any>;
+    locales?: { [key: string]: any };
     lastUpdated?: boolean;
     editLinkText?: string;
     editLinks?: boolean;
     docsRepo?: string;
     docsBranch: string;
     showAvatarList?: boolean;
+    nav: Array<any>;
+    search?: boolean;
+    searchMaxSuggestions?: number;
+    selectText?: string;
   };
-  locales: Array<any>;
+  locales: { [key: string]: any };
   head: Array<any>;
+  logo?: string;
 }
 
 type currentPage = Page & {
@@ -58,6 +63,7 @@ type siteContext = {
   currentPageSidebarItems: any;
   allPagesSidebarItems: any;
   currentPageInfo: currentPage;
+  currentLocate: string;
 };
 
 declare const SiteContext: React.Context<siteContext>;

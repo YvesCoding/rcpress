@@ -47,7 +47,7 @@ const createMarkdown = async ({
     remarkPlugins: resolvePlugin(
       [
         [
-          'gatsby-remark-ant-alert',
+          'remark-ant-alert',
           {
             info: [
               {

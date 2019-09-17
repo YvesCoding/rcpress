@@ -80,7 +80,11 @@ module.exports = {
 // .rcpress/config.js
 module.exports = {
   themeConfig: {
-    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
+    sidebar: [
+      '/',
+      '/page-a',
+      ['/page-b', 'Explicit link text']
+    ]
   }
 };
 ```
@@ -123,7 +127,7 @@ module.exports = {
 
 如果你想为不同的页面组来显示不同的侧边栏，首先，将你的页面文件组织成下述的目录结构：
 
-```
+```bash
 .
 ├─ README.md
 ├─ contact.md
@@ -145,9 +149,17 @@ module.exports = {
 module.exports = {
   themeConfig: {
     sidebar: {
-      '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
+      '/foo/': [
+        '' /* /foo/ */,
+        'one' /* /foo/one.html */,
+        'two' /* /foo/two.html */
+      ],
 
-      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */]
+      '/bar/': [
+        '' /* /bar/ */,
+        'three' /* /bar/three.html */,
+        'four' /* /bar/four.html */
+      ]
     }
   }
 };

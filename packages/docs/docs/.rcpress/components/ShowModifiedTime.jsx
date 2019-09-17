@@ -6,12 +6,17 @@ export const ShowTime = () => {
   return (
     <SiteContext.Consumer>
       {context => {
+        console.log(context);
+
         return (
           <div className="modifiedTime modifiedTimeLeft">
-            {context.currentLocaleSiteData.themeConfig.lastUpdated}{' '}
-            {moment(context.currentPageInfo.fields.modifiedTime).format(
-              'YYYY-MM-DD HH:mm:SS'
-            )}
+            {
+              context.currentLocaleSiteData.themeConfig
+                .lastUpdated
+            }{' '}
+            {moment(
+              context.currentPageInfo.lastUpdated
+            ).format('YYYY-MM-DD HH:mm:SS')}
           </div>
         );
       }}

@@ -5,6 +5,8 @@ import { BackTop } from 'antd';
 import MainContent from './layout/main-content';
 import { useSiteContext } from '@rcpress/core';
 import Media from 'react-media';
+import stepNProcess from './components/nprocess';
+import NProgress from 'nprogress';
 
 const chekScrollPosition = (
   path: string,
@@ -40,8 +42,11 @@ const Layout = () => {
   const { showBackToTop } = siteData.themeConfig;
   const { locales } = siteData;
 
+  stepNProcess();
+
   useEffect(() => {
     chekScrollPosition(path, prePath, setPrePath);
+    NProgress.done(true);
   }, [path]);
 
   return (

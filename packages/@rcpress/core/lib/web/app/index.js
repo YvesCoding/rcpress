@@ -34,6 +34,7 @@ if (module.hot) {
 const SiteContext = React.createContext({
   siteData: {},
   path: '',
+  currentLocate: undefined,
   currentLocaleSiteData: {},
   currentPageSidebarItems: {},
   allPagesSidebarItems: {},
@@ -45,7 +46,8 @@ export function createApp(opts) {
   return () => {
     const [path, setPath] = useState('/');
     const {
-      currentLocaleSiteData
+      currentLocaleSiteData,
+      targetLocale
     } = getcurrentLocaleConfigByPath(siteData, path);
     const sidebarItems = resolveSidebarItems(
       siteData,
@@ -61,6 +63,7 @@ export function createApp(opts) {
     return (
       <SiteContext.Provider
         value={{
+          currentLocate: targetLocale,
           siteData,
           path,
           currentLocaleSiteData,

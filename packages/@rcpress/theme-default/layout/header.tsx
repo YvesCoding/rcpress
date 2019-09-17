@@ -1,5 +1,9 @@
 /* eslint-disable react/jsx-one-expression-per-line */
-import React from 'react';
+import React, {
+  useRef,
+  useEffect,
+  useReducer
+} from 'react';
 import Link from '../components/MyLink';
 import * as utils from '../components/utils';
 import {
@@ -14,74 +18,99 @@ import {
   Affix,
   Badge
 } from 'antd';
-import { SiteContext } from '@rcpress/core';
+import { useSiteContext } from '@rcpress/core';
 import SearchBox from '../components/search-box';
 import SubMenu from 'antd/lib/menu/SubMenu';
+
+type menuMode =
+  | 'vertical'
+  | 'vertical-left'
+  | 'vertical-right'
+  | 'horizontal'
+  | 'inline';
 
 interface HeaderProps {
   isMobile: boolean;
 }
 interface HeaderState {
-  inputValue?: string;
   menuVisible: boolean;
-  menuMode?:
-    | 'vertical'
-    | 'vertical-left'
-    | 'vertical-right'
-    | 'horizontal'
-    | 'inline';
-  searchOption?: any[];
-  searching?: boolean;
+  menuMode?: menuMode;
 }
 
-class Header extends React.Component<
-  HeaderProps,
-  HeaderState
-> {
-  state: HeaderState = {
-    inputValue: undefined,
+interface HeaderAction {
+  type: 'menuVisible' | 'menuMode';
+  payload: string | boolean;
+}
+
+const HeaderReducer = (
+  state: HeaderState,
+  action: HeaderAction
+): HeaderState => {
+  switch (action.type) {
+    case 'menuVisible':
+      return {
+        ...state,
+        menuVisible: action.payload as boolean
+      };
+
+    case 'menuMode':
+      if (state.menuMode != action.payload) {
+        return {
+          ...state,
+          menuMode: action.payload as menuMode
+        };
+      }
+  }
+
+  return state;
+};
+
+const Header: React.FunctionComponent<HeaderProps> = ({
+  isMobile
+}) => {
+  const [state, dispatch] = useReducer(HeaderReducer, {
     menuVisible: false,
     menuMode: 'horizontal'
-  };
+  });
+  const affix = useRef<Affix>(null);
 
-  static contextType = SiteContext;
-
-  searchInput: Input | null | undefined;
-
-  componentDidMount() {
-    const { isMobile } = this.props;
-    this.setMenuMode(isMobile);
-  }
-
-  setMenuMode = (isMobile: boolean) => {
-    this.setState({
-      menuMode: isMobile ? 'inline' : 'horizontal'
-    });
-  };
-
-  componentDidUpdate(preProps: HeaderProps) {
-    const { isMobile } = this.props;
-    if (isMobile !== preProps.isMobile) {
-      this.setMenuMode(isMobile);
+  const {
+    siteData,
+    path,
+    allPagesSidebarItems,
+    currentLocate,
+    currentLocaleSiteData: {
+      themeConfig,
+      title,
+      base,
+      logo
     }
+  } = useSiteContext();
 
-    const affix = this.refs['header-affix'] as Affix;
-    affix && affix.updatePosition();
-  }
+  useEffect(() => {
+    dispatch({
+      type: 'menuMode',
+      payload: isMobile ? 'inline' : 'horizontal'
+    });
 
-  handleShowMenu = () => {
-    this.setState({
-      menuVisible: true
+    affix.current && affix.current.updatePosition();
+  });
+
+  const handleShowMenu = () => {
+    dispatch({
+      type: 'menuVisible',
+      payload: true
     });
   };
 
-  onMenuVisibleChange = (visible: boolean) => {
-    this.setState({
-      menuVisible: visible
+  const onMenuVisibleChange = (visible: boolean) => {
+    dispatch({
+      type: 'menuVisible',
+      payload: visible
     });
   };
 
-  setLocaleLinks = (
+  const setLocaleLinks = (
     localeLink: string,
     currentSlug: string,
     currentLocale: string
@@ -89,7 +118,7 @@ class Header extends React.Component<
     return currentSlug.replace(currentLocale, localeLink);
   };
 
-  renderNav = (item: any, index: number) => {
+  const renderNav = (item: any, index: number) => {
     return item.items && item.items.length ? (
       <Menu.SubMenu
         className="hide-in-home-page"
@@ -99,7 +128,7 @@ class Header extends React.Component<
         }
       >
         {item.items.map((ch: any, index: number) => {
-          return this.renderNav(ch, index);
+          return renderNav(ch, index);
         })}
       </Menu.SubMenu>
     ) : (
@@ -121,64 +150,50 @@ class Header extends React.Component<
     );
   };
 
-  render() {
-    const { menuMode, menuVisible } = this.state;
-    const {
-      siteData,
-      path,
-      allPagesSidebarItems
-    } = this.context;
-    let currentLocate = utils.getCurrentLoacle(
-      siteData,
-      path
-    );
-    let {
-      currentLocaleSiteData: {
-        themeConfig,
-        title,
-        base,
-        logo
-      }
-    } = utils.getcurrentLocaleConfigBySlug(siteData, path);
-    const { locales } = siteData.themeConfig;
+  const { menuMode, menuVisible } = state;
 
-    const {
-      nav = [],
-      search,
-      searchMaxSuggestions
-    } = themeConfig;
-    const activeMenuItem = nav
-      .filter((item: any) => {
-        return item.link && path.startsWith(item.link);
-      })
-      .map((_: string) => _.link);
-    const menu = (
-      <>
+  const { locales } = siteData.themeConfig;
+
+  const {
+    nav = [],
+    search,
+    searchMaxSuggestions
+  } = themeConfig;
+
+  const activeMenuItem = nav
+    .filter((item: any) => {
+      return item.link && path.startsWith(item.link);
+    })
+    .map((_: string) => _.link);
+
+  const menu = (
+    <>
+      <Menu
+        mode={menuMode}
+        selectedKeys={activeMenuItem as any}
+        id="nav"
+        key="nav"
+      >
+        {nav.map((item: any, index: number) => {
+          return renderNav(item, index);
+        })}
+      </Menu>
+      {menuMode === 'inline' && currentLocate ? (
         <Menu
+          key="choose-lang"
+          selectedKeys={[currentLocate || '']}
           mode={menuMode}
-          selectedKeys={activeMenuItem}
-          id="nav"
-          key="nav"
         >
-          {nav.map((item: any, index: number) => {
-            return this.renderNav(item, index);
-          })}
-        </Menu>
-        {menuMode === 'inline' && currentLocate ? (
-          <Menu
+          <SubMenu
             key="choose-lang"
-            selectedKeys={[currentLocate || '']}
-            mode={menuMode}
+            title={themeConfig.selectText}
           >
-            <SubMenu
-              key="choose-lang"
-              title={themeConfig.selectText}
-            >
-              {Object.keys(locales).map(item => {
+            {locales &&
+              Object.keys(locales).map(item => {
                 return (
                   <Menu.Item key={item}>
                     <Link
-                      to={this.setLocaleLinks(
+                      to={setLocaleLinks(
                         item,
                         path,
                         currentLocate as string
@@ -189,19 +204,20 @@ class Header extends React.Component<
                   </Menu.Item>
                 );
               })}
-            </SubMenu>
-          </Menu>
-        ) : null}
-      </>
-    );
+          </SubMenu>
+        </Menu>
+      ) : null}
+    </>
+  );
 
-    const chooseLanguage = currentLocate ? (
-      <Menu selectedKeys={[currentLocate]}>
-        {Object.keys(locales).map(item => {
+  const chooseLanguage = currentLocate ? (
+    <Menu selectedKeys={[currentLocate]}>
+      {locales &&
+        Object.keys(locales).map(item => {
           return (
             <Menu.Item key={item}>
               <Link
-                to={this.setLocaleLinks(
+                to={setLocaleLinks(
                   item,
                   path,
                   currentLocate as string
@@ -212,103 +228,92 @@ class Header extends React.Component<
             </Menu.Item>
           );
         })}
-      </Menu>
-    ) : null;
+    </Menu>
+  ) : null;
 
-    return (
-      <Affix style={{ width: '100%' }} ref="header-affix">
-        <div id="header" className="header">
-          {menuMode === 'inline' ? (
-            <>
-              {search && allPagesSidebarItems.length ? (
-                <SearchBox
-                  mobile
-                  datas={allPagesSidebarItems}
-                  max={searchMaxSuggestions}
-                />
-              ) : null}
-              <Popover
-                overlayClassName="popover-menu"
-                placement="bottomRight"
-                content={menu}
-                trigger="click"
-                visible={menuVisible}
-                arrowPointAtCenter
-                onVisibleChange={this.onMenuVisibleChange}
-              >
-                <Icon
-                  className="nav-phone-icon"
-                  type="menu"
-                  onClick={this.handleShowMenu}
-                />
-              </Popover>
-            </>
-          ) : null}
-          <Row>
-            <Col
-              xxl={4}
-              xl={5}
-              lg={8}
-              md={8}
-              sm={24}
-              xs={24}
+  return (
+    <Affix style={{ width: '100%' }} ref={affix}>
+      <div id="header" className="header">
+        {menuMode === 'inline' ? (
+          <>
+            {search && allPagesSidebarItems.length ? (
+              <SearchBox
+                mobile
+                datas={allPagesSidebarItems}
+                max={searchMaxSuggestions}
+              />
+            ) : null}
+            <Popover
+              overlayClassName="popover-menu"
+              placement="bottomRight"
+              content={menu}
+              trigger="click"
+              visible={menuVisible}
+              arrowPointAtCenter
+              onVisibleChange={onMenuVisibleChange}
             >
-              <Link
-                id="site-logo"
-                to={currentLocate || base}
-              >
-                {logo && (
-                  <img
-                    src={utils.resolvePathWithBase(
-                      logo,
-                      base
-                    )}
-                    alt={title + '-logo'}
-                  />
-                )}
-                <span className="left-top-title">
-                  {title}
-                </span>
-              </Link>
-            </Col>
-            <Col
-              xxl={20}
-              xl={19}
-              lg={16}
-              md={16}
-              sm={0}
-              xs={0}
-            >
-              {search && allPagesSidebarItems.length ? (
-                <SearchBox
-                  datas={allPagesSidebarItems}
-                  max={searchMaxSuggestions}
+              <Icon
+                className="nav-phone-icon"
+                type="menu"
+                onClick={handleShowMenu}
+              />
+            </Popover>
+          </>
+        ) : null}
+        <Row>
+          <Col xxl={4} xl={5} lg={8} md={8} sm={24} xs={24}>
+            <Link id="site-logo" to={currentLocate || base}>
+              {logo && (
+                <img
+                  src={utils.resolvePathWithBase(
+                    logo,
+                    base
+                  )}
+                  alt={title + '-logo'}
                 />
-              ) : null}
-              <div className="header-meta">
-                <div className="right-header">
-                  {currentLocate ? (
-                    <Dropdown
-                      overlay={chooseLanguage}
-                      placement="bottomLeft"
-                    >
-                      <Button size="small">
-                        {themeConfig.selectText}{' '}
-                        <Icon type="down" />
-                      </Button>
-                    </Dropdown>
-                  ) : null}
-                </div>
-                {menuMode === 'horizontal' ? (
-                  <div id="menu">{menu}</div>
+              )}
+              <span className="left-top-title">
+                {title}
+              </span>
+            </Link>
+          </Col>
+          <Col
+            xxl={20}
+            xl={19}
+            lg={16}
+            md={16}
+            sm={0}
+            xs={0}
+          >
+            {search && allPagesSidebarItems.length ? (
+              <SearchBox
+                datas={allPagesSidebarItems}
+                max={searchMaxSuggestions || 5}
+              />
+            ) : null}
+            <div className="header-meta">
+              <div className="right-header">
+                {currentLocate ? (
+                  <Dropdown
+                    overlay={chooseLanguage}
+                    placement="bottomLeft"
+                  >
+                    <Button size="small">
+                      {themeConfig.selectText}{' '}
+                      <Icon type="down" />
+                    </Button>
+                  </Dropdown>
                 ) : null}
               </div>
-            </Col>
-          </Row>
-        </div>
-      </Affix>
-    );
-  }
-}
+              {menuMode === 'horizontal' ? (
+                <div id="menu">{menu}</div>
+              ) : null}
+            </div>
+          </Col>
+        </Row>
+      </div>
+    </Affix>
+  );
+};
 
 export default Header;

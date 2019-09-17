@@ -26,6 +26,7 @@ export function getcurrentLocaleConfigByPath(
   }
 
   return {
+    targetLocale,
     locale: targetLocale,
     currentLocaleSiteData: {
       ...siteData,
@@ -79,7 +80,8 @@ function resolvePath(relative, base, append = '') {
 export function resolveSidebarItems(siteData, currentPath) {
   const { pages } = siteData;
   const {
-    currentLocaleSiteData
+    currentLocaleSiteData,
+    targetLocale
   } = getcurrentLocaleConfigByPath(siteData, currentPath);
 
   const pageSidebarConfig =
@@ -111,6 +113,7 @@ export function resolveSidebarItems(siteData, currentPath) {
     }, []);
 
     return {
+      targetLocale,
       currentPageSidebarItems,
       allPagesSidebarItems
     };

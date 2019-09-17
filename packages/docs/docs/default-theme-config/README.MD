@@ -80,7 +80,11 @@ To enable the sidebar, use `themeConfig.sidebar`. The basic configuration expect
 // .rcpress/config.js
 module.exports = {
   themeConfig: {
-    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
+    sidebar: [
+      '/',
+      '/page-a',
+      ['/page-b', 'Explicit link text']
+    ]
   }
 };
 ```
@@ -123,7 +127,7 @@ Sidebar groups are collapsable by default. You can force a group to be always op
 
 If you wish to display different sidebars for different sections of content, first organize your pages into directories for each desired section:
 
-```
+```bash
 .
 ├─ README.md
 ├─ contact.md
@@ -145,9 +149,17 @@ Then, update your configuration to define your sidebar for each section.
 module.exports = {
   themeConfig: {
     sidebar: {
-      '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
+      '/foo/': [
+        '' /* /foo/ */,
+        'one' /* /foo/one.html */,
+        'two' /* /foo/two.html */
+      ],
 
-      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */]
+      '/bar/': [
+        '' /* /bar/ */,
+        'three' /* /bar/three.html */,
+        'four' /* /bar/four.html */
+      ]
     }
   }
 };

@@ -1,8 +1,8 @@
 import React from 'react';
 import { SiteContext } from '@rcpress/core';
 
-const resolvePathWithBase = (p1, p2) => {
-  return (p1 + p2).replace(/\/\//g, '/');
+const resolvePathWithBase = (filePath, base) => {
+  return (base + filePath).replace(/\/\//g, '/');
 };
 
 export default ({ url, width, height, ...rest }) => (

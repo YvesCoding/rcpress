@@ -8,7 +8,7 @@ import './introduction.less'
 
 import ImgWidthBase from '@components/ImgWidthBase'
 
-<div class="pic-plus">
+<div className="pic-plus">
   <ImgWidthBase url="antd-icon.svg" width={120} />
    <span>+</span>
   <ImgWidthBase url="react-icon.svg" width={120}/>

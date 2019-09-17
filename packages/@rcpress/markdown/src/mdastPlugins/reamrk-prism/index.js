@@ -80,7 +80,7 @@ module.exports = (
     // 100% width highlighted code lines work
     node.type = `html`;
 
-    let highlightClassName = `gatsby-highlight`;
+    let highlightClassName = `rcpress-highlight`;
     if (highlightLines && highlightLines.length > 0)
       highlightClassName += ` has-highlighted-lines`;
 
