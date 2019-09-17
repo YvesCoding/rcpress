@@ -1,12 +1,12 @@
 import React from 'react';
-import { PageInfo } from '../utils';
 import MobileMenu from 'rc-drawer';
-import { Badge, Col, Menu, Icon, Affix } from 'antd';
+import { Badge, Col, Menu, Icon, Affix, Divider } from 'antd';
 import Link from '../MyLink';
+import Toc from '../Toc';
 
 const { SubMenu } = Menu;
 
-function getFlatMenuList(menuList: PageInfo[]): PageInfo[] {
+function getFlatMenuList(menuList: any[]): any[] {
   return menuList.reduce((pre, cur) => {
     return (cur.children && cur.children.length
       ? getFlatMenuList(cur.children).concat(cur)
@@ -15,7 +15,7 @@ function getFlatMenuList(menuList: PageInfo[]): PageInfo[] {
   }, []);
 }
 
-function getActiveMenuItem(path: string, currentPageSidebarItems: PageInfo[]): PageInfo {
+function getActiveMenuItem(path: string, currentPageSidebarItems: any[]): any {
   const newMenusList = getFlatMenuList(currentPageSidebarItems);
   const activeMenu = newMenusList.find(menu => menu.path == path);
   if (!activeMenu) return { title: '', path: '', children: [] };
@@ -24,7 +24,7 @@ function getActiveMenuItem(path: string, currentPageSidebarItems: PageInfo[]): P
 }
 
 interface MenuPros {
-  menuList: PageInfo[];
+  menuList: any[];
   currentPath: string;
   isMobile: boolean;
   getPreAndNextMenu?(prev: React.Component | null, next: React.Component | null): void;
@@ -100,7 +100,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     return newMenusList.filter(menu => !menu.collapsable).map(menu => menu.title);
   };
 
-  generateMenuItem = ({ before = null, after = null }, item: PageInfo) => {
+  generateMenuItem = ({ before = null, after = null }, item: any) => {
     if (!item.title) {
       return;
     }
@@ -143,7 +143,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     );
   };
 
-  generaGroupItem = (footerNavIcons = {}, item: PageInfo) => {
+  generaGroupItem = (footerNavIcons = {}, item: any) => {
     const generateMenuItem = this.generateMenuItem.bind(this, footerNavIcons);
 
     if (!item.children || !item.children.length) {
@@ -157,7 +157,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     );
   };
 
-  generateSubMenuItems = (menus?: PageInfo[], footerNavIcons = {}) => {
+  generateSubMenuItems = (menus?: any[], footerNavIcons = {}) => {
     if (!menus) return [];
     const generateMenuItem = this.generateMenuItem.bind(this, footerNavIcons);
     const itemGroups = menus.map(menu => {
@@ -165,7 +165,9 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
         return generateMenuItem(menu);
       }
 
-      const groupItems = menu.children.map(item => this.generaGroupItem(footerNavIcons, item));
+      const groupItems = menu.children.map((item: any) =>
+        this.generaGroupItem(footerNavIcons, item)
+      );
       return (
         <SubMenu title={menu.title} key={menu.title}>
           {groupItems}
@@ -202,6 +204,8 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
     return isMobile ? (
       <MobileMenu key="mobile-menu" wrapperClassName="drawer-wrapper">
         {menuChild}
+        <Divider />
+        <Toc />
       </MobileMenu>
     ) : (
       <Col xxl={4} xl={5} lg={6} md={24} sm={24} xs={24} className="main-menu">

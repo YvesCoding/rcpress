@@ -9,12 +9,8 @@ import Footer from './footer';
 const MainContent: FunctionComponent<{
   isMobile: boolean;
 }> = ({ isMobile }) => {
-  const [prev, setPrev] = useState<React.Component | null>(
-    null
-  );
-  const [next, setNext] = useState<React.Component | null>(
-    null
-  );
+  const [prev, setPrev] = useState<React.Component | null>(null);
+  const [next, setNext] = useState<React.Component | null>(null);
 
   const {
     currentPageInfo: { isWebsiteHome },
@@ -25,10 +21,7 @@ const MainContent: FunctionComponent<{
 
   const enableMenu = !!(menuList && menuList.length);
 
-  function getPreAndNextMenu(
-    prev: React.Component | null,
-    next: React.Component | null
-  ) {
+  function getPreAndNextMenu(prev: React.Component | null, next: React.Component | null) {
     setPrev(prev);
     setNext(next);
   }
@@ -57,13 +50,11 @@ const MainContent: FunctionComponent<{
             <HomePage />
           ) : (
             <div>
-              <Content prev={prev} next={next} />
+              <Content isMoblie={isMobile} prev={prev} next={next} />
             </div>
           )}
         </div>
-        {footerText && isWebsiteHome ? (
-          <Footer footerText={footerText} />
-        ) : null}
+        {footerText && isWebsiteHome ? <Footer footerText={footerText} /> : null}
       </Col>
     </Row>
   );

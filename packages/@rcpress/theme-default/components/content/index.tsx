@@ -5,30 +5,16 @@ import moment from 'moment';
 import AvatarList from './AvatarList';
 import { useSiteContext } from '@rcpress/core';
 import SEO from '../SEO/SEO';
-import { getPageTitle } from '../utils';
 import PrevAndNext from '../prevAndNext';
-
-const Link = Anchor.Link;
+import Toc from '../Toc';
 
 const Article: FunctionComponent<{
   prev: React.Component | null;
   next: React.Component | null;
+  isMoblie: boolean;
 }> = props => {
-  const getTocs = (toc: any): any => {
-    return (
-      <Link key={toc.url} href={toc.url} title={toc.title}>
-        {toc.items && toc.items.map(getTocs)}
-      </Link>
-    );
-  };
-
-  const getPageTitle = (
-    currentPageTitle: string,
-    siteName: string
-  ) => {
-    return currentPageTitle
-      ? `${currentPageTitle} | ${siteName}`
-      : siteName;
+  const getPageTitle = (currentPageTitle: string, siteName: string) => {
+    return currentPageTitle ? `${currentPageTitle} | ${siteName}` : siteName;
   };
 
   const {
@@ -50,33 +36,14 @@ const Article: FunctionComponent<{
     }
   } = useSiteContext();
 
-  const {
-    subtitle,
-    disableEditLink,
-    disableUpdateTime,
-    editLink
-  } = currentPageInfo.frontMatter;
-  const {
-    filePath,
-    lastUpdated: modifiedTime,
-    avatarList,
-    Markdown
-  } = currentPageInfo;
-  const noAvatar =
-    !showAvatarList || !avatarList || !avatarList.length;
-  const editPath = getEditLink(
-    editLink,
-    docsRepo || repo,
-    docsBranch,
-    filePath
-  );
+  const { subtitle, disableEditLink, disableUpdateTime, editLink } = currentPageInfo.frontMatter;
+  const { filePath, lastUpdated: modifiedTime, avatarList, Markdown } = currentPageInfo;
+  const noAvatar = !showAvatarList || !avatarList || !avatarList.length;
+  const editPath = getEditLink(editLink, docsRepo || repo, docsBranch, filePath);
 
-  const currentPageTitle = getPageTitle(
-    currentPageInfo.title,
-    title
-  );
+  const currentPageTitle = getPageTitle(currentPageInfo.title, title);
 
-  const { prev, next } = props;
+  const { prev, next, isMoblie } = props;
   return (
     <>
       <SEO
@@ -87,51 +54,24 @@ const Article: FunctionComponent<{
       />
       <div className="main-container">
         <article className="markdown">
-          {(docsRepo || repo) &&
-          editLinkText &&
-          editLinks &&
-          !disableEditLink ? (
+          {(docsRepo || repo) && editLinkText && editLinks && !disableEditLink ? (
             <h1>
               {currentPageTitle}
-              {!subtitle ? null : (
-                <span className="subtitle">{subtitle}</span>
-              )}
+              {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
 
-              <EditButton
-                path={editPath}
-                title={editLinkText}
-              />
+              <EditButton path={editPath} title={editLinkText} />
             </h1>
           ) : null}
 
           {lastUpdated && !disableUpdateTime && (
-            <div
-              className={`modifiedTime ${
-                noAvatar ? 'modifiedTimeLeft' : ''
-              }`}
-            >
-              {!noAvatar && (
-                <AvatarList avatarList={avatarList} />
-              )}
-              {lastUpdated}{' '}
-              {moment(modifiedTime).format(
-                'YYYY-MM-DD HH:mm:SS'
-              )}
+            <div className={`modifiedTime ${noAvatar ? 'modifiedTimeLeft' : ''}`}>
+              {!noAvatar && <AvatarList avatarList={avatarList} />}
+              {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}
             </div>
           )}
 
-          {currentPageInfo.toc &&
-          currentPageInfo.toc.items.length ? (
-            <div className="toc-affix">
-              <Anchor
-                offsetTop={70}
-                className="toc"
-                targetOffset={0}
-              >
-                {currentPageInfo.toc.items.map(getTocs)}
-              </Anchor>
-            </div>
-          ) : null}
+          {!isMoblie ? <Toc affix /> : null}
+
           <section className="markdown api-container">
             <Markdown />
           </section>
@@ -141,12 +81,7 @@ const Article: FunctionComponent<{
     </>
   );
 };
-const getEditLink = (
-  editLink: string,
-  docsRepo: string,
-  docsBranch: string,
-  path: string
-) => {
+const getEditLink = (editLink: string, docsRepo: string, docsBranch: string, path: string) => {
   if (editLink) return editLink;
 
   const bitbucket = /bitbucket.org/;
