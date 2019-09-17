@@ -145,3 +145,15 @@ plugins: [
 **参考：**
 
 - [gatsby-remark-prismjs](https://www.npmjs.com/package/gatsby-remark-prismjs#inline-code-blocks)
+
+## emoji :tada: 1
+
+输入：
+
+```markdown
+:tada: :100:
+```
+
+输出：
+
+:tada: :100:

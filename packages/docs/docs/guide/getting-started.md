@@ -18,19 +18,19 @@ npm install rcpress-cli -g
 
 Use `cli` to initialize a default initial project
 
-```Celebration
+```bash
 RcPress my-docs
 ```
 
 Initialize in an existing project
 
-```Celebration
+```bash
 RcPress ./-force
 ```
 
 After the initialization is complete, switch to the initialized directory and run the website.
 
-```Celebration
+```bash
 Yarn start
 # 或
 Start with npm
