@@ -7,8 +7,8 @@ const hash = require('hash-sum');
 const cache = new LRU({ max: 1000 });
 const devCache = new LRU({ max: 1000 });
 const DEFAULT_RENDERER = `
-import React from 'react'
-import { mdx } from '@mdx-js/react'
+import React from 'react';
+import { mdx } from '@mdx-js/react';
 `;
 
 module.exports = function(src) {
@@ -28,10 +28,7 @@ module.exports = function(src) {
   const content = frontMatter.content;
 
   if (!isProd && !isServer) {
-    const inferredTitle = inferTitle(
-      frontMatter,
-      results.headings
-    );
+    const inferredTitle = inferTitle(frontMatter, results.headings);
     const headers = results.headings;
     delete frontMatter.content;
 
@@ -41,8 +38,7 @@ module.exports = function(src) {
     if (
       cachedData &&
       (cachedData.inferredTitle !== inferredTitle ||
-        JSON.stringify(cachedData.frontMatter) !==
-          JSON.stringify(frontMatter) ||
+        JSON.stringify(cachedData.frontMatter) !== JSON.stringify(frontMatter) ||
         headersChanged(cachedData.headers, headers))
     ) {
       // frontMatter changed... need to do a full reload
@@ -56,9 +52,7 @@ module.exports = function(src) {
     });
   }
 
-  const res = `${DEFAULT_RENDERER}\n${markdown.render(
-    content
-  )}`;
+  const res = `${DEFAULT_RENDERER}\n${markdown.render(content)}`;
 
   cache.set(key, res);
 
@@ -67,10 +61,7 @@ module.exports = function(src) {
 
 function headersChanged(a, b) {
   if (a.length !== b.length) return true;
-  return a.some(
-    (h, i) =>
-      h.title !== b[i].title || h.level !== b[i].level
-  );
+  return a.some((h, i) => h.title !== b[i].title || h.level !== b[i].level);
 }
 
 module.exports.frontMatterEmitter = new EventEmitter();

@@ -1,3 +1,3 @@
 exports.spa = require('./spa');
-exports.build = require('./build');
+exports.ssr = require('./ssr');
 exports.eject = require('./eject');

@@ -5,7 +5,7 @@ const {
   version
 } = require('../package.json');
 const path = require('path');
-const { spa, build, eject } = require('@rcpress/core/lib/node');
+const { spa, ssr, eject } = require('@rcpress/core/lib/node');
 const { logger } = require('@rcpress/util');
 
 if (!semver.satisfies(process.version, requiredVersion)) {
@@ -24,7 +24,7 @@ program.version(version).usage('<command> [options]');
 
 program
   .command('dev [targetDir]')
-  .description('start development server')
+  .description('start a development singe-page-app server')
   .option('-p, --port <port>', 'use specified port (default: 8080)')
   .option('-h, --host <host>', 'use specified host (default: 0.0.0.0)')
   .option('--debug', 'start development server in debug mode')
@@ -51,6 +51,20 @@ program
       },
       true /* is production */
     );
+  });
+
+program
+  .command('serve [targetDir]')
+  .description('start a development server-side-render server')
+  .option('-p, --port <port>', 'use specified port (default: 8080)')
+  .option('-h, --host <host>', 'use specified host (default: 0.0.0.0)')
+  .option('--debug', 'start development server in debug mode')
+  .action((dir = 'docs', { host, port, debug }) => {
+    wrapCommand(ssr)(path.resolve(dir), {
+      host,
+      port,
+      debug
+    });
   });
 
 program

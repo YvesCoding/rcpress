@@ -11,7 +11,7 @@
   "author": {
     "name": "Yves Wang"
   },
-  "main": "lib/web/app/index.js",
+  "main": "lib/web/index.js",
   "typings": "types/index.d.ts",
   "dependencies": {
     "@babel/cli": "^7.0.0",

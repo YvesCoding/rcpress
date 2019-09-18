@@ -1,4 +1,4 @@
-module.exports = function createClientConfig(options, cliOptions, isProd) {
+module.exports = function createSPAConfig(options, cliOptions, isProd) {
   const fs = require('fs-extra');
   const path = require('path');
 
@@ -7,7 +7,7 @@ module.exports = function createClientConfig(options, cliOptions, isProd) {
   const CopyPlugin = require('copy-webpack-plugin');
   const config = createBaseConfig(options, cliOptions);
   const { sourceDir, outDir } = options;
-  config.entry('app').add('@rcpress/core/lib/web/app/clientEntry.js');
+  config.entry('app').add('@rcpress/core/lib/web/clientEntry.js');
 
   config.node.merge({
     // prevent webpack from injecting useless setImmediate polyfill because Vue
