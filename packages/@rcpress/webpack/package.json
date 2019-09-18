@@ -15,6 +15,7 @@
     "@rcpress/util": "^0.0.0",
     "autoprefixer": "^8.2.0",
     "babel-loader": "^8.0.6",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
     "hash-sum": "^2.0.0",

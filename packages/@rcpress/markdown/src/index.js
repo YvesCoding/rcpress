@@ -1,10 +1,6 @@
 const mdx = require(`@mdx-js/mdx`);
 const generateTOC = require(`mdast-util-toc`);
-const {
-  deepMerge,
-  emoji,
-  parseFrontmatter
-} = require('@rcpress/util');
+const { deepMerge, emoji, parseFrontmatter } = require('@rcpress/util');
 const toString = require(`mdast-util-to-string`);
 const { unifiedPlugins, reamrk2mdast } = require('./util');
 const path = require('path');
@@ -16,18 +12,13 @@ const hash = require('hash-sum');
  * @returns html, toc, frontMatter, headings
  * @param {*} mdContent mdx content
  */
-const createMarkdown = async ({
-  markdown: options = {},
-  base = '/'
-}) => {
+const createMarkdown = async ({ markdown: options = {}, base = '/' }) => {
   const cache = new LRU({ max: 1000 });
   const resolvePlugin = (plugins, dirName) =>
     plugins.map(plugin => [
       require(path.resolve(
         __dirname,
-        `./${dirName}/${
-          Array.isArray(plugin) ? plugin[0] : plugin
-        }`
+        `./${dirName}/${Array.isArray(plugin) ? plugin[0] : plugin}`
       )),
       plugin[1]
     ]);
@@ -91,9 +82,8 @@ const createMarkdown = async ({
   options.remarkPlugins = [
     ...unifiedPlugins(options.remarkPlugins || []),
     ...(await reamrk2mdast({
-      remarkPlugins: unifiedPlugins(
-        options.mdastPlugins || []
-      ),
+      remarkPlugins: unifiedPlugins(options.mdastPlugins || []),
+      // add prefix in link of markdown
       pathPrefix: base
     }))
   ];
@@ -111,18 +101,12 @@ const createMarkdown = async ({
       frontMatter: {}
     };
 
-    const {
-      content: frontMatterCodeResult
-    } = (results.frontMatter = parseFrontmatter(rawMDX));
+    const { content: frontMatterCodeResult } = (results.frontMatter = parseFrontmatter(rawMDX));
     const content = `${frontMatterCodeResult}`;
     const mdast = compiler.parse(content);
 
     // toc
-    results.toc = getItems(
-      generateTOC(mdast, { maxDepth: options.maxTocDepth })
-        .map,
-      {}
-    );
+    results.toc = getItems(generateTOC(mdast, { maxDepth: options.maxTocDepth }).map, {});
 
     // headings
     visit(mdast, `heading`, heading => {
@@ -166,9 +150,7 @@ function getItems(node, current) {
     return current;
   } else {
     if (node.type === 'list') {
-      current.items = node.children.map(i =>
-        getItems(i, {})
-      );
+      current.items = node.children.map(i => getItems(i, {}));
       return current;
     } else if (node.type === 'listItem') {
       const heading = getItems(node.children[0], {});
