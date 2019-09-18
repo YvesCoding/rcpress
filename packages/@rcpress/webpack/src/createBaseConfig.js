@@ -1,7 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
 const { logger } = require('@rcpress/util');
-const LoadablePlugin = require('@loadable/webpack-plugin');
 
 module.exports = function createBaseConfig(
   {
@@ -275,9 +274,6 @@ module.exports = function createBaseConfig(
       LAST_COMMIT_HASH: JSON.stringify(getLastCommitHash())
     }
   ]);
-
-  // loadable webpack plugin
-  config.plugin('LoadablePlugin').use(new LoadablePlugin());
 
   return config;
 };

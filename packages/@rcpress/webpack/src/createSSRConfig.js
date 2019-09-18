@@ -5,6 +5,7 @@ module.exports = function createSSRConfig(options, cliOptions) {
   const createBaseConfig = require('./createBaseConfig');
   const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
   const CopyPlugin = require('copy-webpack-plugin');
+  const LoadablePlugin = require('@loadable/webpack-plugin');
 
   const config = createBaseConfig(options, cliOptions, true /* isServer */);
   const { sourceDir, outDir } = options;
@@ -41,6 +42,9 @@ module.exports = function createSSRConfig(options, cliOptions) {
       }
     ]);
   }
+
+  // loadable webpack plugin
+  config.plugin('LoadablePlugin').use(new LoadablePlugin());
 
   if (options.siteConfig.chainWebpack) {
     options.siteConfig.chainWebpack(config, true /* isServer */);

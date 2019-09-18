@@ -105,7 +105,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     config = applyUserWebpackConfig(userConfig, config, false /* isServer */, isProd);
   }
 
-  const compiler = webpack(config, function(e, s) {
+  const compiler = webpack(config, (err, stat) => {
     debugger;
   });
 
