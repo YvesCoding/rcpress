@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
-const clientConfig = require('./webpack.client.config');
-const serverConfig = require('./webpack.server.config');
 const chokidar = require('chokidar');
 const MFS = require('memory-fs');
 
@@ -12,7 +10,7 @@ const readFile = (fs, file) => {
   } catch (e) {}
 };
 
-module.exports = function setupDevServer(app, templatePath, cb) {
+module.exports = function setupDevServer(clientConfig, serverConfig, app, templatePath, cb) {
   let bundle;
   let template;
   let clientManifest;

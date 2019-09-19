@@ -12,7 +12,16 @@ const createServer = (clientConfig, serverConfig, app, templatePath) => {
   let clientManifest;
   let serverManifest;
 
-  let readyPromise = require('./setup-dev-server')(app, templatePath, (bundle, options) => {});
+  function createRenderer(bundle, options) {
+    return createBundleRenderer(bundle, options);
+  }
+
+  let renderer;
+  let readyPromise;
+
+  let readyPromise = require('./setup-dev-server')(app, templatePath, (bundle, options) => {
+    renderer = createRenderer(bundle, options);
+  });
 
   const serve = (path, cache) =>
     express.static(resolve(path), {
