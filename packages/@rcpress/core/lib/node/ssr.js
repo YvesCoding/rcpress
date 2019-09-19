@@ -13,7 +13,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   const prepare = require('./prepare');
   const {
     WebpackLogPlugin,
-    createSPAConfig,
+    createSSRConfig,
     markdownLoader: { frontMatterEmitter }
   } = require('@rcpress/webpack');
   const { applyUserWebpackConfig, logger } = require('@rcpress/util');
@@ -39,7 +39,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   }
 
   // resolve webpack config
-  let config = createSPAConfig(options, cliOptions, isProd);
+  let config = createSSRConfig(options, cliOptions, isProd);
 
   config
     .plugin('html')
