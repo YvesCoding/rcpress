@@ -105,9 +105,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     config = applyUserWebpackConfig(userConfig, config, false /* isServer */, isProd);
   }
 
-  const compiler = webpack(config, (err, stat) => {
-    debugger;
-  });
+  const compiler = webpack(config);
 
   if (!isProd) {
     const contentBase = path.resolve(sourceDir, '.rcpress/public');

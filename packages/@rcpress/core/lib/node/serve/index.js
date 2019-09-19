@@ -8,30 +8,35 @@ const webpack = require('webpack');
 
 module.exports = createServer;
 
-const createServer = (clientConfig, serverConfig, app, templatePath) => {
-  let clientManifest;
-  let serverManifest;
-
+const createServer = ({ clientConfig, serverConfig, templatePath, options }) => {
   function createRenderer(bundle, options) {
     return createBundleRenderer(bundle, options);
   }
 
+  const app = express();
+
   let renderer;
   let readyPromise;
 
-  let readyPromise = require('./setup-dev-server')(app, templatePath, (bundle, options) => {
-    renderer = createRenderer(bundle, options);
-  });
+  let readyPromise = require('./setup-dev-server')(
+    clientConfig,
+    serverConfig,
+    app,
+    templatePath,
+    (bundle, options) => {
+      renderer = createRenderer(bundle, options);
+    }
+  );
 
   const serve = (path, cache) =>
     express.static(resolve(path), {
       maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
     });
 
+  const contentBase = path.resolve(options.sourceDir, '.rcpress/public');
+
   app.use(compression({ threshold: 0 }));
-  app.use('/dist', serve('./dist', true));
-  app.use('/public', serve('./public', true));
-  app.use('/manifest.json', serve('./manifest.json', true));
+  app.use(options.siteData.base, serve(contentBase, true));
 
   function render(req, res) {
     const s = Date.now();
@@ -67,17 +72,9 @@ const createServer = (clientConfig, serverConfig, app, templatePath) => {
     });
   }
 
-  app.get(
-    '*',
-    isProd
-      ? render
-      : (req, res) => {
-          readyPromise.then(() => render(req, res));
-        }
-  );
-
-  const port = process.env.PORT || 8080;
-  app.listen(port, () => {
-    console.log(`server started at localhost:${port}`);
+  app.get('*', (req, res) => {
+    readyPromise.then(() => render(req, res));
   });
+
+  return app;
 };
