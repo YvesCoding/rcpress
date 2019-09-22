@@ -45,9 +45,8 @@ const createServer = ({ app, spaConfig, ssrConfig, templatePath, options }) => {
         return handleError(err);
       }
       res.send(html);
-      if (!isProd) {
-        console.log(`whole request: ${Date.now() - s}ms`);
-      }
+
+      console.log(`whole request: ${Date.now() - s}ms`);
     });
   }
 
