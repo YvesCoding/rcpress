@@ -1,48 +1,28 @@
-const fs = require('fs-extra');
 const path = require('path');
-const express = require('express');
 const compression = require('compression');
-const resolve = file => path.resolve(__dirname, file);
-const { createBundleRenderer } = require('vue-server-renderer');
-const webpack = require('webpack');
+const Render = require('./pageRender');
+const express = require('express');
 
-module.exports = createServer;
-
-const createServer = ({ clientConfig, serverConfig, templatePath, options }) => {
-  function createRenderer(bundle, options) {
-    return createBundleRenderer(bundle, options);
-  }
-
-  const app = express();
-
+const createServer = ({ app, spaConfig, ssrConfig, templatePath, options }) => {
   let renderer;
-  let readyPromise;
 
-  let readyPromise = require('./setup-dev-server')(
-    clientConfig,
-    serverConfig,
+  let { readyPromise, clientMfs } = require('./step-server')(
+    spaConfig,
+    ssrConfig,
     app,
     templatePath,
     (bundle, options) => {
-      renderer = createRenderer(bundle, options);
+      renderer = new Render(bundle, options, clientMfs);
     }
   );
-
-  const serve = (path, cache) =>
-    express.static(resolve(path), {
-      maxAge: cache && isProd ? 1000 * 60 * 60 * 24 * 30 : 0
-    });
 
   const contentBase = path.resolve(options.sourceDir, '.rcpress/public');
 
   app.use(compression({ threshold: 0 }));
-  app.use(options.siteData.base, serve(contentBase, true));
+  app.use(options.siteData.base, express.static(contentBase));
 
   function render(req, res) {
     const s = Date.now();
-
-    res.setHeader('Content-Type', 'text/html');
-    res.setHeader('Server', 'TEST-VUE-SSR');
 
     const handleError = err => {
       if (err.url) {
@@ -58,7 +38,6 @@ const createServer = ({ clientConfig, serverConfig, templatePath, options }) => 
     };
 
     const context = {
-      title: 'Vue-SSR-Full-Feature-Example', // default title
       url: req.url
     };
     renderer.renderToString(context, (err, html) => {
@@ -75,6 +54,5 @@ const createServer = ({ clientConfig, serverConfig, templatePath, options }) => 
   app.get('*', (req, res) => {
     readyPromise.then(() => render(req, res));
   });
-
-  return app;
 };
+module.exports = createServer;

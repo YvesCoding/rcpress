@@ -135,7 +135,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
           ]
         },
         overlay: false,
-        host: this.host,
+        host,
         contentBase,
         before: app => {
           // respect base when serving static files...

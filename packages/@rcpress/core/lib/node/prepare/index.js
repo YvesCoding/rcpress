@@ -14,23 +14,28 @@ module.exports = async function prepare(sourceDir) {
   const routesCode = await genRoutesFile(options);
   // const componentCode = await genComponentRegistrationFile(options);
 
-  await writeTemp('routes.js', [/**componentCode*/, routesCode].join('\n'));
+  await writeTemp(options.tempPath, 'routes.js', [routesCode].join('\n'));
 
   // 3. generate siteData
   const dataCode = `export const siteData = ${JSON.stringify(options.siteData, null, 2)}`;
-  await writeTemp('siteData.js', dataCode);
+  await writeTemp(options.tempPath, 'siteData.js', dataCode);
 
   // 4. handle user override
   const overridePath = path.resolve(sourceDir, '.rcpress/override.less').replace(/[\\]+/g, '/');
   const hasUserOverride = fs.existsSync(overridePath);
   await writeTemp(
+    options.tempPath,
     'override.less',
     hasUserOverride ? `@import(${JSON.stringify(overridePath)})` : ``
   );
 
   const stylePath = path.resolve(sourceDir, '.rcpress/style.less').replace(/[\\]+/g, '/');
   const hasUserStyle = fs.existsSync(stylePath);
-  await writeTemp('style.less', hasUserStyle ? `@import(${JSON.stringify(stylePath)})` : ``);
+  await writeTemp(
+    options.tempPath,
+    'style.less',
+    hasUserStyle ? `@import(${JSON.stringify(stylePath)})` : ``
+  );
 
   // Temporary tip, will be removed at next release.
   if (hasUserOverride && !hasUserStyle) {
@@ -38,9 +43,9 @@ module.exports = async function prepare(sourceDir) {
       `${chalk.magenta(
         'override.styl'
       )} has been split into 2 APIs, we recommend you upgrade to continue.\n` +
-      `      See: ${chalk.magenta(
-        'https://rcpress.vuejs.org/default-theme-config/#simple-css-override'
-      )}`
+        `      See: ${chalk.magenta(
+          'https://rcpress.vuejs.org/default-theme-config/#simple-css-override'
+        )}`
     );
   }
 

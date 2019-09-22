@@ -183,6 +183,10 @@ module.exports = async function resolveOptions(sourceDir) {
     pages: pagesData
   };
 
+  // make tmp path
+  const tempPath = path.resolve(__dirname, '../../../.temp');
+  fs.ensureDirSync(tempPath);
+
   const options = {
     siteConfig,
     siteData,
@@ -198,7 +202,8 @@ module.exports = async function resolveOptions(sourceDir) {
     globalComponentPath,
     useDefaultTheme,
     isAlgoliaSearch,
-    markdown
+    markdown,
+    tempPath
   };
 
   return options;

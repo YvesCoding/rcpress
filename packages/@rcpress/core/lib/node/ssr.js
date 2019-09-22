@@ -6,14 +6,16 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   const fs = require('fs-extra');
   const path = require('path');
   const chalk = require('chalk');
-  const webpack = require('webpack');
   const chokidar = require('chokidar');
-  const serve = require('webpack-dev-server');
+  const createServer = require('./serve');
+  const http = require('http');
+  const express = require('express');
 
   const prepare = require('./prepare');
   const {
-    WebpackLogPlugin,
     createSSRConfig,
+    createSPAConfig,
+    WebpackLogPlugin,
     markdownLoader: { frontMatterEmitter }
   } = require('@rcpress/webpack');
   const { applyUserWebpackConfig, logger } = require('@rcpress/util');
@@ -39,19 +41,42 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   }
 
   // resolve webpack config
-  let config = createSSRConfig(options, cliOptions, isProd);
+  let spaConfig = createSPAConfig(options, cliOptions, isProd, true);
+  let ssrConfig = createSSRConfig(options, cliOptions, isProd);
 
-  config
-    .plugin('html')
-    // using a fork of html-webpack-plugin to avoid it requiring webpack
-    // internals from an incompatible version.
-    .use(require('vuepress-html-webpack-plugin'), [
+  if (!isProd) {
+    const app = express();
+
+    const port = await resolvePort(cliOptions.port || options.siteConfig.port);
+    const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
+
+    http.createServer(app).listen(port, host);
+
+    ssrConfig.plugin('rcpress-log').use(WebpackLogPlugin, [
       {
-        template: path.resolve(__dirname, './index.dev.html')
+        port,
+        displayHost,
+        publicPath: options.publicPath,
+        isProd
       }
     ]);
 
-  if (!isProd) {
+    spaConfig = spaConfig.toConfig();
+    ssrConfig = ssrConfig.toConfig();
+    const userConfig = options.siteConfig.configureWebpack;
+    if (userConfig) {
+      ssrConfig = applyUserWebpackConfig(userConfig, ssrConfig, true /* isServer */, isProd);
+      spaConfig = applyUserWebpackConfig(userConfig, spaConfig, true /* isServer */, isProd);
+    }
+
+    createServer({
+      app,
+      ssrConfig,
+      spaConfig,
+      templatePath: path.resolve(__dirname, './index.ssr.html'),
+      options
+    });
+
     // setup watchers to update options and dynamically generated files
     const update = () => {
       prepare(sourceDir).catch(err => {
@@ -85,81 +110,6 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);
-  }
-
-  const port = await resolvePort(cliOptions.port || options.siteConfig.port);
-  const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
-
-  config.plugin('rcpress-log').use(WebpackLogPlugin, [
-    {
-      port,
-      displayHost,
-      publicPath: options.publicPath,
-      isProd
-    }
-  ]);
-
-  config = config.toConfig();
-  const userConfig = options.siteConfig.configureWebpack;
-  if (userConfig) {
-    config = applyUserWebpackConfig(userConfig, config, false /* isServer */, isProd);
-  }
-
-  const compiler = webpack(config, function(e, s) {
-    debugger;
-  });
-
-  if (!isProd) {
-    const contentBase = path.resolve(sourceDir, '.rcpress/public');
-
-    const serverConfig = Object.assign(
-      {
-        disableHostCheck: true,
-        compress: true,
-        clientLogLevel: 'error',
-        hot: true,
-        quiet: true,
-        headers: {
-          'access-control-allow-origin': '*'
-        },
-        open: options.siteConfig.open,
-        publicPath: options.siteConfig.base,
-        watchOptions: {
-          ignored: [/node_modules/, `!${path.resolve(__dirname, 'app/.temp')}/**`]
-        },
-        historyApiFallback: {
-          disableDotRule: true,
-          rewrites: [
-            {
-              from: /./,
-              to: path.posix.join(options.siteConfig.base, 'index.html')
-            }
-          ]
-        },
-        overlay: false,
-        host: this.host,
-        contentBase,
-        before: app => {
-          // respect base when serving static files...
-          if (fs.existsSync(contentBase)) {
-            app.use(options.siteConfig.base, require('express').static(contentBase));
-          }
-        }
-      },
-      options.siteConfig.devServer || {}
-    );
-
-    const error = await new Promise(resolve => {
-      try {
-        new serve(compiler, serverConfig).listen(port, host, resolve);
-      } catch (error) {
-        resolve(error);
-      }
-    });
-
-    if (error) {
-      throw error;
-    }
   }
 };
 

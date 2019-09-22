@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const { logger } = require('@rcpress/util');
+const loadableBabelPlugin = require('@loadable/babel-plugin');
 
 module.exports = function createBaseConfig(
   {
@@ -85,7 +86,8 @@ module.exports = function createBaseConfig(
     plugins: [
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties'],
-      ['@babel/plugin-transform-regenerator']
+      ['@babel/plugin-transform-regenerator'],
+      loadableBabelPlugin
     ]
   };
 

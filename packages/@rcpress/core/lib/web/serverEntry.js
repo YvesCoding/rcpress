@@ -1,15 +1,18 @@
-import { createApp } from './index';
+/* global BASE_URL, GA_ID, ga, SW_ENABLED, VUEPRESS_VERSION, LAST_COMMIT_HASH*/
 
-export default context =>
-  new Promise((resolve, reject) => {
-    const { app, router } = createApp();
-    const { url } = context;
-    const { fullPath } = router.resolve(url).route;
+import { createApp } from './app';
+import { register } from 'register-service-worker';
+import { render } from 'react-dom';
+import { StaticRouter as Router } from 'react-router-dom';
+import React from 'react';
+import { siteData } from '@temp/siteData';
 
-    if (fullPath !== url) {
-      return reject({ url: fullPath });
-    }
+const App = createApp();
 
-    router.push(url);
-    router.onReady(() => resolve(app));
-  });
+export default ctx => {
+  return (
+    <Router basename={siteData.base} context={{ url: ctx.url }}>
+      <App />
+    </Router>
+  );
+};

@@ -3,30 +3,26 @@ module.exports = function createSSRConfig(options, cliOptions) {
   const path = require('path');
   const WebpackBar = require('webpackbar');
   const createBaseConfig = require('./createBaseConfig');
-  const VueSSRServerPlugin = require('vue-server-renderer/server-plugin');
   const CopyPlugin = require('copy-webpack-plugin');
   const LoadablePlugin = require('@loadable/webpack-plugin');
+  const nodeExternals = require('webpack-node-externals');
 
   const config = createBaseConfig(options, cliOptions, true /* isServer */);
   const { sourceDir, outDir } = options;
 
-  config
+  config.output
+    .path(path.join(options.tempPath, 'server'))
+    .end()
     .target('node')
-    .externals([/^vue|vue-router$/])
+    .externals(['@loadable/component', 'react', 'react-dom', nodeExternals()])
     .devtool('source-map');
 
   // no need to minimize server build
   config.optimization.minimize(false);
 
-  config.entry('app').add(path.resolve(__dirname, '../web/serverEntry.js'));
+  config.entry('app').add('@rcpress/core/lib/web/serverEntry.js');
 
   config.output.filename('server-bundle.js').libraryTarget('commonjs2');
-
-  config.plugin('ssr-server').use(VueSSRServerPlugin, [
-    {
-      filename: 'manifest/server.json'
-    }
-  ]);
 
   const publicDir = path.resolve(sourceDir, '.rcpress/public');
   if (fs.existsSync(publicDir)) {
@@ -44,7 +40,11 @@ module.exports = function createSSRConfig(options, cliOptions) {
   }
 
   // loadable webpack plugin
-  config.plugin('LoadablePlugin').use(new LoadablePlugin());
+  config.plugin('LoadablePlugin').use(
+    new LoadablePlugin({
+      outputAsset: false
+    })
+  );
 
   if (options.siteConfig.chainWebpack) {
     options.siteConfig.chainWebpack(config, true /* isServer */);

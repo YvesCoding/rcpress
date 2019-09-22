@@ -11,7 +11,7 @@
   "author": {
     "name": "Yves Wang"
   },
-  "main": "lib/web/index.js",
+  "main": "lib/web/app.js",
   "typings": "types/index.d.ts",
   "dependencies": {
     "@babel/cli": "^7.0.0",
@@ -19,6 +19,8 @@
     "@babel/generator": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.1.6",
     "@babel/traverse": "^7.0.0",
+    "@loadable/babel-plugin": "^5.10.0",
+    "@loadable/server": "^5.10.2",
     "@rcpress/markdown": "^0.0.0",
     "@rcpress/util": "^0.0.0",
     "@rcpress/webpack": "^0.0.0",
@@ -49,7 +51,8 @@
     "toml": "^3.0.0",
     "unist-util-find": "^1.0.1",
     "unist-util-select": "^2.0.2",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
     "@types/react-helmet": "^5.0.8",

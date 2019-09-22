@@ -4,11 +4,8 @@ const fs = require('fs-extra');
 const globby = require('globby');
 const { logger } = require('@rcpress/util');
 
-const tempPath = path.resolve(__dirname, '../../../.temp');
-fs.ensureDirSync(tempPath);
-
 const tempCache = new Map();
-exports.writeTemp = async function(file, content) {
+exports.writeTemp = async function(tempPath, file, content) {
   // cache write to avoid hitting the dist if it didn't change
   const cached = tempCache.get(file);
   if (cached !== content) {
