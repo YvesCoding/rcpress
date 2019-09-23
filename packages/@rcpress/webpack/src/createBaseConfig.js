@@ -243,7 +243,7 @@ module.exports = function createBaseConfig(
     )
   );
 
-  if (isProd && !isServer) {
+  if (isProd || isServer) {
     config.plugin('extract-css').use(CSSExtractPlugin, [
       {
         filename: 'assets/css/styles.[chunkhash:8].css'

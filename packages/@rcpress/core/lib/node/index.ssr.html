@@ -7,9 +7,11 @@
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}" />
     <!-- prettier-ignore -->
+    {{{ links }}}
+    {{{ styles }}}
   </head>
   <body>
-    <!--vue-ssr-outlet-->
-    {{{ renderScripts() }}}
+    <div id="app">{{{ html() }}}</div>
+    {{{ scripts }}}
   </body>
 </html>

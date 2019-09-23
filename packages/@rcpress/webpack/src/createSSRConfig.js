@@ -1,5 +1,5 @@
 module.exports = function createSSRConfig(options, cliOptions) {
-  const fs = require('fs');
+  const fs = require('fs-extra');
   const path = require('path');
   const WebpackBar = require('webpackbar');
   const createBaseConfig = require('./createBaseConfig');
@@ -9,9 +9,12 @@ module.exports = function createSSRConfig(options, cliOptions) {
 
   const config = createBaseConfig(options, cliOptions, true /* isServer */);
   const { sourceDir, outDir } = options;
+  const outputPath = path.join(options.tempPath, 'server');
+
+  fs.removeSync(outputPath);
 
   config.output
-    .path(path.join(options.tempPath, 'server'))
+    .path(outputPath)
     .end()
     .target('node')
     .externals(['@loadable/component', 'react', 'react-dom', nodeExternals()])

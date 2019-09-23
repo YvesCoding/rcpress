@@ -30,7 +30,6 @@ module.exports = function(src) {
   if (!isProd && !isServer) {
     const inferredTitle = inferTitle(frontMatter, results.headings);
     const headers = results.headings;
-    delete frontMatter.content;
 
     // diff frontMatter and title, since they are not going to be part of the
     // returned component, changes in frontMatter do not trigger proper updates

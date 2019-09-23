@@ -85,19 +85,25 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);
+
+    const port = await resolvePort(cliOptions.port || options.siteConfig.port);
+    const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
+
+    config.plugin('rcpress-log').use(WebpackLogPlugin, [
+      {
+        port,
+        displayHost,
+        publicPath: options.publicPath,
+        isProd: false
+      }
+    ]);
+  } else {
+    config.plugin('rcpress-log').use(WebpackLogPlugin, [
+      {
+        isProd: true
+      }
+    ]);
   }
-
-  const port = await resolvePort(cliOptions.port || options.siteConfig.port);
-  const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
-
-  config.plugin('rcpress-log').use(WebpackLogPlugin, [
-    {
-      port,
-      displayHost,
-      publicPath: options.publicPath,
-      isProd
-    }
-  ]);
 
   config = config.toConfig();
   const userConfig = options.siteConfig.configureWebpack;
@@ -105,7 +111,9 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     config = applyUserWebpackConfig(userConfig, config, false /* isServer */, isProd);
   }
 
-  const compiler = webpack(config);
+  const compiler = webpack(config, () => {
+    debugger;
+  });
 
   if (!isProd) {
     const contentBase = path.resolve(sourceDir, '.rcpress/public');

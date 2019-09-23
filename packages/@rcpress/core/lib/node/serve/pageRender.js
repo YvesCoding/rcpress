@@ -12,7 +12,7 @@ class Render {
 
   renderToString(context, cb) {
     try {
-      const { clientManifest } = this.options;
+      const { clientManifest, template } = this.options;
 
       const nodeExtractor = new ChunkExtractor({
         stats: this.bundle,
@@ -27,8 +27,14 @@ class Render {
       });
 
       const jsx = webExtractor.collectChunks(CreateApp(context));
+      const html = renderToString(jsx);
+      const res = template
+        .replace('{{{ html() }}}', html)
+        .replace('{{{ scripts }}}', webExtractor.getScriptTags())
+        .replace('{{{ links }}}', webExtractor.getLinkTags())
+        .replace('{{{ styles }}}', webExtractor.getStyleTags());
 
-      cb(null, renderToString(jsx));
+      cb(null, res);
     } catch (error) {
       cb(error, null);
     }
