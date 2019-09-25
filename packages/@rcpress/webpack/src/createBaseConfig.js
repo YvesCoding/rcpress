@@ -176,17 +176,15 @@ module.exports = function createBaseConfig(
     applyLoaders(normalRule, false);
 
     function applyLoaders(rule, modules) {
-      if (!isServer) {
-        if (isProd) {
-          rule.use('extract-css-loader').loader(CSSExtractPlugin.loader);
-        } else {
-          rule.use('style-loader').loader('style-loader');
-        }
+      if (isProd || isServer) {
+        rule.use('extract-css-loader').loader(CSSExtractPlugin.loader);
+      } else {
+        rule.use('style-loader').loader('style-loader');
       }
 
       rule
         .use('css-loader')
-        .loader(isServer ? 'css-loader/locals' : 'css-loader')
+        .loader('css-loader')
         .options({
           modules,
           localIdentName: `[local]_[hash:base64:8]`,
@@ -244,7 +242,7 @@ module.exports = function createBaseConfig(
   );
 
   if (isProd || isServer) {
-    config.plugin('extract-css').use(CSSExtractPlugin, [
+    config.plugin('extract-css').use(new CSSExtractPlugin(), [
       {
         filename: 'assets/css/styles.[chunkhash:8].css'
       }

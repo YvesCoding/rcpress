@@ -6,7 +6,7 @@ module.exports = function createSPAConfig(options, cliOptions, isProd, isServer)
   const WebpackBar = require('webpackbar');
   const createBaseConfig = require('./createBaseConfig');
   const CopyPlugin = require('copy-webpack-plugin');
-  const config = createBaseConfig(options, cliOptions);
+  const config = createBaseConfig(options, cliOptions, isServer);
   const { sourceDir, outDir } = options;
   config
     .entry('app')
