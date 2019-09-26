@@ -5,9 +5,8 @@ module.exports = function createSSRConfig(options, cliOptions) {
   const createBaseConfig = require('./createBaseConfig');
   const CopyPlugin = require('copy-webpack-plugin');
   const LoadablePlugin = require('@loadable/webpack-plugin');
-  const nodeExternals = require('webpack-node-externals');
 
-  const config = createBaseConfig(options, cliOptions, true /* isServer */);
+  const config = createBaseConfig(options, cliOptions, true, true);
   const { sourceDir, outDir } = options;
   const outputPath = path.join(options.tempPath, 'server');
 

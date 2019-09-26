@@ -18,7 +18,8 @@ module.exports = function createBaseConfig(
     globalComponentPath
   },
   { debug } = {},
-  isServer
+  isServer,
+  isServerBundle
 ) {
   const Config = require('webpack-chain');
   const CSSExtractPlugin = require('mini-css-extract-plugin');
@@ -72,7 +73,7 @@ module.exports = function createBaseConfig(
     rcpress: require('@rcpress/core/package.json').version,
     '@babel/core': require('@babel/core').version,
     isProd,
-    isServer,
+    isServerBundle,
     config:
       (siteConfig.markdown ? JSON.stringify(siteConfig.markdown) : '') +
       (siteConfig.chainWebpack || '').toString() +
@@ -176,15 +177,17 @@ module.exports = function createBaseConfig(
     applyLoaders(normalRule, false);
 
     function applyLoaders(rule, modules) {
-      if (isProd || isServer) {
-        rule.use('extract-css-loader').loader(CSSExtractPlugin.loader);
-      } else {
-        rule.use('style-loader').loader('style-loader');
+      if (!isServerBundle) {
+        if (isProd || isServer) {
+          rule.use('extract-css-loader').loader(CSSExtractPlugin.loader);
+        } else {
+          rule.use('style-loader').loader('style-loader');
+        }
       }
 
       rule
         .use('css-loader')
-        .loader('css-loader')
+        .loader(isServerBundle ? 'css-loader/locals' : 'css-loader')
         .options({
           modules,
           localIdentName: `[local]_[hash:base64:8]`,
@@ -241,8 +244,8 @@ module.exports = function createBaseConfig(
     )
   );
 
-  if (isProd || isServer) {
-    config.plugin('extract-css').use(new CSSExtractPlugin(), [
+  if ((isProd || isServer) && !isServerBundle) {
+    config.plugin('extract-css').use(CSSExtractPlugin, [
       {
         filename: 'assets/css/styles.[chunkhash:8].css'
       }
