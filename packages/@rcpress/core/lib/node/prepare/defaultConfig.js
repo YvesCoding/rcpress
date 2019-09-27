@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  base: '/',
+  base: '',
   title: path.relative('../', process.cwd()),
   description: '',
   lang: 'en-US',

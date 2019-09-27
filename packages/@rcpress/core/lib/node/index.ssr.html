@@ -1,11 +1,15 @@
 <!-- prettier-ignore -->
 <!DOCTYPE html>
-<html lang="{{ lang }}">
+<html {{{ htmlAttr }}}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>{{ title }}</title>
-    <meta name="description" content="{{ description }}" />
+     {{{ title }}}
+
+     {{{ meta }}} 
+    <script>
+     Window.RC_CONTEXT = "{{ RC_CONTEXT }}";
+    </script>
     <!-- prettier-ignore -->
     {{{ links }}}
     {{{ styles }}}

@@ -38,9 +38,9 @@ const SiteContext = React.createContext({
 });
 export { SiteContext };
 
-export function createApp(opts) {
+export function createApp(ctx = {}) {
   return () => {
-    const [path, setPath] = useState('/');
+    const [path, setPath] = useState(ctx.url || '/');
     const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(siteData, path);
     const sidebarItems = resolveSidebarItems(siteData, path);
 

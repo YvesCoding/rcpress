@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const React = require('react');
 const { renderToString } = require('react-dom/server');
 const { ChunkExtractor } = require('@loadable/server');
+const Helmet = require('react-helmet');
 
 class Render {
   constructor(bundle, options, clientMfs) {
@@ -28,11 +29,19 @@ class Render {
 
       const jsx = webExtractor.collectChunks(CreateApp(context));
       const html = renderToString(jsx);
+      const helmet = Helmet.renderStatic();
+
       const res = template
         .replace('{{{ html() }}}', html)
         .replace('{{{ scripts }}}', webExtractor.getScriptTags())
         .replace('{{{ links }}}', webExtractor.getLinkTags())
-        .replace('{{{ styles }}}', webExtractor.getStyleTags());
+        .replace('{{{ styles }}}', webExtractor.getStyleTags())
+
+        .replace('{{{ title }}}', helmet.title.toString())
+        .replace('{{{ meta }}}', helmet.meta.toString())
+        .replace('{{{ htmlAttr }}}', helmet.htmlAttributes.toString())
+
+        .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
 
       cb(null, res);
     } catch (error) {

@@ -1,19 +1,16 @@
 const path = require('path');
 module.exports = {
   title: 'rcpress',
-  base: process.env.base || '/',
   locales: {
     '/': {
       lang: 'en-US',
       title: 'RcPress',
-      description:
-        'A static website generator build with Ant Design and driven by gatsby.js'
+      description: 'A static website generator build with Ant Design and driven by gatsby.js'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'RcPress',
-      description:
-        '一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器'
+      description: '一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器'
     }
   },
   logo: '/favicon.png',
@@ -99,10 +96,7 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@components': path.resolve(
-          __dirname,
-          './components'
-        )
+        '@components': path.resolve(__dirname, './components')
       }
     }
   }

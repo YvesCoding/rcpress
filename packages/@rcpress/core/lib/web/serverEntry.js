@@ -2,16 +2,14 @@
 
 import { createApp } from './app';
 import { register } from 'register-service-worker';
-import { render } from 'react-dom';
 import { StaticRouter as Router } from 'react-router-dom';
 import React from 'react';
 import { siteData } from '@temp/siteData';
 
-const App = createApp();
-
 export default ctx => {
+  const App = createApp(ctx);
   return (
-    <Router basename={siteData.base} context={{ url: ctx.url }}>
+    <Router basename={siteData.base} location={ctx.url} context={ctx}>
       <App />
     </Router>
   );
