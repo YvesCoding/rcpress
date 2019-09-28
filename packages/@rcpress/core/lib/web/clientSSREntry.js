@@ -9,7 +9,7 @@ import { siteData } from '@temp/siteData';
 import { loadableReady } from '@loadable/component';
 
 loadableReady(() => {
-  const App = createApp();
+  const App = createApp(RC_CONTEXT);
 
   window.__RCPRESS_VERSION__ = {
     version: RCPRESS_VERSION,

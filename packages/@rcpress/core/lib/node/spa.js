@@ -7,8 +7,8 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   const path = require('path');
   const chalk = require('chalk');
   const webpack = require('webpack');
-  const chokidar = require('chokidar');
   const serve = require('webpack-dev-server');
+  const fileWatcher = require('./fileWatcher');
 
   const prepare = require('./prepare');
   const {
@@ -40,6 +40,8 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
   // resolve webpack config
   let config = createSPAConfig(options, cliOptions, isProd);
+  let host = cliOptions.host || options.siteConfig.host;
+  let port;
 
   config
     .plugin('html')
@@ -59,35 +61,13 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       });
     };
 
-    // watch add/remove of files
-    const pagesWatcher = chokidar.watch(
-      ['**/*.mdx?', '.rcpress/components/**/*.jsx?', '.rcpress/components/**/*.tsx?'],
-      {
-        cwd: sourceDir,
-        ignored: '.rcpress/**/*.md',
-        ignoreInitial: true
-      }
-    );
-    pagesWatcher.on('add', update);
-    pagesWatcher.on('unlink', update);
-    pagesWatcher.on('addDir', update);
-    pagesWatcher.on('unlinkDir', update);
-
-    // watch config file
-    const configWatcher = chokidar.watch(
-      ['.rcpress/config.js', '.rcpress/config.yml', '.rcpress/config.toml'],
-      {
-        cwd: sourceDir,
-        ignoreInitial: true
-      }
-    );
-    configWatcher.on('change', update);
+    new fileWatcher(update, sourceDir).watch();
 
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);
 
-    const port = await resolvePort(cliOptions.port || options.siteConfig.port);
-    const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
+    port = await resolvePort(cliOptions.port || options.siteConfig.port);
+    const { displayHost } = await resolveHost(host);
 
     config.plugin('rcpress-log').use(WebpackLogPlugin, [
       {
@@ -111,9 +91,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     config = applyUserWebpackConfig(userConfig, config, false /* isServer */, isProd);
   }
 
-  const compiler = webpack(config, () => {
-    debugger;
-  });
+  const compiler = webpack(config);
 
   if (!isProd) {
     const contentBase = path.resolve(sourceDir, '.rcpress/public');
@@ -131,7 +109,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
         open: options.siteConfig.open,
         publicPath: options.siteConfig.base,
         watchOptions: {
-          ignored: [/node_modules/, `!${path.resolve(__dirname, 'app/.temp')}/**`]
+          ignored: [/node_modules/]
         },
         historyApiFallback: {
           disableDotRule: true,
@@ -143,7 +121,6 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
           ]
         },
         overlay: false,
-        host,
         contentBase,
         before: app => {
           // respect base when serving static files...

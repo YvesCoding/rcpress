@@ -55,7 +55,7 @@ module.exports = function loadConfig(rcpressDir, bustCache = true) {
     siteConfig = require(configPath);
   }
 
-  siteConfig = deepMerge(defaultConf, siteConfig);
+  siteConfig = deepMerge(JSON.parse(JSON.stringify(defaultConf)), siteConfig);
 
   validateConfig(siteConfig);
 

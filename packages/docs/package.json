@@ -7,8 +7,8 @@
   "author": "",
   "scripts": {
     "dev": "node ../@rcpress/cli/src/index dev",
-    "build": "node ../@rcpress/cli/src/index build",
-    "serve": "node ../@rcpress/cli/src/index serve"
+    "build": "node ../@rcpress/cli/src/index build temp",
+    "serve": "node ../@rcpress/cli/src/index serve temp"
   },
   "devDependencies": {
     "@rcpress/cli": "^0.0.0"

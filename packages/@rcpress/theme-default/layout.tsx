@@ -8,19 +8,13 @@ import Media from 'react-media';
 import stepNProcess from './components/nprocess';
 import NProgress from 'nprogress';
 
-const chekScrollPosition = (
-  path: string,
-  prePath: string,
-  setPath: (path: string) => void
-) => {
+const chekScrollPosition = (path: string, prePath: string, setPath: (path: string) => void) => {
   if (!window.location.hash && path && path !== prePath) {
     window.scrollTo(0, 0);
     setPath(path);
   } else if (window.location.hash) {
     const element = document.getElementById(
-      decodeURIComponent(
-        window.location.hash.replace('#', '')
-      )
+      decodeURIComponent(window.location.hash.replace('#', ''))
     );
     setTimeout(() => {
       if (element) {
@@ -32,10 +26,7 @@ const chekScrollPosition = (
 
 const Layout = () => {
   const siteContext = useSiteContext();
-  const {
-    currentLocaleSiteData: siteData,
-    path
-  } = siteContext;
+  const { currentLocaleSiteData: siteData, path } = siteContext;
 
   const [prePath, setPrePath] = useState();
 
@@ -52,14 +43,11 @@ const Layout = () => {
   return (
     <Media query="(max-width: 996px)">
       {smallScreen => {
-        const isMobile =
-          smallScreen && typeof window !== `undefined`;
+        const isMobile = smallScreen && typeof window !== `undefined`;
         return (
           <div
-            className={`page-wrapper ${((!locales &&
-              path == '/') ||
-              (locales &&
-                Object.keys(locales).includes(path))) &&
+            className={`page-wrapper ${((!locales && path == '/') ||
+              (locales && Object.keys(locales).includes(path))) &&
               'index-page-wrapper'}`}
           >
             <Header isMobile={isMobile} />

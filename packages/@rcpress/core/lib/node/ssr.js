@@ -6,10 +6,10 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   const fs = require('fs-extra');
   const path = require('path');
   const chalk = require('chalk');
-  const chokidar = require('chokidar');
   const createServer = require('./serve');
   const http = require('http');
   const express = require('express');
+  const fileWatcher = require('./fileWatcher');
 
   const prepare = require('./prepare');
   const {
@@ -84,29 +84,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       });
     };
 
-    // watch add/remove of files
-    const pagesWatcher = chokidar.watch(
-      ['**/*.mdx?', '.rcpress/components/**/*.jsx?', '.rcpress/components/**/*.tsx?'],
-      {
-        cwd: sourceDir,
-        ignored: '.rcpress/**/*.md',
-        ignoreInitial: true
-      }
-    );
-    pagesWatcher.on('add', update);
-    pagesWatcher.on('unlink', update);
-    pagesWatcher.on('addDir', update);
-    pagesWatcher.on('unlinkDir', update);
-
-    // watch config file
-    const configWatcher = chokidar.watch(
-      ['.rcpress/config.js', '.rcpress/config.yml', '.rcpress/config.toml'],
-      {
-        cwd: sourceDir,
-        ignoreInitial: true
-      }
-    );
-    configWatcher.on('change', update);
+    new fileWatcher(update, sourceDir).watch();
 
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);

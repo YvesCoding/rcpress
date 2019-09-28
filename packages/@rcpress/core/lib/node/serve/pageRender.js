@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const React = require('react');
 const { renderToString } = require('react-dom/server');
 const { ChunkExtractor } = require('@loadable/server');
-const Helmet = require('react-helmet');
+const { Helmet } = require('react-helmet');
 
 class Render {
   constructor(bundle, options, clientMfs) {
@@ -31,19 +31,30 @@ class Render {
       const html = renderToString(jsx);
       const helmet = Helmet.renderStatic();
 
-      const res = template
-        .replace('{{{ html() }}}', html)
-        .replace('{{{ scripts }}}', webExtractor.getScriptTags())
-        .replace('{{{ links }}}', webExtractor.getLinkTags())
-        .replace('{{{ styles }}}', webExtractor.getStyleTags())
+      // we put css inline and don't need prefetch for css.
+      const removeCSSL = link => {
+        return (link || '')
+          .split('\n')
+          .filter(perLink => !/\.css">$/.test(perLink))
+          .join('\n');
+      };
 
-        .replace('{{{ title }}}', helmet.title.toString())
-        .replace('{{{ meta }}}', helmet.meta.toString())
-        .replace('{{{ htmlAttr }}}', helmet.htmlAttributes.toString())
+      webExtractor.getCssString().then(cssString => {
+        const res = template
+          .replace('{{{ html() }}}', html)
 
-        .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
+          .replace('{{{ links }}}', removeCSSL(webExtractor.getLinkTags()))
+          .replace('{{{ scripts }}}', webExtractor.getScriptTags())
+          .replace('{{{ style }}}', `<style>${cssString}</style>`)
 
-      cb(null, res);
+          .replace('{{{ title }}}', helmet.title.toString())
+          .replace('{{{ meta }}}', helmet.meta.toString())
+          .replace('{{{ htmlAttr }}}', helmet.htmlAttributes.toString())
+          .replace('{{{ helmet-links }}}', helmet.link.toString())
+
+          .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
+        cb(null, res);
+      });
     } catch (error) {
       cb(error, null);
     }

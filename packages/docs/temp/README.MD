@@ -12,7 +12,11 @@ features:
     details: Support <a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a> to support <a href="guide/theme#custom-layout">custom layout</a> (eg custom site header, bottom, homepage, etc.)
 ---
 
+2333
+
 # Get Started
+
+1111
 
 ## Install
 
@@ -29,24 +33,24 @@ npm install rcpress-cli -g
 
 ```
 
-## Usage
+## Usage111
 
-Use `cli` to initialize a default starter project
+Use `cli` to initialize 111111a default starter project
 
 ```bash
 rcpress my-1
 ```
 
-333 1112222111
-
 Switch t1o the initialized site directory and run the Site
 
 ```bash
 cd my-docs
-
 yarn start
 # OR
-npm start
+npm
+
+
+111111
 ```
 
 Visit the default address `localhost:8000` to see the effect page

@@ -16,7 +16,14 @@ module.exports = function createSSRConfig(options, cliOptions) {
     .path(outputPath)
     .end()
     .target('node')
-    .externals(['@loadable/component', 'react', 'react-dom'])
+    .externals([
+      '@loadable/component',
+      'react',
+      'react-dom',
+      'react-helmet',
+      'react-router',
+      'react-router-dom'
+    ])
     .devtool('source-map');
 
   // no need to minimize server build

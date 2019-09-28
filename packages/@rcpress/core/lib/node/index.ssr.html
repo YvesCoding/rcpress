@@ -4,18 +4,21 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-     {{{ title }}}
-
-     {{{ meta }}} 
+     <!--react-helmet render area  -->
+    {{{ title }}}
+     {{{ meta }}}
+     {{{ helmet-links }}}
     <script>
-     Window.RC_CONTEXT = "{{ RC_CONTEXT }}";
+     window.RC_CONTEXT = "{{ RC_CONTEXT }}";
     </script>
-    <!-- prettier-ignore -->
-    {{{ links }}}
-    {{{ styles }}}
+    
+    <!--loadable-components prefetch  -->
+    {{{ links }}} 
+    {{{ style }}}  
   </head>
   <body>
     <div id="app">{{{ html() }}}</div>
+     <!--loadable-components render area  -->
     {{{ scripts }}}
   </body>
 </html>
