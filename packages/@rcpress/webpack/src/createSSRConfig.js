@@ -1,4 +1,4 @@
-module.exports = function createSSRConfig(options, cliOptions) {
+module.exports = function createSSRConfig(options, cliOptions, isProd) {
   const fs = require('fs-extra');
   const path = require('path');
   const WebpackBar = require('webpackbar');
@@ -29,7 +29,10 @@ module.exports = function createSSRConfig(options, cliOptions) {
   // no need to minimize server build
   config.optimization.minimize(false);
 
-  config.entry('app').add('@rcpress/core/lib/web/serverEntry.js');
+  config
+    .entry('app')
+    .add(!isProd ? 'react-hot-loader/patch' : '')
+    .add('@rcpress/core/lib/web/serverEntry.js');
 
   config.output.filename('server-bundle.js').libraryTarget('commonjs2');
 

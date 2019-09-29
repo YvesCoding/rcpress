@@ -88,6 +88,7 @@ module.exports = function createBaseConfig(
       ['@babel/plugin-proposal-decorators', { legacy: true }],
       ['@babel/plugin-proposal-class-properties'],
       ['@babel/plugin-transform-regenerator'],
+      ['react-hot-loader/babel'],
       loadableBabelPlugin
     ]
   };

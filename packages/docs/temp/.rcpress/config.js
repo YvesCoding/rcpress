@@ -54,12 +54,7 @@ module.exports = {
             link: 'https://github.com/YvesCoding/rcpress',
             important: true
           }
-        ],
-        sidebar: {
-          '/guide/': getGuideSidebar(),
-          '/config/': [''],
-          '/default-theme-config/': ['']
-        }
+        ]
       },
       '/zh': {
         label: '简体中文',
@@ -84,12 +79,7 @@ module.exports = {
             link: 'https://github.com/YvesCoding/rcpress',
             important: true
           }
-        ],
-        sidebar: {
-          '/zh/guide/': getGuideSidebar('开始上手'),
-          '/zh/config/': [''],
-          '/zh/default-theme-config/': ['']
-        }
+        ]
       }
     }
   },

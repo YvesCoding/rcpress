@@ -1,4 +1,5 @@
 import('@temp/style.less');
+import { hot } from 'react-hot-loader/root';
 import 'regenerator-runtime/runtime';
 import 'core-js/stage/3';
 import { getcurrentLocaleConfigByPath, resolveSidebarItems, getCurrentPage } from './util';
@@ -14,19 +15,6 @@ import { siteData } from '@temp/siteData';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-// suggest dev server restart on base change
-if (module.hot) {
-  const prevBase = siteData.base;
-  module.hot.accept('../../.temp/siteData', () => {
-    if (siteData.base !== prevBase) {
-      window.alert(
-        `[rcpress] Site base has changed. ` +
-          `Please restart dev server to ensure correct asset paths.`
-      );
-    }
-  });
-}
-
 const SiteContext = React.createContext({
   siteData: {},
   path: '',
@@ -38,8 +26,8 @@ const SiteContext = React.createContext({
 });
 export { SiteContext };
 
-export function createApp(ctx = {}) {
-  return () => {
+export function createApp(ctx = {}, enableHot) {
+  const app = () => {
     const [path, setPath] = useState(ctx.url || '/');
     const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(siteData, path);
     const sidebarItems = resolveSidebarItems(siteData, path);
@@ -89,6 +77,12 @@ export function createApp(ctx = {}) {
       </SiteContext.Provider>
     );
   };
+
+  if (enableHot) {
+    return hot(app);
+  }
+
+  return app;
 }
 
 const components = React.createContext({});

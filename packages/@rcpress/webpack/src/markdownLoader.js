@@ -37,7 +37,7 @@ module.exports = function(src) {
     if (
       cachedData &&
       (cachedData.inferredTitle !== inferredTitle ||
-        JSON.stringify(cachedData.frontMatter) !== JSON.stringify(frontMatter) ||
+        JSON.stringify(cachedData.frontMatter.data) !== JSON.stringify(frontMatter.data) ||
         headersChanged(cachedData.headers, headers))
     ) {
       // frontMatter changed... need to do a full reload

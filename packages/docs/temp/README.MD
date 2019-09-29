@@ -18,24 +18,26 @@ features:
 
 1111
 
-## Install
+## asdasd
 
+1113333
 Install `rcpress-cli` via [yarn](https://yarnpkg.com)
 
 ```bash
 yarn global add rcpress-cli
 ```
 
-Or install via [npm](https://docs.npmjs.com/cli/install.html)
+Or install111 via [npm](https://docs.npmjs.com/cli/install.html)
 
 ```bash
-npm install rcpress-cli -g
+npm install rcpress-cli -2323
 
 ```
 
-## Usage111
+## Usage111222
 
-Use `cli` to initialize 111111a default starter project
+Use `cli` to initializ111e 111111a default starter project11
+12
 
 ```bash
 rcpress my-1
