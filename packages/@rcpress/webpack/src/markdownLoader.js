@@ -7,14 +7,24 @@ const hash = require('hash-sum');
 const cache = new LRU({ max: 1000 });
 const devCache = new LRU({ max: 1000 });
 const DEFAULT_RENDERER = `
+import { hot } from 'react-hot-loader/root'; 
+import { setConfig } from 'react-hot-loader';
 import React from 'react';
 import { mdx } from '@mdx-js/react';
+
+setConfig({
+  logLevel: 'debug' 
+})
+`;
+
+const HOTABLE_CODE = `
+MDXContent = hot(MDXContent);
 `;
 
 module.exports = function(src) {
   const isProd = process.env.NODE_ENV === 'production';
   const isServer = this.target === 'node';
-  const { markdown } = getOptions(this);
+  const { markdown, hot } = getOptions(this);
   const file = this.resourcePath;
   const key = hash(file + src);
   const cached = cache.get(key);
@@ -51,7 +61,7 @@ module.exports = function(src) {
     });
   }
 
-  const res = `${DEFAULT_RENDERER}\n${markdown.render(content)}`;
+  const res = `${DEFAULT_RENDERER}\n${markdown.render(content)}\n${hot ? HOTABLE_CODE : ''}`;
 
   cache.set(key, res);
 

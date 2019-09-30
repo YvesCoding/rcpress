@@ -102,7 +102,7 @@ module.exports = function createBaseConfig(
     .end()
     .use('markdownLoader')
     .loader(require.resolve('./markdownLoader'))
-    .options({ sourceDir, markdown });
+    .options({ hot: !isProd && !isServerBundle, markdown });
 
   config.module
     .rule('pug')
