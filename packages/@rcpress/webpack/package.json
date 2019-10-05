@@ -16,7 +16,6 @@
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^0.28.11",
-    "eact-dom": null,
     "file-loader": "^1.1.11",
     "hash-sum": "^2.0.0",
     "less-loader": "^5.0.0",

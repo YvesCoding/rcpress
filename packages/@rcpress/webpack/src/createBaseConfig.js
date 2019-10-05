@@ -38,7 +38,7 @@ module.exports = function createBaseConfig(
     .end();
 
   if (debug) {
-    config.devtool('source-map');
+    config.devtool('#source-map');
   } else if (!isProd) {
     config.devtool('cheap-module-eval-source-map');
   }
@@ -50,6 +50,7 @@ module.exports = function createBaseConfig(
     .set('@globalComp', globalComponentPath)
     .set('@source', sourceDir)
     .set('@temp', cacheDirectory)
+    .set('react-dom', '@hot-loader/react-dom')
     .set('@default-theme', '@rcpress/theme-default')
     .set(
       '@AlgoliaSearchBox',
@@ -102,7 +103,7 @@ module.exports = function createBaseConfig(
     .end()
     .use('markdownLoader')
     .loader(require.resolve('./markdownLoader'))
-    .options({ hot: !isProd && !isServerBundle, markdown });
+    .options({ markdown });
 
   config.module
     .rule('pug')

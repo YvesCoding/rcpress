@@ -31,7 +31,7 @@ module.exports = function setupDevServer(clientConfig, serverConfig, app, templa
     update();
   });
 
-  clientConfig.entry.app.push('webpack-hot-middleware/client');
+  clientConfig.entry.app.push('webpack-hot-middleware/client?quiet=true');
   clientConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

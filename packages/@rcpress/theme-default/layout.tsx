@@ -8,10 +8,10 @@ import Media from 'react-media';
 import stepNProcess from './components/nprocess';
 import NProgress from 'nprogress';
 
-const chekScrollPosition = (path: string, prePath: string, setPath: (path: string) => void) => {
+const chekScrollPosition = (path: string, prePath: string, setPrePath: (path: string) => void) => {
   if (!window.location.hash && path && path !== prePath) {
     window.scrollTo(0, 0);
-    setPath(path);
+    setPrePath(path);
   } else if (window.location.hash) {
     const element = document.getElementById(
       decodeURIComponent(window.location.hash.replace('#', ''))
@@ -33,12 +33,12 @@ const Layout = () => {
   const { showBackToTop } = siteData.themeConfig;
   const { locales } = siteData;
 
-  stepNProcess();
-
   useEffect(() => {
     chekScrollPosition(path, prePath, setPrePath);
     NProgress.done(true);
   }, [path]);
+
+  stepNProcess();
 
   return (
     <Media query="(max-width: 996px)">

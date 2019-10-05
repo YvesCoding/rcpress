@@ -49,6 +49,17 @@ module.exports = async function prepare(sourceDir) {
     );
   }
 
+  // 5 write react-hot-loader config
+  await writeTemp(
+    options.tempPath,
+    'rhlConfig.js',
+    `
+    // rhlConfig.js
+    import { setConfig } from 'react-hot-loader';
+    setConfig({ logLevel: 'debug'});
+    `
+  );
+
   // 5. handle enhanceApp.js
   // const enhanceAppPath = path.resolve(sourceDir, '.rcpress/enhanceApp.js');
   // await writeEnhanceTemp('enhanceApp.js', enhanceAppPath);

@@ -1,5 +1,6 @@
 import('@temp/style.less');
 import { hot } from 'react-hot-loader/root';
+import '@temp/rhlConfig';
 import 'regenerator-runtime/runtime';
 import 'core-js/stage/3';
 import { getcurrentLocaleConfigByPath, resolveSidebarItems, getCurrentPage } from './util';
@@ -7,89 +8,65 @@ import { MDXProvider } from '@mdx-js/react';
 import globalComponent from '@globalComp';
 import createInternalGlobalComponent from './internalGlobalComponent';
 
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { routes } from '@temp/routes';
 import { siteData } from '@temp/siteData';
 
+import { SiteContext } from './context';
+
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-const SiteContext = React.createContext({
-  siteData: {},
-  path: '',
-  currentLocate: undefined,
-  currentLocaleSiteData: {},
-  currentPageSidebarItems: {},
-  allPagesSidebarItems: {},
-  currentPageInfo: {}
-});
-export { SiteContext };
+const App = ctx => {
+  const [path, setPath] = useState(ctx.url || '/');
+  const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(siteData, path);
+  const sidebarItems = resolveSidebarItems(siteData, path);
 
-export function createApp(ctx = {}, enableHot) {
-  const app = () => {
-    const [path, setPath] = useState(ctx.url || '/');
-    const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(siteData, path);
-    const sidebarItems = resolveSidebarItems(siteData, path);
+  const currentPageInfo = getCurrentPage(siteData.pages, routes, path);
 
-    const currentPageInfo = getCurrentPage(siteData.pages, routes, path);
-
-    return (
-      <SiteContext.Provider
-        value={{
-          currentLocate: targetLocale,
-          siteData,
-          path,
-          currentLocaleSiteData,
-          ...sidebarItems,
-          currentPageInfo
+  return (
+    <SiteContext.Provider
+      value={{
+        currentLocate: targetLocale,
+        siteData,
+        path,
+        currentLocaleSiteData,
+        ...sidebarItems,
+        currentPageInfo
+      }}
+    >
+      <MDXProvider
+        components={{
+          ...globalComponent,
+          ...createInternalGlobalComponent(SiteContext)
         }}
       >
-        <MDXProvider
-          components={{
-            ...globalComponent,
-            ...createInternalGlobalComponent(SiteContext)
-          }}
-        >
-          <Switch>
-            {routes.map((route, index) => {
-              if (route.redirect) {
-                return (
-                  <Route key={index} {...route} render={() => <Redirect to={route.redirect} />} />
-                );
-              }
-              const Comp = route.route_component;
+        <Switch>
+          {routes.map((route, index) => {
+            if (route.redirect) {
               return (
-                <Route
-                  key={index}
-                  {...route}
-                  render={props => {
-                    if (path != props.match.path) {
-                      setPath(props.match.path);
-                    }
-                    return <Comp {...props} />;
-                  }}
-                />
+                <Route key={index} {...route} render={() => <Redirect to={route.redirect} />} />
               );
-            })}
-          </Switch>
-        </MDXProvider>
-      </SiteContext.Provider>
-    );
-  };
-
-  if (enableHot) {
-    return hot(app);
-  }
-
-  return app;
-}
-
-const components = React.createContext({});
-export { components };
-
-const useSiteContext = () => {
-  return useContext(SiteContext);
+            }
+            const Comp = route.route_component;
+            return (
+              <Route
+                key={index}
+                {...route}
+                render={props => {
+                  if (path != props.match.path) {
+                    setPath(props.match.path);
+                  }
+                  return <Comp {...props} />;
+                }}
+              />
+            );
+          })}
+        </Switch>
+      </MDXProvider>
+    </SiteContext.Provider>
+  );
 };
 
-export { useSiteContext };
+export default hot(App);

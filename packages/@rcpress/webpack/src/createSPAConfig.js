@@ -10,7 +10,6 @@ module.exports = function createSPAConfig(options, cliOptions, isProd, isServer)
   const { sourceDir, outDir } = options;
   config
     .entry('app')
-    .add(!isProd ? 'react-hot-loader/patch' : '')
     .add(
       isServer
         ? '@rcpress/core/lib/web/clientSSREntry.js'

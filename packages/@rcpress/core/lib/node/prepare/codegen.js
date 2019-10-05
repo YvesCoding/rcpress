@@ -1,5 +1,9 @@
 const path = require('path');
 
+const genLoadableImportedCode = (name, path) => {
+  return `const  ${name} = loadable(() => import(${path}));\n`;
+};
+
 exports.genRoutesFile = async function({
   siteData: {
     pages,
@@ -8,6 +12,15 @@ exports.genRoutesFile = async function({
   pageFiles,
   sourceDir
 }) {
+  function getImportedMakrdown({}, index) {
+    const file = pageFiles[index];
+
+    return genLoadableImportedCode(
+      `AsyncMD$${index}`,
+      JSON.stringify(path.resolve(sourceDir, file))
+    );
+  }
+
   function genRoute({ path: pagePath }, index) {
     const file = pageFiles[index];
     const filePath = path.join(docsDir, file);
@@ -15,11 +28,9 @@ exports.genRoutesFile = async function({
   {
     path: ${JSON.stringify(pagePath)},
     filePath: ${JSON.stringify(filePath)},
-    markdown: loadable(() => import(${JSON.stringify(
-      path.resolve(sourceDir, file)
-    )})),
+    markdown: AsyncMD$${index},
     name: '${pagePath}' ,
-    route_component:ThemeLayout,
+    route_component: LayoutWrapper,
     exact: true
   }`;
 
@@ -47,32 +58,15 @@ exports.genRoutesFile = async function({
 
   const notFoundRoute = `,
   { 
-    route_component: ThemeNotFound 
+    route_component: nNotFoundWrapper 
   }`;
 
   return (
     `import loadable from '@loadable/component';\n` +
-    `import React from 'react';\n` +
-    `const ThemeLayout = loadable(() => import('@themeLayout'));\n` +
-    `const ThemeNotFound = loadable(() => import('@themeNotFound'));\n` +
-    `export const routes = [${pages
-      .map(genRoute)
-      .join(',')}${notFoundRoute}\n]`
+    genLoadableImportedCode('LayoutWrapper', "'@rcpress/core/lib/web/layoutHotWrapper'") +
+    genLoadableImportedCode('nNotFoundWrapper', "'@rcpress/core/lib/web/notFoundHotWrapper'") +
+    '\n' +
+    `${pages.map(getImportedMakrdown).join('')}` +
+    `export const routes = [${pages.map(genRoute).join(',')}${notFoundRoute}\n]`
   );
 };
-
-// TODO add global component.
-// exports.genComponentRegistrationFile = async function ({ sourceDir }) {
-//   function genImport(file) {
-//     const name = fileToComponentName(file);
-//     const baseDir = path.resolve(sourceDir, '.rcpress/components');
-//     const absolutePath = path.resolve(baseDir, file);
-//     const code = `Vue.component(${JSON.stringify(name)}, () => import(${JSON.stringify(
-//       absolutePath
-//     )}))`;
-//     return code;
-//   }
-
-//   const components = (await resolveComponents(sourceDir)) || [];
-//   return `import React from 'react'\n` + `import loadable from '@loadable/component'\n` + components.map(genImport).join('\n');
-// };

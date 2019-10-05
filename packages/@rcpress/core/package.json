@@ -11,7 +11,7 @@
   "author": {
     "name": "Yves Wang"
   },
-  "main": "lib/web/app.js",
+  "main": "lib/web/context.js",
   "typings": "types/index.d.ts",
   "dependencies": {
     "@babel/cli": "^7.0.0",
@@ -19,6 +19,7 @@
     "@babel/generator": "^7.0.0",
     "@babel/plugin-proposal-decorators": "^7.1.6",
     "@babel/traverse": "^7.0.0",
+    "@hot-loader/react-dom": "^16.9.0",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/server": "^5.10.2",
     "@rcpress/markdown": "^0.0.0",
@@ -34,14 +35,15 @@
     "himalaya": "^1.1.0",
     "js-yaml": "^3.13.1",
     "less": "^3.8.1",
+    "lodash": "^4.17.15",
     "mdast-util-to-string": "^1.0.5",
     "node-fetch": "^2.5.0",
     "nprogress": "^0.2.0",
-    "prismjs": "^1.15.0",
     "prism-react-renderer": "^0.1.7",
+    "prismjs": "^1.15.0",
     "rc-drawer": "^2.0.1",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-github-button-fix-iebug": "^0.0.1",
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.0.1",
@@ -51,7 +53,6 @@
     "toml": "^3.0.0",
     "unist-util-find": "^1.0.1",
     "unist-util-select": "^2.0.2",
-    "lodash": "^4.17.15",
     "webpack-hot-middleware": "^2.25.0"
   },
   "devDependencies": {
