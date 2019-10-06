@@ -7,7 +7,6 @@ module.exports = class WebpackLogPlugin {
   }
 
   apply(compiler) {
-    let isFirst = true;
     compiler.hooks.done.tap('rcpress-log', stats => {
       clearScreen();
       const { displayHost, port, publicPath, isProd } = this.options;
@@ -24,8 +23,7 @@ module.exports = class WebpackLogPlugin {
         )} finished in ${stats.endTime - stats.startTime} ms!`
       );
 
-      if (isFirst && !isProd) {
-        isFirst = false;
+      if (!isProd) {
         console.log(
           `\n${chalk.gray('>')} RcPress dev server listening at ${chalk.cyan(
             `http://${displayHost}:${port}${publicPath}`

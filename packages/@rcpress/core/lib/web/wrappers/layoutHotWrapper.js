@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// This file used to import react hot loader and hot exported the layout and 440 page.
+// This file used to import react hot loader and hot exported the layout page.
 
 import { hot } from 'react-hot-loader';
 import React from 'react';

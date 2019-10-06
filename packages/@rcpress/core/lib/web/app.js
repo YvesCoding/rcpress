@@ -3,10 +3,10 @@ import { hot } from 'react-hot-loader/root';
 import '@temp/rhlConfig';
 import 'regenerator-runtime/runtime';
 import 'core-js/stage/3';
-import { getcurrentLocaleConfigByPath, resolveSidebarItems, getCurrentPage } from './util';
+import { getcurrentLocaleConfigByPath, resolveSidebarItems, getCurrentPage } from './shared/util';
 import { MDXProvider } from '@mdx-js/react';
 import globalComponent from '@globalComp';
-import createInternalGlobalComponent from './internalGlobalComponent';
+import createInternalGlobalComponent from './components';
 
 import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';

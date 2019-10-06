@@ -63,8 +63,11 @@ exports.genRoutesFile = async function({
 
   return (
     `import loadable from '@loadable/component';\n` +
-    genLoadableImportedCode('LayoutWrapper', "'@rcpress/core/lib/web/layoutHotWrapper'") +
-    genLoadableImportedCode('nNotFoundWrapper', "'@rcpress/core/lib/web/notFoundHotWrapper'") +
+    genLoadableImportedCode('LayoutWrapper', "'@rcpress/core/lib/web/wrappers/layoutHotWrapper'") +
+    genLoadableImportedCode(
+      'nNotFoundWrapper',
+      "'@rcpress/core/lib/web/wrappers/notFoundHotWrapper'"
+    ) +
     '\n' +
     `${pages.map(getImportedMakrdown).join('')}` +
     `export const routes = [${pages.map(genRoute).join(',')}${notFoundRoute}\n]`
