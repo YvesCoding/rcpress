@@ -1,5 +1,3 @@
-const webpack = require('webpack');
-const React = require('react');
 const { renderToString } = require('react-dom/server');
 const { ChunkExtractor } = require('@loadable/server');
 const { Helmet } = require('react-helmet');

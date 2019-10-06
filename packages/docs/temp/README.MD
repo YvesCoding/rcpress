@@ -12,4 +12,4 @@ features:
     details: Support <a target="_blank" href="https://github.com/mdx-js/mdx">mdx</a> to support <a href="guide/theme#custom-layout">custom layout</a> (eg custom site header, bottom, homepage, etc.)
 ---
 
-16
+1

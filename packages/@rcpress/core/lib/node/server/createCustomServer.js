@@ -1,12 +1,12 @@
 const path = require('path');
 const compression = require('compression');
-const Render = require('./pageRender');
+const Render = require('../pageRender');
 const express = require('express');
 
 const createServer = ({ app, spaConfig, ssrConfig, templatePath, options }) => {
   let renderer;
 
-  let { readyPromise, clientMfs } = require('./step-server')(
+  let { readyPromise, clientMfs } = require('./stepCustomServer')(
     spaConfig,
     ssrConfig,
     app,

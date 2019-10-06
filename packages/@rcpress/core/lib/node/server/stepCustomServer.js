@@ -1,7 +1,6 @@
 const fs = require('fs');
 const webpack = require('webpack');
 const chokidar = require('chokidar');
-const MFS = require('memory-fs');
 
 module.exports = function setupDevServer(clientConfig, serverConfig, app, templatePath, cb) {
   let bundle;

@@ -13,7 +13,7 @@ module.exports = class WebpackLogPlugin {
       const { displayHost, port, publicPath, isProd } = this.options;
       if (stats.compilation.errors && stats.compilation.errors.length) {
         for (const e of stats.compilation.errors) {
-          logger.error(e.message);
+          logger.error(e);
         }
       }
       const time = new Date().toTimeString().match(/^[\d:]+/)[0];

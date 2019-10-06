@@ -1,3 +1,3 @@
-exports.spa = require('./spa');
-exports.ssr = require('./ssr');
-exports.eject = require('./eject');
+exports.spa = require('./commands/spa');
+exports.ssr = require('./commands/ssr');
+exports.eject = require('./commands/eject');
