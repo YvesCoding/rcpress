@@ -16,6 +16,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     markdownLoader: { frontMatterEmitter }
   } = require('@rcpress/webpack');
   const { applyUserWebpackConfig, logger } = require('@rcpress/util');
+  const PageRender = require('../../pageRender');
 
   logger.wait('\nExtracting site metadata...');
   const options = await prepare(sourceDir);
@@ -38,7 +39,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   }
 
   // resolve webpack config
-  let spaConfig = createSPAConfig(options, cliOptions, isProd, true).toConfig();
+  let spaConfig = createSPAConfig(options, cliOptions, isProd, true /* isServer */).toConfig();
   let ssrConfig = createSSRConfig(options, cliOptions, isProd).toConfig();
 
   const userConfig = options.siteConfig.configureWebpack;
@@ -64,8 +65,9 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     };
 
     new fileWatcher(update, sourceDir).watch();
-
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);
+  } else {
+    const render = new PageRender();
   }
 };

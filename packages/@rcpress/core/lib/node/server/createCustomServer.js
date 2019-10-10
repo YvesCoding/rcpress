@@ -40,14 +40,15 @@ const createServer = ({ app, spaConfig, ssrConfig, templatePath, options }) => {
     const context = {
       url: req.url
     };
-    renderer.renderToString(context, (err, html) => {
-      if (err) {
+    renderer
+      .renderToString(context)
+      .then(html => {
+        res.send(html);
+        console.log(`whole request: ${Date.now() - s}ms`);
+      })
+      .cache(err => {
         return handleError(err);
-      }
-      res.send(html);
-
-      console.log(`whole request: ${Date.now() - s}ms`);
-    });
+      });
   }
 
   app.get('*', (req, res) => {

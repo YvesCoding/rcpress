@@ -97,12 +97,6 @@ module.exports = async function build(sourceDir, cliOptions = {}) {
     );
   }
 
-  // DONE.
-  const relativeDir = path.relative(process.cwd(), outDir);
-  logger.success(
-    `\n${chalk.green('Success!')} Generated static files in ${chalk.cyan(relativeDir)}.\n`
-  );
-
   // --- helpers ---
 
   function compile(config) {
