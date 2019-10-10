@@ -68,6 +68,22 @@ program
   });
 
 program
+  .command('generate [targetDir]')
+  .description('generate static html files.')
+  .option('-d, --dest <outDir>', 'specify build output dir (default: .rcpress/dist)')
+  .option('--debug', 'build in development mode for debugging')
+  .action((dir = 'docs', { dest, debug }) => {
+    wrapCommand(ssr)(
+      path.resolve(dir),
+      {
+        dest,
+        debug
+      },
+      true /* is production */
+    );
+  });
+
+program
   .command('eject [targetDir]')
   .description('copy the default theme into .rcpress/theme for customization.')
   .action((dir = '.') => {

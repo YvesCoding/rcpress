@@ -20,22 +20,8 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
   logger.wait('\nExtracting site metadata...');
   const options = await prepare(sourceDir);
-
-  if (isProd) {
-    if (cliOptions.outDir) {
-      options.outDir = cliOptions.outDir;
-    }
-
-    const { outDir } = options;
-    if (path.resolve() === outDir) {
-      return console.error(
-        logger.error(
-          chalk.red('Unexpected option: outDir cannot be set to the current working directory.\n'),
-          false
-        )
-      );
-    }
-    await fs.remove(outDir);
+  if (cliOptions.outDir) {
+    options.outDir = cliOptions.outDir;
   }
 
   // resolve webpack config
@@ -68,6 +54,25 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);
   } else {
-    const render = new PageRender();
+    const { outDir } = options;
+    if (path.resolve() === outDir) {
+      return console.error(
+        logger.error(
+          chalk.red('Unexpected option: outDir cannot be set to the current working directory.\n'),
+          false
+        )
+      );
+    }
+    await fs.remove(outDir);
+
+    const webpack = require('webpack');
+    const stat = webpack([spaConfig, ssrConfig]);
+    const renderer = new PageRender(stat[0], {
+      clientManifest: stat[1],
+      template: path.resolve(__dirname, '../templates/index.ssr.html'),
+      outDir
+    });
+
+    renderer.renderPages(options.siteData.pages);
   }
 };

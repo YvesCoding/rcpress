@@ -19,7 +19,6 @@ module.exports = async function createServer(
   ssrConfig,
   useDevSServer = true
 ) {
-  const app = express();
   const port = await resolvePort(cliOptions.port || options.siteConfig.port);
   const isProd = process.env.NODE_ENV === 'production';
   const { host, displayHost } = await resolveHost(cliOptions.host || options.siteConfig.host);
@@ -35,6 +34,7 @@ module.exports = async function createServer(
   );
 
   if (!useDevSServer) {
+    const app = express();
     // we assume that we are in ssr dev environment if we dont use webpack dev server
     createCustomServer(ssrConfig, spaConfig, options, app, port, host);
   } else {
