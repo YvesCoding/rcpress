@@ -42,6 +42,19 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   // resolve webpack config
   let config = createSPAConfig(options, cliOptions, isProd);
 
+  let compilerDoneReporterOpts = {
+    isProd
+  };
+  if (!isProd) {
+    const resolvedOpts = await resolveHostandPort(
+      cliOptions.port || options.siteConfig.port,
+      cliOptions.host || options.siteConfig.host
+    );
+
+    compilerDoneReporterOpts = { ...compilerDoneReporterOpts, ...resolvedOpts };
+  }
+  config.plugin('rcpress-log').use(WebpackLogPlugin, [compilerDoneReporterOpts]);
+
   config
     .plugin('html')
     // using a fork of html-webpack-plugin to avoid it requiring webpack
@@ -64,12 +77,6 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
     // also listen for frontMatter changes from markdown files
     frontMatterEmitter.on('update', update);
-  } else {
-    config.plugin('rcpress-log').use(WebpackLogPlugin, [
-      {
-        isProd: true
-      }
-    ]);
   }
 
   config = config.toConfig();
@@ -79,6 +86,6 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   }
 
   if (!isProd) {
-    await createServer(options, cliOptions, config);
+    await createServer(options, config, null, host, port);
   }
 };

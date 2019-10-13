@@ -13,11 +13,7 @@ exports.normalizeHeadTag = function(tag) {
   };
 };
 
-exports.applyUserWebpackConfig = function(
-  userConfig,
-  config,
-  isServer
-) {
+exports.applyUserWebpackConfig = function(userConfig, config, isServer) {
   const merge = require('webpack-merge');
   if (typeof userConfig === 'object') {
     return merge(config, userConfig);
@@ -41,18 +37,8 @@ exports.inferTitle = function(frontMatter, headers) {
 
   const levelOneHead = headers.find(h => h.depth == 1);
 
-  return levelOneHead
-    ? deeplyParseHeaders(levelOneHead.value)
-    : '';
+  return levelOneHead ? deeplyParseHeaders(levelOneHead.value) : '';
 };
-
-// ensure only one `/` in new url
-exports.withPathPrefix = (url, pathPrefix) =>
-  (pathPrefix + url).replace(/\/\//, `/`);
-
-module.exports.logger = require('./logger');
-module.exports.deepMerge = require('./deepMerge');
-module.exports.emoji = require('./emoji');
 
 exports.parseFrontmatter = function(content) {
   const matter = require('gray-matter');
@@ -66,3 +52,12 @@ exports.parseFrontmatter = function(content) {
     }
   });
 };
+
+// ensure only one `/` in new url
+exports.withPathPrefix = (url, pathPrefix) => (pathPrefix + url).replace(/\/\//, `/`);
+
+exports.logger = require('./logger');
+exports.deepMerge = require('./deepMerge');
+exports.emoji = require('./emoji');
+exports.emoji = require('./emoji');
+exports.resolveHostandPort = require('./resolveHostandPort');
