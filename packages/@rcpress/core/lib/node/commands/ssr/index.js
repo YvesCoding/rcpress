@@ -94,15 +94,18 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     await fs.remove(outDir);
 
     const webpack = require('webpack');
-    webpack([spaConfig, ssrConfig], (err, stat) => {
+    webpack([ssrConfig, spaConfig], (err, stat) => {
       if (err) {
         throw error;
       }
 
       const stats = stat.stats;
-      const renderer = new PageRender(stats[0], {
-        clientManifest: stats[1],
-        template: path.resolve(__dirname, '../templates/index.ssr.html'),
+      const renderer = new PageRender(stats[0].toJson(), {
+        clientManifest: stats[1].toJson(),
+        template: fs.readFileSync(
+          path.resolve(__dirname, '../../templates/index.ssr.html'),
+          'utf-8'
+        ),
         outDir
       });
 
