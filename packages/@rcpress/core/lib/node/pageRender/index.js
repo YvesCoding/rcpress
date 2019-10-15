@@ -104,7 +104,9 @@ class Render {
       console.error(logger.error(chalk.red(`Error rendering ${pagePath}:`), false));
       throw e;
     }
-    const filename = decodeURIComponent(pagePath.replace(/\/$/, '/index.html').replace(/^\//, ''));
+    const filename = decodeURIComponent(
+      pagePath.replace(/\/$/, '/index').replace(/^\//, '') + '.html'
+    );
     const filePath = path.resolve(outDir, filename);
     await fs.ensureDir(path.dirname(filePath));
     await fs.writeFile(filePath, html);

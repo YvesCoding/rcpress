@@ -31,20 +31,20 @@ Global component
 
 ## Default global component
 
-### PageCustomer
+### SiteCustomer
 
 ```js
-<PageCustomer>
+<SiteCustomer>
   {ctx => {
     return `Current page path (not including base): ${ctx.path}`;
   }}
-</PageCustomer>
+</SiteCustomer>
 ```
 
-<PageCustomer>
+<SiteCustomer>
 {
     ctx => {
         return `Current page path (not including base): ${ctx.path}`
     }
 }
-</PageCustomer>
+</SiteCustomer>

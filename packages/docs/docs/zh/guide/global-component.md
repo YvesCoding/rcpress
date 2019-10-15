@@ -31,20 +31,20 @@ export default {
 
 ## 默认的全局组件
 
-### PageCustomer
+### SiteCustomer
 
 ```js
-<PageCustomer>
+<SiteCustomer>
   {ctx => {
     return `当前页面路径(不包含base)： ${ctx.path}`;
   }}
-</PageCustomer>
+</SiteCustomer>
 ```
 
-<PageCustomer>
+<SiteCustomer>
 {
     ctx => {
         return `当前页面路径(不包含base)： ${ctx.path}`
     }
 }
-</PageCustomer>
+</SiteCustomer>

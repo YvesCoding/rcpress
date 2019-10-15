@@ -9,6 +9,7 @@
     "bs": "lerna bootstrap",
     "build": "yarn build:docs",
     "serve": "yarn workspace docs serve",
+    "generate": "yarn workspace docs generate",
     "build-with-prefix": "cross-env base=/rcpress  yarn build",
     "build:docs": "yarn workspace docs build",
     "cl": "conventional-changelog -p angular -i CHANGELOG.md -s",
