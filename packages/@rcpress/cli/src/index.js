@@ -69,7 +69,7 @@ program
 
 program
   .command('generate [targetDir]')
-  .description('generate static html files.')
+  .description('generate static html files from server side render.')
   .option('-d, --dest <outDir>', 'specify build output dir (default: .rcpress/dist)')
   .option('--debug', 'build in development mode for debugging')
   .action((dir = 'docs', { dest, debug }) => {
