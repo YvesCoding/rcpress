@@ -1,6 +1,7 @@
 import React, { useContext, useReducer, useEffect } from 'react';
 import { noop } from '../shared/noop';
 import { register } from 'register-service-worker';
+import SWUpdateEvent from './SWUpdateEvent';
 
 // global site data sotred in the context
 export const SiteContext = React.createContext({
@@ -52,25 +53,23 @@ export const useSwNotice = () => {
     ) {
       register(`${BASE_URL}service-worker.js`, {
         ready() {
-          console.log('[vuepress:sw] Service worker is active.');
+          console.log('[rcpress:sw] Service worker is active.');
           state.ready();
         },
         cached(registration) {
-          console.log('[vuepress:sw] Content has been cached for offline use.');
+          console.log('[rcpress:sw] Content has been cached for offline use.');
           state.cached(new SWUpdateEvent(registration));
         },
         updated(registration) {
-          console.log('[vuepress:sw] Content updated.');
+          console.log('[rcpress:sw] Content updated.');
           state.updated(new SWUpdateEvent(registration));
         },
         offline() {
-          console.log(
-            '[vuepress:sw] No internet connection found. App is running in offline mode.'
-          );
+          console.log('[rcpress:sw] No internet connection found. App is running in offline mode.');
           state.offline();
         },
         error(err) {
-          console.error('[vuepress:sw] Error during service worker registration:', err);
+          console.error('[rcpress:sw] Error during service worker registration:', err);
           state.error(err);
         }
       });
