@@ -106,7 +106,7 @@ module.exports = async function resolveOptions(sourceDir) {
   let globalComponentPath = getCompWithExt(path.resolve(sourceDir, '.rcpress/globalComponent'));
 
   if (!globalComponentPath) {
-    globalComponentPath = path.resolve(__dirname, '../../web/noop.js');
+    globalComponentPath = path.resolve(__dirname, '../../web/shared/noop.js');
   }
 
   // TODO Algolia supported
