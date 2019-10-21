@@ -18,6 +18,19 @@ import { SiteContext } from './context';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
+// suggest dev server restart on base change
+if (module.hot) {
+  const prevBase = siteData.base;
+  module.hot.accept('../.temp/siteData', () => {
+    if (siteData.base !== prevBase) {
+      window.alert(
+        `[rcpress] Site base has changed. ` +
+          `Please restart dev server to ensure correct asset paths.`
+      );
+    }
+  });
+}
+
 const App = ctx => {
   const [path, setPath] = useState(ctx.url || '/');
   const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(siteData, path);
