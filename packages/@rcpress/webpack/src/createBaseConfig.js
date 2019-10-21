@@ -276,7 +276,8 @@ module.exports = function createBaseConfig(
       GA_ID: siteConfig.ga ? JSON.stringify(siteConfig.ga) : false,
       SW_ENABLED: !!siteConfig.serviceWorker,
       RCPRESS_VERSION: JSON.stringify(require('@rcpress/core/package.json').version),
-      LAST_COMMIT_HASH: JSON.stringify(getLastCommitHash())
+      LAST_COMMIT_HASH: JSON.stringify(getLastCommitHash()),
+      IS_SERVER: isServerBundle
     }
   ]);
 

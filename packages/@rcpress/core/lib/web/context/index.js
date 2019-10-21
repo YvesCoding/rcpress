@@ -19,3 +19,7 @@ const useSiteContext = () => {
 };
 
 export { useSiteContext };
+
+// service worker notification .
+
+export const useSW = () => {};

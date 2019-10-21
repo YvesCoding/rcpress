@@ -19,7 +19,7 @@ async function resolvePort(port) {
 }
 
 module.exports = async function resolveHostandPort(oldPort, oldHost) {
-  const port = resolvePort(oldPort);
+  const port = await resolvePort(oldPort);
   const { host, displayHost } = resolveHost(oldHost);
 
   return {

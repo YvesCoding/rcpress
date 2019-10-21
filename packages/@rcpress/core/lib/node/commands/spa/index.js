@@ -86,6 +86,12 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   }
 
   if (!isProd) {
-    await createServer(options, config, null, host, port);
+    await createServer(
+      options,
+      config,
+      null,
+      compilerDoneReporterOpts.host,
+      compilerDoneReporterOpts.port
+    );
   }
 };

@@ -15,14 +15,16 @@ module.exports = {
   },
   logo: '/favicon.png',
   head: [
-    ['link', { rel: 'icon', href: `/favicon.png` }]
-    // [
-    //   'script',
-    //   {
-    //     type: 'text/javascript',
-    //     src: 'https://s4.cnzz.com/z_stat.php?id=1277950202&web_id=1277950202'
-    //   }
-    // ]
+    ['link', { rel: 'icon', href: `/favicon.png` }][
+      // [
+      //   'script',
+      //   {
+      //     type: 'text/javascript',
+      //     src: 'https://s4.cnzz.com/z_stat.php?id=1277950202&web_id=1277950202'
+      //   }
+      // ]
+      ('link', { rel: 'manifest', href: '/manifest.json' })
+    ]
   ],
   footer:
     'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>',

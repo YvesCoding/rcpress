@@ -46,7 +46,7 @@ const createServer = ({ app, spaConfig, ssrConfig, templatePath, options }) => {
         res.send(html);
         console.log(`whole request: ${Date.now() - s}ms`);
       })
-      .cache(err => {
+      .catch(err => {
         return handleError(err);
       });
   }

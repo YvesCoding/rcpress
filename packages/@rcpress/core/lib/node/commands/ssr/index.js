@@ -41,6 +41,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
     compilerDoneReporterOpts = { ...compilerDoneReporterOpts, ...resolvedOpts };
   }
+
   spaConfig.plugin('rcpress-log').use(WebpackLogPlugin, [compilerDoneReporterOpts]);
 
   if (!isProd) {
@@ -77,8 +78,8 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       options,
       spaConfig,
       ssrConfig,
-      host,
-      port,
+      compilerDoneReporterOpts.host,
+      compilerDoneReporterOpts.port,
       false /* use webpack-dev-server*/
     );
   } else {
