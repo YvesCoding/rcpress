@@ -18,10 +18,6 @@ export const useSiteContext = () => {
 };
 
 // sw notice mechanism hook.
-const wrapperConsole = logStr => fn => {
-  console.log(logStr);
-  return fn;
-};
 const swReducer = (state, action) => {
   switch (action.type) {
     case 'ready':
@@ -47,5 +43,39 @@ export const useSwNotice = () => {
     error: noop
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // Register service worker
+    if (
+      process.env.NODE_ENV === 'production' &&
+      SW_ENABLED &&
+      window.location.protocol === 'https:'
+    ) {
+      register(`${BASE_URL}service-worker.js`, {
+        ready() {
+          console.log('[vuepress:sw] Service worker is active.');
+          state.ready();
+        },
+        cached(registration) {
+          console.log('[vuepress:sw] Content has been cached for offline use.');
+          state.cached(new SWUpdateEvent(registration));
+        },
+        updated(registration) {
+          console.log('[vuepress:sw] Content updated.');
+          state.updated(new SWUpdateEvent(registration));
+        },
+        offline() {
+          console.log(
+            '[vuepress:sw] No internet connection found. App is running in offline mode.'
+          );
+          state.offline();
+        },
+        error(err) {
+          console.error('[vuepress:sw] Error during service worker registration:', err);
+          state.error(err);
+        }
+      });
+    }
+  }, []);
+
+  return dispatch;
 };
