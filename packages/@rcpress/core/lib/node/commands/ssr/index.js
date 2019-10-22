@@ -39,7 +39,11 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       cliOptions.host || options.siteConfig.host
     );
 
-    compilerDoneReporterOpts = { ...compilerDoneReporterOpts, ...resolvedOpts };
+    compilerDoneReporterOpts = {
+      ...compilerDoneReporterOpts,
+      ...resolvedOpts,
+      publicPath: options.siteData.base
+    };
   }
 
   spaConfig.plugin('rcpress-log').use(WebpackLogPlugin, [compilerDoneReporterOpts]);
