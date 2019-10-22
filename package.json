@@ -14,7 +14,7 @@
     "build:docs": "yarn workspace docs build",
     "cl": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "clean": "lerna clean && rm -rf node_modules",
-    "publish": "lerna publish --conventional-commits",
+    "pub": "lerna publish --conventional-commits",
     "dev": "yarn workspace docs dev"
   },
   "devDependencies": {
