@@ -1,17 +1,16 @@
 {
   "name": "@rcpress/markdown",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "src/index.js",
   "dependencies": {
-    "@rcpress/util": "^0.0.0",
     "@mdx-js/mdx": "^1.0.0-rc.4",
     "@mdx-js/react": "^1.0.0-rc.5",
-    "mdast-util-toc": "",
+    "@rcpress/util": "^0.1.0",
     "mdast-util-to-string": "^1.0.5",
+    "mdast-util-toc": "",
+    "parse-numeric-range": "^0.0.2",
     "toml": "^3.0.0",
     "unist-util-find": "^1.0.1",
-    "unist-util-select": "^2.0.2",
-    "parse-numeric-range": "^0.0.2"
-  },
-  "devDependencies": {}
+    "unist-util-select": "^2.0.2"
+  }
 }

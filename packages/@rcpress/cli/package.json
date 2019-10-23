@@ -1,6 +1,6 @@
 {
   "name": "@rcpress/cli",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Create a website based on Ant Design and GatsbyJs",
   "keywords": [
     "rcpress"
@@ -11,9 +11,9 @@
     "rcpress": "index.js"
   },
   "dependencies": {
-    "@rcpress/core": "^0.0.0",
-    "@rcpress/theme-default": "^0.0.0",
-    "@rcpress/util": "^0.0.0",
+    "@rcpress/core": "^0.1.0",
+    "@rcpress/theme-default": "^0.1.0",
+    "@rcpress/util": "^0.1.0",
     "chalk": "2.4.2",
     "commander": "2.19.0",
     "cross-spawn": "6.0.5",

@@ -1,11 +1,11 @@
 {
   "name": "@rcpress/util",
   "main": "src/index.js",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "dependencies": {
-    "node-emoji": "^1.8.1",
-    "toml": "^3.0.0",
     "gray-matter": "^4.0.2",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "node-emoji": "^1.8.1",
+    "toml": "^3.0.0"
   }
 }

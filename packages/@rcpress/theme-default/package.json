@@ -1,11 +1,11 @@
 {
   "name": "@rcpress/theme-default",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The default theme of RcPress",
   "dependencies": {
-    "axios": "^0.18.0",
     "antd": "latest",
-    "react-media": "next",
-    "nprogress": "^0.2.0"
+    "axios": "^0.18.0",
+    "nprogress": "^0.2.0",
+    "react-media": "next"
   }
 }
