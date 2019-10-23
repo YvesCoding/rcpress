@@ -81,15 +81,20 @@ module.exports = function createBaseConfig(
       (siteConfig.configureWebpack || '').toString()
   });
 
+  const resolve = p => require.resolve(p);
   const babelOption = {
     cacheDirectory,
     cacheIdentifier,
-    presets: [['@babel/preset-typescript'], ['@babel/preset-env'], ['@babel/preset-react']],
+    presets: [
+      [resolve('@babel/preset-typescript')],
+      [resolve('@babel/preset-env')],
+      [resolve('@babel/preset-react')]
+    ],
     plugins: [
-      ['@babel/plugin-proposal-decorators', { legacy: true }],
-      ['@babel/plugin-proposal-class-properties'],
-      ['@babel/plugin-transform-regenerator'],
-      ['react-hot-loader/babel'],
+      [resolve('@babel/plugin-proposal-decorators'), { legacy: true }],
+      [resolve('@babel/plugin-proposal-class-properties')],
+      [resolve('@babel/plugin-transform-regenerator')],
+      [resolve('react-hot-loader/babel')],
       loadableBabelPlugin
     ]
   };

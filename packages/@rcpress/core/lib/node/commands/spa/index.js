@@ -16,7 +16,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     createSPAConfig,
     markdownLoader: { frontMatterEmitter }
   } = require('@rcpress/webpack');
-  const { applyUserWebpackConfig, logger } = require('@rcpress/util');
+  const { applyUserWebpackConfig, logger, resolveHostandPort } = require('@rcpress/util');
 
   logger.wait('\nExtracting site metadata...');
 
