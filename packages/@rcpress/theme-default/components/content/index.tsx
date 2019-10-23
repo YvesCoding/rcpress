@@ -63,7 +63,7 @@ const Article: FunctionComponent<{
             </h1>
           ) : null}
 
-          {lastUpdated && !disableUpdateTime && (
+          {lastUpdated && !disableUpdateTime && modifiedTime && (
             <div className={`modifiedTime ${noAvatar ? 'modifiedTimeLeft' : ''}`}>
               {!noAvatar && <AvatarList avatarList={avatarList} />}
               {lastUpdated} {moment(modifiedTime).format('YYYY-MM-DD HH:mm:SS')}

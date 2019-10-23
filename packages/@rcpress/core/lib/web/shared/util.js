@@ -1,8 +1,8 @@
 export function getCurrentLoacle(siteData, path) {
-  let targetLocale = '/';
+  let targetLocale = '';
 
   const locales = siteData.themeConfig.locales;
-  if (!locales) return targetLocale;
+  if (!locales) return siteData.base || '/';
 
   for (let locale in locales) {
     if (path != targetLocale && path.startsWith(locale)) {
@@ -13,14 +13,11 @@ export function getCurrentLoacle(siteData, path) {
   return Object.keys(locales).length > 1 && targetLocale;
 }
 
-export function getcurrentLocaleConfigByPath(
-  siteData,
-  path
-) {
+export function getcurrentLocaleConfigByPath(siteData, path) {
   const targetLocale = getCurrentLoacle(siteData, path);
-  if (!targetLocale) {
+  if (!siteData.themeConfig.locales) {
     return {
-      locale: '/',
+      locale: targetLocale,
       currentLocaleSiteData: siteData
     };
   }
@@ -79,13 +76,12 @@ function resolvePath(relative, base, append = '') {
 
 export function resolveSidebarItems(siteData, currentPath) {
   const { pages } = siteData;
-  const {
-    currentLocaleSiteData,
-    targetLocale
-  } = getcurrentLocaleConfigByPath(siteData, currentPath);
+  const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(
+    siteData,
+    currentPath
+  );
 
-  const pageSidebarConfig =
-    currentLocaleSiteData.themeConfig.sidebar;
+  const pageSidebarConfig = currentLocaleSiteData.themeConfig.sidebar;
 
   let currentPageSidebarItems = [];
   let allPagesSidebarItems = [];
@@ -96,14 +92,8 @@ export function resolveSidebarItems(siteData, currentPath) {
       allPagesSidebarItems
     };
   } else {
-    allPagesSidebarItems = Object.keys(
-      pageSidebarConfig
-    ).reduce((pre, cur) => {
-      const resolvedConfig = resolvePageSidebar(
-        pageSidebarConfig[cur],
-        cur,
-        pages
-      );
+    allPagesSidebarItems = Object.keys(pageSidebarConfig).reduce((pre, cur) => {
+      const resolvedConfig = resolvePageSidebar(pageSidebarConfig[cur], cur, pages);
 
       if (currentPath.startsWith(cur)) {
         currentPageSidebarItems = resolvedConfig;
@@ -120,26 +110,19 @@ export function resolveSidebarItems(siteData, currentPath) {
   }
 }
 function resolvePageSidebar(config, path, pages) {
-  return config
-    ? config.map(item => resolveItem(item, pages, path, 1))
-    : [];
+  return config ? config.map(item => resolveItem(item, pages, path, 1)) : [];
 }
 
 function resolveItem(item, pages, base, nestedLevel) {
   if (typeof item === 'string') {
     return resolvePage(pages, item, base);
   } else if (Array.isArray(item)) {
-    return Object.assign(
-      resolvePage(pages, item[0], base),
-      {
-        title: item[1]
-      }
-    );
+    return Object.assign(resolvePage(pages, item[0], base), {
+      title: item[1]
+    });
   } else {
     if (nestedLevel > 2) {
-      console.error(
-        '[RcPress] Currently RcPress sidebar only support max two levels nested. '
-      );
+      console.error('[RcPress] Currently RcPress sidebar only support max two levels nested. ');
 
       return null;
     }
@@ -147,9 +130,7 @@ function resolveItem(item, pages, base, nestedLevel) {
     const children = item.children || [];
     return {
       title: item.title,
-      children: children.map(child =>
-        resolveItem(child, pages, base, nestedLevel + 1)
-      ),
+      children: children.map(child => resolveItem(child, pages, base, nestedLevel + 1)),
       collapsable: item.collapsable !== false
     };
   }
@@ -172,9 +153,7 @@ export function resolvePage(pages, rawPath, base) {
     }
   }
 
-  console.error(
-    `[RcPress] No matching page found for sidebar item "${rawPath}"`
-  );
+  console.error(`[RcPress] No matching page found for sidebar item "${rawPath}"`);
   return {
     children: [],
     title: rawPath,

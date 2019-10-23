@@ -48,6 +48,9 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
   spaConfig.plugin('rcpress-log').use(WebpackLogPlugin, [compilerDoneReporterOpts]);
 
+  spaConfig = spaConfig.toConfig();
+  ssrConfig = ssrConfig.toConfig();
+
   if (!isProd) {
     // setup watchers to update options and dynamically generated files
     const update = () => {
@@ -63,18 +66,8 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
 
   const userConfig = options.siteConfig.configureWebpack;
   if (userConfig) {
-    ssrConfig = applyUserWebpackConfig(
-      userConfig,
-      ssrConfig.toConfig(),
-      true /* isServer */,
-      isProd
-    );
-    spaConfig = applyUserWebpackConfig(
-      userConfig,
-      spaConfig.toConfig(),
-      true /* isServer */,
-      isProd
-    );
+    ssrConfig = applyUserWebpackConfig(userConfig, ssrConfig, true /* isServer */, isProd);
+    spaConfig = applyUserWebpackConfig(userConfig, spaConfig, true /* isServer */, isProd);
   }
 
   if (!isProd) {
