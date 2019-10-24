@@ -6,3 +6,5 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # 0.1.0 (2019-10-23)
 
 **Note:** Version bump only for package @rcpress/cli
+#!/usr/bin/env node
+require("./src/index");

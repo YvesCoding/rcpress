@@ -85,7 +85,7 @@ class Render {
     const pagePath = page.path;
     readline.clearLine(process.stdout, 0);
     readline.cursorTo(process.stdout, 0);
-    process.stdout.write(`Rendering page: ${pagePath}`);
+    process.stdout.write(`Rendering page: ${pagePath}\n`);
 
     const meta = ((page.frontMatter && page.frontMatter.meta) || []).filter(
       item => item.name !== 'description'

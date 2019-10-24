@@ -23,9 +23,9 @@ jobs:
     steps:
       - checkout
       - run: yarn && yarn bs
-      - run: yarn build-with-prefix
+      - run: yarn generate-with-prefix
       - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/before-dep.sh"
-      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public root@$DOCKER_IP:~/rcpress/tmp
+      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/docs/.rcpress/dist/* root@$DOCKER_IP:~/rcpress/tmp
       - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/after-dep.sh"
 workflows:
   version: 2

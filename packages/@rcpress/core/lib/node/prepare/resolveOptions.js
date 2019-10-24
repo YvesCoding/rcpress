@@ -64,6 +64,7 @@ module.exports = async function resolveOptions(sourceDir) {
     themePath = path.dirname(defaultThemeLayoutPath);
     themeLayoutPath = defaultThemeLayoutPath;
     themeNotFoundPath = resolvePathWidthExts(`${themePath}/NotFound`);
+    // console.log('defaultThemePath:', defaultThemeLayoutPath);
   } else {
     // resolve theme Layout
     if (siteConfig.theme) {
@@ -91,12 +92,7 @@ module.exports = async function resolveOptions(sourceDir) {
       themeNotFoundPath = resolvePathWidthExts(`${path.dirname(defaultThemeLayoutPath)}/NotFound`);
     }
 
-    // TODO rcpress should also have a similar config file to enhance app.
-    // resolve theme enhanceApp
-    // themeEnhanceAppPath = path.resolve(themePath, 'enhanceApp.js');
-    // if (!fs.existsSync(themeEnhanceAppPath)) {
-    //   themeEnhanceAppPath = null;
-    // }
+    // console.log('customThemePath:', themeLayoutPath);
   }
 
   // resolve theme config
@@ -186,6 +182,8 @@ module.exports = async function resolveOptions(sourceDir) {
   // make tmp path
   const tempPath = path.resolve(__dirname, '../../../.temp');
   fs.ensureDirSync(tempPath);
+
+  console.log('layoutPath:', themeLayoutPath);
 
   const options = {
     siteConfig,

@@ -84,6 +84,9 @@ exports.getGitLastUpdatedTimeStamp = function(filepath) {
 module.exports.createResolveThemeLayoutPath = sourceDir => name => {
   let themePath = '';
   try {
+    // console.log('resolveThemeLayout...');
+    // console.log('sourceDir:', sourceDir);
+    // console.log('name:', name);
     themePath = createResolvePathWithExts(sourceDir)(`${name}/Layout`);
   } catch (error) {
     throw new Error(logger.error(`Failed to load theme "${name}"`, false));
@@ -94,17 +97,18 @@ module.exports.createResolveThemeLayoutPath = sourceDir => name => {
 
 const createResolvePathWithExts = sourceDir => basePath => {
   const extensions = ['ts', 'tsx', 'js', 'jsx'];
+  // console.log('resolvedPath:', path.resolve(__dirname, '../../../../node_modules'));
 
   for (let index = 0; index < extensions.length; index++) {
     const ext = extensions[index];
     try {
       return require.resolve(`${basePath}.${ext}`, {
-        paths: [path.resolve(__dirname, '../../../node_modules'), path.resolve(sourceDir)]
+        paths: [path.resolve(__dirname, '../../../../node_modules'), path.resolve(sourceDir)]
       });
     } catch (error) {}
   }
 
-  return '';
+  throw new Error('Fail to resolve the extension of', basePath);
 };
 
 const getCompWithExt = pathWithoutExt => {

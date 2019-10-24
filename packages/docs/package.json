@@ -6,10 +6,10 @@
   "license": "MIT",
   "author": "",
   "scripts": {
-    "dev": "node ../@rcpress/cli/src/index dev temp",
-    "generate": "node ../@rcpress/cli/src/index generate temp",
-    "build": "node ../@rcpress/cli/src/index build temp",
-    "serve": "node ../@rcpress/cli/src/index serve temp"
+    "dev": "rcpress dev",
+    "generate": "rcpress generate",
+    "build": "rcpress build",
+    "serve": "rcpress serve"
   },
   "devDependencies": {
     "@rcpress/cli": "^0.1.0"
