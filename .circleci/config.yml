@@ -1,0 +1,39 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+
+defaults: &defaults
+  environment:
+    - APP_VERSION: $CIRCLE_SHA1
+  working_directory: ~/project/rcpress
+  docker:
+    # specify the version you desire here
+    - image: circleci/node:10.15.2
+
+jobs:
+  build-docs:
+    <<: *defaults
+
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.15.2
+
+    steps:
+      - checkout
+      - run: yarn && yarn bs
+      - run: yarn build-with-prefix
+      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/before-dep.sh"
+      - run: scp -o "StrictHostKeyChecking no" -r packages/docs/public root@$DOCKER_IP:~/rcpress/tmp
+      - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/after-dep.sh"
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-docs:
+          filters:
+            branches:
+              only:
+                - 'master'
+          context: aliyun

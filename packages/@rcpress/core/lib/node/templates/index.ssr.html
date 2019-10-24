@@ -1,0 +1,24 @@
+<!-- prettier-ignore -->
+<!DOCTYPE html>
+<html {{{ htmlAttr }}}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+     <!--react-helmet render area  -->
+    {{{ title }}}
+     {{{ meta }}}
+     {{{ helmet-links }}}
+    <script>
+     window.RC_CONTEXT = "{{ RC_CONTEXT }}";
+    </script>
+    
+    <!--loadable-components prefetch  -->
+    {{{ links }}} 
+    {{{ style }}}  
+  </head>
+  <body>
+    <div id="app">{{{ html() }}}</div>
+     <!--loadable-components render area  -->
+    {{{ scripts }}}
+  </body>
+</html>

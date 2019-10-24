@@ -1,0 +1,211 @@
+/**
+ * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/chriskempson/tomorrow-theme
+ * @author Rose Pritchard
+ */
+
+pre code[class*='language-'],
+pre[class*='language-'] {
+  color: #ccc;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono',
+    'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0;
+  overflow: auto;
+}
+
+pre[class*='language-'] {
+  background: #2d2d2d;
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #ccc;
+}
+
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+  color: #e2777a;
+}
+
+.token.function-name {
+  color: #6196cc;
+}
+
+.token.boolean,
+.token.number,
+.token.function {
+  color: #f08d49;
+}
+
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+  color: #f8c555;
+}
+
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+  color: #cc99cd;
+}
+
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+  color: #7ec699;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #67cdcc;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.inserted {
+  color: green;
+}
+
+/////////
+
+.rcpress-highlight {
+  background: #f2f4f5;
+  position: relative;
+  margin: 1.5em 0;
+}
+
+.rcpress-highlight pre[class*='language-'] {
+  // background-color: transparent;
+  border: 0;
+  -webkit-overflow-scrolling: touch;
+  position: static !important;
+}
+
+.rcpress-highlight pre[class*='language-']::before {
+  border-radius: 0 0 4px 4px;
+  // color: rgba(0, 0, 0, 0.65);
+  font-size: 0.75rem;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas,
+    Liberation Mono, Courier New, monospace;
+  letter-spacing: 0.075em;
+  line-height: 1;
+  position: absolute;
+  right: 1rem;
+  text-align: right;
+  text-transform: uppercase;
+  top: 0.25rem;
+}
+
+.rcpress-highlight
+  pre[class*='language-javascript']::before {
+  content: 'js';
+}
+
+.rcpress-highlight pre[class*='language-js']::before {
+  content: 'js';
+}
+
+.rcpress-highlight pre[class*='language-jsx']::before {
+  content: 'jsx';
+}
+
+.rcpress-highlight pre[class*='language-graphql']::before {
+  content: 'GraphQL';
+}
+
+.rcpress-highlight pre[class*='language-html']::before {
+  content: 'html';
+}
+
+.rcpress-highlight pre[class*='language-css']::before {
+  content: 'css';
+}
+
+.rcpress-highlight pre[class*='language-mdx']::before {
+  content: 'mdx';
+  font-weight: 400;
+}
+
+.rcpress-highlight pre[class*='language-shell']::before {
+  content: 'shell';
+}
+
+.rcpress-highlight pre[class*='language-sh']::before {
+  content: 'sh';
+}
+
+.rcpress-highlight pre[class*='language-bash']::before {
+  content: 'bash';
+}
+
+.rcpress-highlight pre[class*='language-yaml']::before {
+  content: 'yaml';
+}
+
+.rcpress-highlight pre[class*='language-markdown']::before {
+  content: 'md';
+}
+
+.rcpress-highlight pre[class*='language-json']::before,
+.rcpress-highlight pre[class*='language-json5']::before {
+  content: 'json';
+}
+
+.rcpress-highlight pre[class*='language-diff']::before {
+  content: 'diff';
+}
+
+.rcpress-highlight pre[class*='language-text']::before {
+  content: 'text';
+}
+
+.rcpress-highlight pre[class*='language-flow']::before {
+  content: 'flow';
+}

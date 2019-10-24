@@ -1,0 +1,17 @@
+{
+  "name": "docs",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
+  "scripts": {
+    "dev": "node ../@rcpress/cli/src/index dev temp",
+    "generate": "node ../@rcpress/cli/src/index generate temp",
+    "build": "node ../@rcpress/cli/src/index build temp",
+    "serve": "node ../@rcpress/cli/src/index serve temp"
+  },
+  "devDependencies": {
+    "@rcpress/cli": "^0.1.0"
+  }
+}

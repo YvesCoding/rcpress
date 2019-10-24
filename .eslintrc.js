@@ -5,15 +5,15 @@ const eslintrc = {
     node: true,
     jasmine: true,
     jest: true,
-    es6: true,
+    es6: true
   },
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
     ecmaFeatures: {
       jsx: true,
-      experimentalObjectRestSpread: true,
-    },
+      experimentalObjectRestSpread: true
+    }
   },
   plugins: ['markdown', 'react', 'babel'],
   rules: {
@@ -44,15 +44,15 @@ const eslintrc = {
     'object-curly-newline': 0,
     'no-restricted-globals': 0,
     'jsx-a11y/mouse-events-have-key-events': 0,
-    'react/jsx-no-target-blank': 0,
-  },
+    'react/jsx-no-target-blank': 0
+  }
 };
 
 if (process.env.RUN_ENV === 'DEMO') {
   eslintrc.globals = {
     React: true,
     ReactDOM: true,
-    mountNode: true,
+    mountNode: true
   };
 
   Object.assign(eslintrc.rules, {
@@ -63,7 +63,7 @@ if (process.env.RUN_ENV === 'DEMO') {
     'prefer-rest-params': 0,
     'react/no-multi-comp': 0,
     'jsx-a11y/href-no-hash': 0,
-    'import/newline-after-import': 0,
+    'import/newline-after-import': 0
   });
 }
 

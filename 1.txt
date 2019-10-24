@@ -1,0 +1,17 @@
+/Users/yiwang/Desktop/node/
+gatsby-theme-antdsite/node_modules/
+event-source-polyfill/src/eventsource.js"
+
+/Users/yiwang/Desktop/node/
+
+gatsby-theme-antdsite/node_modules
+/webpack-hot-middleware/client.js?path=/__webpack_hmr&reload=true&overlay=false
+
+
+  app.use(
+    require(`webpack-hot-middleware`)(compiler, {
+      log: false,
+      path: `/__webpack_hmr`,
+      heartbeat: 10 * 1000,
+    })
+  )

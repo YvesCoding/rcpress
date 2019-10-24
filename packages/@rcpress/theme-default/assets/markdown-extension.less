@@ -1,0 +1,78 @@
+/** 
+ * --------------------------------
+ * Custom markdown block
+ * --------------------------------
+ */
+
+.md-alert.ant-alert {
+  .ant-alert-description {
+    p {
+      margin: 0.3rem 0;
+    }
+  }
+
+  margin-bottom: 16px;
+}
+
+/** 
+ * --------------------------------
+ *  Highlight code line
+ * --------------------------------
+ */
+
+.rcpress-highlight-code-line {
+  background-color: rgba(0, 0, 0, 0.66);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+}
+
+.rcpress-highlight pre[class*='language-'] code {
+  overflow: initial;
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
+}
+.rcpress-highlight pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+.rcpress-highlight pre::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.rcpress-highlight pre::-webkit-scrollbar-thumb {
+  background: hsla(0, 0%, 39%, 0.7);
+}
+.rcpress-highlight pre::-webkit-scrollbar-thumb:hover {
+  background: hsla(0, 0%, 39%, 1);
+}
+/** 
+ * --------------------------------
+ *  Line  Numbers 
+ * --------------------------------
+ */
+
+// Adjust the position of the line numbers
+.rcpress-highlight pre[class*='language-'].line-numbers {
+  padding-left: 2.8em;
+}
+
+// If you only want to use line numbering
+.rcpress-highlight {
+  border-radius: 0.3em;
+}
+.rcpress-highlight pre[class*='language-'].line-numbers {
+  padding-left: 1.8em;
+}
+.line-numbers .line-numbers-rows {
+  border-right: none !important;
+}
+.line-numbers-rows > span:before {
+  padding-right: 0.4rem;
+  padding-left: 0.4rem;
+}
+.line-numbers .line-numbers-rows {
+  padding-top: 1em !important;
+  background: #2d2d2d;
+}
