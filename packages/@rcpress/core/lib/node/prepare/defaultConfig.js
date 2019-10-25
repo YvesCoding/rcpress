@@ -8,6 +8,7 @@ module.exports = {
   head: [],
   footer: null,
   useCNDForLargeFiles: true,
+  port: 3000,
   largeFileList: [
     {
       name: 'moment',

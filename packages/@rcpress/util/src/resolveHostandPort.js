@@ -13,7 +13,7 @@ function resolveHost(host) {
 }
 
 async function resolvePort(port) {
-  portfinder.basePort = parseInt(port) || 8080;
+  portfinder.basePort = parseInt(port);
   port = await portfinder.getPortPromise();
   return port;
 }

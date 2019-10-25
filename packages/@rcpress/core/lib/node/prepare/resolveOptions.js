@@ -183,7 +183,7 @@ module.exports = async function resolveOptions(sourceDir) {
   const tempPath = path.resolve(__dirname, '../../../.temp');
   fs.ensureDirSync(tempPath);
 
-  console.log('layoutPath:', themeLayoutPath);
+  // console.log('layoutPath:', themeLayoutPath);
 
   const options = {
     siteConfig,

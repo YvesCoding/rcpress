@@ -1,6 +1,6 @@
 const path = require('path');
 module.exports = {
-  base: '/rcpress',
+  base: process.env.base || '/',
   title: 'rcpress',
   locales: {
     '/': {

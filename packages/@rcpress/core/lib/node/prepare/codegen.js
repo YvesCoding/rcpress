@@ -1,7 +1,7 @@
 const path = require('path');
 
-const genLoadableImportedCode = (name, path) => {
-  return `const  ${name} = loadable(() => import(${path}));\n`;
+const genLoadableImportedCode = (name, path, chunkName) => {
+  return `const  ${name} = loadable(() => import(/* webpackChunkName: "${chunkName}" */ ${path}));\n`;
 };
 
 exports.genRoutesFile = async function({
@@ -17,7 +17,8 @@ exports.genRoutesFile = async function({
 
     return genLoadableImportedCode(
       `AsyncMD$${index}`,
-      JSON.stringify(path.resolve(sourceDir, file))
+      JSON.stringify(path.resolve(sourceDir, file)),
+      file
     );
   }
 
@@ -58,15 +59,20 @@ exports.genRoutesFile = async function({
 
   const notFoundRoute = `,
   { 
-    route_component: nNotFoundWrapper 
+    route_component: notFoundWrapper 
   }`;
 
   return (
     `import loadable from '@loadable/component';\n` +
-    genLoadableImportedCode('LayoutWrapper', "'@rcpress/core/lib/web/wrappers/layoutHotWrapper'") +
     genLoadableImportedCode(
-      'nNotFoundWrapper',
-      "'@rcpress/core/lib/web/wrappers/notFoundHotWrapper'"
+      'LayoutWrapper',
+      "'@rcpress/core/lib/web/wrappers/layoutHotWrapper'",
+      'LayoutWrapper'
+    ) +
+    genLoadableImportedCode(
+      'notFoundWrapper',
+      "'@rcpress/core/lib/web/wrappers/notFoundHotWrapper'",
+      'notFoundWrapper'
     ) +
     '\n' +
     `${pages.map(getImportedMakrdown).join('')}` +

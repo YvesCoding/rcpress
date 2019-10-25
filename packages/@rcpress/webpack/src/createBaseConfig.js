@@ -34,7 +34,6 @@ module.exports = function createBaseConfig(
     .output.path(outDir)
     .filename(isProd ? 'assets/js/[name].[hash:8].js' : 'assets/js/[name].js')
     .publicPath(isProd ? publicPath : '/')
-    .chunkFilename('[name].[hash:8].js')
     .end();
 
   if (debug) {
