@@ -20,7 +20,7 @@ English | [简体中文](./README-zh_CN.md)
 - RcPress is a static website generator based on React.js.
 - It is built with [Ant Design](https://ant.design/) and inspired by [Vuepress](https://vuepress.vuejs.org/).
 
-## What is the difference between vuepress and vuepress?
+## What is the difference between rcpress and vuepress?
 
 > The biggest difference is probably that rcpress is driven by the react.js, while vuepress is driven by vue.
 
