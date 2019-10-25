@@ -2,12 +2,12 @@
 
 <h1 align="center">RcPress</h1>
 <p align="center">
-A static website generator build with Ant Design and driven by gatsby.js
+A static website generator build with Ant Design and powered by React.js. 🎨
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/v/rcpress.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/rcpress/tree/master"><img src="https://circleci.com/gh/YvesCoding/rcpress/tree/master.png?style=shield" alt="Build Status"></a> 
-  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/l/rcpress.svg" alt="License"></a>
-<a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/dm/rcpress.svg" alt="Download"></a>
+  <a href="https://www.npmjs.com/package/@rcpress/core"><img src="https://img.shields.io/npm/v/@rcpress/core.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/rcpress/tree/master"><img src="https://circleci.com/gh/YvesCoding/rcpress/tree/master.png?style=shield" alt="Build Status"></a> 
+  <a href="https://www.npmjs.com/package/@rcpress/core"><img src="https://img.shields.io/npm/l/@rcpress/core.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/@rcpress/core"><img src="https://img.shields.io/npm/dm/@rcpress/core.svg" alt="Download"></a>
 <a href="https://github.com/YvesCoding/rcpress"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
 </p>
 
@@ -18,8 +18,11 @@ English | [简体中文](./README-zh_CN.md)
 ## Introduction
 
 - RcPress is a static website generator based on React.js.
-- It's driven by [Gatsby Js](https://www.gatsbyjs.org/)
-- It is built with [Ant Design](https://ant.design/) and its configuration style borrows from [Vuepress](https://rcpress.vuejs.org/).
+- It is built with [Ant Design](https://ant.design/) and inspired by [Vuepress](https://vuepress.vuejs.org/).
+
+## What is the difference between vuepress and vuepress?
+
+> The biggest difference is probably that rcpress is driven by the react.js, while vuepress is driven by vue.
 
 ## Features
 
@@ -33,27 +36,42 @@ For detailed docs, recommend to visit [guide section](https://www.yvescoding.com
 
 ## Install
 
-Install command line tool `rcpress-cli`
-
 ```bash
 
-yarn global add rcpress-cli
+yarn global add @rcpress/cli
 
 # or if you use npm
 
-npm i rcpress-cli -g
+npm i  @rcpress/cli -g
 
 ```
 
 ## Usage
 
-Initialize a default starter project via `rcpress-cli`
-
 ```bash
-rcpress my-docs
+# create docs diretory(docs is the default documentation directory)
+mkdir docs
+
+# create a markdown file
+echo '# Hello RcPress' > docs/README.md
+
+
+# When in dev env
+
+# start spa mode server
+rcpress dev
+# start ssr mode server
+rcpress server
+
+# When in production env
+
+# build spa in production
+rcpress build
+# build ssr and generate static html files in production
+rcpress generate
 ```
 
-Visit `8000` port and that's all.
+Visit `3000` port and that's all.
 
 ## Homepage Screenshot
 

@@ -2,12 +2,12 @@
 
 <h1 align="center">RcPress</h1>
 <p align="center">
-一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器
+一款使用Ant Design构建，由React.js驱动的静态网站生成器.  🎨
 </p>
 <p align="center">
-  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/v/rcpress.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/rcpress/tree/master"><img src="https://circleci.com/gh/YvesCoding/rcpress/tree/master.png?style=shield" alt="Build Status"></a> 
-  <a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/l/rcpress.svg" alt="License"></a>
-<a href="https://www.npmjs.com/package/rcpress"><img src="https://img.shields.io/npm/dm/rcpress.svg" alt="Download"></a>
+  <a href="https://www.npmjs.com/package/@rcpress/core"><img src="https://img.shields.io/npm/v/@rcpress/core.svg" alt="Version"></a><a href="https://circleci.com/gh/YvesCoding/rcpress/tree/master"><img src="https://circleci.com/gh/YvesCoding/rcpress/tree/master.png?style=shield" alt="Build Status"></a> 
+  <a href="https://www.npmjs.com/package/@rcpress/core"><img src="https://img.shields.io/npm/l/@rcpress/core.svg" alt="License"></a>
+<a href="https://www.npmjs.com/package/@rcpress/core"><img src="https://img.shields.io/npm/dm/@rcpress/core.svg" alt="Download"></a>
 <a href="https://github.com/YvesCoding/rcpress"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" alt="prettier"></a>
 </p>
 
@@ -18,8 +18,11 @@
 ## 简介
 
 - RcPress 是一个基于 React.js 的静态文档生成器。
-- 它是由[Gatsby Js](https://www.gatsbyjs.org/)驱动的
-- 使用 [Ant Design](https://ant.design/)设计构建， 并且它的配置项借鉴了[Vuepress](https://rcpress.vuejs.org/)
+- 使用 [Ant Design](https://ant.design/)设计构建， 并且它的灵感来源于[Vuepress](https://rcpress.vuejs.org/)
+
+## 与 vuepress 有何不同之处
+
+> 最大的不同点大概就是 rcpress 使用了 react.js 驱动，而 vuepress 是由 vue 驱动的。
 
 ## 特点
 
@@ -37,12 +40,11 @@
 
 ```bash
 
-yarn global add rcpress-cli
+yarn global add @rcpress/cli
 
-# 或者如果你使用npm
+# 或者如果你用npm
 
-npm i rcpress-cli -g
-
+npm i  @rcpress/cli -g
 ```
 
 ## 用法
@@ -50,7 +52,26 @@ npm i rcpress-cli -g
 使用命令行工具`rcpress-cli`初始化一个默认的入门项目
 
 ```bash
-rcpress my-docs
+# 创建 docs 目录(docs是默认的文档目录)
+mkdir docs
+
+#创建markdown文件
+echo '# Hello RcPress' > docs/README.md
+
+
+# 当在开发环境时
+
+# 启动spa模式的服务
+rcpress dev
+# 启动服务端渲染的服务
+rcpress server
+
+# 挡在生产环境时
+
+# 在生产环境下构建spa
+rcpress build
+# 在生产环境下构建ssr并且声称静态html文件
+rcpress generate
 ```
 
 访问`8000`端口即可。
