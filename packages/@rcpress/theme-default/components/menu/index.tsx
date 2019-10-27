@@ -38,7 +38,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
   constructor(props: MenuPros) {
     super(props);
     this.state = {
-      openKeys: []
+      openKeys: this.getSideBarOpenKeys()
     };
   }
 
@@ -46,10 +46,6 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
 
   componentDidMount() {
     this.getPreAndNext();
-
-    this.setState({
-      openKeys: (this.getSideBarOpenKeys() || []) as Array<string>
-    });
   }
 
   componentWillReceiveProps() {

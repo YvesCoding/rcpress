@@ -7,6 +7,7 @@ import { useSiteContext } from '@rcpress/core';
 import Media from 'react-media';
 import stepNProcess from './components/nprocess';
 import NProgress from 'nprogress';
+import { withRouter } from 'react-router';
 
 const chekScrollPosition = (path: string, prePath: string, setPrePath: (path: string) => void) => {
   if (!window.location.hash && path && path !== prePath) {
@@ -24,7 +25,7 @@ const chekScrollPosition = (path: string, prePath: string, setPrePath: (path: st
   }
 };
 
-const Layout = () => {
+const Layout = withRouter((props: any) => {
   const siteContext = useSiteContext();
   const { currentLocaleSiteData: siteData, path } = siteContext;
 
@@ -33,9 +34,20 @@ const Layout = () => {
   const { showBackToTop } = siteData.themeConfig;
   const { locales } = siteData;
 
+  console.log(path);
+
   useEffect(() => {
+    function handleLinkClickf({ pathname }: any) {
+      if (pathname == path) return;
+
+      NProgress.start();
+      NProgress.set(0.6);
+    }
+
     chekScrollPosition(path, prePath, setPrePath);
     NProgress.done(true);
+
+    return props.history.listen(handleLinkClickf);
   }, [path]);
 
   stepNProcess();
@@ -58,6 +70,6 @@ const Layout = () => {
       }}
     </Media>
   );
-};
+});
 
 export default Layout;
