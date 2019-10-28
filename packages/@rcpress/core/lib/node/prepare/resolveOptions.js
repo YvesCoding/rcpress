@@ -1,6 +1,8 @@
 const fs = require('fs-extra');
 const path = require('path');
 const globby = require('globby');
+const fetch = require('node-fetch');
+const himalaya = require('himalaya');
 const createMarkdown = require('@rcpress/markdown');
 const loadConfig = require('./loadConfig');
 const {
@@ -168,6 +170,9 @@ module.exports = async function resolveOptions(sourceDir) {
 
       data.toc = toc;
 
+      // get avatarList
+      data.avatarList = await getAvatarList(themeConfig, file);
+
       return data;
     })
   );
@@ -205,4 +210,33 @@ module.exports = async function resolveOptions(sourceDir) {
   };
 
   return options;
+};
+
+//  get AvatarList from github
+const getAvatarList = async (themeConfig, filename) => {
+  const sourcePath = `https://github.com/${themeConfig.docsRepo || themeConfig.repo}/contributors/${
+    themeConfig.docsBranch
+  }`;
+  const fileCompeletePath = `${themeConfig.docsDir}/${filename}/list`.replace(/\/\//, '/');
+  const url = `${sourcePath}/${fileCompeletePath}`;
+  const html = await fetch(url).then(res => res.text());
+  const ast = himalaya.parse(html)[0].children || [];
+  const data = ast
+    .map(item => {
+      if (item.type === 'element') {
+        const AlinkAST = item.children[1];
+        const href = AlinkAST.attributes.find(({ key }) => key === 'href').value;
+        const img = AlinkAST.children[1];
+        const text = AlinkAST.children[2].content;
+        const src = img.attributes.find(({ key }) => key === 'src').value;
+        return {
+          href,
+          text,
+          src
+        };
+      }
+      return null;
+    })
+    .filter(item => item && item.src);
+  return data;
 };

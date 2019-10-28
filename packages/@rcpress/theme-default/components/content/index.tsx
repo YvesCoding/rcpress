@@ -56,7 +56,7 @@ const Article: FunctionComponent<{
         <article className="markdown">
           {(docsRepo || repo) && editLinkText && editLinks && !disableEditLink ? (
             <h1>
-              {currentPageTitle}
+              {currentPageInfo.title}
               {!subtitle ? null : <span className="subtitle">{subtitle}</span>}
 
               <EditButton path={editPath} title={editLinkText} />

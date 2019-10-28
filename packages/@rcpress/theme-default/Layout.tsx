@@ -13,17 +13,24 @@ const chekScrollPosition = (path: string, prePath: string, setPrePath: (path: st
   if (!window.location.hash && path && path !== prePath) {
     window.scrollTo(0, 0);
     setPrePath(path);
-  } else if (window.location.hash) {
+
+    return;
+  }
+
+  tryScrollToHash();
+};
+
+function tryScrollToHash() {
+  if (!window.location.hash) return;
+  setTimeout(() => {
     const element = document.getElementById(
       decodeURIComponent(window.location.hash.replace('#', ''))
     );
-    setTimeout(() => {
-      if (element) {
-        element.scrollIntoView(true);
-      }
-    }, 100);
-  }
-};
+    if (element) {
+      element.scrollIntoView(true);
+    }
+  }, 100);
+}
 
 const Layout = withRouter((props: any) => {
   const siteContext = useSiteContext();
@@ -34,11 +41,12 @@ const Layout = withRouter((props: any) => {
   const { showBackToTop } = siteData.themeConfig;
   const { locales } = siteData;
 
-  console.log(path);
-
   useEffect(() => {
-    function handleLinkClickf({ pathname }: any) {
-      if (pathname == path) return;
+    function handeLocationChange({ pathname }: any) {
+      if (pathname == path) {
+        tryScrollToHash();
+        return;
+      }
 
       NProgress.start();
       NProgress.set(0.6);
@@ -47,7 +55,7 @@ const Layout = withRouter((props: any) => {
     chekScrollPosition(path, prePath, setPrePath);
     NProgress.done(true);
 
-    return props.history.listen(handleLinkClickf);
+    return props.history.listen(handeLocationChange);
   }, [path]);
 
   stepNProcess();
