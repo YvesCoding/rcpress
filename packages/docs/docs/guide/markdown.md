@@ -145,3 +145,15 @@ I can highlight this code with js syntax: `js>>>const foo = 'bar';`
 **reference:**
 
 - [gatsby-remark-prismjs](https://www.npmjs.com/package/gatsby-remark-prismjs#inline-code-blocks)
+
+## emoji :tada:
+
+Enter:
+
+```markdown
+:tada: :100:
+```
+
+Output:
+
+:tada: :100:

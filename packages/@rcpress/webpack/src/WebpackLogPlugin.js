@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const { logger } = require('@rcpress/util');
 
+let isInited = false;
 module.exports = class WebpackLogPlugin {
   constructor(options) {
     this.options = options;
@@ -8,7 +9,11 @@ module.exports = class WebpackLogPlugin {
 
   apply(compiler) {
     compiler.hooks.done.tap('rcpress-log', stats => {
-      clearScreen();
+      if (!isInited) {
+        isInited = true;
+        clearScreen();
+      }
+
       const { displayHost, port, publicPath, isProd } = this.options;
       if (stats.compilation.errors && stats.compilation.errors.length) {
         for (const e of stats.compilation.errors) {

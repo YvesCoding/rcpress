@@ -33,7 +33,7 @@ module.exports = function(src) {
   const frontMatter = results.frontMatter;
   const content = frontMatter.content;
 
-  if (!isProd && !isServer) {
+  if (!isProd) {
     const inferredTitle = inferTitle(frontMatter, results.headings);
     const headers = results.headings;
 
@@ -66,7 +66,7 @@ module.exports = function(src) {
 
 function headersChanged(a, b) {
   if (a.length !== b.length) return true;
-  return a.some((h, i) => h.title !== b[i].title || h.level !== b[i].level);
+  return a.some((h, i) => h.value !== b[i].value || h.depth !== b[i].depth);
 }
 
 module.exports.frontMatterEmitter = new EventEmitter();

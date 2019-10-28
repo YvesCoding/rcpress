@@ -7,6 +7,8 @@ const { logger } = require('@rcpress/util');
 const chalk = require('chalk');
 
 module.exports = async function prepare(sourceDir) {
+  logger.wait('\nCollecting the site data...');
+
   // 1. load options
   const options = await resolveOptions(sourceDir);
 
@@ -46,6 +48,8 @@ module.exports = async function prepare(sourceDir) {
 
   // 6. handle the theme enhanceApp.js
   // await writeEnhanceTemp('themeEnhanceApp.js', options.themeEnhanceAppPath);
+
+  logger.success('\nCollecting site data finished.');
 
   return options;
 };
