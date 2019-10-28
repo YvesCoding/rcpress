@@ -86,7 +86,7 @@ program
 program
   .command('eject [targetDir]')
   .description('copy the default theme into .rcpress/theme for customization.')
-  .action((dir = '.') => {
+  .action((dir = 'docs') => {
     wrapCommand(eject)(path.resolve(dir));
   });
 

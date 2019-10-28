@@ -48,6 +48,8 @@ npm i  @rcpress/cli -g
 
 ## Usage
 
+Create diretory and markdown file
+
 ```bash
 # create docs diretory(docs is the default documentation directory)
 mkdir docs
@@ -55,23 +57,27 @@ mkdir docs
 # create a markdown file
 echo '# Hello RcPress' > docs/README.md
 
+```
 
-# When in dev env
+Run server
 
+```bash
 # start spa mode server
 rcpress dev
 # start ssr mode server
 rcpress server
 
-# When in production env
+# Visit `3000` port and that's all.
+```
 
+Build
+
+```bash
 # build spa in production
 rcpress build
 # build ssr and generate static html files in production
 rcpress generate
 ```
-
-Visit `3000` port and that's all.
 
 ## Homepage Screenshot
 

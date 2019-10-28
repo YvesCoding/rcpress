@@ -1,65 +1,70 @@
 # 快速上手
 
-## 安装 cli
+## 安装
 
 使用 [yarn](https://yarnpkg.com) 安装`rcpress-cli`
 
 ```bash
-yarn global add rcpress-cli
+yarn global add @rcpress/cli
 ```
 
 或者使用[npm](https://docs.npmjs.com/cli/install.html) 安装
 
 ```bash
-npm install rcpress-cli -g
+npm install @rcpress/cli -g
 ```
 
-## 使用 cli 创建一个初始的项目
+## 用法
 
-使用 `cli` 来初始化一个默认的初始项目
+创建目录以及文件
 
 ```bash
-rcpress my-docs
+# 创建 docs 目录(docs是默认的文档目录)
+mkdir docs
+
+#创建markdown文件
+echo '# Hello RcPress' > docs/README.md
+
 ```
 
-在已有的项目里初始化
+运行
 
 ```bash
-rcpress ./ --force
+
+# 启动spa模式的服务
+rcpress dev
+# 启动服务端渲染的服务
+rcpress server
+
+# 访问默认的地址 `localhost:3000` 即可看到效果页面
 ```
 
-初始化完毕后，切换到初始化后的目录，运行网站
+打包构建
 
 ```bash
-yarn start
-# OR
-npm start
+# 在生产环境下构建spa
+rcpress build
+# 在生产环境下构建ssr并且声称静态html文件
+rcpress generate
 ```
-
-访问默认的地址 `localhost:8000` 即可看到效果页面
 
 ## 项目结构
 
-初始化之后你会看到如下目录：
+RcPress 与 Vuepress 遵循相同的原则，即 **约定大于配置**，推荐的文档结构如下：
 
 ```bash{numberLines:true}
-├── .rcpress
-    ├── config.js # rcpress 配置文件
 ├── docs # 存放文档目录
-    ├── guide
-        ├── introduction.md
-        ├── page-collapsed.md
-        ├── group-1-item.md
-        ├── group-2-item.md
-    ├── README.MD
-├── src # 主要是用于存放404页面，放到src/pages下是因为只有这个目录能被gatsby识别
-    ├── pages
-        ├── 404.js
-        ├── 404.css
-├── static # 用于存放网站的一些静态文件，能直接被访问：如： www.xxx.com/favicon.png
-    ├── favicon.png # 用于存放网站logo
-├── package.json # 主要包含了devDependencies依赖项：rcpress和gatsby
-├── gatsby-config.js # gatsby配置文件，已配置好，无需更改。
+    ├── .rcpress
+        ├── globalComponent.js # 用于存储全局组件，您可以在markdown中直接使用它们。
+        ├── config.js # rcpress 配置文件
+        ├── style.less # rcpress 全局样式
+        ├── public # 用于存储网站的一些静态文件，这些文件可以直接访问：例如：www.xxx.com/favicon.png
+        ├── theme
+            ├── Layout.(t|j)sx? # 覆盖默认主题。
+    ├── guide
+        ├── README.MD
+    ├── README.MD
+├── package.json
 ```
 
 下面来简单解释一下初始化项目的配置文件：
@@ -72,8 +77,7 @@ module.exports = {
   // 一般展示在首页和左上角
   logo: '/favicon.png',
   // 网站首页底部的文字，支持html格式
-  footer:
-    'MIT Licensed | Copyright © 2019-present Yi(Yves) Wang',
+  footer: 'MIT Licensed | Copyright © 2019-present Yi(Yves) Wang',
   // 生成网站时会向网站头部插入的一些元素，
   // 其中每个元素格式为[tagName, {/*元素属性，会原封不动附加到生成的元素上。*/},/*子节点*/]
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
@@ -134,32 +138,3 @@ module.exports = {
 - 详细的配置文件说明请参考：[配置一节](../config)
 
 - 如果你想自定义头部，足部，或者首页等等，请参考[自定义主题](theme)
-
-## 效果图
-
-import ImgWidthBase from '@components/ImgWidthBase'
-
-<p align="center">
-<ImgWidthBase url="screenshot.png" width={700}/>  
-</p>
-
-<p align="center">
-<ImgWidthBase url="screenshot-1.png" width={700}/>
-</p>
-
-<p align="center">
-<ImgWidthBase url="screenshot-mobile.png" width={330}  />
-
-<ImgWidthBase url="screenshot-mobile-1.png" width={330}/>
-
-</p>
-
-<p align="center">
-</p>
-
-<p align="center">
-<ImgWidthBase url="screenshot-mobile-2.png" width={300}/>
-
-<ImgWidthBase url="screenshot-mobile-3.png" width={300}/>
-
-</p>

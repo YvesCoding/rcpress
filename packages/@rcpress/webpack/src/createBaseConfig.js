@@ -236,7 +236,7 @@ module.exports = function createBaseConfig(
     'less',
     /\.less$/,
     'less-loader',
-    Object.assign({ javascriptEnabled: true }, siteConfig.sass)
+    Object.assign({ javascriptEnabled: true }, siteConfig.less)
   );
   createCSSRule(
     'stylus',

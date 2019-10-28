@@ -19,37 +19,45 @@ features:
 使用 [yarn](https://yarnpkg.com) 安装`rcpress-cli`
 
 ```bash
-yarn global add rcpress-cli
+yarn global add @rcpress/cli
 ```
 
 或者使用[npm](https://docs.npmjs.com/cli/install.html) 安装
 
 ```bash
-npm install rcpress-cli -g
+npm install @rcpress/cli -g
 ```
 
 ## 用法
 
-使用 `cli` 来初始化一个默认的入门项目
+创建目录以及文件
 
 ```bash
-rcpress my-docs
+# 创建 docs 目录(docs是默认的文档目录)
+mkdir docs
+
+#创建markdown文件
+echo '# Hello RcPress' > docs/README.md
+
 ```
 
-切换到初始化的网站目录，运行网站
+运行
 
 ```bash
-cd my-docs
 
-yarn start
-# OR
-npm start
+# 启动spa模式的服务
+rcpress dev
+# 启动服务端渲染的服务
+rcpress server
+
+# 访问默认的地址 `localhost:3000` 即可看到效果页面
 ```
 
-访问默认的地址 `localhost:8000` 即可看到效果页面
+打包构建
 
-import ImgWidthBase from '@components/ImgWidthBase'
-
-<p align="center">
-<ImgWidthBase url="screenshot.png" width={700}/>
-</p>
+```bash
+# 在生产环境下构建spa
+rcpress build
+# 在生产环境下构建ssr并且声称静态html文件
+rcpress generate
+```

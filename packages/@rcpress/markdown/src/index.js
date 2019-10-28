@@ -31,7 +31,8 @@ const createMarkdown = async ({ markdown: options = {}, base = '/' }) => {
         'remark-header-custom-ids',
         'remark-img-warpper-p',
         'remark-emoji',
-        'reamrk-prism'
+        'reamrk-prism',
+        'addTargetToExternalLink'
       ],
       'mdastPlugins'
     ),

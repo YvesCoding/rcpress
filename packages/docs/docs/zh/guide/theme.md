@@ -2,36 +2,47 @@
 
 ## 自定义布局
 
-开发自定义的主题需要在`,rcpress`目录下新建一个`theme`目录。
+要开发自定义主题，您需要在 rcpress 目录下创建一个新的主题目录。
+
+您可以通过创建“ Layout.js”来自定义主题。
 
 ```bash
 ├── .rcpress
-    ├── theme           # 主题文件夹，用于存放自定义主题
+    ├── theme                 # Theme folder for storing custom themes
+        ├── Layout.js         # Customize the entire
 ```
 
-你可以通过建立不同的文件来自定义整个布局或者部分布局。
-
-```bash
-├── .rcpress
-    ├── theme                 # 主题文件夹，用于存放自定义主题
-        ├── layout.js         # 自定义整个布局
-        ├── header.js         # 自定义整个页面头部
-        ├── main-content.js   # 自定义除了首页外的内容页面
-        ├── heme.js           # 自定义首页
-        ├── footer.js         # 自定义首页尾部
-```
-
-其中：
-
-- 自定义 layout 的话会自定义所有布局。
-- 自定义其他文件为部分布局。
-
-## 获取网站数据和当前页面的数据
-
-页面的数据都存在从`rcpress`导出的`SiteContext`中
+## 使用依赖项中的主题
 
 ```js
+module.exports = {
+  theme: 'xxx'
+};
+```
+
+## 获取站点数据和当前页面数据
+
+页面数据存储在 `SiteContext` 中。它是从 rcpress 导出的。
+
+```jsx
 import { SiteContext } from '@rcpress/core';
+
+<SiteContext.Provider>
+{
+  siteContext => {
+    console.log(siteContext)
+  }
+}
+</SiteContext.Provier>
+```
+
+也可以通过`react hook`获取站点数据。
+
+```js
+import { useSiteContext } from '@rcpress/core';
+
+const siteContext = useSiteContext();
+console.log(siteContext);
 ```
 
 `SiteContext`是由`React.createContext` api 创建而成，用法可以参照一下 react 的[文档](https://reactjs.org/docs/context.html#reactcreatecontext)。
@@ -109,7 +120,7 @@ import { SiteContext } from '@rcpress/core';
 在项目根目录下运行下列命令:
 
 ```bash
-rcpress-cli --eject
+rcpress eject
 ```
 
 即可把所有默认主题拷贝到当前工作目录下的`.rcpress/theme`文件夹下， 然后你就=可以修改整个默认主题了。

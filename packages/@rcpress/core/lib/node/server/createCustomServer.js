@@ -44,7 +44,7 @@ const createServer = ({ app, spaConfig, ssrConfig, templatePath, options }) => {
       .renderToString(context)
       .then(html => {
         res.send(html);
-        console.log(`whole request: ${Date.now() - s}ms`);
+        console.log(`Finish the request ${req.url} in  ${Date.now() - s}ms`);
       })
       .catch(err => {
         return handleError(err);

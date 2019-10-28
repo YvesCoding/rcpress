@@ -1,65 +1,69 @@
 # Quick Start
 
-## Install cli
+## Install
 
-Install via [yarn](https://yarnpkg.com) `rcpress-cli`
-
-```bash
-yarn global add rcpress-cli
-```
-
-or install via [npm](https://docs.npmjs.com/cli/install.html)
+Install `@rcpress/cli` via [yarn](https://yarnpkg.com)
 
 ```bash
-npm install rcpress-cli -g
+yarn global add @rcpress/cli
 ```
 
-##Create an initial project using cli
-
-Use `cli` to initialize a default initial project
+Or install via [npm](https://docs.npmjs.com/cli/install.html)
 
 ```bash
-RcPress my-docs
+npm install @rcpress/cli -g
 ```
 
-Initialize in an existing project
+## Usage
+
+Create diretory and markdown file
 
 ```bash
-RcPress ./-force
+# create docs diretory(docs is the default documentation directory)
+mkdir docs
+
+# create a markdown file
+echo '# Hello RcPress' > docs/README.md
+
 ```
 
-After the initialization is complete, switch to the initialized directory and run the website.
+Run server
 
 ```bash
-Yarn start
-# 或
-Start with npm
+# start spa mode server
+rcpress dev
+# start ssr mode server
+rcpress server
+
+# Visit the default address `localhost:3000` to see the effect page
 ```
 
-Visit the default address `localhost:8000` to see the effect page
+Build
+
+```bash
+# build spa in production
+rcpress build
+# build ssr and generate static html files in production
+rcpress generate
+```
 
 ## Project Structure
 
-After initialization you will see the following directory:
+RcPress follows the same principle with Vuepress, which is **"Convention is better than configuration"**, the recommended document structure is as follows:
 
 ```bash{numberLines:true}
-├── .rcpress
-    ├── config.js # rcpress configuration file
 ├── docs # store the document directory
+    ├── .rcpress
+        ├── globalComponent.js # used to store global components which you can use them directly in markdown.
+        ├── config.js # rcpress configuration file
+        ├── style.less # rcpress global style
+        ├── public # Used to store some static files of the website, which can be directly accessed: eg: www.xxx.com/favicon.png
+        ├── theme
+            ├── Layout.(t|j)sx? # override the default theme.
     ├── guide
-        ├── introduction.md
-        ├── page-collapsed.md
-        ├── group-1-item.md
-        ├── group-2-item.md
+        ├── README.MD
     ├── README.MD
-├── src # is mainly used to store 404 pages, put under src/pages because only this directory can be recognized by gatsby
-    ├── pages
-        ├── 404.js
-        ├── 404.css
-├── static # Used to store some static files of the website, which can be directly accessed: eg: www.xxx.com/favicon.png
-    ├── favicon.png # Used to store website logo
-├── package.json # mainly contains devDependencies dependencies: rcpress and gatsby
-├── gatsby-config.js # gatsby configuration file, configured, no need to change.
+├── package.json
 ```
 
 Let's briefly explain the configuration file of the initialization project:
@@ -134,32 +138,3 @@ Relevant information:
 - For detailed configuration file description, please refer to: [Configuration section](../config)
 
 - If you want to customize the head, foot, or home page, etc., please refer to [custom theme](theme)
-
-## Screenshots
-
-import ImgWidthBase from '@components/ImgWidthBase'
-
-<p align="center">
-<ImgWidthBase url="screenshot.png" width={700}/>  
-</p>
-
-<p align="center">
-<ImgWidthBase url="screenshot-1.png" width={700}/>
-</p>
-
-<p align="center">
-<ImgWidthBase url="screenshot-mobile.png" width={330}  />
-
-<ImgWidthBase url="screenshot-mobile-1.png" width={330}/>
-
-</p>
-
-<p align="center">
-</p>
-
-<p align="center">
-<ImgWidthBase url="screenshot-mobile-2.png" width={300}/>
-
-<ImgWidthBase url="screenshot-mobile-3.png" width={300}/>
-
-</p>

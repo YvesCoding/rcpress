@@ -3,7 +3,6 @@ import './introduction.less'
 # 介绍
 
 - RcPress 是一个基于 React.js 的静态文档生成器。
-- 它是由[Gatsby Js](https://www.gatsbyjs.org/)驱动的
 - 使用 [Ant Design](https://ant.design/)设计构建， 并且它的配置项借鉴了[Vuepress](https://rcpress.vuejs.org/)
 
 import ImgWidthBase from '@components/ImgWidthBase'
@@ -12,8 +11,6 @@ import ImgWidthBase from '@components/ImgWidthBase'
   <ImgWidthBase url="antd-icon.svg" width={120} />
    <span>+</span>
   <ImgWidthBase url="react-icon.svg" width={120}/>
-    <span>+</span> 
-  <ImgWidthBase url="gatsby-icon-144x144.png" width={120}/>
    <span>=</span> 
   <ImgWidthBase url="favicon.png" width={120}/>
 </div>
@@ -27,7 +24,6 @@ import ImgWidthBase from '@components/ImgWidthBase'
 ## 技术栈
 
 - [Ant Design](https://ant.design/docs/react/introduce-cn)
-- [Gatsby](https://www.gatsbyjs.org/)
 - markdown
 - [mdx](https://github.com/mdx-js/mdx)
 - [React](https://reactjs.org/)
@@ -39,5 +35,4 @@ import ImgWidthBase from '@components/ImgWidthBase'
 
 ## 版本
 
-- rcpress 版本：[![npm package](https://img.shields.io/npm/v/rcpress.svg?style=flat-square)](https://www.npmjs.org/package/rcpress)
-- rcpress-cli 版本：[![npm package](https://img.shields.io/npm/v/rcpress-cli.svg?style=flat-square)](https://www.npmjs.org/package/rcpress-cli)
+- rcpress 版本：[![npm package](https://img.shields.io/npm/v/@rcpress/core.svg?style=flat-square)](https://www.npmjs.org/package/@rcpress/core.svg)

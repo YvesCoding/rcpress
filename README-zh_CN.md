@@ -49,7 +49,7 @@ npm i  @rcpress/cli -g
 
 ## 用法
 
-使用命令行工具`rcpress-cli`初始化一个默认的入门项目
+创建目录以及文件
 
 ```bash
 # 创建 docs 目录(docs是默认的文档目录)
@@ -57,24 +57,27 @@ mkdir docs
 
 #创建markdown文件
 echo '# Hello RcPress' > docs/README.md
+```
 
+运行
 
-# 当在开发环境时
-
+```bash
 # 启动spa模式的服务
 rcpress dev
 # 启动服务端渲染的服务
 rcpress server
 
-# 挡在生产环境时
+# 访问`3000`端口即可。
+```
 
+打包构建
+
+```bash
 # 在生产环境下构建spa
 rcpress build
 # 在生产环境下构建ssr并且声称静态html文件
 rcpress generate
 ```
-
-访问`8000`端口即可。
 
 ## 首页截图
 

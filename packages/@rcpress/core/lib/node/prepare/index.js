@@ -21,14 +21,6 @@ module.exports = async function prepare(sourceDir) {
   await writeTemp(options.tempPath, 'siteData.js', dataCode);
 
   // 4. handle user override
-  const overridePath = path.resolve(sourceDir, '.rcpress/override.less').replace(/[\\]+/g, '/');
-  const hasUserOverride = fs.existsSync(overridePath);
-  await writeTemp(
-    options.tempPath,
-    'override.less',
-    hasUserOverride ? `@import(${JSON.stringify(overridePath)})` : ``
-  );
-
   const stylePath = path.resolve(sourceDir, '.rcpress/style.less').replace(/[\\]+/g, '/');
   const hasUserStyle = fs.existsSync(stylePath);
   await writeTemp(
@@ -36,18 +28,6 @@ module.exports = async function prepare(sourceDir) {
     'style.less',
     hasUserStyle ? `@import(${JSON.stringify(stylePath)})` : ``
   );
-
-  // Temporary tip, will be removed at next release.
-  if (hasUserOverride && !hasUserStyle) {
-    logger.tip(
-      `${chalk.magenta(
-        'override.styl'
-      )} has been split into 2 APIs, we recommend you upgrade to continue.\n` +
-        `      See: ${chalk.magenta(
-          'https://rcpress.vuejs.org/default-theme-config/#simple-css-override'
-        )}`
-    );
-  }
 
   // 5 write react-hot-loader config
   await writeTemp(

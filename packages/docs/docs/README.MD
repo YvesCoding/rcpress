@@ -16,43 +16,47 @@ features:
 
 ## Install
 
-Install `rcpress-cli` via [yarn](https://yarnpkg.com)
+Install `@rcpress/cli` via [yarn](https://yarnpkg.com)
 
 ```bash
-yarn global add rcpress-cli
+yarn global add @rcpress/cli
 ```
 
 Or install via [npm](https://docs.npmjs.com/cli/install.html)
 
 ```bash
-npm install rcpress-cli -g
-
+npm install @rcpress/cli -g
 ```
 
 ## Usage
 
-Use `cli` to initialize a default starter project
+Create diretory and markdown file
 
 ```bash
-rcpress my-1
+# create docs diretory(docs is the default documentation directory)
+mkdir docs
+
+# create a markdown file
+echo '# Hello RcPress' > docs/README.md
+
 ```
 
-333 1112222111
-
-Switch t1o the initialized site directory and run the Site
+Run server
 
 ```bash
-cd my-docs
+# start spa mode server
+rcpress dev
+# start ssr mode server
+rcpress server
 
-yarn start
-# OR
-npm start
+# Visit the default address `localhost:3000` to see the effect page
 ```
 
-Visit the default address `localhost:8000` to see the effect page
+Build
 
-import ImgWidthBase from '@components/ImgWidthBase'
-
-<p align="center">
-<ImgWidthBase url="screenshot.png" width={700}/>
-</p>
+```bash
+# build spa in production
+rcpress build
+# build ssr and generate static html files in production
+rcpress generate
+```

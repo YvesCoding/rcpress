@@ -4,34 +4,45 @@
 
 To develop custom themes, you need to create a new theme directory under the `rcpress` directory.
 
-```bash
-├── .rcpress
-    ├── theme           # Theme folder for storing custom themes
-```
-
-You can customize the entire layout or partial layout by creating different files.
+You can customize theme by creating `Layout.js`.
 
 ```bash
 ├── .rcpress
     ├── theme                 # Theme folder for storing custom themes
-        ├── layout.js         # Customize the entire layout
-        ├── header.js         # Customize the entire page header
-        ├── main-content.js   # Customize content pages except home pages
-        ├── heme.js           # Custom Home Page
-        ├── footer.js         # Custom Home Page Footer
+        ├── Layout.js         # Customize the entire
 ```
 
-Note:
+## Using a theme from a dependency
 
-- Customizing layouts will customize all layouts.
-- Customize other files for partial layout.
+```js
+module.exports = {
+  theme: 'xxx'
+};
+```
 
 ## Get site data and current page data
 
 Page data stores in `SiteContext`. which is exported from `rcpress`.
 
-```js
+```jsx
 import { SiteContext } from '@rcpress/core';
+
+<SiteContext.Provider>
+{
+  siteContext => {
+    console.log(siteContext)
+  }
+}
+</SiteContext.Provier>
+```
+
+you can also access site data by hook.
+
+```js
+import { useSiteContext } from '@rcpress/core';
+
+const siteContext = useSiteContext();
+console.log(siteContext);
 ```
 
 `SiteContext` is created by `React.createContext` api, you can refer to react's [document](https://reactjs.org/docs/context.html#reactcreatecontext).
@@ -109,7 +120,7 @@ Current page data, the value is:
 Run the following commands in the project root directory:
 
 ```bash
-rcpress-cli --eject
+rcpress eject
 ```
 
-You can copy all default topics to the `rcpress/theme` folder in the current working directory, and then you can modify the entire default theme.
+You can copy entire theme to the `.rcpress/theme` folder in the current working directory, and then you can modify the entire default theme.
