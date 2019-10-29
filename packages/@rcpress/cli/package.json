@@ -1,7 +1,7 @@
 {
   "name": "@rcpress/cli",
   "version": "0.1.1",
-  "description": "Create a website based on Ant Design and GatsbyJs",
+  "description": "Create a website based on Ant Design",
   "keywords": [
     "rcpress"
   ],
