@@ -6,12 +6,13 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'RcPress',
-      description: 'A static website generator build with Ant Design and driven by gatsby.js'
+      description:
+        'A static website generator whose ui is build with Ant Design and it is driven by React.js'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'RcPress',
-      description: '一款使用Ant Design构建，由gatsby.js驱动的静态网站生成器'
+      description: '一个静态网站生成器，其ui是使用Ant Design构建的，并由React.js驱动'
     }
   },
   logo: '/favicon.png',
