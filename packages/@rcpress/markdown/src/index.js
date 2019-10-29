@@ -40,38 +40,41 @@ const createMarkdown = async ({ markdown: options = {}, base = '/' }) => {
       [
         [
           'remark-ant-alert',
-          {
-            info: [
-              {
-                alias: 'tip',
-                defaultTitle: 'Tip'
-              },
-              {
-                alias: 'tip-zh',
-                defaultTitle: '提示'
-              }
-            ],
-            warning: [
-              {
-                alias: 'warning',
-                defaultTitle: 'Warning'
-              },
-              {
-                alias: 'warning-zh',
-                defaultTitle: '警告'
-              }
-            ],
-            error: [
-              {
-                alias: 'error',
-                defaultTitle: 'Caveat'
-              },
-              {
-                alias: 'error-zh',
-                defaultTitle: '严重警告'
-              }
-            ]
-          }
+          Object.assign(
+            {
+              info: [
+                {
+                  alias: 'tip',
+                  defaultTitle: 'Tip'
+                },
+                {
+                  alias: 'tip-zh',
+                  defaultTitle: '提示'
+                }
+              ],
+              warning: [
+                {
+                  alias: 'warning',
+                  defaultTitle: 'Warning'
+                },
+                {
+                  alias: 'warning-zh',
+                  defaultTitle: '警告'
+                }
+              ],
+              error: [
+                {
+                  alias: 'error',
+                  defaultTitle: 'Caveat'
+                },
+                {
+                  alias: 'error-zh',
+                  defaultTitle: '严重警告'
+                }
+              ]
+            },
+            options.alert
+          )
         ]
       ],
       'remarkPlugins'

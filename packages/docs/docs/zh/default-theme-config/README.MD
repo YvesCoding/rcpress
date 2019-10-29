@@ -80,11 +80,7 @@ module.exports = {
 // .rcpress/config.js
 module.exports = {
   themeConfig: {
-    sidebar: [
-      '/',
-      '/page-a',
-      ['/page-b', 'Explicit link text']
-    ]
+    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
   }
 };
 ```
@@ -149,17 +145,9 @@ module.exports = {
 module.exports = {
   themeConfig: {
     sidebar: {
-      '/foo/': [
-        '' /* /foo/ */,
-        'one' /* /foo/one.html */,
-        'two' /* /foo/two.html */
-      ],
+      '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
 
-      '/bar/': [
-        '' /* /bar/ */,
-        'three' /* /bar/three.html */,
-        'four' /* /bar/four.html */
-      ]
+      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */]
     }
   }
 };
@@ -286,18 +274,35 @@ module.exports = {
 };
 ```
 
-## 定制主题颜色
+### logo
 
-你可以通过设置`themeConfig.themeColors`来变更主题的颜色。
+- 类型: `string`
+- 默认值: ``
+
+你可以在导航栏加上一个 logo 通过`logo`属性. logo 可以放在`public`
 
 ```js
+// .rcpress/config.js
 module.exports = {
   themeConfig: {
-    themeColors: {
-      'primary-color': 'red'
-    }
+    logo: '/logo.png'
   }
 };
 ```
 
-`themeConfig.themeColors`的值会赋给`less-loader`的`modifyVars`。 具体请参考[Ant Design - 在 webpack 中定制主题](https://ant.design/docs/react/customize-theme-cn#%E5%9C%A8-webpack-%E4%B8%AD%E5%AE%9A%E5%88%B6%E4%B8%BB%E9%A2%98)
+### footer
+
+- 类型: `string`
+- 默认值: `null`
+
+设置网站的足部。如果不设置则不显示足部。
+
+```js
+// .rcpress/config.js
+module.exports = {
+  themeConfig: {
+    footer:
+      'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>'
+  }
+};
+```

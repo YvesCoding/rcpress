@@ -21,11 +21,6 @@ module.exports = {
   ],
   footer:
     'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>',
-  // less: {
-  //   modifyVars: {
-  //     'primary-color': 'blue'
-  //   }
-  // },
   themeConfig: {
     repo: 'YvesCoding/rcpress',
     docsDir: 'packages/docs/docs',

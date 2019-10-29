@@ -6,9 +6,7 @@
 Don't worry about the default settings being overwritten, rcpress will use the [deepMerge function](https://github.com/YvesCoding/rcpress/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/rcpress/lib/util.js#L5) to **deep merge** the new settings and default configuration.
 :::
 
-## Basic Config
-
-### base
+## base
 
 - Type: `string`
 - Default: `/`
@@ -17,21 +15,21 @@ The base URL to which the site will be deployed. You will need to set this if yo
 
 The `base` is automatically prepended to all the URLs that start with `/` in other options, so you only need to specify it once.
 
-### title
+## title
 
 - Type: `string`
 - Default: `Current working directory name`
 
 Title for the site. This will be the prefix for all page titles, and displayed in the navbar in the default theme.
 
-### description
+## description
 
 - Type: `string`
 - Default: `undefined`
 
 Description for the site. This will be rendered as a `<meta>` tag in the page HTML.
 
-### head
+## head
 
 - Type: `Array`
 - Default: `[]`
@@ -44,97 +42,31 @@ module.exports = {
 };
 ```
 
-### locales
+## locales
 
 - Type: `{ [path: string]: Object }`
 - Default: `undefined`
 
 Specify locales for i18n support. For more details, see the guide on [Internationalization](../guide/i18n).
 
-### logo
+## less/scss/sass
 
-- Type: `string`
-- Default: ``
-
-You can add a logo to the navbar via `logo`. Logo can be placed in [static folder](https://www.gatsbyjs.org/docs/static-folder/).
+Set options for the corresponding loader, for example
 
 ```js
-// .rcpress/config.js
+// Modify ant design theme color to red
 module.exports = {
-  themeConfig: {
-    logo: '/assets/img/logo.png'
+  title: 'xxx',
+  less: {
+    modifyVars: {
+      // Assign to less-loader
+      'primary-color': 'red'
+    }
   }
 };
 ```
 
-### footer
-
-- Type: `string`
-- Default: `null`
-
-Set website footer. Footer will not display if it isn't set any value.
-
-```js
-// .rcpress/config.js
-module.exports = {
-  themeConfig: {
-    footer:
-      'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>'
-  }
-};
-```
-
-### prefetch
-
-- Type: `boolean`
-- Default: `true`
-
-Whether to enable page preloading. It is recommended to disable this when the server bandwidth is slow.
-
-### useCNDForLargeFiles
-
-- Type: `boolean`
-- Default: `true`
-
-For larger files, whether to load from CDN. It is recommended to enable this when the server bandwidth is slow.
-
-### largeFileList
-
-- Type:
-
-```ts
-Array<{name:string,umdName:string,cdnLink:string,order?:number}>
-```
-
-- Default:
-
-```js
-[
-  {
-    name: 'moment',
-    umdName: 'moment',
-    cdnLink: 'https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js'
-  },
-  {
-    order: 2,
-    name: 'react-dom',
-    umdName: 'ReactDOM',
-    cdnLink: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.1/umd/react-dom.production.min.js'
-  },
-  {
-    order: 1,
-    name: 'react',
-    umdName: 'React',
-    cdnLink: 'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
-  }
-];
-```
-
-A list of files to be loaded from the CDN.
-
-## Theming
-
-### themeConfig
+## themeConfig
 
 - Type: `Object`
 - Default: `{}`

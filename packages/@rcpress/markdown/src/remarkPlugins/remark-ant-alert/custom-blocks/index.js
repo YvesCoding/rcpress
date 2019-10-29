@@ -35,9 +35,7 @@ function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
-module.exports = function blockPlugin() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
+module.exports = function blockPlugin(options = {}) {
   var regex = /\:\:\: (.*?)(?:\|(.*?))?\n([\s\S]*?)\n *?\:\:\:/;
 
   function findTypeAndTitle(option, type) {

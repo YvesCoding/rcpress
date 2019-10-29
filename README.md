@@ -17,12 +17,14 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Introduction
 
-- RcPress is a static website generator based on React.js.
-- It is built with [Ant Design](https://ant.design/) and inspired by [Vuepress](https://vuepress.vuejs.org/).
+- Rcpress is a static document generator based on react.js.
+- The document is made by imitating ant design [official website](https://ant.design/)
+- Function configuration is to imitate [vuepress](https://rcpress.vuejs.org/)
 
 ## What is the difference between rcpress and vuepress?
 
-> The biggest difference is probably that rcpress is driven by the react.js, while vuepress is driven by vue.
+- Rcpress is driven by react.js, while vuepress is driven by Vue.
+- Rcpress uses ant design as the UI framework, while vuepress uses a custom style.
 
 ## Features
 
@@ -84,11 +86,6 @@ rcpress generate
 <p align="center">
 <img src="https://www.yvescoding.com/rcpress/screenshot.png" width="700" />
 </p>
-
-## Todo List
-
-- [x] Support highlighting the specified line of code
-- [ ] A global component that can display the demo
 
 ## Thanks
 

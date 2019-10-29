@@ -80,11 +80,7 @@ To enable the sidebar, use `themeConfig.sidebar`. The basic configuration expect
 // .rcpress/config.js
 module.exports = {
   themeConfig: {
-    sidebar: [
-      '/',
-      '/page-a',
-      ['/page-b', 'Explicit link text']
-    ]
+    sidebar: ['/', '/page-a', ['/page-b', 'Explicit link text']]
   }
 };
 ```
@@ -149,17 +145,9 @@ Then, update your configuration to define your sidebar for each section.
 module.exports = {
   themeConfig: {
     sidebar: {
-      '/foo/': [
-        '' /* /foo/ */,
-        'one' /* /foo/one.html */,
-        'two' /* /foo/two.html */
-      ],
+      '/foo/': ['' /* /foo/ */, 'one' /* /foo/one.html */, 'two' /* /foo/two.html */],
 
-      '/bar/': [
-        '' /* /bar/ */,
-        'three' /* /bar/three.html */,
-        'four' /* /bar/four.html */
-      ]
+      '/bar/': ['' /* /bar/ */, 'three' /* /bar/three.html */, 'four' /* /bar/four.html */]
     }
   }
 };
@@ -301,3 +289,36 @@ module.exports = {
 ```
 
 The value of `themeConfig.themeColors` is assigned to `modifyVars` of `less-loader`. For details, please refer to: [Ant Design - Customize in webpack](https://ant.design/docs/react/customize-theme#Customize-in-webpack)
+
+### logo
+
+- Type: `string`
+- Default: ``
+
+You can add a logo to the navigation bar via the `logo` property. The logo can be placed in the `.rcpress/public` directory.
+
+```js
+// .rcpress/config.js
+module.exports = {
+  themeConfig: {
+    logo: '/logo.png'
+  }
+};
+```
+
+### footer
+
+- Type: `string`
+- Default: `null`
+
+Set website footer. Footer will not display if it isn't set any value.
+
+```js
+// .rcpress/config.js
+module.exports = {
+  themeConfig: {
+    footer:
+      'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>'
+  }
+};
+```

@@ -10,9 +10,7 @@ import ImgWidthBase from '@components/ImgWidthBase'
 <div className="pic-plus">
   <ImgWidthBase url="antd-icon.svg" width={120} />
    <span>+</span>
-  <ImgWidthBase url="react-icon.svg" width={120}/>
-   <span>=</span> 
-  <ImgWidthBase url="favicon.png" width={120}/>
+  <ImgWidthBase url="react-icon.svg" width={120}/> 
 </div>
 
 ## 特点

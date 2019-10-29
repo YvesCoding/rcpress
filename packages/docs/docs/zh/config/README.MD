@@ -6,9 +6,7 @@
 不必担心默认的设置会被覆盖掉，rcpress 会使用[deepMerge 函数](https://github.com/YvesCoding/rcpress/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/rcpress/lib/util.js#L5)将新设置的配置和默认配置进行**深度合并**
 :::
 
-## 基本配置
-
-### base
+## base
 
 - 类型: `string`
 - 默认值: `/`
@@ -17,21 +15,21 @@
 
 `base` 将会自动地作为前缀插入到所有以 `/` 开始的其他选项的链接中，所以你只需要指定一次。
 
-### title
+## title
 
 - 类型: `string`
 - 默认值: `当前工作目录名称`
 
 网站的标题，它将会被用作所有页面标题的前缀，同时，默认主题下，它将显示在导航栏（navbar）上。
 
-### description
+## description
 
 - 类型: `string`
 - 默认值: `undefined`
 
 网站的描述，它将会以 `<meta>` 标签渲染到当前页面的 HTML 中。
 
-### head
+## head
 
 - 类型: `Array`
 - 默认值: `[]`
@@ -44,97 +42,31 @@ module.exports = {
 };
 ```
 
-### locales
+## locales
 
 - 类型: `{ [path: string]: Object }`
 - 默认值: `undefined`
 
 提供多语言支持的语言配置。具体细节请查看 [多语言支持](../guide/i18n)。
 
-### logo
+## less/scss/sass
 
-- 类型: `string`
-- 默认值: ``
-
-你可以在导航栏加上一个 logo 通过`logo`属性. logo 可以放在[静态文件夹](https://www.gatsbyjs.org/docs/static-folder/).
+设置给对应的 loader 的 option， 例如
 
 ```js
-// .rcpress/config.js
+// 修改ant design 主题颜色为红色
 module.exports = {
-  themeConfig: {
-    logo: '/assets/img/logo.png'
+  title: 'xxx',
+  less: {
+    modifyVars: {
+      // 赋值给less-loader
+      'primary-color': 'red'
+    }
   }
 };
 ```
 
-### footer
-
-- 类型: `string`
-- 默认值: `null`
-
-设置网站的足部。如果不设置则不显示足部。
-
-```js
-// .rcpress/config.js
-module.exports = {
-  themeConfig: {
-    footer:
-      'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>'
-  }
-};
-```
-
-### prefetch
-
-- 类型: `boolean`
-- 默认值: `true`
-
-是否开启页面预加载。建议服务器宽带较慢时禁用此项。
-
-### useCNDForLargeFiles
-
-- 类型: `boolean`
-- 默认值: `true`
-
-对于体积较大的文件，是否从 CDN 加载。建议服务器宽带较慢时启用此项。
-
-### largeFileList
-
-- 类型:
-
-```ts
-Array<{name:string,umdName:string,cdnLink:string,order?:number}>
-```
-
-- 默认值:
-
-```js
-[
-  {
-    name: 'moment',
-    umdName: 'moment',
-    cdnLink: 'https://gw.alipayobjects.com/os/lib/moment/2.24.0/min/moment.min.js'
-  },
-  {
-    order: 2,
-    name: 'react-dom',
-    umdName: 'ReactDOM',
-    cdnLink: 'https://gw.alipayobjects.com/os/lib/react-dom/16.8.1/umd/react-dom.production.min.js'
-  },
-  {
-    order: 1,
-    name: 'react',
-    umdName: 'React',
-    cdnLink: 'https://gw.alipayobjects.com/os/lib/react/16.8.1/umd/react.production.min.js'
-  }
-];
-```
-
-将从 CDN 加载的文件列表。
-
-## 主题
-
-### themeConfig
+## themeConfig
 
 - 类型: `Object`
 - 默认值: `{}`

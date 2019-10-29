@@ -1,60 +1,70 @@
 # Command Line Tool
 
 ```bash
-rcpress [projectName] [optons]
+rcpress <command> [docsPath] [optons]
 ```
 
-## projectName
+I will introduce them one by one.
 
-Prject can be a project name such as:
+## command
+
+### Commands in development mode
+
+- dev
+
+Run spa mode
+
+- serve
+
+Running SSR mode
+
+### Commands in production mode
+
+- build
+
+Build spa
+
+- generate
+
+Build ssr, generate static html files.
+
+### other commands
+
+- eject
+
+Copy the whole default theme to the current folder. You can modify the whole default theme.
+
+See also:
+
+[Custom theme](./theme)
+
+## docsPath
+
+docsPath is the directory where you store your documents. The default is `docs`.
 
 ```bash
-rcpress my-docs
-```
+rcpress ./ # The document is in the current directory
 
-Can also be a path name such as:
-
-```bash
-rcpress ./
+rcpress my-docs # The documentation is in the my-docs directory
 ```
 
 ## options
 
-### --use-npm
+- --debug
 
-By default, `yarn` is used to download dependencies. If you specify this parameter, use npm to download dependencies.
+Turn on debug mode
 
-### --force
+- --port
 
-By default, if the directory to be created has files other than the following:
+Specify the port to run in development mode
 
-```js
-const validFiles = [
-  '.DS_Store',
-  'Thumbs.db',
-  '.git',
-  '.gitignore',
-  '.idea',
-  'README.md',
-  'LICENSE',
-  '.hg',
-  '.hgignore',
-  '.hgcheck',
-  '.npmignore',
-  'mkdocs.yml',
-  'docs',
-  '.travis.yml',
-  '.gitlab-ci.yml',
-  '.gitattributes'
-];
+- --outDir
+
+Specify the file generation path after packaging in the production environment
+
+## example
+
+```bash
+# In the development environment, run the spa, the document is stored in my-docs, and the port is 8080.
+rcpress dev my-docs --port 8080
 ```
-
-Can not be considered a [secure](https://github.com/facebook/create-react-app/blob/30fc0bf5ed566d9b42194d56541d278013d7928c/packages/create-react-app/createReactApp.js#L791) project, the project will not be created successfully, the program will automatically exit. Specify `--force` to ignore this rule and force the creation of the project. If there is package.json, it will be merged.
-
-### --ejct
-
-Copy the entire default theme to the current folder, you can modify the entire default theme.
-
-Refer to:
-
-[Custom Themes](./theme)

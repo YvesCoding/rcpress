@@ -1,60 +1,70 @@
 # 命令行工具
 
 ```bash
-rcpress [projectName] [optons]
+rcpress <command> [docsPath] [optons]
 ```
 
-## projectName
+下面逐一进行介绍。
 
-prject 可以是一个项目名称，如：
+## command
 
-```bash
-rcpress my-docs
-```
+### 开发模式下的命令
 
-也可以是一个路径名称，如：
+- dev
 
-```bash
-rcpress ./
-```
+运行 spa 模式
 
-## options
+- serve
 
-### --use-npm
+运行 ssr 模式
 
-默认使用`yarn`下载依赖。如果指定此参数则使用 npm 下载依赖。
+### 生产模式下的命令
 
-### --force
+- build
 
-默认如果待创建的目录存在以下之外的文件：
+打包 spa
 
-```js
-const validFiles = [
-  '.DS_Store',
-  'Thumbs.db',
-  '.git',
-  '.gitignore',
-  '.idea',
-  'README.md',
-  'LICENSE',
-  '.hg',
-  '.hgignore',
-  '.hgcheck',
-  '.npmignore',
-  'mkdocs.yml',
-  'docs',
-  '.travis.yml',
-  '.gitlab-ci.yml',
-  '.gitattributes'
-];
-```
+- generate
 
-则不能被认为是一个[安全](https://github.com/facebook/create-react-app/blob/30fc0bf5ed566d9b42194d56541d278013d7928c/packages/create-react-app/createReactApp.js#L791)项目, 项目将不会被创建成功，程序将自动退出， 指定 `--force` 则无视此条规则，强制创建项目，如果存在 package.json 将会被 merge。
+打包 ssr， 生成静态 html 文件。
 
-### --ejct
+### 其他命令
+
+- eject
 
 拷贝整个默认的主题到当前文件夹下，你可以对整个默认主题进行修改。
 
 参考：
 
 [自定义主题](./theme)
+
+## docsPath
+
+docsPath 是你存放文档的目录， 默认为 `docs`.
+
+```bash
+rcpress ./ # 文档在当前目录下
+
+rcpress my-docs # 文档在my-docs目录下
+```
+
+## options
+
+- --debug
+
+开启调试模式
+
+- --port
+
+指定开发模式下运行的端口
+
+- --outDir
+
+指定生产环境下打包后的文件生成路径
+
+## 例子
+
+```bash
+# 在开发环境下，运行spa， 文档存放于my-docs，运行的端口为8080
+rcpress dev my-docs --port 8080
+```
