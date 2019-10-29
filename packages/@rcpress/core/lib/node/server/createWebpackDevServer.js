@@ -22,7 +22,7 @@ module.exports = async function createDeveServer(config, options, port, host) {
       open: options.siteConfig.open,
       publicPath: options.siteConfig.base,
       watchOptions: {
-        ignored: [/node_modules/]
+        ignored: [/node_modules(\\|\/)(?!@rcpress(\\|\/)core(\\|\/).temp)/]
       },
       historyApiFallback: {
         disableDotRule: true,
