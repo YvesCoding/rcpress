@@ -1,7 +1,7 @@
 {
   "name": "@rcpress/util",
   "main": "src/index.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "gray-matter": "^4.0.2",
     "lodash": "^4.17.15",

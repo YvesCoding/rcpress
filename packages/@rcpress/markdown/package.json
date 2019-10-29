@@ -1,11 +1,11 @@
 {
   "name": "@rcpress/markdown",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "src/index.js",
   "dependencies": {
     "@mdx-js/mdx": "^1.0.0-rc.4",
     "@mdx-js/react": "^1.0.0-rc.5",
-    "@rcpress/util": "^0.1.0",
+    "@rcpress/util": "^0.1.1",
     "mdast-util-to-string": "^1.0.5",
     "mdast-util-toc": "",
     "parse-numeric-range": "^0.0.2",
