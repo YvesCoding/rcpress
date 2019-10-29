@@ -20,6 +20,7 @@ module.exports = {
     ['link', { rel: 'icon', href: `/favicon.png` }],
     ['link', { rel: 'manifest', href: '/manifest.json' }]
   ],
+  serviceWorker: true,
   footer:
     'MIT Licensed | Copyright © 2019-present <a target="_blank" href="https://github.com/wangyi7099">Yi(Yves) Wang</a>',
   themeConfig: {

@@ -19,7 +19,7 @@
 
 - RcPress 是一个基于 React.js 的静态文档生成器。
 - 文档是模仿 ant-design [官网](https://ant.design/)做的
-- 功能配置是模仿[Vuepress](https://rcpress.vuejs.org/)
+- 功能配置是模仿[Vuepress](https://vuepress.vuejs.org/)
 
 ## 与 vuepress 有何不同之处
 

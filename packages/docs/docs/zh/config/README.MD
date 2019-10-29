@@ -146,3 +146,23 @@ const config = {
 **也可以参考:**
 
 - [markdown 扩展](../guide/markdown/)
+
+### serviceWorker
+
+- 类型: `boolean`
+- 默认值: `false`
+
+如果设置成 `true`，VuePress 将会自动生成并且注册一个 service worker，它缓存了那些已访问过的页面的内容，用于离线访问（仅在生产环境生效）。
+
+如果你正在开发一个自定义主题，`Layout.js` 组件将会自动触发下述的事件：
+
+- `sw-ready`
+- `sw-cached`
+- `sw-updated`
+- `sw-offline`
+- `sw-error`
+
+::: tip | PWA NOTES
+`serviceWorker` 选项仅仅用来控制 service worker，为了让你的网站完全地兼容 PWA，你需要在 `.rcpress/public` 提供 Manifest 和 icons，更多细节，请参见 [MDN docs about the Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest).
+此外，只有您能够使用 SSL 部署您的站点时才能启用此功能，因为 service worker 只能在 HTTPs 的 URL 下注册。
+:::

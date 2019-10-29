@@ -19,7 +19,7 @@ English | [简体中文](./README-zh_CN.md)
 
 - Rcpress is a static document generator based on react.js.
 - The document is made by imitating ant design [official website](https://ant.design/)
-- Function configuration is to imitate [vuepress](https://rcpress.vuejs.org/)
+- Function configuration is to imitate [vuepress](https://vuepress.vuejs.org/)
 
 ## What is the difference between rcpress and vuepress?
 
