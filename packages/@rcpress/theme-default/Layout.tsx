@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './assets/style';
 import Header from './layout/header';
-import { BackTop } from 'antd';
+import { BackTop, Modal } from 'antd';
 import MainContent from './layout/main-content';
-import { useSiteContext } from '@rcpress/core';
+import { useSiteContext, useSWHook } from '@rcpress/core';
 import Media from 'react-media';
 import stepNProcess from './components/nprocess';
 import NProgress from 'nprogress';
@@ -57,6 +57,37 @@ const Layout = withRouter((props: any) => {
 
     return props.history.listen(handeLocationChange);
   }, [path]);
+
+  const [registration, setRegistration] = useState(null);
+  const dispath = useSWHook()[1];
+
+  function info() {
+    const popup = siteContext.currentLocaleSiteData.updatePopup;
+    Modal.confirm({
+      title: popup.message,
+      okText: popup.okText,
+      cancelText: popup.cancelText,
+      onOk() {
+        if (registration) {
+          (registration as any).skipWaiting().then(() => {
+            location.reload(true);
+          });
+          setRegistration(null);
+        }
+      },
+      onCancel() {}
+    });
+  }
+
+  useEffect(() => {
+    dispath({
+      type: 'updated',
+      payload(reg: any) {
+        setRegistration(reg);
+        info();
+      }
+    });
+  }, []);
 
   stepNProcess();
 

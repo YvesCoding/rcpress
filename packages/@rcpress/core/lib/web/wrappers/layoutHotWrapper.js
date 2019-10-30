@@ -10,10 +10,10 @@
 import { hot } from 'react-hot-loader';
 import React from 'react';
 import Layout from '@themeLayout';
-import useSw from '../serviceWorker';
+import { useSWRegistry } from '../serviceWorker';
 
 const LayoutWrapperComponent = props => {
-  useSw();
+  useSWRegistry();
 
   return <Layout {...props} />;
 };

@@ -26,7 +26,13 @@ interface SiteData {
   base?: string;
   pages?: Array<Page>;
   footer?: string;
-  lang: string;
+  lang?: string;
+  serviceWorker?: boolean;
+  updatePopup: {
+    message?: string;
+    okText?: string;
+    cancelText?: string;
+  };
   themeConfig: {
     repo: string;
     docsDir?: string;
@@ -73,7 +79,20 @@ declare const SiteContext: React.Context<siteContext>;
 // };
 
 declare const useSiteContext: () => siteContext;
-
 export { SiteContext };
 // export { components };
 export { useSiteContext };
+
+// service worker
+type state = {
+  ready: any;
+  cached: any;
+  updated: any;
+  offline: any;
+  error: any;
+};
+type dispatch = (args: { type: keyof state; payload: any }) => void;
+declare const useSWHook: () => [state, dispatch];
+declare const useSWRegistry: () => void;
+export { useSWHook };
+export { useSWRegistry };

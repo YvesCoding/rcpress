@@ -8,6 +8,12 @@ module.exports = {
   head: [],
   footer: null,
   port: 3000,
+  serviceWorker: false,
+  updatePopup: {
+    message: 'New content is available.',
+    okText: 'Refresh',
+    cancelText: 'Cancel'
+  },
   themeConfig: {
     themeColors: null,
     repo: null,

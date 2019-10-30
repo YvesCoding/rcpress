@@ -21,7 +21,7 @@ const swReducer = (state, action) => {
   }
 };
 
-export default () => {
+export const useSWHook = () => {
   const [state, dispatch] = useReducer(swReducer, {
     ready: noop,
     cached: noop,
@@ -30,6 +30,11 @@ export default () => {
     error: noop
   });
 
+  return [state, dispatch];
+};
+
+export const useSWRegistry = () => {
+  const state = useSWHook();
   useEffect(() => {
     // Register service worker
     if (
@@ -61,6 +66,4 @@ export default () => {
       });
     }
   }, []);
-
-  return dispatch;
 };
