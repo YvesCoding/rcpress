@@ -9,7 +9,7 @@
     "bs": "lerna bootstrap",
     "serve": "yarn workspace docs serve",
     "generate": "yarn workspace docs generate",
-    "generate-with-prefix": "cross-env base=/rcpress/  yarn generate",
+    "generate-with-prefix": "cross-env base=/rcpress  yarn generate",
     "cl": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "clean": "lerna clean && rm -rf node_modules",
     "pub": "lerna publish --conventional-commits",
