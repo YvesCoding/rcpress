@@ -10,6 +10,7 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   const fileWatcher = require('../../fileWatcher');
   const createServer = require('../../server');
   const prepare = require('../../prepare');
+  const buildSW = require('../../sw');
 
   const {
     WebpackLogPlugin,
@@ -97,5 +98,10 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       compilerDoneReporterOpts.host,
       compilerDoneReporterOpts.port
     );
+  } else {
+    // generate service worker config.
+    if (options.siteData.serviceWorker) {
+      buildSW(options.outDir);
+    }
   }
 };
