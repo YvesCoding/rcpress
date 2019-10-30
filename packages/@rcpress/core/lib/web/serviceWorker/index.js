@@ -37,7 +37,7 @@ export default () => {
       SW_ENABLED &&
       window.location.protocol === 'https:'
     ) {
-      register(`${BASE_URL}service-worker.js`, {
+      register(`${BASE_URL}/service-worker.js`, {
         ready() {
           console.log('[rcpress:sw] Service worker is active.');
           state.ready();
