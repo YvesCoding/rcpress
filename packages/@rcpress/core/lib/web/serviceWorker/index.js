@@ -34,7 +34,7 @@ export const useSWHook = () => {
 };
 
 export const useSWRegistry = () => {
-  const state = useSWHook();
+  const state = useSWHook()[0];
   useEffect(() => {
     // Register service worker
     if (
