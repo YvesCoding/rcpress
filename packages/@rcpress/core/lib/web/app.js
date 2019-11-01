@@ -37,7 +37,6 @@ const App = ctx => {
   const sidebarItems = resolveSidebarItems(siteData, path);
 
   const currentPageInfo = getCurrentPage(siteData.pages, routes, path);
-
   return (
     <SiteContext.Provider
       value={{

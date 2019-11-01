@@ -38,7 +38,7 @@ module.exports = async function resolveOptions(sourceDir) {
           if (name === 'src' || name === 'href') {
             const value = attrs[name];
             if (value.charAt(0) === '/') {
-              attrs[name] = base + value.slice(1);
+              attrs[name] = base + '/' + value.slice(1);
             }
           }
         }

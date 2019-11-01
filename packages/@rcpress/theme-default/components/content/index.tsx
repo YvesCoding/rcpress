@@ -42,7 +42,6 @@ const Article: FunctionComponent<{
   const editPath = getEditLink(editLink, docsRepo || repo, docsBranch, filePath);
 
   const currentPageTitle = getPageTitle(currentPageInfo.title, title);
-
   const { prev, next, isMoblie } = props;
   return (
     <>
