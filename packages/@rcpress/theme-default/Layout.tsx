@@ -79,15 +79,13 @@ const Layout = withRouter((props: any) => {
     });
   }
 
-  useEffect(() => {
-    dispath({
-      type: 'updated',
-      payload(reg: any) {
-        setRegistration(reg);
-        info();
-      }
-    });
-  }, []);
+  dispath({
+    type: 'updated',
+    payload(reg: any) {
+      setRegistration(reg);
+      info();
+    }
+  });
 
   stepNProcess();
 
