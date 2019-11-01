@@ -33,7 +33,7 @@ npm install @rcpress/cli -g
 Create diretory and markdown file
 
 ```bash
-# create docs diretory(docs is the default documentation directory).
+# create docs diretory(docs is the default documentation directory)
 mkdir docs
 
 # create a markdown file
