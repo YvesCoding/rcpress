@@ -13,7 +13,7 @@ let swUpdateObject = {
 
 export const useSWHook = () => {
   const dispatch = args => {
-    swUpdateObject[args[type]] = args.payload;
+    swUpdateObject[args.type] = args.payload;
   };
 
   return [swUpdateObject, dispatch];
