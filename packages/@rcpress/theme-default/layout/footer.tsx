@@ -7,7 +7,7 @@ class Footer extends React.Component<{
     const { footerText } = this.props;
 
     return (
-      <footer id="footer">
+      <footer id="site-footer">
         <div
           className="bottom-bar"
           dangerouslySetInnerHTML={{
