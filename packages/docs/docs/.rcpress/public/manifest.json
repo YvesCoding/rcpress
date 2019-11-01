@@ -3,12 +3,12 @@
   "short_name": "RcPress",
   "icons": [
     {
-      "src": "/favicon.png",
+      "src": "/rcpress/favicon.png",
       "sizes": "131x150",
       "type": "image/png"
     }
   ],
-  "start_url": "/index.html",
+  "start_url": "/rcpress/index.html",
   "display": "standalone",
   "background_color": "#fff",
   "theme_color": "#3eaf7c"

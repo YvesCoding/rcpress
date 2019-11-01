@@ -2,7 +2,7 @@ import React from 'react';
 import { SiteContext } from '@rcpress/core';
 
 const resolvePathWithBase = (filePath, base) => {
-  return (base + filePath).replace(/\/\//g, '/');
+  return (base + '/' + filePath).replace(/\/\//g, '/');
 };
 
 export default ({ url, width, height, ...rest }) => (
