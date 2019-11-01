@@ -3,7 +3,7 @@
 > Most of the text is copied in [rcpress](https://rcpress.vuejs.org/config/), with minor modifications
 
 ::: tip
-Don't worry about the default settings being overwritten, rcpress will use the [deepMerge function](https://github.com/YvesCoding/rcpress/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/rcpress/lib/util.js#L5) to **deep merge** the new settings and default configuration.
+Don't worry about the default settings being overwritten, rcpress will use the [deepMerge function](https://github.com/YvesCoding/rcpress/blob/master/packages/%40rcpress/util/src/deepMerge.js) to **deep merge** the new settings and default configuration.
 :::
 
 ## base

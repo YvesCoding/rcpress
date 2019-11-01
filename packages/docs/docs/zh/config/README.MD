@@ -3,7 +3,7 @@
 > 文本大部分复制于[rcpress](https://rcpress.vuejs.org/zh/config/)，略作修改
 
 ::: tip-zh
-不必担心默认的设置会被覆盖掉，rcpress 会使用[deepMerge 函数](https://github.com/YvesCoding/rcpress/blob/e85108dbac8fdd09d0d1673bb4d4b37b64e4cfbc/packages/rcpress/lib/util.js#L5)将新设置的配置和默认配置进行**深度合并**
+不必担心默认的设置会被覆盖掉，rcpress 会使用[deepMerge 函数](https://github.com/YvesCoding/rcpress/blob/master/packages/%40rcpress/util/src/deepMerge.js)将新设置的配置和默认配置进行**深度合并**
 :::
 
 ## base
