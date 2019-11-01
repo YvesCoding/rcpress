@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './assets/style';
 import Header from './layout/header';
 import { BackTop, Modal } from 'antd';
@@ -58,32 +58,25 @@ const Layout = withRouter((props: any) => {
     return props.history.listen(handeLocationChange);
   }, [path]);
 
-  const [registration, setRegistration] = useState(null);
   const dispath = useSWHook()[1];
-
-  function info() {
-    const popup = siteContext.currentLocaleSiteData.updatePopup;
-    Modal.confirm({
-      title: popup.message,
-      okText: popup.okText,
-      cancelText: popup.cancelText,
-      onOk() {
-        if (registration) {
-          (registration as any).skipWaiting().then(() => {
-            location.reload(true);
-          });
-          setRegistration(null);
-        }
-      },
-      onCancel() {}
-    });
-  }
 
   dispath({
     type: 'updated',
-    payload(reg: any) {
-      setRegistration(reg);
-      info();
+    payload(updateEvent: any) {
+      const popup = siteContext.currentLocaleSiteData.updatePopup;
+      Modal.confirm({
+        title: popup.message,
+        okText: popup.okText,
+        cancelText: popup.cancelText,
+        onOk() {
+          if (updateEvent) {
+            (updateEvent as any).skipWaiting().then(() => {
+              location.reload(true);
+            });
+          }
+        },
+        onCancel() {}
+      });
     }
   });
 
