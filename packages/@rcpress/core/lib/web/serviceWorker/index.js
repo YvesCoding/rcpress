@@ -1,40 +1,29 @@
-import { useReducer, useEffect } from 'react';
+import { useEffect } from 'react';
 import { noop } from '../shared/noop';
 import SWUpdateEvent from './SWUpdateEvent';
 import { register } from 'register-service-worker';
 
-// sw notice mechanism hook.
-const swReducer = (state, action) => {
-  switch (action.type) {
-    case 'ready':
-      return { ...state, ready: action.payload };
-    case 'cached':
-      return { ...state, cached: action.payload };
-    case 'updated':
-      return { ...state, updated: action.payload };
-    case 'offline':
-      return { ...state, offline: action.payload };
-    case 'error':
-      return { ...state, error: action.payload };
-    default:
-      throw new Error('unkonwn sw type.');
-  }
+const swUpdateObject = {
+  ready: noop,
+  cached: noop,
+  updated: noop,
+  offline: noop,
+  error: noop
 };
 
 export const useSWHook = () => {
-  const [state, dispatch] = useReducer(swReducer, {
-    ready: noop,
-    cached: noop,
-    updated: noop,
-    offline: noop,
-    error: noop
-  });
+  const dispatch = newObj => {
+    swUpdateObject = {
+      ...swUpdateObject,
+      ...newObj
+    };
+  };
 
-  return [state, dispatch];
+  return [swUpdateObject, dispatch];
 };
 
 export const useSWRegistry = () => {
-  const state = useSWHook()[0];
+  const state = swUpdateObject;
   useEffect(() => {
     // Register service worker
     if (
