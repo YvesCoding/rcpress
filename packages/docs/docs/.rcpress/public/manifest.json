@@ -3,8 +3,8 @@
   "short_name": "RcPress",
   "icons": [
     {
-      "src": "/rcpress/favicon.png",
-      "sizes": "131x150",
+      "src": "/rcpress/favicon-192X219.png",
+      "sizes": "192x219",
       "type": "image/png"
     }
   ],

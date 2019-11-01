@@ -193,7 +193,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ isMobile }) => {
             </Link>
           </Col>
           <Col xxl={20} xl={19} lg={16} md={16} sm={0} xs={0}>
-            {search && allPagesSidebarItems.length ? (
+            {search && allPagesSidebarItems.length && menuMode !== 'inline' ? (
               <SearchBox datas={allPagesSidebarItems} max={searchMaxSuggestions || 5} />
             ) : null}
             <div className="header-meta">
