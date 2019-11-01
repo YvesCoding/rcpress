@@ -3,7 +3,7 @@ import { noop } from '../shared/noop';
 import SWUpdateEvent from './SWUpdateEvent';
 import { register } from 'register-service-worker';
 
-const swUpdateObject = {
+let swUpdateObject = {
   ready: noop,
   cached: noop,
   updated: noop,
