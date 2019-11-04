@@ -56,6 +56,11 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
       });
     }
   }
+  componentDidUpdate(prevProps: MenuPros) {
+    if (prevProps.currentPath != this.props.currentPath) {
+      this.getPreAndNext();
+    }
+  }
 
   getPreAndNext = () => {
     const { currentPath } = this.props || [];
