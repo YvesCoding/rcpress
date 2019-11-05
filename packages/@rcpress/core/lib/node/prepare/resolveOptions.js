@@ -219,7 +219,12 @@ const getAvatarList = async (themeConfig, filename) => {
   }`;
   const fileCompeletePath = `${themeConfig.docsDir}/${filename}/list`.replace(/\/\//, '/');
   const url = `${sourcePath}/${fileCompeletePath}`;
-  const html = await fetch(url).then(res => res.text());
+  const html = await fetch(url)
+    .then(res => res.text())
+    .catch(e => {
+      logger.error(e);
+    });
+
   const ast = himalaya.parse(html)[0].children || [];
   const data = ast
     .map(item => {

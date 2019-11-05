@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './assets/style';
 import Header from './layout/header';
-import { BackTop, Modal } from 'antd';
+import { BackTop, notification, Button } from 'antd';
 import MainContent from './layout/main-content';
 import { useSiteContext, useSWHook } from '@rcpress/core';
 import Media from 'react-media';
@@ -64,18 +64,25 @@ const Layout = withRouter((props: any) => {
     type: 'updated',
     payload(updateEvent: any) {
       const popup = siteContext.currentLocaleSiteData.updatePopup;
-      Modal.confirm({
-        title: popup.message,
-        okText: popup.okText,
-        cancelText: popup.cancelText,
-        onOk() {
-          if (updateEvent) {
-            (updateEvent as any).skipWaiting().then(() => {
-              location.reload(true);
-            });
-          }
-        },
-        onCancel() {}
+      notification.info({
+        message: <div style={{ textAlign: 'center' }}>{popup.message}</div>,
+        placement: 'bottomRight',
+        duration: null,
+        style: { width: '300px' },
+        description: (
+          <Button
+            type="primary"
+            onClick={() => {
+              if (updateEvent) {
+                (updateEvent as any).skipWaiting().then(() => {
+                  location.reload(true);
+                });
+              }
+            }}
+          >
+            {popup.buttonText}
+          </Button>
+        )
       });
     }
   });

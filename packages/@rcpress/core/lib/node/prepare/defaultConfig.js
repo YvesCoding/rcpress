@@ -11,8 +11,7 @@ module.exports = {
   serviceWorker: false,
   updatePopup: {
     message: 'New content is available.',
-    okText: 'Refresh',
-    cancelText: 'Cancel'
+    buttonText: 'Refresh'
   },
   themeConfig: {
     themeColors: null,

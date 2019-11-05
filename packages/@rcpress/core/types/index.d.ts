@@ -30,8 +30,7 @@ interface SiteData {
   serviceWorker?: boolean;
   updatePopup: {
     message?: string;
-    okText?: string;
-    cancelText?: string;
+    buttonText?: string;
   };
   themeConfig: {
     repo: string;

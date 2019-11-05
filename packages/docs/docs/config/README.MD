@@ -167,3 +167,44 @@ The `serviceWorker` option only handles the service worker. To make your site fu
 
 Also, only enable this if you are able to deploy your site with SSL, since service worker can only be registered under HTTPs URLs.
 :::
+
+## SW-Update Popup
+
+```diff
+module.exports = {
+  themeConfig: {
+    serviceWorker: {
+      updatePopup: {
+         message: "New content is available.",
+         buttonText: "Refresh"
+      }
+    }
+  },
+ serviceWorker: true,
+}
+```
+
+For [i18n](../guide/i18n) user:
+
+```diff
+module.exports = {
+  themeConfig: {
+    '/': {
+      serviceWorker: {
+        updatePopup: {
+          message: "New content is available.",
+          buttonText: "Refresh"
+        }
+      }
+    },
+    '/zh/': {
+      serviceWorker: {
+        updatePopup: {
+          message: "发现新内容可用",
+          buttonText: "刷新"
+        }
+      }
+    }
+  },
+  serviceWorker: true
+```
