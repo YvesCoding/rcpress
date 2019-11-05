@@ -170,41 +170,42 @@ Also, only enable this if you are able to deploy your site with SSL, since servi
 
 ## SW-Update Popup
 
-```diff
+```js
 module.exports = {
   themeConfig: {
     serviceWorker: {
       updatePopup: {
-         message: "New content is available.",
-         buttonText: "Refresh"
+        message: 'New content is available.',
+        buttonText: 'Refresh'
       }
     }
   },
- serviceWorker: true,
-}
+  serviceWorker: true
+};
 ```
 
 For [i18n](../guide/i18n) user:
 
-```diff
+```js
 module.exports = {
   themeConfig: {
     '/': {
       serviceWorker: {
         updatePopup: {
-          message: "New content is available.",
-          buttonText: "Refresh"
+          message: 'New content is available.',
+          buttonText: 'Refresh'
         }
       }
     },
     '/zh/': {
       serviceWorker: {
         updatePopup: {
-          message: "发现新内容可用",
-          buttonText: "刷新"
+          message: '发现新内容可用',
+          buttonText: '刷新'
         }
       }
     }
   },
   serviceWorker: true
+};
 ```

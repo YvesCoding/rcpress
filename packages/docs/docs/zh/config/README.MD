@@ -169,23 +169,23 @@ const config = {
 
 ## SW-Update Popup
 
-```diff
+```js
 module.exports = {
   themeConfig: {
     serviceWorker: {
       updatePopup: {
-         message: "New content is available.",
-         buttonText: "Refresh"
+        message: 'New content is available.',
+        buttonText: 'Refresh'
       }
     }
   },
- serviceWorker: true,
-}
+  serviceWorker: true
+};
 ```
 
 如果你在 [i18n](../guide/i18n) 模式下:
 
-```diff
+```js
 module.exports = {
   themeConfig: {
     '/': {
