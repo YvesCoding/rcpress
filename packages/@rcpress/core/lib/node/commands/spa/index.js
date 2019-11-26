@@ -19,6 +19,8 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   } = require('@rcpress/webpack');
   const { applyUserWebpackConfig, logger, resolveHostandPort } = require('@rcpress/util');
 
+  const webpack = require('webpack');
+
   logger.wait('\nExtracting site metadata...');
 
   const options = await prepare(sourceDir);
@@ -99,9 +101,15 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       compilerDoneReporterOpts.port
     );
   } else {
-    // generate service worker config.
-    if (options.siteData.serviceWorker) {
-      buildSW(options.outDir);
-    }
+    webpack(config, (err, stats) => {
+      if (err) {
+        throw err;
+      }
+
+      // generate service worker config.
+      if (options.siteData.serviceWorker) {
+        buildSW(options.outDir);
+      }
+    });
   }
 };

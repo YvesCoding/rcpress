@@ -16,4 +16,5 @@ module.exports = async function(outDir) {
     await fs.readFile(path.resolve(__dirname, './skip-waiting.js'), 'utf8'),
     { flag: 'a' }
   );
+  logger.success('\nGenerated service worker successfully!');
 };
