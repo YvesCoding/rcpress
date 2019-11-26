@@ -20,6 +20,58 @@
 - RcPress 是一个基于 React.js 的静态文档生成器。
 - 界面是模仿 ant-design [官网](https://ant.design/)做的
 - 配置，代码模仿自[Vuepress](https://vuepress.vuejs.org/)
+- 开发它的目的是我以前是 vuepress 老用户，然后用上 react 后想在 react 里使用它。
+
+## 快速上手
+
+### 安装
+
+安装命令行工具 `@rcpress/cli`
+
+```bash
+
+yarn global add @rcpress/cli
+
+# 或者如果你用npm
+
+npm i  @rcpress/cli -g
+```
+
+### 用法
+
+创建目录以及文件
+
+```bash
+# 创建 docs 目录(docs是默认的文档目录)
+mkdir docs
+
+#创建markdown文件
+echo '# Hello RcPress' > docs/README.md
+```
+
+可以运行如下命令
+
+```bash
+# 启动spa模式的服务
+rcpress dev # 推荐
+# 启动服务端渲染的服务
+rcpress server
+
+# 访问`3000`端口即可。
+```
+
+打包构建
+
+```bash
+# 在生产环境下构建spa
+rcpress build
+# 在生产环境下构建ssr并且声称静态html文件
+rcpress generate
+```
+
+## 文档
+
+可以参考官网上的[向导一节](https://www.yvescoding.com/rcpress/guide/getting-started)
 
 ## 与 vuepress 的对比
 
@@ -40,61 +92,6 @@
 |    打包成单页面     |      ❌      |           ✅            |
 |   打包成静态 html   |      ✅      |           ✅            |
 |  markdown 中写代码  |      ✅      |         ✅(mdx)         |
-
-## 特点
-
-- 只需要简单配置和会一些 markdown 知识就能快速上手，熟悉[Vuepress](https://rcpress.vuejs.org/)的用户使用起来更是得心应手
-- 支持用 markdown 语法渲染成常用的 Ant Design 组件，如[Alert](https://www.yvescoding.com/rcpress/zh/guide/markdown#%E6%8F%90%E7%A4%BA%E6%A1%86%EF%BC%88alert%EF%BC%89)
-- 支支持[mdx](https://github.com/mdx-js/mdx) ,支持[自定义布局](https://www.yvescoding.com/rcpress/zh/guide/theme#custom-layout)(例如自定义网站头部，底部， 首页等)
-
-## 文档
-
-获取详细的文档， 推荐访问网站上的[向导一节](https://www.yvescoding.com/rcpress/guide/getting-started)。
-
-## 安装
-
-安装命令行工具 `rcpress-cli`
-
-```bash
-
-yarn global add @rcpress/cli
-
-# 或者如果你用npm
-
-npm i  @rcpress/cli -g
-```
-
-## 用法
-
-创建目录以及文件
-
-```bash
-# 创建 docs 目录(docs是默认的文档目录)
-mkdir docs
-
-#创建markdown文件
-echo '# Hello RcPress' > docs/README.md
-```
-
-运行
-
-```bash
-# 启动spa模式的服务
-rcpress dev
-# 启动服务端渲染的服务
-rcpress server
-
-# 访问`3000`端口即可。
-```
-
-打包构建
-
-```bash
-# 在生产环境下构建spa
-rcpress build
-# 在生产环境下构建ssr并且声称静态html文件
-rcpress generate
-```
 
 ## 首页截图
 
