@@ -7,14 +7,19 @@ const readline = require('readline');
 const { logger } = require('@rcpress/util');
 const path = require('path');
 
+// options: {
+//  clientManifest,
+//  template,
+//  outDir
+// }
 class Render {
-  constructor(bundle, options, clientMfs = fs) {
-    this.bundle = bundle;
+  constructor(serverBundle, options, clientMfs = fs) {
+    this.bundle = serverBundle;
     this.options = options;
     this.clientMfs = clientMfs;
   }
 
-  renderToString(context) {
+  renderToString(context, pureHtml) {
     return new Promise((resolve, reject) => {
       try {
         const { pageMeta = '' } = context;
@@ -45,19 +50,20 @@ class Render {
         };
 
         webExtractor.getCssString().then(cssString => {
-          const res = template
-            .replace('{{{ html() }}}', html)
+          let res = template.replace('{{{ html() }}}', html);
+          if (!pureHtml) {
+            res = res
+              .replace('{{{ links }}}', removeCSSL(webExtractor.getLinkTags()))
+              .replace('{{{ scripts }}}', webExtractor.getScriptTags())
+              .replace('{{{ style }}}', `<style>${cssString}</style>`)
 
-            .replace('{{{ links }}}', removeCSSL(webExtractor.getLinkTags()))
-            .replace('{{{ scripts }}}', webExtractor.getScriptTags())
-            .replace('{{{ style }}}', `<style>${cssString}</style>`)
+              .replace('{{{ title }}}', helmet.title.toString())
+              .replace('{{{ meta }}}', helmet.meta.toString() + '\n' + pageMeta)
+              .replace('{{{ htmlAttr }}}', helmet.htmlAttributes.toString())
+              .replace('{{{ helmet-links }}}', helmet.link.toString())
 
-            .replace('{{{ title }}}', helmet.title.toString())
-            .replace('{{{ meta }}}', helmet.meta.toString() + '\n' + pageMeta)
-            .replace('{{{ htmlAttr }}}', helmet.htmlAttributes.toString())
-            .replace('{{{ helmet-links }}}', helmet.link.toString())
-
-            .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
+              .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
+          }
 
           resolve(res);
         });
@@ -67,11 +73,22 @@ class Render {
     });
   }
 
+  async writeToFile(page, outDir, html) {
+    const pagePath = page.path;
+    const filename = decodeURIComponent(
+      pagePath.replace(/\/$/, '/index').replace(/^\//, '') + '.html'
+    );
+    const filePath = path.resolve(outDir, filename);
+    await fs.ensureDir(path.dirname(filePath));
+    await fs.writeFile(filePath, html);
+  }
+
   async renderPages(pages) {
     const outDir = this.options.outDir;
 
     for (const page of pages) {
-      await this.renderPage(page, outDir);
+      const html = await this.renderPage(page, outDir);
+      await this.writeToFile(page, outDir, html);
     }
 
     // DONE.
@@ -81,7 +98,7 @@ class Render {
     );
   }
 
-  async renderPage(page, outDir) {
+  async renderPage(page, pureHtml) {
     const pagePath = page.path;
     readline.clearLine(process.stdout, 0);
     readline.cursorTo(process.stdout, 0);
@@ -99,17 +116,13 @@ class Render {
 
     let html;
     try {
-      html = await this.renderToString(context);
+      html = await this.renderToString(context, pureHtml);
     } catch (e) {
       console.error(logger.error(chalk.red(`Error rendering ${pagePath}:`), false));
       throw e;
     }
-    const filename = decodeURIComponent(
-      pagePath.replace(/\/$/, '/index').replace(/^\//, '') + '.html'
-    );
-    const filePath = path.resolve(outDir, filename);
-    await fs.ensureDir(path.dirname(filePath));
-    await fs.writeFile(filePath, html);
+
+    return html;
   }
 }
 

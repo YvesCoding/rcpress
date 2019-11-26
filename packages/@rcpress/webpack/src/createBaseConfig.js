@@ -15,7 +15,8 @@ module.exports = function createBaseConfig(
     isAlgoliaSearch,
     markdown,
     cache,
-    globalComponentPath
+    globalComponentPath,
+    tempPath
   },
   { debug } = {},
   isServer,
@@ -23,7 +24,7 @@ module.exports = function createBaseConfig(
 ) {
   const Config = require('webpack-chain');
   const CSSExtractPlugin = require('mini-css-extract-plugin');
-  const cacheDirectory = '@rcpress/core/.temp';
+
   const isProd = process.env.NODE_ENV === 'production';
   const inlineLimit = 10000;
   const modulePaths = getModulePaths();
@@ -48,7 +49,7 @@ module.exports = function createBaseConfig(
     .set('@themeNotFound', themeNotFoundPath)
     .set('@globalComp', globalComponentPath)
     .set('@source', sourceDir)
-    .set('@temp', cacheDirectory)
+    .set('@temp', tempPath)
     .set('react-dom', '@hot-loader/react-dom')
     .set('@default-theme', '@rcpress/theme-default')
     .set(
@@ -66,7 +67,7 @@ module.exports = function createBaseConfig(
 
   if (cache === false) {
     logger.tip('Clean cache...\n');
-    fs.emptyDirSync(cacheDirectory);
+    fs.emptyDirSync(tempPath);
   }
 
   const cacheIdentifier = JSON.stringify({
@@ -82,7 +83,7 @@ module.exports = function createBaseConfig(
 
   const resolve = p => require.resolve(p);
   const babelOption = {
-    cacheDirectory,
+    cacheDirectory: tempPath,
     cacheIdentifier,
     presets: [
       [resolve('@babel/preset-typescript')],

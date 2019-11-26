@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ssr pagerender 1`] = `
+"<!-- prettier-ignore -->
+<!DOCTYPE html>
+<html {{{ htmlAttr }}}>
+  <head>
+    <meta charset=\\"utf-8\\" />
+    <meta name=\\"viewport\\" content=\\"width=device-width,initial-scale=1\\" />
+     <!--react-helmet render area  -->
+    {{{ title }}}
+     {{{ meta }}}
+     {{{ helmet-links }}}
+    <script>
+     window.RC_CONTEXT = \\"{{ RC_CONTEXT }}\\";
+    </script>
+    
+    <!--loadable-components prefetch  -->
+    {{{ links }}} 
+    {{{ style }}}  
+  </head>
+  <body>
+    <div id=\\"app\\"><div class=\\"page-wrapper index-page-wrapper\\"><div style=\\"width:100%\\"><div class=\\"\\"><div id=\\"header\\" class=\\"header\\"><div class=\\"ant-row\\"><div class=\\"ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-8 ant-col-lg-8 ant-col-xl-5 ant-col-xxl-4\\"><a id=\\"site-logo\\" href=\\"/\\"><span class=\\"left-top-title\\">rcpress</span></a></div><div class=\\"ant-col ant-col-xs-0 ant-col-sm-0 ant-col-md-16 ant-col-lg-16 ant-col-xl-19 ant-col-xxl-20\\"><div class=\\"header-meta\\"><div class=\\"right-header\\"></div><div id=\\"menu\\"><ul id=\\"nav\\" class=\\"ant-menu ant-menu-light ant-menu-root ant-menu-horizontal\\" role=\\"menu\\"></ul></div></div></div></div></div></div></div><div class=\\"ant-row main-wrapper\\"><div class=\\"ant-col ant-col-xs-24 ant-col-sm-24 ant-col-md-24 ant-col-lg-24 ant-col-xl-24 ant-col-xxl-24\\"><div><div><div class=\\"main-container\\"><article class=\\"markdown\\"><div class=\\"modifiedTime modifiedTimeLeft\\">Last Updated<!-- --> <!-- -->2020-03-14 21:55:00</div><div class=\\" toc-affix\\"><div><div class=\\"\\"><div class=\\"toc toc-affix ant-anchor-wrapper\\" style=\\"max-height:calc(100vh - 70px)\\"><div class=\\"ant-anchor\\"><div class=\\"ant-anchor-ink\\"><span class=\\"ant-anchor-ink-ball\\"></span></div><div class=\\"ant-anchor-link\\"><a class=\\"ant-anchor-link-title\\" href=\\"#hello-world\\" title=\\"hello world!\\">hello world!</a></div></div></div></div></div></div><section class=\\"markdown api-container\\"><h1 class=\\"__internal\\" id=\\"hello-world\\">hello world!<a href=\\"#hello-world\\" aria-hidden=\\"true\\" class=\\"anchor\\">#</a></h1><p>hello world</p></section><section class=\\"prev-next-nav\\"></section></article></div></div></div></div></div></div></div>
+     <!--loadable-components render area  -->
+    {{{ scripts }}}
+  </body>
+</html>
+"
+`;

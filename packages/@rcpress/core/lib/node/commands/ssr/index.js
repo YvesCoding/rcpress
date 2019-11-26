@@ -1,75 +1,10 @@
-module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
-  if (isProd) {
-    process.env.NODE_ENV = 'production';
-  }
+var getConfig = require('./getConfig');
+const webpack = require('webpack');
+const fs = require('fs-extra');
+const path = require('path');
 
-  const fs = require('fs-extra');
-  const path = require('path');
-  const chalk = require('chalk');
-  const createServer = require('../../server');
-  const fileWatcher = require('../../fileWatcher');
-
-  const prepare = require('../../prepare');
-  const {
-    WebpackLogPlugin,
-    createSSRConfig,
-    createSPAConfig,
-    markdownLoader: { frontMatterEmitter }
-  } = require('@rcpress/webpack');
-
-  const { applyUserWebpackConfig, logger, resolveHostandPort } = require('@rcpress/util');
-  const PageRender = require('../../pageRender');
-  const buildSW = require('../../sw');
-
-  logger.wait('\nExtracting site metadata...');
-  const options = await prepare(sourceDir);
-  if (cliOptions.outDir) {
-    options.outDir = cliOptions.outDir;
-  }
-
-  // resolve webpack config
-  let spaConfig = createSPAConfig(options, cliOptions, isProd, true /* isServer */);
-  let ssrConfig = createSSRConfig(options, cliOptions, isProd);
-
-  let compilerDoneReporterOpts = {
-    isProd
-  };
-  if (!isProd) {
-    const resolvedOpts = await resolveHostandPort(
-      cliOptions.port || options.siteConfig.port,
-      cliOptions.host || options.siteConfig.host
-    );
-
-    compilerDoneReporterOpts = {
-      ...compilerDoneReporterOpts,
-      ...resolvedOpts,
-      publicPath: options.siteData.base
-    };
-  }
-
-  spaConfig.plugin('rcpress-log').use(WebpackLogPlugin, [compilerDoneReporterOpts]);
-
-  spaConfig = spaConfig.toConfig();
-  ssrConfig = ssrConfig.toConfig();
-
-  if (!isProd) {
-    // setup watchers to update options and dynamically generated files
-    const update = () => {
-      prepare(sourceDir).catch(err => {
-        console.error(logger.error(chalk.red(err.stack), false));
-      });
-    };
-
-    new fileWatcher(update, sourceDir).watch();
-    // also listen for frontMatter changes from markdown files
-    frontMatterEmitter.on('update', update);
-  }
-
-  const userConfig = options.siteConfig.configureWebpack;
-  if (userConfig) {
-    ssrConfig = applyUserWebpackConfig(userConfig, ssrConfig, true /* isServer */, isProd);
-    spaConfig = applyUserWebpackConfig(userConfig, spaConfig, true /* isServer */, isProd);
-  }
+module.exports = async function ssr(sourceDir, cliOptions = {}, isProd) {
+  const [ssrConfig, spaConfig, options] = await getConfig(sourceDir, cliOptions, isProd);
 
   if (!isProd) {
     await createServer(
@@ -81,39 +16,47 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       false /* use webpack-dev-server*/
     );
   } else {
-    const { outDir } = options;
-    if (path.resolve() === outDir) {
-      return console.error(
-        logger.error(
-          chalk.red('Unexpected option: outDir cannot be set to the current working directory.\n'),
-          false
-        )
-      );
-    }
-    await fs.remove(outDir);
+    const buildSW = require('../../sw');
+    const renderer = await module.exports.getPageRender(ssrConfig, spaConfig, options);
+    await renderer.renderPages(options.siteData.pages);
 
-    const webpack = require('webpack');
+    // generate service worker config.
+    if (options.siteData.serviceWorker) {
+      buildSW(options.outDir);
+    }
+  }
+};
+
+module.exports.getPageRender = async function getPageRender(ssrConfig, spaConfig, options) {
+  const { outDir } = options;
+  const PageRender = require('../../pageRender');
+  if (path.resolve() === outDir) {
+    return console.error(
+      logger.error(
+        chalk.red('Unexpected option: outDir cannot be set to the current working directory.\n'),
+        false
+      )
+    );
+  }
+  await fs.remove(outDir);
+
+  return await new Promise((resolve, reject) => {
     webpack([ssrConfig, spaConfig], async (err, stat) => {
       if (err) {
-        throw error;
+        reject(error);
       }
 
       const stats = stat.stats;
-      const renderer = new PageRender(stats[0].toJson(), {
-        clientManifest: stats[1].toJson(),
-        template: fs.readFileSync(
-          path.resolve(__dirname, '../../templates/index.ssr.html'),
-          'utf-8'
-        ),
-        outDir
-      });
-
-      await renderer.renderPages(options.siteData.pages);
-
-      // generate service worker config.
-      if (options.siteData.serviceWorker) {
-        buildSW(options.outDir);
-      }
+      resolve(
+        new PageRender(stats[0].toJson(), {
+          clientManifest: stats[1].toJson(),
+          template: fs.readFileSync(
+            path.resolve(__dirname, '../../templates/index.ssr.html'),
+            'utf-8'
+          ),
+          outDir
+        })
+      );
     });
-  }
+  });
 };

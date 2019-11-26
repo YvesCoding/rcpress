@@ -13,25 +13,63 @@ defaults: &defaults
     - image: circleci/node:10.15.2
 
 jobs:
-  build-docs:
+  # install dependencies
+  install-dependencies:
     <<: *defaults
-
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:10.15.2
-
     steps:
       - checkout
-      - run: yarn && yarn bs
+
+      - restore_cache:
+          keys:
+            - v1-deps-{{ checksum "yarn.lock" }}
+            - v1-deps
+
+      - run:
+          name: 'Install dependencies'
+          command: yarn bs
+
+      - save_cache:
+          key: v1-deps-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      - persist_to_workspace:
+          root: ~/project/rcpress
+          paths:
+            - node_modules
+            - packages/*/node_modules
+            - packages/@rcpress/*/node_modules
+
+  # test
+  run-tests:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project/rcpress
+      - run:
+          name: 'Run tests'
+          command: yarn test
+
+  # build docs and upload to server
+  build-docs:
+    <<: *defaults
+    steps:
+      - checkout
       - run: yarn generate-with-prefix
       - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/before-dep.sh"
       - run: scp -o "StrictHostKeyChecking no" -r packages/docs/docs/.rcpress/dist/* root@$DOCKER_IP:~/rcpress/tmp
       - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/after-dep.sh"
+
 workflows:
   version: 2
-  build-and-deploy:
+  build:
     jobs:
+      - install-dependencies
+      - run-tests:
+          requires: install-dependencies
       - build-docs:
+          requires: install-dependencies
           filters:
             branches:
               only:

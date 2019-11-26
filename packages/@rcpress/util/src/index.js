@@ -1,4 +1,7 @@
 const { deeplyParseHeaders } = require('./parseHeaders');
+const matter = require('gray-matter');
+const toml = require('toml');
+const merge = require('webpack-merge');
 
 exports.normalizeHeadTag = function(tag) {
   if (typeof tag === 'string') {
@@ -14,7 +17,6 @@ exports.normalizeHeadTag = function(tag) {
 };
 
 exports.applyUserWebpackConfig = function(userConfig, config, isServer) {
-  const merge = require('webpack-merge');
   if (typeof userConfig === 'object') {
     return merge(config, userConfig);
   }
@@ -41,9 +43,6 @@ exports.inferTitle = function(frontMatter, headers) {
 };
 
 exports.parseFrontmatter = function(content) {
-  const matter = require('gray-matter');
-  const toml = require('toml');
-
   return matter(content, {
     excerpt_separator: '<!-- more -->',
     engines: {

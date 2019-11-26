@@ -2,7 +2,7 @@
 import React, { useRef, useEffect, useReducer } from 'react';
 import Link from '../components/MyLink';
 import * as utils from '../components/utils';
-import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
+import { Row, Col, Icon, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
 import { useSiteContext } from '@rcpress/core';
 import SearchBox from '../components/search-box';
 import SubMenu from 'antd/lib/menu/SubMenu';

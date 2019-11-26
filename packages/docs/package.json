@@ -6,9 +6,9 @@
   "license": "MIT",
   "author": "",
   "scripts": {
+    "build": "rcpress build",
     "dev": "rcpress dev",
     "generate": "rcpress generate",
-    "build": "rcpress build",
     "serve": "rcpress serve"
   },
   "devDependencies": {

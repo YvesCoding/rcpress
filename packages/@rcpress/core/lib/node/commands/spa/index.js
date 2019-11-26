@@ -1,25 +1,25 @@
+const fs = require('fs-extra');
+const path = require('path');
+const chalk = require('chalk');
+const webpack = require('webpack');
+
+const {
+  WebpackLogPlugin,
+  createSPAConfig,
+  markdownLoader: { frontMatterEmitter }
+} = require('@rcpress/webpack');
+
+const fileWatcher = require('../../fileWatcher');
+const createServer = require('../../server');
+const prepare = require('../../prepare');
+const buildSW = require('../../sw');
+
+const { applyUserWebpackConfig, logger, resolveHostandPort } = require('@rcpress/util');
+
 module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
   if (isProd) {
     process.env.NODE_ENV = 'production';
   }
-
-  const fs = require('fs-extra');
-  const path = require('path');
-  const chalk = require('chalk');
-
-  const fileWatcher = require('../../fileWatcher');
-  const createServer = require('../../server');
-  const prepare = require('../../prepare');
-  const buildSW = require('../../sw');
-
-  const {
-    WebpackLogPlugin,
-    createSPAConfig,
-    markdownLoader: { frontMatterEmitter }
-  } = require('@rcpress/webpack');
-  const { applyUserWebpackConfig, logger, resolveHostandPort } = require('@rcpress/util');
-
-  const webpack = require('webpack');
 
   logger.wait('\nExtracting site metadata...');
 
