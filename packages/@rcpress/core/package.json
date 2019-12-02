@@ -1,6 +1,6 @@
 {
   "name": "@rcpress/core",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A static website generator build with Ant Design",
   "homepage": "https://github.com/YvesCoding/rcpress",
   "repository": {
@@ -24,7 +24,7 @@
     "@loadable/server": "^5.10.2",
     "@rcpress/markdown": "^0.1.1",
     "@rcpress/util": "^0.1.1",
-    "@rcpress/webpack": "^0.1.1",
+    "@rcpress/webpack": "^0.1.8",
     "@types/classnames": "^2.2.7",
     "@types/react-dom": "^16.8.4",
     "axios": "^0.18.0",
