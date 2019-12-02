@@ -118,7 +118,7 @@ module.exports = function createBaseConfig(
 
   config.module
     .rule('js')
-    .test(/\.(jsx?)|(tsx?)$/)
+    .test(/(\.jsx?|\.tsx?)$/)
     .exclude.add(filepath => {
       // transpile rcpress
       if (/@rcpress/.test(filepath)) {
