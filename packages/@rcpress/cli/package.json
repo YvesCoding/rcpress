@@ -1,6 +1,6 @@
 {
   "name": "@rcpress/cli",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Create a website based on Ant Design",
   "keywords": [
     "rcpress"
@@ -11,7 +11,7 @@
     "rcpress": "index.js"
   },
   "dependencies": {
-    "@rcpress/core": "^0.1.8",
+    "@rcpress/core": "^0.1.9",
     "@rcpress/theme-default": "^0.1.5",
     "@rcpress/util": "^0.1.1",
     "chalk": "2.4.2",

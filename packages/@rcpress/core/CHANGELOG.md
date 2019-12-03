@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.9](https://github.com/YvesCoding/rcpress/compare/v0.1.8...v0.1.9) (2019-12-03)
+
+
+### Bug Fixes
+
+* **close:** don't fetch avatars when showAvatarList is false.(close [#11](https://github.com/YvesCoding/rcpress/issues/11)) ([2ae9cfd](https://github.com/YvesCoding/rcpress/commit/2ae9cfd43d4399b24db1b0b0d403f04baa936c00))
+
+
+
+
+
 ## [0.1.8](https://github.com/YvesCoding/rcpress/compare/v0.1.7...v0.1.8) (2019-12-02)
 
 **Note:** Version bump only for package @rcpress/core
