@@ -169,9 +169,11 @@ module.exports = async function resolveOptions(sourceDir) {
       }
 
       data.toc = toc;
-
+      data.avatarList = [];
       // get avatarList
-      data.avatarList = await getAvatarList(themeConfig, file);
+      if (themeConfig.showAvatarList) {
+        data.avatarList = await getAvatarList(themeConfig, file);
+      }
 
       return data;
     })
