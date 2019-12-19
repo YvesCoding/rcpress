@@ -12,6 +12,6 @@ module.exports = {
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
   setupFiles: ['<rootDir>/node_modules/regenerator-runtime/runtime'],
-  setupTestFrameworkScriptFile: '<rootDir>/setupTest.js',
+  setupFilesAfterEnv: ['<rootDir>/setupTest.js'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
 };

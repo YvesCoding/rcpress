@@ -23,6 +23,7 @@
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/server": "^5.10.2",
     "@rcpress/markdown": "^0.1.1",
+    "@rcpress/test-util": "^0.0.0",
     "@rcpress/util": "^0.1.1",
     "@rcpress/webpack": "^0.1.1",
     "@types/classnames": "^2.2.7",

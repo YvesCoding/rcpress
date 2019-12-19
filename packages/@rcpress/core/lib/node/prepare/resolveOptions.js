@@ -185,7 +185,7 @@ module.exports = async function resolveOptions(sourceDir) {
   };
 
   // make tmp path
-  const tempPath = path.resolve(__dirname, '../../../.temp');
+  const tempPath = path.resolve(sourceDir, '.rcpress/.temp');
   fs.ensureDirSync(tempPath);
 
   // console.log('layoutPath:', themeLayoutPath);

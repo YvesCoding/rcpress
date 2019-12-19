@@ -1,0 +1,8 @@
+{
+  "name": "@rcpress/test-util",
+  "main": "index.js",
+  "version": "0.0.0",
+  "dependencies": {
+    "@rcpress/util": "^0.1.1"
+  }
+}
