@@ -28,7 +28,7 @@ module.exports = async function prepare(sourceDir) {
   await writeTemp(
     options.tempPath,
     'style.less',
-    hasUserStyle ? `@import(${JSON.stringify(stylePath)})` : ``
+    hasUserStyle ? `@import ${JSON.stringify(stylePath)};` : ``
   );
 
   // 5 write react-hot-loader config
