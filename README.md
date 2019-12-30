@@ -22,9 +22,7 @@
 - 配置，代码模仿自[Vuepress](https://vuepress.vuejs.org/)
 - 开发它的目的是我以前是 vuepress 老用户，然后用上 react 后想在 react 里使用它。
 
-## 快速上手
-
-### 安装
+## 用法
 
 安装命令行工具 `@rcpress/cli`
 
@@ -37,9 +35,7 @@ yarn global add @rcpress/cli
 npm i  @rcpress/cli -g
 ```
 
-### 用法
-
-创建目录以及文件
+创建文件
 
 ```bash
 # 创建 docs 目录(docs是默认的文档目录)

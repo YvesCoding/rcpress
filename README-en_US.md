@@ -49,7 +49,9 @@ A static website generator build with Ant Design and powered by React.js. 🎨
 
 For detailed docs, recommend to visit [guide section](https://www.yvescoding.com/rcpress/guide/getting-started) on the website.
 
-## Install
+## Usage
+
+Install command line tool `@rcpress/cli`
 
 ```bash
 
@@ -60,8 +62,6 @@ yarn global add @rcpress/cli
 npm i  @rcpress/cli -g
 
 ```
-
-## Usage
 
 Create diretory and markdown file
 
