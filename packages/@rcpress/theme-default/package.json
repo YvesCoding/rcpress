@@ -1,6 +1,6 @@
 {
   "name": "@rcpress/theme-default",
-  "version": "0.1.5",
+  "version": "0.1.11",
   "description": "The default theme of RcPress",
   "dependencies": {
     "antd": "^4.0.1",

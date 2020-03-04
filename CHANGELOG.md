@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.11](https://github.com/YvesCoding/antdsite/compare/v0.1.10...v0.1.11) (2020-03-04)
+
+
+### Bug Fixes
+
+* update antd to 4.X.(close [#16](https://github.com/YvesCoding/antdsite/issues/16)) ([bdcb30c](https://github.com/YvesCoding/antdsite/commit/bdcb30c873c5a4ad6199ab4727accb1462f48c47))
+
+
+
+
+
 ## [0.1.10](https://github.com/YvesCoding/antdsite/compare/v0.1.9...v0.1.10) (2019-12-30)
 
 
