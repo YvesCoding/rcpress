@@ -1,6 +1,5 @@
 import React from 'react';
-import { Tooltip } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { Tooltip, Icon } from 'antd';
 
 const EditButton: React.SFC<{
   title: React.ReactNode;
@@ -9,7 +8,7 @@ const EditButton: React.SFC<{
   return (
     <Tooltip title={title}>
       <a className="edit-button" target="_blank" href={path}>
-        <EditOutlined />
+        <Icon type="edit" />
       </a>
     </Tooltip>
   );

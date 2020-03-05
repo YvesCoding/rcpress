@@ -1,7 +1,6 @@
 import React from 'react';
 import MobileMenu from 'rc-drawer';
-import { Badge, Col, Menu, Affix, Divider } from 'antd';
-import { ExportOutlined } from '@ant-design/icons';
+import { Badge, Col, Menu, Icon, Affix, Divider } from 'antd';
 import Link from '../MyLink';
 import Toc from '../Toc';
 
@@ -133,7 +132,7 @@ export default class LeftMenu extends React.PureComponent<MenuPros, MenuState> {
       >
         <Badge dot={item.important}>
           {before}
-          {text} <ExportOutlined />
+          {text} <Icon type="export" />
           {after}
         </Badge>
       </a>

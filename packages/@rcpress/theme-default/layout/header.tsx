@@ -2,11 +2,10 @@
 import React, { useRef, useEffect, useReducer } from 'react';
 import Link from '../components/MyLink';
 import * as utils from '../components/utils';
-import { Row, Col, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
+import { Row, Col, Icon, Input, Menu, Button, Popover, Dropdown, Affix, Badge } from 'antd';
 import { useSiteContext } from '@rcpress/core';
 import SearchBox from '../components/search-box';
 import SubMenu from 'antd/lib/menu/SubMenu';
-import { DownOutlined, MenuOutlined } from '@ant-design/icons';
 
 type menuMode = 'vertical' | 'vertical-left' | 'vertical-right' | 'horizontal' | 'inline';
 
@@ -180,7 +179,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ isMobile }) => {
               arrowPointAtCenter
               onVisibleChange={onMenuVisibleChange}
             >
-              <DownOutlined className="nav-phone-icon" onClick={handleShowMenu} />
+              <Icon className="nav-phone-icon" type="menu" onClick={handleShowMenu} />
             </Popover>
           </>
         ) : null}
@@ -202,7 +201,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ isMobile }) => {
                 {currentLocate ? (
                   <Dropdown overlay={chooseLanguage} placement="bottomLeft">
                     <Button size="small">
-                      {themeConfig.selectText} <DownOutlined />
+                      {themeConfig.selectText} <Icon type="down" />
                     </Button>
                   </Dropdown>
                 ) : null}
