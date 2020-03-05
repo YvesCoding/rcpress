@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.12](https://github.com/YvesCoding/antdsite/compare/v0.1.11...v0.1.12) (2020-03-05)
+
+
+### Bug Fixes
+
+* ant design version regression to 3.24.0 ([d82b32d](https://github.com/YvesCoding/antdsite/commit/d82b32d9a29c5c320fb02e4fe301ec054e1da2df))
+
+
+
+
+
+
 ## [0.1.11](https://github.com/YvesCoding/antdsite/compare/v0.1.10...v0.1.11) (2020-03-04)
 
 
