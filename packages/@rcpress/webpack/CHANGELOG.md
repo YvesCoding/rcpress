@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.13](https://github.com/YvesCoding/antdsite/compare/v0.1.12...v0.1.13) (2020-03-09)
+
+
+### Bug Fixes
+
+* base not working in dev mode. ([50d4fd3](https://github.com/YvesCoding/antdsite/commit/50d4fd34e4e2467d09163030d9b12403617c40f8))
+
+
+
+
+
 ## [0.1.8](https://github.com/YvesCoding/antdsite/compare/v0.1.7...v0.1.8) (2019-12-02)
 
 
