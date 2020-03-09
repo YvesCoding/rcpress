@@ -33,7 +33,7 @@ module.exports = function createBaseConfig(
     .mode(isProd ? 'production' : 'development')
     .output.path(outDir)
     .filename(isProd ? 'assets/js/[name].[hash:8].js' : 'assets/js/[name].js')
-    .publicPath(isProd ? publicPath : '/')
+    .publicPath(publicPath)
     .end();
 
   if (debug) {
