@@ -2,9 +2,14 @@ var getConfig = require('./getConfig');
 const webpack = require('webpack');
 const fs = require('fs-extra');
 const path = require('path');
+const createServer = require('../../server');
 
 module.exports = async function ssr(sourceDir, cliOptions = {}, isProd) {
-  const [ssrConfig, spaConfig, options] = await getConfig(sourceDir, cliOptions, isProd);
+  const [ssrConfig, spaConfig, options, compilerDoneReporterOpts] = await getConfig(
+    sourceDir,
+    cliOptions,
+    isProd
+  );
 
   if (!isProd) {
     await createServer(
@@ -22,9 +27,11 @@ module.exports = async function ssr(sourceDir, cliOptions = {}, isProd) {
 
     // generate service worker config.
     if (options.siteData.serviceWorker) {
-      buildSW(options.outDir);
+      await buildSW(options.outDir);
     }
   }
+
+  return true /** successfully executed command */;
 };
 
 module.exports.getPageRender = async function getPageRender(ssrConfig, spaConfig, options) {

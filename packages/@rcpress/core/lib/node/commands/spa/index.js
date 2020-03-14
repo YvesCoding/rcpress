@@ -101,15 +101,20 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
       compilerDoneReporterOpts.port
     );
   } else {
-    webpack(config, (err, stats) => {
-      if (err) {
-        throw err;
-      }
+    return await new Promise((resolve, reject) => {
+      webpack(config, async (err, stats) => {
+        if (err) {
+          reject(err);
+        }
 
-      // generate service worker config.
-      if (options.siteData.serviceWorker) {
-        buildSW(options.outDir);
-      }
+        // generate service worker config.
+        if (options.siteData.serviceWorker) {
+          await buildSW(options.outDir);
+          resolve(true) /** successfully executed command */;
+        }
+      });
     });
   }
+
+  return true; /** successfully executed command */
 };

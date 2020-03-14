@@ -66,5 +66,5 @@ module.exports = async function dev(sourceDir, cliOptions = {}, isProd) {
     spaConfig = applyUserWebpackConfig(userConfig, spaConfig, false /* isServer */, isProd);
   }
 
-  return [ssrConfig, spaConfig, options];
+  return [ssrConfig, spaConfig, options, compilerDoneReporterOpts];
 };
