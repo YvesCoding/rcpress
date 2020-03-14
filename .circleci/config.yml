@@ -56,8 +56,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-       - attach_workspace:
+      - attach_workspace:
           at: ~/project/rcpress
+
       - run: yarn generate-with-prefix
       - run: ssh -o "StrictHostKeyChecking no" root@$DOCKER_IP "~/rcpress/before-dep.sh"
       - run: scp -o "StrictHostKeyChecking no" -r packages/docs/docs/.rcpress/dist/* root@$DOCKER_IP:~/rcpress/tmp
