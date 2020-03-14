@@ -13,6 +13,7 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest'
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
+  testEnvironment: 'node',
   setupFiles: ['<rootDir>/node_modules/regenerator-runtime/runtime'],
   setupFilesAfterEnv: ['<rootDir>/setupTest.js'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],

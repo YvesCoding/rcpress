@@ -1,6 +1,10 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { mount } from 'enzyme';
 import React from 'react';
-import SearchBox from '../search-box';
+import SearchBox from '../components/search-box';
 
 describe('SearchBox', () => {
   test('SearchBox', () => {
