@@ -67,9 +67,11 @@ workflows:
     jobs:
       - install-dependencies
       - run-tests:
-          requires: install-dependencies
+          requires:
+            - install-dependencies
       - build-docs:
-          requires: install-dependencies
+          requires:
+            - install-dependencies
           filters:
             branches:
               only:
