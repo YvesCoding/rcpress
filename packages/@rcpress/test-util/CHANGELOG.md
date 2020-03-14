@@ -5,21 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.2.0](https://github.com/YvesCoding/antdsite/compare/v0.1.13...v0.2.0) (2020-03-14)
 
-**Note:** Version bump only for package @rcpress/markdown
 
+### Features
 
-
-
-
-## 0.1.1 (2019-10-29)
-
-**Note:** Version bump only for package @rcpress/markdown
-
-
-
-
-
-
-# 0.1.0 (2019-10-23)
-
-**Note:** Version bump only for package @rcpress/markdown
+* add test ([61df46e](https://github.com/YvesCoding/antdsite/commit/61df46e5250c6cdea24e051837ab34132fc8fa6c))
