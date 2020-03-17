@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/YvesCoding/antdsite/compare/v0.2.0...v0.2.1) (2020-03-17)
+
+
+### Bug Fixes
+
+* page render not generate style. ([038069e](https://github.com/YvesCoding/antdsite/commit/038069e126ec952cb1e0c54017e77fcf14a2afd5))
+
+
+
+
+
 # [0.2.0](https://github.com/YvesCoding/antdsite/compare/v0.1.13...v0.2.0) (2020-03-14)
 
 
