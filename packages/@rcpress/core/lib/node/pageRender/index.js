@@ -87,7 +87,7 @@ class Render {
     const outDir = this.options.outDir;
 
     for (const page of pages) {
-      const html = await this.renderPage(page, outDir);
+      const html = await this.renderPage(page);
       await this.writeToFile(page, outDir, html);
     }
 
