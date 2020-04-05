@@ -1,3 +1,7 @@
+/*
+ * @author wangyi7099
+ */
+
 import React from 'react';
 import { Alert } from 'antd';
 // global components

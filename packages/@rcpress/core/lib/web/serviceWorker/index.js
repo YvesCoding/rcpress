@@ -1,3 +1,7 @@
+/*
+ * @author wangyi7099
+ */
+
 import { useEffect } from 'react';
 import { noop } from '../shared/noop';
 import SWUpdateEvent from './SWUpdateEvent';

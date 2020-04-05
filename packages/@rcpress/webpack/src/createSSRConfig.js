@@ -1,12 +1,11 @@
 module.exports = function createSSRConfig(options, cliOptions, isProd) {
   const fs = require('fs-extra');
   const path = require('path');
-  const WebpackBar = require('webpackbar');
   const createBaseConfig = require('./createBaseConfig');
   const CopyPlugin = require('copy-webpack-plugin');
   const LoadablePlugin = require('@loadable/webpack-plugin');
 
-  const config = createBaseConfig(options, cliOptions, true, true);
+  const config = createBaseConfig(options, cliOptions, true, true, isProd);
   const { sourceDir, outDir } = options;
   const outputPath = path.join(options.tempPath, 'server');
 
@@ -36,16 +35,6 @@ module.exports = function createSSRConfig(options, cliOptions, isProd) {
   const publicDir = path.resolve(sourceDir, '.rcpress/public');
   if (fs.existsSync(publicDir)) {
     config.plugin('copy').use(CopyPlugin, [[{ from: publicDir, to: outDir }]]);
-  }
-
-  if (!cliOptions.debug) {
-    config.plugin('bar').use(WebpackBar, [
-      {
-        name: 'Server',
-        color: 'blue',
-        compiledIn: false
-      }
-    ]);
   }
 
   // loadable webpack plugin

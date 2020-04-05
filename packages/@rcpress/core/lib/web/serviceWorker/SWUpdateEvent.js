@@ -1,3 +1,7 @@
+/*
+ * @author wangyi7099
+ */
+
 export default class SWUpdateEvent {
   constructor(registration) {
     Object.defineProperty(this, 'registration', {

@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 const fs = require('fs');
 const webpack = require('webpack');
 const chokidar = require('chokidar');
@@ -40,7 +46,8 @@ module.exports = function setupDevServer(clientConfig, serverConfig, app, templa
   const clientCompiler = webpack(clientConfig);
   const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
     publicPath: clientConfig.output.publicPath,
-    stats: false
+    stats: false,
+    logLevel: 'silent'
   });
 
   app.use(devMiddleware);
@@ -56,7 +63,7 @@ module.exports = function setupDevServer(clientConfig, serverConfig, app, templa
   });
 
   // hot middleware
-  app.use(require('webpack-hot-middleware')(clientCompiler, { heartbeat: 5000 }));
+  app.use(require('webpack-hot-middleware')(clientCompiler, { heartbeat: 5000, log: false }));
 
   // watch and update server renderer
   const serverCompiler = webpack(serverConfig);

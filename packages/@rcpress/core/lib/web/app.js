@@ -1,3 +1,7 @@
+/*
+ * @author wangyi7099
+ */
+
 import('@temp/style.less');
 import { hot } from 'react-hot-loader/root';
 import '@temp/rhlConfig';
@@ -21,7 +25,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 // suggest dev server restart on base change
 if (module.hot) {
   const prevBase = siteData.base;
-  module.hot.accept('../../.temp/siteData', () => {
+  module.hot.accept('@temp/siteData', () => {
     if (siteData.base !== prevBase) {
       window.alert(
         `[rcpress] Site base has changed. ` +

@@ -1,3 +1,7 @@
+/*
+ * @author wangyi7099
+ */
+
 import React, { useContext } from 'react';
 
 // global site data sotred in the context

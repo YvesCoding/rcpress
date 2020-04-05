@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 module.exports = async function(outDir) {
   const path = require('path');
   const fs = require('fs-extra');

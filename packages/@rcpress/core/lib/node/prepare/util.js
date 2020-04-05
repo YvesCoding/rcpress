@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 const path = require('path');
 const spawn = require('cross-spawn');
 const fs = require('fs-extra');

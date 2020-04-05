@@ -3,10 +3,9 @@ module.exports = function createSPAConfig(options, cliOptions, isProd, isServer)
   const path = require('path');
 
   const LoadablePlugin = require('@loadable/webpack-plugin');
-  const WebpackBar = require('webpackbar');
   const createBaseConfig = require('./createBaseConfig');
   const CopyPlugin = require('copy-webpack-plugin');
-  const config = createBaseConfig(options, cliOptions, isServer, false);
+  const config = createBaseConfig(options, cliOptions, isServer, false, isProd);
   const { sourceDir, outDir } = options;
   config
     .entry('app')
@@ -30,16 +29,6 @@ module.exports = function createSPAConfig(options, cliOptions, isProd, isServer)
     tls: 'empty',
     child_process: 'empty'
   });
-
-  if (!cliOptions.debug) {
-    config.plugin('bar').use(WebpackBar, [
-      {
-        name: 'Client',
-        color: '#41b883',
-        compiledIn: false
-      }
-    ]);
-  }
 
   if (isServer) {
     // loadable webpack plugin

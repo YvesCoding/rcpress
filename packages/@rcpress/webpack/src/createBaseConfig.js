@@ -20,12 +20,12 @@ module.exports = function createBaseConfig(
   },
   { debug } = {},
   isServer,
-  isServerBundle
+  isServerBundle,
+  isProd
 ) {
   const Config = require('webpack-chain');
   const CSSExtractPlugin = require('mini-css-extract-plugin');
 
-  const isProd = process.env.NODE_ENV === 'production';
   const inlineLimit = 10000;
   const modulePaths = getModulePaths();
   const config = new Config();

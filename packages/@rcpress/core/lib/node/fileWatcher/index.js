@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 const chokidar = require('chokidar');
 
 class fileWatcher {

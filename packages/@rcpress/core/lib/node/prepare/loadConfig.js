@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 const fs = require('fs-extra');
 const path = require('path');
 const yamlParser = require('js-yaml');

@@ -16,12 +16,12 @@ exports.normalizeHeadTag = function(tag) {
   };
 };
 
-exports.applyUserWebpackConfig = function(userConfig, config, isServer) {
+exports.applyUserWebpackConfig = function(userConfig, config, isServer, isProd) {
   if (typeof userConfig === 'object') {
     return merge(config, userConfig);
   }
   if (typeof userConfig === 'function') {
-    const res = userConfig(config, isServer);
+    const res = userConfig(config, isServer, isProd);
     if (res && typeof res === 'object') {
       return merge(config, res);
     }
@@ -52,6 +52,10 @@ exports.parseFrontmatter = function(content) {
   });
 };
 
+exports.getCurrentTime = () => {
+  return new Date().toTimeString().match(/^[\d:]+/)[0];
+};
+
 // ensure only one `/` in new url
 exports.withPathPrefix = (url, pathPrefix) => (pathPrefix + url).replace(/\/\//, `/`);
 
@@ -59,4 +63,4 @@ exports.logger = require('./logger');
 exports.deepMerge = require('./deepMerge');
 exports.emoji = require('./emoji');
 exports.emoji = require('./emoji');
-exports.resolveHostandPort = require('./resolveHostandPort');
+exports.resolveAddress = require('./resolveAddress');

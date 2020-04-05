@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 const { renderToString } = require('react-dom/server');
 const { ChunkExtractor } = require('@loadable/server');
 const { Helmet } = require('react-helmet');

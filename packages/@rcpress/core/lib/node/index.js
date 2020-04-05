@@ -1,3 +1,11 @@
-exports.spa = require('./commands/spa');
-exports.ssr = require('./commands/ssr');
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
+exports.dev = require('./commands/dev');
+exports.build = require('./commands/build');
+exports.serve = require('./commands/serve');
+exports.generate = require('./commands/generate');
 exports.eject = require('./commands/eject');

@@ -27,6 +27,10 @@ const logTypes = {
 
 const getLoggerFn = (color, label) => (msg, log = true) => {
   let newLine = false;
+  if (msg instanceof Error) {
+    msg = msg.message;
+  }
+
   if (msg.startsWith('\n')) {
     if (log) msg = msg.slice(1);
     newLine = true;

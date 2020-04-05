@@ -42,8 +42,4 @@ config/components/es
 config/components/package.json
 **/package-lock.json
 
-# gatsby files
-.cache/ 
-false  
-my-docs
 .temp

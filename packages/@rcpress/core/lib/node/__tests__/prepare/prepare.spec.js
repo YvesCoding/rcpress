@@ -1,6 +1,5 @@
-const path = require('path');
 const fs = require('fs-extra');
-const prepare = require('../../prepare/index');
+const App = require('../../app');
 const { getSourceDirs } = require('@rcpress/test-util');
 
 describe('App', () => {
@@ -8,8 +7,9 @@ describe('App', () => {
     await Promise.all(
       getSourceDirs(__dirname).map(async ({ name, docsPath, docsTempPath }) => {
         await fs.ensureDir(docsTempPath);
-        const option = await prepare(docsPath);
-        expect(option.sourceDir).toBe(docsPath);
+        const app = new App(docsPath);
+        await app.prepare();
+        expect(app.options.sourceDir).toBe(docsPath);
       })
     );
   });

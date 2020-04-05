@@ -1,3 +1,9 @@
+'use strict';
+
+/*
+ * @author wangyi7099
+ */
+
 const chalk = require('chalk');
 const semver = require('semver');
 const {
@@ -5,7 +11,7 @@ const {
   version
 } = require('../package.json');
 const path = require('path');
-const { spa, ssr, eject } = require('@rcpress/core/lib/node');
+const App = require('@rcpress/core/lib/node/app');
 const { logger } = require('@rcpress/util');
 
 if (!semver.satisfies(process.version, requiredVersion)) {
@@ -29,11 +35,11 @@ program
   .option('-h, --host <host>', 'use specified host (default: 0.0.0.0)')
   .option('--debug', 'start development server in debug mode')
   .action((dir = 'docs', { host, port, debug }) => {
-    wrapCommand(spa)(path.resolve(dir), {
+    WrapperApp(App)(path.resolve(dir), {
       host,
       port,
       debug
-    });
+    }).dev();
   });
 
 program
@@ -43,14 +49,10 @@ program
   .option('--debug', 'build in development mode for debugging')
   .action((dir = 'docs', { debug, dest }) => {
     const outDir = dest ? path.resolve(dest) : null;
-    wrapCommand(spa)(
-      path.resolve(dir),
-      {
-        debug,
-        outDir
-      },
-      true /* is production */
-    );
+    WrapperApp(App)(path.resolve(dir), {
+      debug,
+      outDir
+    }).build();
   });
 
 program
@@ -60,11 +62,11 @@ program
   .option('-h, --host <host>', 'use specified host (default: 0.0.0.0)')
   .option('--debug', 'start development server in debug mode')
   .action((dir = 'docs', { host, port, debug }) => {
-    wrapCommand(ssr)(path.resolve(dir), {
+    WrapperApp(App)(path.resolve(dir), {
       host,
       port,
       debug
-    });
+    }).serve();
   });
 
 program
@@ -73,21 +75,17 @@ program
   .option('-d, --dest <outDir>', 'specify build output dir (default: .rcpress/dist)')
   .option('--debug', 'build in development mode for debugging')
   .action((dir = 'docs', { dest, debug }) => {
-    wrapCommand(ssr)(
-      path.resolve(dir),
-      {
-        dest,
-        debug
-      },
-      true /* is production */
-    );
+    WrapperApp(App)(path.resolve(dir), {
+      dest,
+      debug
+    }).generate();
   });
 
 program
   .command('eject [targetDir]')
   .description('copy the default theme into .rcpress/theme for customization.')
   .action((dir = 'docs') => {
-    wrapCommand(eject)(path.resolve(dir));
+    WrapperApp(App)(path.resolve(dir)).eject();
   });
 
 // output help information on unknown commands
@@ -142,11 +140,13 @@ if (!process.argv.slice(2).length) {
   program.outputHelp();
 }
 
-function wrapCommand(fn) {
+function WrapperApp(wrapperedApp) {
   return (...args) => {
-    return fn(...args).catch(err => {
+    try {
+      return new wrapperedApp(...args);
+    } catch (error) {
       logger.error(err.stack);
       process.exitCode = 1;
-    });
+    }
   };
 }

@@ -1,46 +1,34 @@
 const chalk = require('chalk');
-const { logger } = require('@rcpress/util');
+const { logger, getCurrentTime } = require('@rcpress/util');
 
-let isInited = false;
 module.exports = class WebpackLogPlugin {
-  constructor(options) {
-    this.options = options;
-  }
-
   apply(compiler) {
-    compiler.hooks.done.tap('rcpress-log', stats => {
-      if (!isInited) {
-        isInited = true;
-        clearScreen();
-      }
+    compiler.hooks.compile.tap('rcpress-log-compile', () => {
+      const time = getCurrentTime();
 
-      const { displayHost, port, publicPath, isProd } = this.options;
+      logger.wait(`${chalk.gray(`[${time}]`)} Compiling...`);
+    });
+
+    compiler.hooks.invalid.tap('rcpress-log-building', () => {
+      const time = getCurrentTime();
+
+      logger.wait(`${chalk.gray(`[${time}]`)} Building...`);
+    });
+
+    compiler.hooks.done.tap('rcpress-log-done', stats => {
       if (stats.compilation.errors && stats.compilation.errors.length) {
         for (const e of stats.compilation.errors) {
-          logger.error(e.message);
+          logger.error(e.message || e);
         }
         return;
       }
-      const time = new Date().toTimeString().match(/^[\d:]+/)[0];
+      const time = getCurrentTime();
 
       logger.success(
-        `\n${chalk.gray(`[${time}]`)} Build ${chalk.italic(
+        `${chalk.gray(`[${time}]`)} Build ${chalk.italic(
           stats.hash.slice(0, 6)
         )} finished in ${stats.endTime - stats.startTime} ms!`
       );
-
-      if (!isProd) {
-        console.log(
-          `\n${chalk.gray('>')} RcPress dev server listening at ${chalk.cyan(
-            `http://${displayHost}:${port}${publicPath}`
-          )}`
-        );
-        compiler.hooks.invalid.tap('rcpress-log', clearScreen);
-      }
     });
   }
 };
-
-function clearScreen() {
-  process.stdout.write('\x1Bc');
-}

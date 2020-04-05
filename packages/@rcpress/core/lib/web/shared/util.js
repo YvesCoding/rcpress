@@ -1,3 +1,7 @@
+/*
+ * @author wangyi7099
+ */
+
 export function getCurrentLoacle(siteData, path) {
   let targetLocale = '';
 
