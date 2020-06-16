@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
      <!--react-helmet render area  -->
     {{{ title }}}
-     {{{ meta }}}
-     {{{ helmet-links }}}
+    {{{ meta }}}
+    {{{ helmet-links }}}
     <script>
      window.RC_CONTEXT = "{{ RC_CONTEXT }}";
     </script>
+      <script>
+       window.less = {
+         async: false,
+         env: 'production'
+       };
+    </script>  
+    <!-- extra head -->
+    <noscript>
+       You need to enable JavaScript to run this app.
+    </noscript>
     
     <!--loadable-components prefetch  -->
     {{{ links }}} 

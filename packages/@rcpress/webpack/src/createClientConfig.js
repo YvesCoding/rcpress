@@ -1,12 +1,9 @@
-module.exports = function createSPAConfig(options, cliOptions, isProd, isServer) {
-  const fs = require('fs-extra');
-  const path = require('path');
+module.exports = function createClientConfig(ctx, isProd, isServer) {
+  const { options, cliOptions, pluginMgr } = ctx;
 
   const LoadablePlugin = require('@loadable/webpack-plugin');
   const createBaseConfig = require('./createBaseConfig');
-  const CopyPlugin = require('copy-webpack-plugin');
   const config = createBaseConfig(options, cliOptions, isServer, false, isProd);
-  const { sourceDir, outDir } = options;
   config
     .entry('app')
     .add(
@@ -39,16 +36,11 @@ module.exports = function createSPAConfig(options, cliOptions, isProd, isServer)
     );
   }
 
-  if (isProd) {
-    const publicDir = path.resolve(sourceDir, '.rcpress/public');
-    if (fs.existsSync(publicDir)) {
-      config.plugin('copy').use(CopyPlugin, [[{ from: publicDir, to: outDir }]]);
-    }
-  }
-
   if (options.siteConfig.chainWebpack) {
     options.siteConfig.chainWebpack(config, false /* isServer */, isProd);
   }
+
+  pluginMgr.applySyncOption('chainWebpack', config, false /* isServer */);
 
   return config;
 };

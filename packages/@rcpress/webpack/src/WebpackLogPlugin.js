@@ -1,5 +1,4 @@
-const chalk = require('chalk');
-const { logger, getCurrentTime } = require('@rcpress/util');
+const { logger, getCurrentTime, chalk } = require('@rcpress/util');
 
 module.exports = class WebpackLogPlugin {
   apply(compiler) {

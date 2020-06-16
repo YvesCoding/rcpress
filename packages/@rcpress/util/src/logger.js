@@ -48,5 +48,8 @@ for (const type in logTypes) {
   logger[type] = getLoggerFn(color, label);
 }
 
+// test phase no op..
+logger.debug = () => {};
+
 module.exports = logger;
 module.exports.getLoggerFn = getLoggerFn;

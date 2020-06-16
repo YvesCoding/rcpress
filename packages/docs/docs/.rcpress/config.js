@@ -26,6 +26,8 @@ module.exports = {
   themeConfig: {
     repo: 'YvesCoding/rcpress',
     docsDir: 'packages/docs/docs',
+    darkTheme: false,
+    showAvatarList: process.env.NODE_ENV === 'production',
     locales: {
       '/': {
         label: 'English',

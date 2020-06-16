@@ -4,15 +4,14 @@
  * @author wangyi7099
  */
 
-const chalk = require('chalk');
 const semver = require('semver');
 const {
   engines: { node: requiredVersion },
   version
 } = require('../package.json');
 const path = require('path');
-const App = require('@rcpress/core/lib/node/app');
-const { logger } = require('@rcpress/util');
+const App = require('@rcpress/core/lib/node/App');
+const { logger, chalk } = require('@rcpress/util');
 
 if (!semver.satisfies(process.version, requiredVersion)) {
   logger.error(
@@ -144,7 +143,7 @@ function WrapperApp(wrapperedApp) {
   return (...args) => {
     try {
       return new wrapperedApp(...args);
-    } catch (error) {
+    } catch (err) {
       logger.error(err.stack);
       process.exitCode = 1;
     }

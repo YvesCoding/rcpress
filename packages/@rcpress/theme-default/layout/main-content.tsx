@@ -46,13 +46,13 @@ const MainContent: FunctionComponent<{
         xs={24}
       >
         <div>
-          {isWebsiteHome ? (
+          {/* {isWebsiteHome ? (
             <HomePage />
           ) : (
             <div>
               <Content isMoblie={isMobile} prev={prev} next={next} />
             </div>
-          )}
+          )} */}
         </div>
         {footerText && isWebsiteHome ? <Footer footerText={footerText} /> : null}
       </Col>

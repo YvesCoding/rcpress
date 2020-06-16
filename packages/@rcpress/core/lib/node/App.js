@@ -4,31 +4,40 @@
  * @author wangyi7099
  */
 
-const fs = require('fs-extra');
 const path = require('path');
-const chalk = require('chalk');
 const webpack = require('webpack');
 const serve = require('webpack-dev-server');
-
+const express = require('express');
+const chokidar = require('chokidar');
 const {
   WebpackLogPlugin,
-  createSPAConfig,
+  createClientConfig,
   createSSRConfig,
   markdownLoader: { frontMatterEmitter }
 } = require('@rcpress/webpack');
-const { applyUserWebpackConfig, logger, resolveAddress, getCurrentTime } = require('@rcpress/util');
+const {
+  applyUserWebpackConfig,
+  fs,
+  chalk,
+  logger,
+  resolveAddress,
+  getCurrentTime
+} = require('@rcpress/util');
 
-const fileWatcher = require('../fileWatcher');
-const buildSW = require('../sw');
-const resolveOptions = require('../prepare/resolveOptions');
-const { genRoutesFile } = require('../prepare/codegen');
-const { writeTemp, createResolveThemeLayoutPath } = require('../prepare/util');
-const getPageRenderer = require('./getPageRenderer');
+const fileWatcher = require('./fileWatcher');
+const buildSW = require('./sw');
+const resolveOptions = require('./prepare/resolveOptions');
+const { genRoutesFile } = require('./prepare/codegen');
+const { createResolveThemeLayoutPath } = require('./prepare/util');
+const PageRender = require('./pageRender');
+const PluginManager = require('./PluginManager');
+const tempCache = new Map();
 
 class App {
-  constructor(sourceDir, cliOptions) {
+  constructor(sourceDir, cliOptions = {}) {
     this.cliOptions = cliOptions;
     this.sourceDir = sourceDir;
+    this.pluginMgr = new PluginManager(this);
   }
 
   createModuleLogger(actionName) {
@@ -43,37 +52,43 @@ class App {
     return reatedLogger;
   }
 
-  async prepare() {
-    const { sourceDir } = this;
-    const prepareLogger = this.createModuleLogger('Collecting the site data');
+  async writeTemp(file, content) {
+    const { tempPath } = this.options;
+    // cache write to avoid hitting the dist if it didn't change
+    const fileFullPath = path.join(tempPath, file);
+    const cached = tempCache.get(fileFullPath);
+    if (cached !== content) {
+      fs.ensureFileSync(fileFullPath);
+      await fs.writeFile(fileFullPath, content, { flag: '' });
+      tempCache.set(fileFullPath, content);
+    }
 
-    prepareLogger();
+    return fileFullPath;
+  }
 
-    // 1. load options
-    const options = await resolveOptions(sourceDir);
+  setTmplArgs(tmplArgs) {
+    this.tmplArgs = tmplArgs;
+  }
 
-    // 2. generate routes & user components registration code
+  async writeTemps() {
+    const { options, sourceDir } = this;
+    //  generate routes & user components registration code
     const routesCode = await genRoutesFile(options);
     // const componentCode = await genComponentRegistrationFile(options);
 
-    await writeTemp(options.tempPath, 'routes.js', [routesCode].join('\n'));
+    await this.writeTemp('routes.js', [routesCode].join('\n'));
 
-    // 3. generate siteData
+    // generate siteData
     const dataCode = `export const siteData = ${JSON.stringify(options.siteData, null, 2)}`;
-    await writeTemp(options.tempPath, 'siteData.js', dataCode);
+    await this.writeTemp('siteData.js', dataCode);
 
-    // 4. handle user override
+    //  handle user override
     const stylePath = path.resolve(sourceDir, '.rcpress/style.less').replace(/[\\]+/g, '/');
     const hasUserStyle = fs.existsSync(stylePath);
-    await writeTemp(
-      options.tempPath,
-      'style.less',
-      hasUserStyle ? `@import ${JSON.stringify(stylePath)};` : ``
-    );
+    await this.writeTemp('style.less', hasUserStyle ? `@import ${JSON.stringify(stylePath)};` : ``);
 
-    // 5 write react-hot-loader config
-    await writeTemp(
-      options.tempPath,
+    // write react-hot-loader config
+    await this.writeTemp(
       'rhlConfig.js',
       `
       // rhlConfig.js
@@ -81,15 +96,18 @@ class App {
       setConfig({ logLevel: 'debug'});
       `
     );
+  }
 
-    // 5. handle enhanceApp.js
-    // const enhanceAppPath = path.resolve(sourceDir, '.rcpress/enhanceApp.js');
-    // await writeEnhanceTemp('enhanceApp.js', enhanceAppPath);
+  async prepare() {
+    const prepareLogger = this.createModuleLogger('Collecting the site data');
+    prepareLogger();
 
-    // 6. handle the theme enhanceApp.js
-    // await writeEnhanceTemp('themeEnhanceApp.js', options.themeEnhanceAppPath);
+    // load options
+    this.options = await resolveOptions(this);
+    // write temp file
+    await this.writeTemps();
 
-    this.options = options;
+    prepareLogger.done();
   }
 
   async createWebpackConfig(isServer, isProd) {
@@ -98,12 +116,7 @@ class App {
 
     const { options, cliOptions } = this;
     // resolve webpack config
-    let clientConfig = (this.clientWebpackConfig = createSPAConfig(
-      options,
-      cliOptions,
-      isProd,
-      isServer
-    ));
+    let clientConfig = (this.clientWebpackConfig = createClientConfig(this, isProd, isServer));
 
     if (!isProd) {
       this.resolvedOpts = await resolveAddress(
@@ -122,11 +135,11 @@ class App {
         // internals from an incompatible version.
         .use(require('vuepress-html-webpack-plugin'), [
           {
-            template: path.resolve(__dirname, '../templates/index.dev.html')
+            template: this.devTmpl
           }
         ]);
     } else {
-      this.serverWebpackConfig = createSSRConfig(options, cliOptions, isProd).toConfig();
+      this.serverWebpackConfig = createSSRConfig(this, isProd).toConfig();
     }
     this.clientWebpackConfig = clientConfig.toConfig();
 
@@ -163,13 +176,79 @@ class App {
     frontMatterEmitter.on('update', update);
   }
 
+  /**
+   * Apply user plugins
+   *
+   * @api private
+   */
+
+  applyUserPlugins() {
+    this.pluginMgr.useByPluginsConfig(this.options.plugins);
+    // TODO: Registry theme plugin here
+    // if (this.themeAPI.existsParentTheme) {
+    //   this.pluginMgr.use(this.themeAPI.parentTheme.entry)
+    // }
+    // this.pluginMgr
+    //   .use(this.themeAPI.theme.entry)
+    //   .use(this.themeAPI.vuepressPlugin)
+    //   .use(Object.assign({}, this.siteConfig, { name: '@vuepress/internal-site-config' }))
+  }
+
+  /**
+   * Make template configurable
+   *
+   * Resolving Priority (devTemplate as example):
+   *
+   *   1. siteConfig.devTemplate
+   *   2. `dev.html` located at .vuepress/templates
+   *   3. themeEntryFile.devTemplate
+   *   4. default devTemplate
+   *
+   * @api private
+   */
+
+  resolveTemplates() {
+    // this.devTemplate = this.resolveCommonAgreementFilePath('devTemplate', {
+    //   defaultValue: this.getLibFilePath('client/index.dev.html'),
+    //   siteAgreement: 'templates/dev.html',
+    //   themeAgreement: 'templates/dev.html'
+    // });
+
+    // this.ssrTemplate = this.resolveCommonAgreementFilePath('ssrTemplate', {
+    //   defaultValue: this.getLibFilePath('client/index.ssr.html'),
+    //   siteAgreement: 'templates/ssr.html',
+    //   themeAgreement: 'templates/ssr.html'
+    // });
+
+    // templates
+    this.ssrTmpl = fs.readFileSync(path.resolve(__dirname, './templates/index.ssr.html'));
+    this.devTmpl = fs.readFileSync(path.resolve(__dirname, './templates/index.dev.html'));
+
+    logger.debug('SSR Template File: ' + chalk.gray(this.ssrTemplate));
+    logger.debug('DEV Template File: ' + chalk.gray(this.devTemplate));
+  }
+
   async process(isServer, isProd) {
     await this.prepare();
+
+    this.resolveTemplates();
+
+    this.applyUserPlugins();
+
+    this.pluginMgr.initialize();
+
     await this.createWebpackConfig(isServer, isProd);
 
     if (!isProd) {
       this.watchFile();
     }
+
+    await this.pluginMgr.applyAsyncOption('ready');
+    await Promise.all([
+      this.pluginMgr.applyAsyncOption('clientDynamicModules', this),
+      this.pluginMgr.applyAsyncOption('enhanceAppFiles', this),
+      this.pluginMgr.applyAsyncOption('globalUIComponents', this)
+    ]);
 
     return this;
   }
@@ -243,22 +322,17 @@ class App {
     const http = require('http');
     const express = require('express');
     const compression = require('compression');
-    const Render = require('../pageRender');
 
-    const { clientWebpackConfig, serverWebpackConfig, options, resolvedOpts } = this;
+    const { options, resolvedOpts } = this;
     let renderer;
     const app = express();
     http.createServer(app).listen(resolvedOpts.port, resolvedOpts.host);
 
-    const templatePath = path.resolve(__dirname, '../templates/index.ssr.html');
-
-    let { readyPromise, clientMfs } = require('./stepCustomServer')(
-      clientWebpackConfig,
-      serverWebpackConfig,
+    let { readyPromise, clientMfs } = this.stepCustomServer(
       app,
-      templatePath,
+      this.ssrTmpl,
       (bundle, options) => {
-        renderer = new Render(bundle, options, clientMfs);
+        renderer = new PageRender(bundle, options, clientMfs);
       }
     );
 
@@ -307,12 +381,121 @@ class App {
     this.serverReady();
   }
 
+  stepCustomServer(app, templatePath, cb) {
+    const { clientWebpackConfig: clientConfig, serverWebpackConfig: serverConfig } = this;
+    let bundle;
+    let template;
+    let clientManifest;
+
+    let ready;
+
+    const readyPromise = new Promise(r => {
+      ready = r;
+    });
+    const update = () => {
+      if (bundle && clientManifest) {
+        ready();
+        cb(bundle, {
+          template,
+          clientManifest
+        });
+      }
+    };
+
+    // read template from disk and watch
+    template = fs.readFileSync(templatePath, 'utf-8');
+    chokidar.watch(templatePath).on('change', () => {
+      template = fs.readFileSync(templatePath, 'utf-8');
+      console.log('index.html template updated.');
+      update();
+    });
+
+    clientConfig.entry.app.push('webpack-hot-middleware/client?quiet=true');
+    clientConfig.plugins.push(
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin()
+    );
+
+    // dev middleware
+    const clientCompiler = webpack(clientConfig);
+    const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
+      publicPath: clientConfig.output.publicPath,
+      watchOptions: {
+        ignored: [/node_modules(\\|\/)(?!@rcpress(\\|\/)core(\\|\/).temp)/]
+      },
+      stats: false,
+      logLevel: 'silent'
+    });
+
+    app.use(devMiddleware);
+    clientCompiler.hooks.done.tap('rcpress-ssr-dev-plugin', stats => {
+      stats = stats.toJson();
+      stats.errors.forEach(err => console.error(err));
+      stats.warnings.forEach(err => console.warn(err));
+      if (stats.errors.length) return;
+
+      clientManifest = stats;
+
+      update();
+    });
+
+    // hot middleware
+    app.use(require('webpack-hot-middleware')(clientCompiler, { heartbeat: 5000, log: false }));
+
+    // watch and update server renderer
+    const serverCompiler = webpack(serverConfig);
+    serverCompiler.watch(
+      { ignored: [/node_modules(\\|\/)(?!@rcpress(\\|\/)core(\\|\/).temp)/] },
+      (err, stats) => {
+        if (err) throw err;
+        stats = stats.toJson();
+        if (stats.errors.length) return;
+
+        bundle = stats;
+        update();
+      }
+    );
+
+    return { clientMfs: devMiddleware.fileSystem, readyPromise };
+  }
+
   serverReady() {
     const { displayHost, port } = this.resolvedOpts;
     const { base } = this.options.siteConfig;
     logger.success(
       `RcPress server listening at ${chalk.cyan(`http://${displayHost}:${port}${base}\n`)}`
     );
+  }
+
+  async getPageRendererForProd() {
+    const { clientWebpackConfig: spaConfig, serverWebpackConfig: ssrConfig, options } = this;
+    const { outDir } = options;
+    if (path.resolve() === outDir) {
+      return console.error(
+        logger.error(
+          chalk.red('Unexpected option: outDir cannot be set to the current working directory.\n'),
+          false
+        )
+      );
+    }
+    await fs.remove(outDir);
+
+    return await new Promise((resolve, reject) => {
+      webpack([ssrConfig, spaConfig], async (err, stat) => {
+        if (err) {
+          reject(err);
+        }
+
+        const stats = stat.stats;
+        resolve(
+          new PageRender(stats[0].toJson(), {
+            clientManifest: stats[1].toJson(),
+            template: fs.readFileSync(this.ssrTmpl, 'utf-8'),
+            outDir
+          })
+        );
+      });
+    });
   }
 
   // commands area
@@ -336,7 +519,7 @@ class App {
     log();
 
     await new Promise((resolve, reject) => {
-      webpack(clientWebpackConfig, async (err, stats) => {
+      webpack(clientWebpackConfig, async err => {
         if (err) {
           reject(err);
         }
@@ -358,10 +541,10 @@ class App {
     const log = this.createModuleLogger('generating');
     log();
 
-    const { serverWebpackConfig, clientWebpackConfig, options } = this;
+    const { options } = this;
 
     // get page render...
-    const renderer = await getPageRenderer(serverWebpackConfig, clientWebpackConfig, options);
+    const renderer = await this.getPageRendererForProd();
     // generating pages..
     await renderer.renderPages(options.siteData.pages);
 

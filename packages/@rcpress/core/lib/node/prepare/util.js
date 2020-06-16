@@ -10,25 +10,6 @@ const fs = require('fs-extra');
 const globby = require('globby');
 const { logger } = require('@rcpress/util');
 
-const tempCache = new Map();
-exports.writeTemp = async function(tempPath, file, content) {
-  // cache write to avoid hitting the dist if it didn't change
-  const cached = tempCache.get(file);
-  if (cached !== content) {
-    await fs.writeFile(path.join(tempPath, file), content);
-    tempCache.set(file, content);
-  }
-};
-
-exports.writeEnhanceTemp = async function(destName, srcPath) {
-  await exports.writeTemp(
-    destName,
-    fs.existsSync(srcPath)
-      ? `export { default } from ${JSON.stringify(srcPath)}`
-      : `export default function () {}`
-  );
-};
-
 const indexRE = /(^|.*\/)(index|readme)\.md$/i;
 const extRE = /\.(jsx|tsx|ts|js|md)$/;
 
@@ -111,7 +92,9 @@ const createResolvePathWithExts = sourceDir => basePath => {
       return require.resolve(`${basePath}.${ext}`, {
         paths: [path.resolve(__dirname, '../../../../node_modules'), path.resolve(sourceDir)]
       });
-    } catch (error) {}
+    } catch (error) {
+      // logger.error(error.message);
+    }
   }
 
   throw new Error('Fail to resolve the extension of', basePath);

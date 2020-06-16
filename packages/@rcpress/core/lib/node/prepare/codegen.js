@@ -18,7 +18,7 @@ exports.genRoutesFile = async function({
   pageFiles,
   sourceDir
 }) {
-  function getImportedMakrdown({}, index) {
+  function getImportedMakrdown(_, index) {
     const file = pageFiles[index];
 
     return genLoadableImportedCode(

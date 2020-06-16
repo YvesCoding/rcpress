@@ -83,6 +83,7 @@ function parseConfig(file) {
       data = tomlParser.parse(content);
       // reformat to match config since TOML does not allow different data type
       // https://github.com/toml-lang/toml#array
+      // eslint-disable-next-line
       const format = [];
       Object.keys(data.head).forEach(meta => {
         data.head[meta].forEach(values => {

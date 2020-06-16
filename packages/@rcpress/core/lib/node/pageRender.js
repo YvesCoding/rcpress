@@ -7,10 +7,8 @@
 const { renderToString } = require('react-dom/server');
 const { ChunkExtractor } = require('@loadable/server');
 const { Helmet } = require('react-helmet');
-const fs = require('fs-extra');
-const chalk = require('chalk');
 const readline = require('readline');
-const { logger } = require('@rcpress/util');
+const { logger, fs, chalk } = require('@rcpress/util');
 const path = require('path');
 
 // options: {

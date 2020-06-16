@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const { logger } = require('@rcpress/util');
 const loadableBabelPlugin = require('@loadable/babel-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = function createBaseConfig(
   {
@@ -43,8 +44,9 @@ module.exports = function createBaseConfig(
     config.devtool('cheap-module-eval-source-map');
   }
 
-  config.resolve.alias
-    .set('@theme', themePath)
+  config.resolve
+    .set('symlinks', true)
+    .alias.set('@theme', themePath)
     .set('@themeLayout', themeLayoutPath)
     .set('@themeNotFound', themeNotFoundPath)
     .set('@globalComp', globalComponentPath)
@@ -83,7 +85,7 @@ module.exports = function createBaseConfig(
 
   const resolve = p => require.resolve(p);
   const babelOption = {
-    cacheDirectory: tempPath,
+    cacheDirectory: path.resolve(tempPath, 'cache'),
     cacheIdentifier,
     presets: [
       [resolve('@babel/preset-typescript')],
@@ -272,6 +274,13 @@ module.exports = function createBaseConfig(
         }
       }
     });
+
+    if (isProd && !isServerBundle) {
+      const publicDir = path.resolve(sourceDir, '.rcpress/public');
+      if (fs.existsSync(publicDir)) {
+        config.plugin('copy').use(CopyPlugin, [[{ from: publicDir, to: outDir }]]);
+      }
+    }
   }
 
   // inject constants
@@ -297,7 +306,10 @@ function getLastCommitHash() {
       .sync('git', ['log', '-1', '--format=%h'])
       .stdout.toString('utf-8')
       .trim();
-  } catch (error) {}
+  } catch (
+    error
+    // eslint-disable-next-line
+  ) {}
   return hash;
 }
 

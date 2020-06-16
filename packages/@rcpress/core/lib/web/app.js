@@ -5,6 +5,7 @@
 import('@temp/style.less');
 import { hot } from 'react-hot-loader/root';
 import '@temp/rhlConfig';
+import '@temp/app-enhancers';
 import 'regenerator-runtime/runtime';
 import 'core-js/stage/3';
 import { getcurrentLocaleConfigByPath, resolveSidebarItems, getCurrentPage } from './shared/util';
