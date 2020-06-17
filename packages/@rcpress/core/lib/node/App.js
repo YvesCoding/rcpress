@@ -135,7 +135,11 @@ class App {
         // internals from an incompatible version.
         .use(require('vuepress-html-webpack-plugin'), [
           {
-            template: this.devTmpl
+            template: this.devTmplPath,
+            templateParameters: () => {
+              this.pluginMgr.applySyncOption('injectTemplate');
+              return this.tmplArgs;
+            }
           }
         ]);
     } else {
@@ -221,11 +225,13 @@ class App {
     // });
 
     // templates
-    this.ssrTmpl = fs.readFileSync(path.resolve(__dirname, './templates/index.ssr.html'));
-    this.devTmpl = fs.readFileSync(path.resolve(__dirname, './templates/index.dev.html'));
+    this.devTmplPath = path.resolve(__dirname, './templates/index.dev.html');
+    this.ssrTmplPath = path.resolve(__dirname, './templates/index.ssr.html');
+    this.ssrTmpl = fs.readFileSync(this.devTmplPath);
+    this.devTmpl = fs.readFileSync(this.ssrTmplPath);
 
-    logger.debug('SSR Template File: ' + chalk.gray(this.ssrTemplate));
-    logger.debug('DEV Template File: ' + chalk.gray(this.devTemplate));
+    logger.debug('SSR Template File: ' + chalk.gray(this.ssrTmplPath));
+    logger.debug('DEV Template File: ' + chalk.gray(this.devTmplPath));
   }
 
   async process(isServer, isProd) {
