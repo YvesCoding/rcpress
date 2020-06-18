@@ -17,13 +17,14 @@ const path = require('path');
 //  outDir
 // }
 class Render {
-  constructor(serverBundle, options, clientMfs = fs) {
+  constructor(serverBundle, options, clientMfs = fs, tmplAtgs = {}) {
     this.bundle = serverBundle;
     this.options = options;
     this.clientMfs = clientMfs;
+    this.tmplAtgs = tmplAtgs;
   }
 
-  renderToString(context, pureHtml) {
+  renderToString(context, isHeaderStrip) {
     return new Promise((resolve, reject) => {
       try {
         const { pageMeta = '' } = context;
@@ -55,7 +56,7 @@ class Render {
 
         webExtractor.getCssString().then(cssString => {
           let res = template.replace('{{{ html() }}}', html);
-          if (!pureHtml) {
+          if (!isHeaderStrip) {
             res = res
               .replace('{{{ links }}}', removeCSSL(webExtractor.getLinkTags()))
               .replace('{{{ scripts }}}', webExtractor.getScriptTags())
@@ -67,6 +68,10 @@ class Render {
               .replace('{{{ helmet-links }}}', helmet.link.toString())
 
               .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
+
+            Object.keys(this.tmplAtgs).forEach(key => {
+              res = res.replace(`{{{ ${key} }}}`, this.tmplAtgs[key]);
+            });
           }
 
           resolve(res);
@@ -102,7 +107,7 @@ class Render {
     );
   }
 
-  async renderPage(page, pureHtml) {
+  async renderPage(page, isHeaderStrip) {
     const pagePath = page.path;
     readline.clearLine(process.stdout, 0);
     readline.cursorTo(process.stdout, 0);
@@ -120,7 +125,7 @@ class Render {
 
     let html;
     try {
-      html = await this.renderToString(context, pureHtml);
+      html = await this.renderToString(context, isHeaderStrip);
     } catch (e) {
       console.error(logger.error(chalk.red(`Error rendering ${pagePath}:`), false));
       throw e;

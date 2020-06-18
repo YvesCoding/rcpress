@@ -137,7 +137,7 @@ class App {
           {
             template: this.devTmplPath,
             templateParameters: () => {
-              this.pluginMgr.applySyncOption('injectTemplate');
+              this.pluginMgr.applySyncOption('injectTemplate', this);
               return this.tmplArgs;
             }
           }
@@ -227,8 +227,6 @@ class App {
     // templates
     this.devTmplPath = path.resolve(__dirname, './templates/index.dev.html');
     this.ssrTmplPath = path.resolve(__dirname, './templates/index.ssr.html');
-    this.ssrTmpl = fs.readFileSync(this.devTmplPath);
-    this.devTmpl = fs.readFileSync(this.ssrTmplPath);
 
     logger.debug('SSR Template File: ' + chalk.gray(this.ssrTmplPath));
     logger.debug('DEV Template File: ' + chalk.gray(this.devTmplPath));
@@ -336,9 +334,10 @@ class App {
 
     let { readyPromise, clientMfs } = this.stepCustomServer(
       app,
-      this.ssrTmpl,
+      this.ssrTmplPath,
       (bundle, options) => {
-        renderer = new PageRender(bundle, options, clientMfs);
+        this.pluginMgr.applySyncOption('injectTemplate', this);
+        renderer = new PageRender(bundle, options, clientMfs, this.tmplArgs);
       }
     );
 
@@ -493,12 +492,18 @@ class App {
         }
 
         const stats = stat.stats;
+        this.pluginMgr.applySyncOption('injectTemplate', this);
+
         resolve(
-          new PageRender(stats[0].toJson(), {
-            clientManifest: stats[1].toJson(),
-            template: fs.readFileSync(this.ssrTmpl, 'utf-8'),
-            outDir
-          })
+          new PageRender(
+            stats[0].toJson(),
+            {
+              clientManifest: stats[1].toJson(),
+              template: fs.readFileSync(this.ssrTmpl, 'utf-8'),
+              outDir
+            },
+            this.tmplArgs
+          )
         );
       });
     });
