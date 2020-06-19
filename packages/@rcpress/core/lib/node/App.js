@@ -70,6 +70,12 @@ class App {
     this.tmplArgs = tmplArgs;
   }
 
+  // get the template arguments
+  async getTmplArgs() {
+    await this.pluginMgr.applyAsyncOption('injectTemplate', this);
+    return this.tmplArgs;
+  }
+
   async writeTemps() {
     const { options, sourceDir } = this;
     //  generate routes & user components registration code
@@ -136,9 +142,8 @@ class App {
         .use(require('vuepress-html-webpack-plugin'), [
           {
             template: this.devTmplPath,
-            templateParameters: () => {
-              this.pluginMgr.applySyncOption('injectTemplate', this);
-              return this.tmplArgs;
+            templateParameters: async () => {
+              return await this.getTmplArgs();
             }
           }
         ]);
@@ -335,9 +340,8 @@ class App {
     let { readyPromise, clientMfs } = this.stepCustomServer(
       app,
       this.ssrTmplPath,
-      (bundle, options) => {
-        this.pluginMgr.applySyncOption('injectTemplate', this);
-        renderer = new PageRender(bundle, options, clientMfs, this.tmplArgs);
+      async (bundle, options) => {
+        renderer = new PageRender(bundle, options, clientMfs, await this.getTmplArgs());
       }
     );
 
@@ -492,7 +496,6 @@ class App {
         }
 
         const stats = stat.stats;
-        this.pluginMgr.applySyncOption('injectTemplate', this);
 
         resolve(
           new PageRender(
@@ -502,7 +505,7 @@ class App {
               template: fs.readFileSync(this.ssrTmpl, 'utf-8'),
               outDir
             },
-            this.tmplArgs
+            await this.getTmplArgs()
           )
         );
       });

@@ -25,7 +25,7 @@ module.exports = function instantiateOption({ name, async }) {
     case PLUGIN_OPTION_MAP.ALIAS.name:
       return new AliasOption(name);
 
-    case PLUGIN_OPTION_MAP.INJECT_TEMPLATE:
+    case PLUGIN_OPTION_MAP.INJECT_TEMPLATE.name:
       return new InjectTemplateOption(name);
 
     default:

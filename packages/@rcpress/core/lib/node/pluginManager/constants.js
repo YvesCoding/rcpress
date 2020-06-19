@@ -21,7 +21,7 @@ const PLUGIN_OPTION_META_MAP = {
   ALIAS: { name: 'alias', types: [Function, Object] },
   EXTEND_CLI: { name: 'extendCli', types: [Function] },
   BEFORE_DEV_SERVER: { name: 'beforeDevServer', types: [Function] },
-  INJECT_TEMPLATE: { name: 'injectTemplate', types: [Object, Function] }
+  INJECT_TEMPLATE: { name: 'injectTemplate', types: [Object, Function], async: true }
 };
 
 const PLUGIN_OPTION_MAP = {};

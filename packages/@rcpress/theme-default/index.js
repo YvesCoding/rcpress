@@ -3,6 +3,12 @@ const WebpackThemePlugin = require('./WebpackThemePlugin');
 module.exports = (options, ctx) => ({
   name: '@rcpress/theme-default',
 
+  injectTemplate(ctx) {
+    return {
+      head: "test1234"
+    }
+  },
+
   chainWebpack(config, isServe) {
     if (!isServe) {
       config.plugin('injections').use(WebpackThemePlugin);
