@@ -220,7 +220,8 @@ module.exports = class PluginAPI {
     alias,
     extendCli,
     beforeDevServer,
-    afterDevServer
+    afterDevServer,
+    injectTemplate
   }) {
     if (!this._loggedPlugins.includes(pluginName)) {
       const isInternalPlugin = pluginName.startsWith('@rcpress/internal-');
@@ -250,7 +251,8 @@ module.exports = class PluginAPI {
       .registerOption(PLUGIN_OPTION_MAP.ALIAS.key, alias, pluginName)
       .registerOption(PLUGIN_OPTION_MAP.EXTEND_CLI.key, extendCli, pluginName)
       .registerOption(PLUGIN_OPTION_MAP.BEFORE_DEV_SERVER.key, beforeDevServer, pluginName)
-      .registerOption(PLUGIN_OPTION_MAP.AFTER_DEV_SERVER.key, afterDevServer, pluginName);
+      .registerOption(PLUGIN_OPTION_MAP.AFTER_DEV_SERVER.key, afterDevServer, pluginName)
+      .registerOption(PLUGIN_OPTION_MAP.INJECT_TEMPLATE.key, injectTemplate, pluginName);
   }
 
   /**

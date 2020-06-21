@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-const Option = require('../abstract/Option');
+const AsyncOption = require('../abstract/AsyncOption');
 
 // /**
 //  * modifyTemplate option.
@@ -16,9 +16,9 @@ const Option = require('../abstract/Option');
 //   return tmpl;
 // }
 
-module.exports = class InjectTemplateOption extends Option {
+module.exports = class InjectTemplateOption extends AsyncOption {
   async apply(ctx) {
-    super.syncApply();
+    await super.asyncApply();
 
     const vals = this.appliedValues;
     let heads = '';

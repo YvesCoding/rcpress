@@ -17,7 +17,7 @@ const path = require('path');
 //  outDir
 // }
 class Render {
-  constructor(serverBundle, options, clientMfs = fs, tmplAtgs = {}) {
+  constructor(serverBundle, options, clientMfs = fs, tmplAtgs = { head: '' }) {
     this.bundle = serverBundle;
     this.options = options;
     this.clientMfs = clientMfs;

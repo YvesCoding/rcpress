@@ -5,8 +5,8 @@ module.exports = (options, ctx) => ({
 
   injectTemplate(ctx) {
     return {
-      head: "test1234"
-    }
+      head: `<link rel="stylesheet" href="/filelist.less">`
+    };
   },
 
   chainWebpack(config, isServe) {
