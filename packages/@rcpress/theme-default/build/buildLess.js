@@ -1,11 +1,13 @@
 const bundle = require('less-bundle-promise');
+const path = require('path');
 
-bundle({
-  src: './src/stylesheet/app.less',
-  dest: './src/stylesheet/antd.less',
-  writeFile: true
-}).then((/* output */) => {
-  // console.log(output);
-}).catch((error) => {
-  console.log('Error', error);
-});
+function resolve(name) {
+  return path.resolve(__dirname, `../stylesheet/${name}.less`);
+}
+module.exports = async function buildLess() {
+  await bundle({
+    src: resolve('app'),
+    dest: resolve('antd'),
+    writeFile: true
+  });
+};

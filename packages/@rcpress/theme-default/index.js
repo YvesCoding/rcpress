@@ -1,11 +1,10 @@
-const path = require('path');
 const WebpackThemePlugin = require('./WebpackThemePlugin');
 module.exports = (options, ctx) => ({
   name: '@rcpress/theme-default',
 
-  injectTemplate(ctx) {
+  injectTemplate() {
     return {
-      head: `<link rel="stylesheet" href="/filelist.less">`
+      head: `<link rel="stylesheet" href="/change-theme.less">`
     };
   },
 
