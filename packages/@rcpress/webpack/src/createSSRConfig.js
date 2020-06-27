@@ -39,6 +39,15 @@ module.exports = function createSSRConfig(ctx, isProd) {
     })
   );
 
+  const WebpackBar = require('webpackbar');
+  config.plugin('bar').use(WebpackBar, [
+    {
+      name: 'Server',
+      color: 'blue',
+      compiledIn: false
+    }
+  ]);
+
   if (options.siteConfig.chainWebpack) {
     options.siteConfig.chainWebpack(config, true /* isServer */);
   }

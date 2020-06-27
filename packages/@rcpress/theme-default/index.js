@@ -4,7 +4,15 @@ module.exports = (options, ctx) => ({
 
   injectTemplate() {
     return {
-      head: `<link rel="stylesheet" href="/change-theme.less">`
+      head: `
+      <link rel="stylesheet" href="/change-theme.less"> 
+      <script>
+      window.less = {
+        javascriptEnabled: true,
+        async: false,
+        env: 'production'
+      };
+   </script>  `
     };
   },
 

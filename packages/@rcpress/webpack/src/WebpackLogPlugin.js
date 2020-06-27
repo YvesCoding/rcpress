@@ -1,17 +1,13 @@
-const { logger, getCurrentTime, chalk } = require('@rcpress/util');
+const { logger, chalk } = require('@rcpress/util');
 
 module.exports = class WebpackLogPlugin {
   apply(compiler) {
     compiler.hooks.compile.tap('rcpress-log-compile', () => {
-      const time = getCurrentTime();
-
-      logger.wait(`${chalk.gray(`[${time}]`)} Compiling...`);
+      logger.wait(`Compiling...`);
     });
 
     compiler.hooks.invalid.tap('rcpress-log-building', () => {
-      const time = getCurrentTime();
-
-      logger.wait(`${chalk.gray(`[${time}]`)} Building...`);
+      logger.wait(`Building...`);
     });
 
     compiler.hooks.done.tap('rcpress-log-done', stats => {
@@ -21,12 +17,10 @@ module.exports = class WebpackLogPlugin {
         }
         return;
       }
-      const time = getCurrentTime();
 
       logger.success(
-        `${chalk.gray(`[${time}]`)} Build ${chalk.italic(
-          stats.hash.slice(0, 6)
-        )} finished in ${stats.endTime - stats.startTime} ms!`
+        `Build ${chalk.italic(stats.hash.slice(0, 6))} finished in ${stats.endTime -
+          stats.startTime} ms!`
       );
     });
   }

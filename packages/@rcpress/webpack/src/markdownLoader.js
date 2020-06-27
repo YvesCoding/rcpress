@@ -19,7 +19,6 @@ MDXContent = hot(module)(MDXContent);
 
 module.exports = function(src) {
   const isProd = process.env.NODE_ENV === 'production';
-  const isServer = this.target === 'node';
   const { markdown } = getOptions(this);
   const file = this.resourcePath;
   const key = hash(file + src);

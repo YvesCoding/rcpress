@@ -46,6 +46,7 @@ const MainContent: FunctionComponent<{
         xs={24}
       >
         <div>
+          <HomePage />
           {/* {isWebsiteHome ? (
             <HomePage />
           ) : (

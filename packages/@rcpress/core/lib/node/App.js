@@ -15,14 +15,7 @@ const {
   createSSRConfig,
   markdownLoader: { frontMatterEmitter }
 } = require('@rcpress/webpack');
-const {
-  applyUserWebpackConfig,
-  fs,
-  chalk,
-  logger,
-  resolveAddress,
-  getCurrentTime
-} = require('@rcpress/util');
+const { applyUserWebpackConfig, fs, chalk, logger, resolveAddress } = require('@rcpress/util');
 
 const fileWatcher = require('./fileWatcher');
 const buildSW = require('./sw');
@@ -240,6 +233,8 @@ class App {
   async process(isServer, isProd) {
     await this.prepare();
 
+    this.pluginMgr.use(this.options.themePath);
+
     this.resolveTemplates();
 
     this.applyUserPlugins();
@@ -373,10 +368,7 @@ class App {
         .renderToString(context)
         .then(html => {
           res.send(html);
-          logger.tip(
-            `${chalk.gray(`[${getCurrentTime()}]`)} Finish the request ${req.url} in  ${Date.now() -
-              s}ms`
-          );
+          logger.tip(`Finish the request ${req.url} in  ${Date.now() - s}ms`);
         })
         .catch(err => {
           return handleError(err);

@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const getCurrentTime = require('./getCurrentTime');
 
 const logger = {};
 
@@ -25,7 +26,7 @@ const logTypes = {
   }
 };
 
-const getLoggerFn = (color, label) => (msg, log = true) => {
+const getLoggerFn = (color, label) => (msg, showTime = true, log = true) => {
   let newLine = false;
   if (msg instanceof Error) {
     msg = msg.message;
@@ -35,6 +36,11 @@ const getLoggerFn = (color, label) => (msg, log = true) => {
     if (log) msg = msg.slice(1);
     newLine = true;
   }
+
+  if (showTime) {
+    msg = `${chalk.gray(`[${getCurrentTime()}]`)} ${msg}`;
+  }
+
   msg = chalk.reset.inverse.bold[color](` ${label} `) + ' ' + msg;
   if (log) {
     console.log(newLine ? '\n' + msg : msg);

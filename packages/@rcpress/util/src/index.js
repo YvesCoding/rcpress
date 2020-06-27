@@ -52,13 +52,10 @@ exports.parseFrontmatter = function(content) {
   });
 };
 
-exports.getCurrentTime = () => {
-  return new Date().toTimeString().match(/^[\d:]+/)[0];
-};
-
 // ensure only one `/` in new url
 exports.withPathPrefix = (url, pathPrefix) => (pathPrefix + url).replace(/\/\//, `/`);
 
+exports.getCurrentTime = require('./getCurrentTime');
 exports.logger = require('./logger');
 exports.deepMerge = require('./deepMerge');
 exports.emoji = require('./emoji');

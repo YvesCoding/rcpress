@@ -31,7 +31,7 @@ function isHome(frontmatter, path, themeConfig) {
 }
 
 module.exports = async function resolveOptions(ctx) {
-  const { sourceDir, pluginMgr } = ctx;
+  const { sourceDir } = ctx;
   const rcpressDir = path.resolve(sourceDir, '.rcpress');
   const siteConfig = loadConfig(rcpressDir);
 
@@ -103,8 +103,6 @@ module.exports = async function resolveOptions(ctx) {
 
     // console.log('customThemePath:', themeLayoutPath);
   }
-
-  pluginMgr.use(themePath);
 
   // resolve theme config
   const themeConfig = siteConfig.themeConfig || {};

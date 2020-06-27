@@ -36,6 +36,15 @@ module.exports = function createClientConfig(ctx, isProd, isServer) {
     );
   }
 
+  const WebpackBar = require('webpackbar');
+  config.plugin('bar').use(WebpackBar, [
+    {
+      name: 'Client',
+      color: '#41b883',
+      compiledIn: false
+    }
+  ]);
+
   if (options.siteConfig.chainWebpack) {
     options.siteConfig.chainWebpack(config, false /* isServer */, isProd);
   }
