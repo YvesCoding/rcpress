@@ -88,4 +88,6 @@ const App = ctx => {
   );
 };
 
+console.log(111);
+
 export default hot(App);

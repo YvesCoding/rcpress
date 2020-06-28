@@ -1888,6 +1888,13 @@
   dependencies:
     "@types/node" ">= 8"
 
+"@rcpress/test-util@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.npm.taobao.org/@rcpress/test-util/download/@rcpress/test-util-0.2.0.tgz#a111b3f41be5974652a3703a57be5a504a45eea2"
+  integrity sha1-oRGz9Bvll0ZSo3A6V75aUEpF7qI=
+  dependencies:
+    "@rcpress/util" "^0.2.0"
+
 "@types/babel__core@^7.1.0":
   version "7.1.7"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.7.tgz#1dacad8840364a57c98d0dd4855c6dd3752c6b89"

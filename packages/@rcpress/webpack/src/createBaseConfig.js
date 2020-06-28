@@ -38,11 +38,13 @@ module.exports = function createBaseConfig(
     .publicPath(publicPath)
     .end();
 
-  if (debug) {
-    config.devtool('#source-map');
-  } else if (!isProd) {
-    config.devtool('cheap-module-eval-source-map');
-  }
+  config.devtool(false);
+
+  // if (debug) {
+  //   config.devtool('#source-map');
+  // } else if (!isProd) {
+  //   config.devtool('cheap-module-eval-source-map');
+  // }
 
   config.resolve
     .set('symlinks', true)
