@@ -12,7 +12,7 @@ import { siteData } from '@temp/siteData';
 export default ctx => {
   return (
     <Router basename={siteData.base} location={ctx.url} context={ctx}>
-      <App {...ctx} />
+      <App {...ctx} siteData={siteData} />
     </Router>
   );
 };

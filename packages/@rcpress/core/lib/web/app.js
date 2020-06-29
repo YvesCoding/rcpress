@@ -17,29 +17,14 @@ import React, { useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { routes } from '@temp/routes';
-import { siteData } from '@temp/siteData';
 
 import { SiteContext } from './context';
 
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 
-// // suggest dev server restart on base change
-// if (module.hot) {
-//   const prevBase = siteData.base;
-//   console.log(1111);
-
-//   module.hot.accept('@temp/siteData', () => {
-//     if (siteData.base !== prevBase) {
-//       window.alert(
-//         `[rcpress] Site base has changed. ` +
-//           `Please restart dev server to ensure correct asset paths.`
-//       );
-//     }
-//   });
-// }
-
 const App = ctx => {
   const [path, setPath] = useState(ctx.url || '/');
+  const { siteData } = ctx;
   const { currentLocaleSiteData, targetLocale } = getcurrentLocaleConfigByPath(siteData, path);
   const sidebarItems = resolveSidebarItems(siteData, path);
 
@@ -87,7 +72,5 @@ const App = ctx => {
     </SiteContext.Provider>
   );
 };
-
-console.log(111);
 
 export default hot(App);

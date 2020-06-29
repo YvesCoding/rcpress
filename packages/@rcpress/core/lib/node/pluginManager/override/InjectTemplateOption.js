@@ -18,15 +18,17 @@ const AsyncOption = require('../abstract/AsyncOption');
 
 module.exports = class InjectTemplateOption extends AsyncOption {
   async apply(ctx) {
-    await super.asyncApply();
+    await super.asyncApply(ctx);
 
     const vals = this.appliedValues;
-    let heads = '';
+    const res = {};
     vals.forEach(val => {
-      const { head } = val;
-      heads += head;
+      Object.keys(val).forEach(key => {
+        res[key] || (res[key] = '');
+        res[key] += val[key];
+      });
     });
 
-    ctx.setTmplArgs({ head: heads });
+    ctx.setTmplArgs(res);
   }
 };

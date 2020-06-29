@@ -11,6 +11,13 @@ import React from 'react';
 import { siteData } from '@temp/siteData';
 import { loadableReady } from '@loadable/component';
 
+// // suggest dev server restart on base change
+if (module.hot) {
+  module.hot.accept('@temp/siteData', () => {
+    window.location.reload();
+  });
+}
+
 loadableReady(() => {
   window.__RCPRESS_VERSION__ = {
     version: RCPRESS_VERSION,
@@ -20,7 +27,7 @@ loadableReady(() => {
   // Register service worker
   hydrate(
     <Router basename={siteData.base}>
-      <App {...window.RC_CONTEXT} />
+      <App {...window.RC_CONTEXT} siteData={siteData} />
     </Router>,
     document.getElementById('app')
   );

@@ -68,11 +68,11 @@ class Render {
               .replace('{{{ helmet-links }}}', helmet.link.toString())
 
               .replace('"{{ RC_CONTEXT }}"', JSON.stringify(context));
-
-            Object.keys(this.tmplAtgs).forEach(key => {
-              res = res.replace(`{{{ ${key} }}}`, this.tmplAtgs[key]);
-            });
           }
+
+          Object.keys(this.tmplAtgs).forEach(key => {
+            res = res.replace(`{{{ ${key} }}}`, this.tmplAtgs[key]);
+          });
 
           resolve(res);
         });

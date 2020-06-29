@@ -395,11 +395,10 @@ class App {
     });
     const update = () => {
       if (bundle && clientManifest) {
-        ready();
         cb(bundle, {
           template,
           clientManifest
-        });
+        }).then(ready);
       }
     };
 

@@ -14,10 +14,17 @@ window.__RCPRESS_VERSION__ = {
   hash: LAST_COMMIT_HASH
 };
 
+// // suggest dev server restart on base change
+if (module.hot) {
+  module.hot.accept('@temp/siteData', () => {
+    window.location.reload();
+  });
+}
+
 // Register service worker
 render(
   <Router basename={siteData.base}>
-    <App />
+    <App siteData={siteData} />
   </Router>,
   document.getElementById('app')
 );

@@ -4,7 +4,7 @@ actionLink: /guide/
 showStar: true
 home: true
 features:
-  - title: Easy to get starte3111
+  - title: Easy to get started11
     details: It only requires simple configuration and some markdown knowledge to get started quickly, users who are familiar with <a href="https://rcpress.vuejs.org/">Vuepress </a> are more comfortable to use
   - title: From markdown to antd
     details: Supports rendering to common Ant design components using the markdown syntax, such as <a href="guide/markdown#prompt-box">Alert</a>
@@ -16,6 +16,7 @@ features:
 
 ## Install
 
+1212
 Install `@rcpress/cli` via [yarn](https://yarnpkg.com)
 
 ```bash
