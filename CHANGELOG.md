@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/YvesCoding/rcpress/compare/v0.2.1...v0.2.2) (2020-07-06)
+
+
+### Bug Fixes
+
+* change temp path to rcpress/core dir. ([0f17581](https://github.com/YvesCoding/rcpress/commit/0f17581a3db4357ae430528de1fa5b2ac9b392a4))
+
+
+
+
+
 ## [0.2.1](https://github.com/YvesCoding/antdsite/compare/v0.2.0...v0.2.1) (2020-03-17)
 
 
