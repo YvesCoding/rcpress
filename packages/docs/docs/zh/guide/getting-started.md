@@ -34,7 +34,7 @@ echo '# Hello RcPress' > docs/README.md
 # 启动spa模式的服务
 rcpress dev
 # 启动服务端渲染的服务
-rcpress server
+rcpress serve
 
 # 访问默认的地址 `localhost:3000` 即可看到效果页面
 ```
@@ -44,7 +44,7 @@ rcpress server
 ```bash
 # 在生产环境下构建spa
 rcpress build
-# 在生产环境下构建ssr并且声称静态html文件
+# 在生产环境下构建ssr并且生成静态html文件
 rcpress generate
 ```
 
