@@ -23,12 +23,12 @@ class AvatarList extends React.Component<{
               key={index}
               className="href-box"
               target="_blank"
-              href={`http://github.com${item.href}`}
+              href={`http://github.com/${item.username}`}
             >
-              <Tooltip title={item.text}>
+              <Tooltip title={item.username}>
                 <Avatar
-                  src={item.src}
-                  alt={item.text}
+                  src={item.url}
+                  alt={item.username}
                   size="small"
                 />
               </Tooltip>
