@@ -222,7 +222,7 @@ module.exports = async function resolveOptions(sourceDir) {
 
 //  get AvatarList from github
 const getAvatarList = async (themeConfig, filename) => {
-  const sourcePath = `https://github.com/${themeConfig.docsRepo || themeConfig.repo}/contributors/${
+  const sourcePath = `https://github.com/${themeConfig.docsRepo || themeConfig.repo}/contributors-list/${
     themeConfig.docsBranch
   }`;
   const fileCompeletePath = `${themeConfig.docsDir}/${filename}`.replace(/\/\//, '/');
