@@ -214,6 +214,8 @@ class App {
         before: app => {
           // respect base when serving static files...
           if (fs.existsSync(contentBase)) {
+            const express = require('express');
+            
             app.use(options.siteConfig.base, express.static(contentBase));
           }
         }
