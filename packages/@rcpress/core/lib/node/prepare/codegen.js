@@ -51,14 +51,12 @@ exports.genRoutesFile = async function({
   }`;
     }
 
-    if (/\/$/.test(pagePath)) {
-      code += `,
+    code += `,
   {
     path: ${JSON.stringify(pagePath + 'index.html')},
     redirect: ${JSON.stringify(pagePath)},
     exact: true
   }`;
-    }
 
     return code;
   }
