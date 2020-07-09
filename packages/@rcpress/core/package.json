@@ -1,6 +1,6 @@
 {
   "name": "@rcpress/core",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A static website generator build with Ant Design",
   "homepage": "https://github.com/YvesCoding/rcpress",
   "repository": {
