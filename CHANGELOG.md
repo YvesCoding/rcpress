@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/YvesCoding/rcpress/compare/v0.2.5...v0.2.6) (2020-07-09)
+
+
+### Bug Fixes
+
+* suppoert .html ([aa724af](https://github.com/YvesCoding/rcpress/commit/aa724af61134f58e0f7416fa6fde94ca6a8249f3))
+
+
+
+
+
 ## [0.2.5](https://github.com/YvesCoding/rcpress/compare/v0.2.4...v0.2.5) (2020-07-09)
 
 
