@@ -32,14 +32,14 @@ exports.genRoutesFile = async function({
     const file = pageFiles[index];
     const filePath = path.join(docsDir, file);
     let code = `
-  {
-    path: ${JSON.stringify(pagePath)},
-    filePath: ${JSON.stringify(filePath)},
-    markdown: AsyncMD$${index},
-    name: '${pagePath}' ,
-    route_component: LayoutWrapper,
-    exact: true
-  }`;
+    {
+      path: ${JSON.stringify(pagePath)},
+      filePath: ${JSON.stringify(filePath)},
+      markdown: AsyncMD$${index},
+      name: '${pagePath}' ,
+      route_component: LayoutWrapper,
+      exact: true
+    }`;
 
     const dncodedPath = decodeURIComponent(pagePath);
     if (dncodedPath !== pagePath) {
@@ -61,7 +61,7 @@ exports.genRoutesFile = async function({
     } else {
       code += `,
   {
-    path: ${JSON.stringify(pagePath + '.html')},
+    path: ${JSON.stringify(pagePath.slice(0, pagePath.lastIndexOf('.html')))},
     redirect: ${JSON.stringify(pagePath)},
     exact: true
   }`;

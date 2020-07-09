@@ -40,7 +40,7 @@ exports.fileToPath = function(file) {
   } else {
     // foo.md -> /foo.html
     // foo/bar.md -> /foo/bar.html
-    return `/${file.replace(extRE, '').replace(/\\/g, '/')}`;
+    return `/${file.replace(extRE, '.html').replace(/\\/g, '/')}`;
   }
 };
 
