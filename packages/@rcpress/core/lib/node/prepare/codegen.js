@@ -18,7 +18,7 @@ exports.genRoutesFile = async function({
   pageFiles,
   sourceDir
 }) {
-  function getImportedMakrdown({}, index) {
+  function getImportedMakrdown(_, index) {
     const file = pageFiles[index];
 
     return genLoadableImportedCode(
@@ -51,12 +51,21 @@ exports.genRoutesFile = async function({
   }`;
     }
 
-    code += `,
+    if (/\/$/.test(pagePath)) {
+      code += `,
   {
     path: ${JSON.stringify(pagePath + 'index.html')},
     redirect: ${JSON.stringify(pagePath)},
     exact: true
   }`;
+    } else {
+      code += `,
+  {
+    path: ${JSON.stringify(pagePath + '.html')},
+    redirect: ${JSON.stringify(pagePath)},
+    exact: true
+  }`;
+    }
 
     return code;
   }
