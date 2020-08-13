@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/YvesCoding/rcpress/compare/v0.2.6...v0.2.7) (2020-08-13)
+
+
+### Bug Fixes
+
+* check title before collecting search result.(close [#33](https://github.com/YvesCoding/rcpress/issues/33)) ([1e54f12](https://github.com/YvesCoding/rcpress/commit/1e54f12d1a4fb883ed098deedd98fc7ea2577a99))
+
+
+
+
+
 ## [0.2.3](https://github.com/YvesCoding/rcpress/compare/v0.2.2...v0.2.3) (2020-07-07)
 
 **Note:** Version bump only for package @rcpress/theme-default
