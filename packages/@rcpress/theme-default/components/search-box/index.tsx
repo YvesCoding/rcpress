@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Input, Icon, Breadcrumb } from 'antd';
-import { PageInfo } from '../utils';
 import Link from '../MyLink';
 
 type filterDatas = {
@@ -17,7 +16,7 @@ interface SearchState {
 }
 
 interface SearchProps {
-  datas: Array<PageInfo>;
+  datas: Array<any>;
   max: number;
   mobile?: boolean;
 }
@@ -33,18 +32,13 @@ function flattenToc(items: any[]): any[] {
   return items
     ? items.reduce((pre, cur) => {
         return pre
-          .concat(cur as any)
-          .concat((cur.items && cur.items.length
-            ? flattenToc(cur.items)
-            : []) as any);
+          .concat(cur.title ? cur : [])
+          .concat((cur.items && cur.items.length ? flattenToc(cur.items) : []) as any);
       }, [])
     : [];
 }
 
-export default class Search extends React.Component<
-  SearchProps,
-  SearchState
-> {
+export default class Search extends React.Component<SearchProps, SearchState> {
   searchInput: Input | null | undefined;
   isClickLink: boolean = false;
 
@@ -103,7 +97,7 @@ export default class Search extends React.Component<
       );
     }
 
-    function resolveOnePageItem(currentItem: PageInfo) {
+    function resolveOnePageItem(currentItem: any) {
       if (match(currentItem.title, query)) {
         results.push([
           {
@@ -112,17 +106,9 @@ export default class Search extends React.Component<
             important: currentItem.important
           }
         ]);
-      } else if (
-        currentItem.toc &&
-        currentItem.toc.items &&
-        currentItem.toc.items.length
-      ) {
+      } else if (currentItem.toc && currentItem.toc.items && currentItem.toc.items.length) {
         let tocs = flattenToc(currentItem.toc.items);
-        for (
-          let i = 0;
-          i < tocs.length && results.length < max;
-          i++
-        ) {
+        for (let i = 0; i < tocs.length && results.length < max; i++) {
           let t = tocs[i];
           if (match(t.title, query)) {
             results.push([
@@ -140,23 +126,12 @@ export default class Search extends React.Component<
       }
     }
 
-    for (
-      let i = 0;
-      i < datas.length && results.length < max;
-      i++
-    ) {
+    for (let i = 0; i < datas.length && results.length < max; i++) {
       const currentItem = datas[i];
       if (currentItem.path) {
         resolveOnePageItem(currentItem);
-      } else if (
-        currentItem.children &&
-        currentItem.children.length
-      ) {
-        for (
-          let j = 0;
-          j < currentItem.children.length;
-          j++
-        ) {
+      } else if (currentItem.children && currentItem.children.length) {
+        for (let j = 0; j < currentItem.children.length; j++) {
           resolveOnePageItem(currentItem.children[j]);
         }
       }
@@ -175,10 +150,7 @@ export default class Search extends React.Component<
       <div id="search-box" className="search-box">
         <div className="searchInput-component">
           <div className="icon-container">
-            <Icon
-              type="search"
-              onClick={this.handleClickIcon}
-            />
+            <Icon type="search" onClick={this.handleClickIcon} />
           </div>
           <Input
             ref={ref => {
@@ -193,8 +165,7 @@ export default class Search extends React.Component<
         </div>
 
         <div className="search-result-list">
-          {this.state.isSearchListShow &&
-          this.state.filterDatas.length ? (
+          {this.state.isSearchListShow && this.state.filterDatas.length ? (
             <List
               key="search-list"
               dataSource={filterDatas}
@@ -202,10 +173,7 @@ export default class Search extends React.Component<
                 return (
                   <List.Item>
                     <Link
-                      to={
-                        dataItem[dataItem.length - 1]
-                          .url as string
-                      }
+                      to={dataItem[dataItem.length - 1].url as string}
                       className="search-item "
                       onMouseDown={() => {
                         this.isClickLink = true;
@@ -217,10 +185,7 @@ export default class Search extends React.Component<
                     >
                       <List.Item.Meta
                         description={
-                          <Breadcrumb
-                            separator=">"
-                            className="ellipsis"
-                          >
+                          <Breadcrumb separator=">" className="ellipsis">
                             {dataItem.map((item, index) => (
                               // <Badge dot={i.important}>
                               <Breadcrumb.Item key={index}>
@@ -251,10 +216,7 @@ export default class Search extends React.Component<
   componentDidMount() {
     const { searchInput } = this;
     document.addEventListener('keyup', event => {
-      if (
-        event.keyCode === 83 &&
-        event.target === document.body
-      ) {
+      if (event.keyCode === 83 && event.target === document.body) {
         searchInput && searchInput.focus();
       }
     });
