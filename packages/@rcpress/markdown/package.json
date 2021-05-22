@@ -7,7 +7,7 @@
     "@mdx-js/react": "^1.0.0-rc.5",
     "@rcpress/util": "^0.2.2",
     "mdast-util-to-string": "^1.0.5",
-    "mdast-util-toc": "",
+    "mdast-util-toc": "5.0.3",
     "parse-numeric-range": "^0.0.2",
     "toml": "^3.0.0",
     "unist-util-find": "^1.0.1",
