@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "private": true,
   "keywords": [],
   "license": "MIT",
@@ -12,6 +12,6 @@
     "serve": "rcpress serve"
   },
   "devDependencies": {
-    "@rcpress/cli": "^0.2.8"
+    "@rcpress/cli": "^0.2.9"
   }
 }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.9](https://github.com/YvesCoding/rcpress/compare/v0.2.8...v0.2.9) (2023-01-22)
+
+
+### Bug Fixes
+
+* add html-entities dependece ([4cdc8e8](https://github.com/YvesCoding/rcpress/commit/4cdc8e8567eec16b839189bc6575e52b10e84b92))
+
+
+
+
+
 ## [0.2.8](https://github.com/YvesCoding/antdsite/compare/v0.2.7...v0.2.8) (2021-05-22)
 
 **Note:** Version bump only for package rcpress
