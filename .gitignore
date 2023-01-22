@@ -43,3 +43,5 @@ config/components/package.json
 **/package-lock.json
 
 .temp
+
+.npmrc
