@@ -32,5 +32,6 @@
     "webpack-chain": "^6.0.0",
     "webpack-dev-server": "^3.5.1",
     "webpack-merge": "^4.1.2"
-  }
+  },
+  "gitHead": "eb37a6758bc8f59e3019cb358627600db8d87460"
 }
